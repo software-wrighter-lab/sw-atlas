@@ -1,9 +1,10 @@
 number = 4
 slug = "corpus-boundary"
-status = "in-progress"
+status = "completed"
 description = "Two facts from the repository owner change the corpus boundary and must be re..."
 role = "meta"
 context_files = []
 created_at = "2026-09-18T12:03:44"
+completed_at = "2026-09-18T12:07:45"
 task_type = "docs"
-commits = []
+commits = ["bbe0a7c883ec6a779669d2fba1673794b2c67bc2"]
