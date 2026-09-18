@@ -23,14 +23,15 @@ later have to earn the right to improve on.
 The step list is in [`.agentrail/plan.md`](../.agentrail/plan.md); read it
 with `agentrail next`.
 
-1. `scaffold-workspace` -- workspace, `atlas-core` stub, justfile, gate green.
-2. `corpus-schema` -- the five types, RON serde, canonical writer, validation.
-3. `ingest-blog` -- 124 posts from front matter; declared cross-corpus links.
-4. `ingest-campus` -- snapshot A; the 1442 exclusion asserted by a test.
-5. `ingest-metadata` -- repository and video metadata, metadata only.
-6. `concept-graph` -- normalized concepts, aliases, parents, collision report.
-7. `coverage-report` -- `just report`, link checker, zero-orphan gate.
-8. `results-and-handoffs` -- seeded results table, work orders, README, queue.
+1. `scaffold-workspace` -- workspace, `atlas-core` stub, justfile, gate green. **done**
+2. `decision-and-requests` -- the no-Python decision recorded; per-repository request files.
+3. `corpus-schema` -- the five types, RON serde, canonical writer, validation.
+4. `ingest-blog` -- 124 posts from front matter; declared cross-corpus links.
+5. `ingest-campus` -- snapshot A; the 1442 exclusion asserted by a test.
+6. `ingest-metadata` -- repository and video metadata, metadata only.
+7. `concept-graph` -- normalized concepts, aliases, parents, collision report.
+8. `coverage-report` -- `just report`, link checker, zero-orphan gate.
+9. `results-and-requests` -- seeded results table, request files, README, queue.
 
 Exit: every public artifact has a Resource, every Resource is reachable
 through concepts and relations, zero orphans and zero broken URLs, and the
@@ -49,13 +50,15 @@ Not started. Sizes are the plan's estimate, not a commitment.
   the number every later saga must beat, measured over ~300 resources.
   Sagas 1 and 2 together are a useful product with no model in it.
 
-- **Saga 3 `needle-probe` (NP01).** One day, decisive, before anything is
-  built. Run upstream Needle unmodified with resource cards in place of
-  tool definitions; score its contrastive head and its decoder on Saga 2's
-  questions; ask the withheld 1442 questions of a model that has never seen
-  them; measure bytes and latency at bfloat16, INT8 and INT4. Exit: a
-  recorded answer to "does an unmodified tiny no-FFN model beat 284 keyword
-  signals on this corpus?", and the shape of everything after it.
+- **Saga 3 `needle-probe` (NP01).** Decisive, and more expensive than it
+  was: the no-Python decision (plan.md section 12.1) means the probe needs
+  a Rust forward pass over the SAN before it can measure anything. Five
+  steps: determine whether the published weights are reachable from Rust at
+  all, write the forward pass, score the contrastive head against MB02, ask
+  the withheld 1442 questions of a model that has never seen them, and
+  measure bytes and latency at bfloat16, INT8 and INT4. Exit: a recorded
+  answer to "can a tiny no-FFN model beat 284 keyword signals on this
+  corpus?", and the shape of everything after it.
 
 - **Saga 4 `atlas-questions`.** Templates over aliases and concepts,
   teacher-generated vague and adversarial phrasings, held-out resources for
@@ -93,6 +96,19 @@ Not started. Sizes are the plan's estimate, not a commitment.
 - **Saga 11 `atlas-prose` (GN01).** A4: a small opt-in generator that
   receives retrieved facts only, for the questions that genuinely need
   synthesis. Never downloaded before it is asked for.
+
+## Decisions taken mid-saga
+
+- **2026-09-18, no Python.** Rust and/or sw-MLPL only, decided by the
+  repository owner. Needle's architecture is adopted; its JAX toolchain is
+  not. Recorded with its cost in [`plan.md`](plan.md) section 12.1 and
+  [`needle.md`](needle.md) section 5. The visible consequence is Saga 3
+  above: the cheap measurement is gone, and the Rust inference path that
+  Saga 8 would have written is pulled forward to replace it.
+- **2026-09-18, per-repository request files.** Asks on sibling
+  repositories live in `docs/<repo>-requests.md`, one file per repository,
+  because a single handoffs file makes it too easy for a reader of one
+  repository to miss the line addressed to them.
 
 ## Removed
 

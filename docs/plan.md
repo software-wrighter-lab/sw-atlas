@@ -348,11 +348,15 @@ already structured. The first ingest needs no model at all.
 
 **Blog** — 124 posts in `blog/_posts`. Every one has `title`, `abstract`,
 `categories`, `tags`, `keywords`, `author`, `date`. 123 have `series` and
-`series_part`; 75 have `video_url`/`video_title`; 65 have `repo_url` and 10
-more have `repo_urls`; 64 have `papers`; 10 have `demo_url`. The
-`repo_url`, `video_url` and `demo_url` fields *are* declared cross-corpus
-relations, already written by hand, already correct. `keywords` is a
-hand-written alias list. `abstract` is a hand-written summary.
+`series_part`; 75 have `video_url`; 65 have `repo_url` and 10 more have
+`repo_urls`; 64 have `papers`; 10 have `demo_url`; 3 have `video_urls`.
+Counted as links rather than posts, that is 201 declared links to Software
+Wrighter repositories, videos and demos, plus 204 citations of outside
+work. The `repo_url`, `video_url` and `demo_url` fields *are* declared
+cross-corpus relations, already written by hand, already correct.
+`keywords` is a hand-written alias list. `abstract` is a hand-written
+summary. The full table, and what would break it, is in
+[`blog-requests.md`](blog-requests.md).
 
 **Campus** — `sw-campus/pages/docent/snapshot-a.json`: 9 places with
 kinds, parents, titles, taglines, status, links, aliases, concepts, 9
@@ -489,29 +493,38 @@ intent accuracy, unsupported recall ≥ 0.8.
 
 ### Saga 3 — the Needle probe (**NP01**)
 
-New, early, and the cheapest decisive experiment available. Upstream Needle
-is MIT, its weights are open, and it runs on a Mac. Before building
-anything, find out whether a tiny no-FFN model can do this job at all.
+The cheapest decisive experiment still available after the no-Python
+decision (§12.1). The question it answers gates everything after it: *can a
+tiny no-FFN model beat 284 keyword signals on this corpus?*
 
-1. **probe.** Run upstream Needle unmodified, offline, with Atlas resource
-   cards in place of tool definitions and the campus catalog as the tool
-   list. Score its contrastive head (recall@1..5) and its decoder (exact
-   match) on Saga 2's held-out questions and the MB01t paraphrase set.
-2. **zero-shot-new-resource.** The 1442 card reader and its radio demo are
+1. **weights-or-not.** Determine whether Needle's published weights are
+   reachable from Rust at acceptable cost: `needle.pkl` is 52 MB of pickled
+   JAX arrays, the Hugging Face copy may offer something better, and the
+   third answer is that they are not worth reaching and this corpus is
+   small enough to train on from scratch. Record which, with the reason.
+   This step may conclude that the probe is a training exercise rather than
+   a loading exercise, and that is a valid outcome.
+2. **forward-pass.** A Rust implementation of the SAN forward pass:
+   embedding, ZCRMSNorm, gated residual, GQA with RoPE, cross-attention,
+   the contrastive head, and a dequant path for INT8 and INT4. Written
+   against the design notes in `simple_attention_networks.md`, which are
+   specific enough to reimplement from. This is Saga 8 work pulled forward,
+   not extra work.
+3. **probe.** With whatever weights step 1 secured, score the contrastive
+   head (recall@1..5) and, if there is a decoder path, exact match, on
+   Saga 2's held-out questions and the MB01t paraphrase set. Resource cards
+   take the place of tool definitions.
+4. **zero-shot-new-resource.** The 1442 card reader and its radio demo are
    excluded from snapshot A on purpose. Put the 1442 card in the context of
    a model that has never been trained on it and ask the withheld
-   questions. This is the whole retraining question, answered in an
-   afternoon.
-3. **cost.** Measure what a 26M parameter model actually costs: bytes at
-   bfloat16, INT8 and INT4; encoder-only latency against
-   encoder-plus-decode latency; and the same numbers projected onto a
-   WASM CPU path.
+   questions. This is the retraining question, asked before the retraining
+   machinery is built.
+5. **cost.** Bytes at bfloat16, INT8 and INT4; encoder-only latency against
+   encoder-plus-decode; the same numbers projected onto a WASM CPU path.
 
-Exit: three rows in the scoreboard — the matcher, Needle's retrieval head,
-Needle's decoder — and a recorded answer to "does an unmodified tiny model
-beat 284 keyword signals on this corpus?". A *no* is as valuable as a yes
-and is published either way. Everything after this saga is shaped by the
-answer.
+Exit: rows in the scoreboard for the matcher, the retrieval head and, if
+reached, the decoder; and a recorded answer to the gating question. A *no*
+is as valuable as a yes and is published either way.
 
 ### Saga 4 — question generation (`atlas-questions`)
 
@@ -728,23 +741,42 @@ browser rather than a kernel, but the same problem.
 
 Flagged rather than assumed. Work proceeds on the stated default.
 
-1. **How the model gets trained — the decision that shapes the year.**
-   Needle is JAX, MIT-licensed, open-weighted, and already pretrained on
-   200B tokens. The lab's standard is that the lab's tools build the lab's
-   products, and `sw-campus` forbids Python in the pipeline.
+1. ~~**How the model gets trained.**~~ **Resolved 2026-09-18 by the
+   repository owner: no Python. Rust and/or sw-MLPL only.**
 
-   | | Approach | First number | Cost |
-   |---|---|---|---|
-   | **A** | Port the SAN to sw-MLPL/Rust, train in-house | months | house-pure, full ownership |
-   | **B** | Finetune upstream Needle offline in JAX, export weights, write only the Rust inference path | days | Python offline; nothing Python ships |
-   | **C** | Needle as an external baseline only; build A anyway | days for the number, months for the product | keeps the rule, spends the time |
+   Needle's *architecture* is adopted; its *toolchain* is not. Options B
+   (finetune upstream Needle offline in JAX) and C (run it once as an
+   external Python baseline) are both closed. Option A stands: the Simple
+   Attention Network is implemented in-house, trained in sw-MLPL or Rust,
+   and the open weights are useful only insofar as a Rust reader can load
+   them.
 
-   **Default: B, with A as the destination** — and Saga 3 deliberately
-   costs nothing either way, because running upstream Needle unmodified is
-   a measurement, not an adoption. The reasoning, and the counter-argument,
-   are in [`needle.md`](needle.md) §5. This one is the repository owner's
-   call, not an implementation detail; say the word and the default changes
-   before Saga 3 closes.
+   State the price, because a resolved decision that hides its own cost is
+   worse than an open one:
+
+   - **Saga 3 is no longer a one-day probe.** Running upstream Needle
+     unmodified was cheap precisely because someone else had written the
+     runtime. A Rust forward pass over the published weights has to be
+     written first — an encoder-decoder with no FFN is attention, a norm,
+     a gated residual, RoPE and a dequant path, so it is a bounded job
+     rather than a small one, and it is work that was going to be done in
+     Saga 8 regardless, pulled forward.
+   - **The published checkpoint is a Python pickle.** Loading
+     `needle.pkl` from Rust is the first obstacle, and it may be cheaper
+     to read the Hugging Face copy in whatever tensor format it offers, or
+     to treat the weights as unavailable and train from scratch on this
+     corpus. Saga 3's first step is to find out which, and to say so.
+   - **The decisive question is delayed, not avoided.** "Can a tiny no-FFN
+     model beat the matcher on this corpus?" still gates everything, and
+     it now costs weeks rather than an afternoon to ask. That is the
+     accepted trade for a repository whose whole pipeline is the lab's own
+     tools.
+
+   What does not change: the architecture in §6, the no-FFN guarantee
+   behind invariant 2, the removal of MoE from the critical path, and the
+   bar. [`needle.md`](needle.md) §5 records the same decision from the
+   architecture side.
+
 2. **Model scale.** Needle is 26M at d=512. The earlier target was 5–10M
    for browser citizenship. Default: measure Needle's 26M first (13 MB at
    INT4 fits A3), then use the depth ladder to find the smallest

@@ -1,6 +1,6 @@
 number = 2
 slug = "decision-and-requests"
-status = "pending"
+status = "in-progress"
 description = "Two owner decisions arrived mid-saga and both change documents rather than co..."
 role = "meta"
 context_files = []

@@ -1,5 +1,5 @@
 number = 9
-slug = "results-and-handoffs"
+slug = "results-and-requests"
 status = "pending"
 description = "Read docs/plan.md sections 10 and 11 first. Close the saga. Seed docs/referen..."
 role = "production"

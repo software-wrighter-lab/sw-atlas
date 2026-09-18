@@ -190,10 +190,13 @@ This also reshapes the nightly pipeline: the interesting branch becomes
 
 ## 5. The one real conflict: Needle is Python
 
+**Resolved 2026-09-18 by the repository owner: no Python. Rust and/or
+sw-MLPL only.** The section below is kept as the reasoning that was put to
+that decision, not as a live recommendation.
+
 Needle is JAX/Flax. `sw-campus` forbids Python "anywhere in the pipeline",
 and `moe-microscope` has zero `.py` files across 165 sw-MLPL programs.
-Three ways to resolve it, and this is a decision for the repository owner,
-not an implementation detail:
+Three ways to resolve it were put forward:
 
 | | Approach | First number in | Cost |
 |---|---|---|---|
@@ -201,20 +204,34 @@ not an implementation detail:
 | **B** | Finetune upstream Needle offline in JAX, export weights, write only the Rust *inference* path | days | Python in the offline pipeline; nothing Python ships |
 | **C** | Needle as an external measured baseline only; build A as planned | days for the number, months for the product | keeps the rule, spends the time anyway |
 
-The recommendation is **B first, A as the destination.** B answers the
-question that actually gates the project -- *can a tiny no-FFN model beat
-the matcher on this corpus?* -- in days rather than months, using open
-weights that are already trained on 200B tokens, and nothing Python-shaped
-reaches a visitor's browser. If the answer is no, the rule was never
-tested and months were saved. If the answer is yes, porting the forward
-pass to Rust is a bounded, well-specified job with a reference
-implementation and a parity test to check against, and porting training to
-sw-MLPL becomes a `moe-microscope` saga with a target worth hitting.
+The recommendation made here was B first, A as the destination, on the
+argument that open weights already trained on 200B tokens answer the
+project's gating question in days rather than months. **The owner chose A**:
+the lab's tools build the lab's products, and a JAX dependency in the
+nightly pipeline — even one that ships nothing — is not the trade this
+project is willing to make. That is the decision; the counter-argument was
+heard and rejected on its merits.
 
-The counter-argument is real and should be recorded: the lab's standard is
-that the lab's tools build the lab's products, and B puts a JAX dependency
-in the nightly pipeline. If that is unacceptable, C keeps the rule at the
-cost of learning the same thing more slowly.
+What survives the decision is everything in §1 to §4: the architecture, the
+no-FFN guarantee, the two heads, the merged milestone, and the reframed
+generalisation experiment. What is lost is the cheap measurement. Three
+consequences follow, and they belong to Saga 3:
+
+1. **A Rust forward pass comes first.** No FFN means the whole inference
+   path is attention, ZCRMSNorm, a gated residual, RoPE, a cross-attention
+   block and a dequant path. That was Saga 8 work; it moves forward.
+2. **The published checkpoint is a pickle.** `needle.pkl` is 52 MB of
+   pickled JAX arrays. Reading it from Rust, reading whatever format the
+   Hugging Face copy offers instead, or declaring the weights unreachable
+   and training from scratch on this corpus are three different projects;
+   Saga 3 step 1 is to determine which one it is and record the answer.
+3. **The design notes are the reusable artifact, not the code.** What
+   `simple_attention_networks.md` documents — why the FFN can go, why
+   encoder-decoder, gated residuals initialised at sigmoid(0), ZCRMSNorm,
+   Muon for an attention-only stack, INT4 QAT as regularisation, token-level
+   loss weighting — is a specification precise enough to reimplement from,
+   under a licence that permits it, and it is cited wherever this work is
+   published.
 
 ## 6. The rest of the field, and why it is mostly rejected
 
