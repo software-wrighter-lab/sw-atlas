@@ -1,4 +1,4 @@
-# <img src="images/sw-atlas-logo.jpg" alt="sw-atlas" width="128" align="left" style="margin-right:12px"> sw-atlas
+# <img src="images/sw-atlas-logo.png" alt="sw-atlas" width="128" align="left" style="margin-right:12px"> sw-atlas
 
 One semantic index over everything Software Wrighter publishes, and a tiny
 model that turns a visitor's sentence into a typed decision about it.

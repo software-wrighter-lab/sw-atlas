@@ -1,0 +1,9 @@
+number = 6
+slug = "logo-asset"
+status = "in-progress"
+description = "The logo in images/ has a typo in the artwork. The corrected 1024x1024 JPEG i..."
+role = "production"
+context_files = []
+created_at = "2026-09-18T12:22:49"
+task_type = "asset"
+commits = []
