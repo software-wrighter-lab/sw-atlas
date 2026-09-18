@@ -1,7 +1,7 @@
 number = 4
-slug = "ingest-campus"
+slug = "ingest-blog"
 status = "pending"
-description = "Read docs/plan.md section 8 first. Write 'atlas-ingest campus ../sw-campus': ..."
+description = "Read docs/plan.md sections 7 and 8 first. Write 'atlas-ingest blog ../blog': ..."
 role = "production"
 context_files = []
 created_at = "2026-09-18T10:07:20"

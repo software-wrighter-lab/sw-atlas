@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-scaffold",
+  "state": {
+    "number": 1,
+    "step": "scaffold-workspace"
+  },
+  "action": "Surveyed demo-extensions and sw-cor24-emulator for workspace conventions; read sw-checklist's own rules (edition 2024, 25/50 LOC functions, 4/7 functions per module, 4/7 modules per crate) before writing code rather than after; kept the crate honest by shipping constants with tests instead of a placeholder schema.",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-18T10:20:20"
+}
