@@ -377,7 +377,9 @@ with its SHA-256; Atlas consumes that, not the mockup's JSON, once it
 exists.
 
 **Repos and videos** — roughly 130 public repositories and 75 videos,
-metadata only to begin with: id, name,
+metadata only to begin with (video scripts exist as authored text in
+repositories not yet cloned here; see §12.3 — the video resource shape is
+designed for them to arrive): id, name,
 description, topics, language, homepage, last update for a repository;
 id, title, description, date, duration, URL, associated project for a
 video. No source files, no transcripts. This keeps the claim precise:
@@ -387,8 +389,10 @@ their own milestone.
 
 So the first corpus is: 124 blog posts + 9–12 campus places (growing) +
 roughly 130 public repositories + ~75 videos — on the order of 340
-resources. (The research note's illustration said 86 repositories; the
-count of record is the one Saga 1 step 6 produces.) At 384-dimension INT8, 300
+resources. (The research note's illustration said 86 repositories; where an
+estimate is uncertain this plan carries the higher figure, because a corpus
+that under-counts itself produces a coverage gate that passes while missing
+things. The count of record is the one the metadata ingester produces.) At 384-dimension INT8, 300
 resource embeddings are 115 KiB. Even 10,000 chunks would be 3.7 MiB. The
 index is not the expensive part; the query encoder is.
 
@@ -799,9 +803,32 @@ Flagged rather than assumed. Work proceeds on the stated default.
    INT4 fits A3), then use the depth ladder to find the smallest
    configuration that still beats the matcher — rather than picking a size
    in advance.
-3. **Corpus boundary.** Default: metadata only for repos and videos. Adding
-   video transcripts (75 videos) would likely be the single largest
-   knowledge gain available, and is deferred, not rejected.
+3. **Corpus boundary.** Default: metadata only for repositories, and
+   metadata only for videos *for now*, with an important correction from
+   the owner on 2026-09-18.
+
+   The deferral of video content was argued on the cost and inaccuracy of
+   transcription. **That argument does not apply: the video scripts already
+   exist as authored text in git repositories.** They are not machine
+   transcripts to be cleaned up; they are prose someone wrote, under
+   version control, in the same form as the blog's front matter. The only
+   thing standing between them and the corpus is that those repositories
+   are not cloned on this machine yet.
+
+   So this is deferred on *availability*, not on principle, and the
+   difference matters to the schema: `ResourceKind::Video` must not be
+   designed as a metadata-only shape that later has to be widened. A video
+   resource gets the same abstract, concepts and aliases a post does, and
+   the field that holds its script is empty today rather than absent.
+
+   What it would take: the repository names, a clone, and an ingester that
+   reads an authored script the way `ingest-blog` reads front matter — no
+   transcription, no alignment, no model. On the evidence of the blog
+   ingest, that is a day's work, and 75 videos of authored prose is
+   plausibly the largest single knowledge gain available to this project.
+
+   Repository *source* ingestion remains deferred on principle: the claim
+   stays "I know about this repository", not "I know what is in it".
 4. **Teacher model.** Which one, run where, at what cost per night, and
    whether its output is committed to the repository for reproducibility.
    Default: committed, hash-pinned, regenerable.

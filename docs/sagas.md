@@ -117,6 +117,14 @@ Not started. Sizes are the plan's estimate, not a commitment.
   from a two-arm to a three-arm comparison as a result, because the prior
   art says persistent memory slots are the interesting third option.
   See [`needle.md`](needle.md) section 8.
+- **2026-09-18, the corpus boundary is asymmetric.** Repository *source*
+  is deferred on principle; video *content* is deferred only until the
+  repositories holding the scripts are cloned here. The scripts are
+  authored text under version control, not machine transcripts, so the
+  cost-and-accuracy argument for deferring them does not apply. The video
+  resource shape is designed for them to arrive. Where a count is
+  uncertain the plan carries the higher figure, because a corpus that
+  under-counts itself gates green while missing things.
 - **2026-09-18, per-repository request files.** Asks on sibling
   repositories live in `docs/<repo>-requests.md`, one file per repository,
   because a single handoffs file makes it too easy for a reader of one

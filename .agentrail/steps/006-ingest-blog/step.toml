@@ -1,4 +1,4 @@
-number = 5
+number = 6
 slug = "ingest-blog"
 status = "pending"
 description = "Read docs/plan.md sections 7 and 8 first. Write 'atlas-ingest blog ../blog': ..."

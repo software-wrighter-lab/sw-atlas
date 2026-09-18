@@ -1,0 +1,9 @@
+number = 4
+slug = "corpus-boundary"
+status = "in-progress"
+description = "Two facts from the repository owner change the corpus boundary and must be re..."
+role = "meta"
+context_files = []
+created_at = "2026-09-18T12:03:44"
+task_type = "docs"
+commits = []

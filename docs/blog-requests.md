@@ -69,11 +69,16 @@ rather than discovered broken by a coverage gate.
 
 ## Possible future asks, not requested now
 
-- **Video transcripts.** 75 posts carry a video. Transcripts would likely
-  be the largest single knowledge gain available to Atlas, and are
-  explicitly deferred: the current claim is "I know *about* this video",
-  not "I know what is in it". If transcripts ever exist for other reasons,
-  sw-atlas would like to know.
+- **Video scripts — and this one has already been answered.** 75 posts
+  carry a video, and the scripts for them exist as authored text in git
+  repositories, not as machine transcripts waiting to be made. That removes
+  the objection this entry was originally written around. sw-atlas would
+  like the repository names when convenient; the ingester for authored
+  scripts is close to the one that already reads front matter, and 75
+  videos of written prose is plausibly the largest single knowledge gain
+  available to the project. Nothing is needed from the blog repository
+  itself — this is recorded here because the blog is where the
+  `video_url` relations are declared, so this is where a reader would look.
 - **A stable per-post identifier** independent of the filename. sw-atlas
   derives ids from the dated slug today, which is stable in practice
   because `_posts` filenames do not change after publication. If that ever
