@@ -1,0 +1,1 @@
+Repository founded: docs/plan.md (architecture, A0-A4 runtime classes with budgets as tests, data model, snapshot layout, 11-saga queue), docs/needle.md (Simple Attention Network assessment; MoE dropped from the critical path), docs/sagas.md (queue), README with the inherited scoreboard, LICENSE/COPYRIGHT/.gitignore, and the atlas-foundation saga plan. No code yet by design.

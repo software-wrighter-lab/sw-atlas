@@ -96,9 +96,10 @@ the same questions.
 | CD01b docent + word vectors | 0.407 | 0.407 | 0.30 | A2 |
 | CD01 dense docent | 0.296 | 0.481 | 0.30 | A2 |
 
-Progress is driven by agentrail sagas; `agentrail status`
-says where the current one stands, and the saga queue is section 10 of
-[`docs/plan.md`](docs/plan.md).
+Progress is driven by [agentrail](CLAUDE.md) sagas. `agentrail status`
+says where the current one stands; [`docs/sagas.md`](docs/sagas.md) holds
+the queue. The active saga is `atlas-foundation`: the corpus and the
+machinery that validates it, with no model in it at all.
 
 ## Building
 
