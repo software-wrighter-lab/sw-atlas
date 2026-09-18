@@ -1,9 +1,10 @@
 number = 7
 slug = "video-source-survey"
-status = "in-progress"
+status = "completed"
 description = "Two repositories were cloned for inspection: ~/github/softwarewrighter/shorts..."
 role = "meta"
 context_files = []
 created_at = "2026-09-18T13:33:13"
+completed_at = "2026-09-18T13:37:30"
 task_type = "docs"
-commits = []
+commits = ["ff848e90741bd5e85780938535e4ad8061e6d3d0"]
