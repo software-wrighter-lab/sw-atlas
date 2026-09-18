@@ -1,9 +1,10 @@
 number = 2
 slug = "decision-and-requests"
-status = "in-progress"
+status = "completed"
 description = "Two owner decisions arrived mid-saga and both change documents rather than co..."
 role = "meta"
 context_files = []
 created_at = "2026-09-18T10:20:39"
+completed_at = "2026-09-18T11:31:51"
 task_type = "docs"
-commits = []
+commits = ["f7d2fb4bf1d46c1c8aa9c5339279ac27d4491b34"]

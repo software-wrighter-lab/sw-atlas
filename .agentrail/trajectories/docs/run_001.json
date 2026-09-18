@@ -1,0 +1,11 @@
+{
+  "task_type": "docs",
+  "state": {
+    "number": 2,
+    "step": "decision-and-requests"
+  },
+  "action": "Recorded the decision where a future session reads it rather than only in a commit message; stated the price of the decision explicitly; recounted the blog front matter at item level when the first number proved to be measuring the wrong thing.",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-18T11:31:51"
+}
