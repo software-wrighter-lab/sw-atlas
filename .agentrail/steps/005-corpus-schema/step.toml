@@ -1,6 +1,6 @@
 number = 5
 slug = "corpus-schema"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md section 7 first. Define the contract every later step depen..."
 role = "production"
 context_files = []

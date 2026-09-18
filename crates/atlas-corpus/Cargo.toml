@@ -1,0 +1,17 @@
+[package]
+name = "atlas-corpus"
+description = "The sw-atlas corpus collection, its cross-reference validator, and its canonical form"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+ron = { workspace = true }
+serde = { workspace = true }
+sha2 = { workspace = true }

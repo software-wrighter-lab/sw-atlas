@@ -1,0 +1,49 @@
+Corpus(
+  schema_version: "0.1",
+  resources: [
+    Resource(
+      id: ResourceId("blog:only-post"),
+      kind: Post,
+      title: "The only post",
+      url: "https://example.invalid/",
+      date: "2026-09-18",
+      summary: "It refers to things that are not here.",
+      body: "",
+      concepts: [ConceptId("no-such-concept")],
+      aliases: [],
+      maturity: None,
+      source_hash: "fixture",
+    ),
+    Resource(
+      id: ResourceId("blog:only-post"),
+      kind: Post,
+      title: "The only post, again",
+      url: "https://example.invalid/again",
+      date: "2026-09-18",
+      summary: "A duplicate identifier.",
+      body: "",
+      concepts: [],
+      aliases: [],
+      maturity: None,
+      source_hash: "fixture",
+    ),
+  ],
+  concepts: [
+    Concept(
+      id: ConceptId("orphaned"),
+      label: "Orphaned",
+      aliases: [],
+      parents: [ConceptId("no-such-parent")],
+      resources: [ResourceId("repo:no-such-repo")],
+    ),
+  ],
+  relations: [
+    Relation(
+      from: ResourceId("blog:only-post"),
+      kind: Discusses,
+      to: ResourceId("video:no-such-video"),
+      weight: 1.0,
+      provenance: Declared,
+    ),
+  ],
+)

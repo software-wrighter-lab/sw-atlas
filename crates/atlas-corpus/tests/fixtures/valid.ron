@@ -1,0 +1,52 @@
+Corpus(
+  schema_version: "0.1",
+  resources: [
+    Resource(
+      id: ResourceId("blog:2026-09-13-saw-building-a-tiny-mixture-of-experts"),
+      kind: Post,
+      title: "Saw #11: Building a Tiny Mixture of Experts",
+      url: "https://blog.softwarewrighter.com/2026/09/13/saw-building-a-tiny-mixture-of-experts/",
+      date: "2026-09-13",
+      summary: "A mixture-of-experts model small enough to print every tensor.",
+      body: "",
+      concepts: [ConceptId("mixture-of-experts")],
+      aliases: ["the moe post", "tiny mixture of experts"],
+      maturity: None,
+      source_hash: "fixture",
+    ),
+    Resource(
+      id: ResourceId("repo:sw-ml-study/moe-microscope"),
+      kind: Repo,
+      title: "moe-microscope",
+      url: "https://github.com/sw-ml-study/moe-microscope",
+      date: "2026-09-17",
+      summary: "Building mixture-of-experts models small enough to understand.",
+      body: "",
+      concepts: [ConceptId("mixture-of-experts")],
+      aliases: ["the microscope"],
+      maturity: Some(Working),
+      source_hash: "fixture",
+    ),
+  ],
+  concepts: [
+    Concept(
+      id: ConceptId("mixture-of-experts"),
+      label: "Mixture of experts",
+      aliases: ["moe", "mixture of experts", "sparse experts"],
+      parents: [],
+      resources: [
+        ResourceId("blog:2026-09-13-saw-building-a-tiny-mixture-of-experts"),
+        ResourceId("repo:sw-ml-study/moe-microscope"),
+      ],
+    ),
+  ],
+  relations: [
+    Relation(
+      from: ResourceId("blog:2026-09-13-saw-building-a-tiny-mixture-of-experts"),
+      kind: Implements,
+      to: ResourceId("repo:sw-ml-study/moe-microscope"),
+      weight: 1.0,
+      provenance: Declared,
+    ),
+  ],
+)
