@@ -125,6 +125,11 @@ Not started. Sizes are the plan's estimate, not a commitment.
   resource shape is designed for them to arrive. Where a count is
   uncertain the plan carries the higher figure, because a corpus that
   under-counts itself gates green while missing things.
+- **2026-09-18, the video scripts are located.**
+  `~/github/softwarewrighter/shorts` holds them as tracked text; 29 of the
+  75 published videos join to it deterministically and the rest need a
+  hand-written map. `video-publishing` turned out to be a backlog, not an
+  index: 111 rows, zero URLs. See [`video-sources.md`](video-sources.md).
 - **2026-09-18, per-repository request files.** Asks on sibling
   repositories live in `docs/<repo>-requests.md`, one file per repository,
   because a single handoffs file makes it too easy for a reader of one

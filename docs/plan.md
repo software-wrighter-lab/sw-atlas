@@ -821,11 +821,18 @@ Flagged rather than assumed. Work proceeds on the stated default.
    resource gets the same abstract, concepts and aliases a post does, and
    the field that holds its script is empty today rather than absent.
 
-   What it would take: the repository names, a clone, and an ingester that
-   reads an authored script the way `ingest-blog` reads front matter — no
-   transcription, no alignment, no model. On the evidence of the blog
-   ingest, that is a day's work, and 75 videos of authored prose is
-   plausibly the largest single knowledge gain available to this project.
+   **Located, 2026-09-18.** The scripts are in
+   `~/github/softwarewrighter/shorts`, which keeps narration, titles and
+   descriptions in git on purpose while excluding the media: 39 projects
+   with a spoken script, 63 with a published description, and a hand-built
+   index of 130 concepts against 26 episodes. Twenty-nine of the blog's 75
+   videos join to it deterministically by episode number; the rest need a
+   committed map of about 46 lines, because titles changed between
+   production and publication and fuzzy matching would get some of them
+   confidently wrong. The survey, with counts and the join rule, is in
+   [`video-sources.md`](video-sources.md). The gitignored media does not
+   need recovering from the old machine: this project indexes text, and the
+   text is tracked.
 
    Repository *source* ingestion remains deferred on principle: the claim
    stays "I know about this repository", not "I know what is in it".
