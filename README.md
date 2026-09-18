@@ -61,9 +61,16 @@ comfortably afford it, and demoted the moment it cannot.
 |---|---:|---|
 | A0 Minimal | 10 MiB | lexical and graph matching, no model |
 | A1 Semantic | 25 MiB | embedding retrieval |
-| A2 Intelligent | 64 MiB | intent, concepts, ranking |
-| A3 Routed | 128 MiB | routed experts, reranking |
+| A2 Intelligent | 64 MiB | intent, ranking, confidence |
+| A3 Decoding | 128 MiB | arguments, comparison, reranking |
 | A4 Enhanced | 256 MiB | prose synthesis, opt-in only |
+
+The model itself is a Simple Attention Network: an encoder-decoder with no
+feed-forward layer, so there is nowhere for a fact to be memorised. It is
+shown resource cards from the snapshot the way
+[Needle](https://github.com/cactus-compute/needle) is shown a tool list, and
+it aligns the question to them. [`docs/needle.md`](docs/needle.md) assesses
+that architecture and the open-source alternatives to it.
 
 Read [`docs/plan.md`](docs/plan.md) first; it is the specification.
 [`docs/sw-atlas-research.txt`](docs/sw-atlas-research.txt) and
