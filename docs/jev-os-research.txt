@@ -1,0 +1,213 @@
+
+Gemini
+New chat
+Search chats
+Images
+Library
+Open-Source Alternatives to Jev
+APL\360 Self-Study Workspace Name
+Understanding Differentiable Operations in AI
+Idiomatic APL Expressions for Logos
+Infineon PSOC Edge E84 Evaluation Board
+FreeToken MoE Memory and Execution
+Best Coding Models for 16GB VRAM
+Understanding Lenses Across Programming Languages
+Global Tech Jobs for Grads
+LinkedIn Technical Carousel PDF Guide
+Recording a Window on Mac
+Xeon Vector Extensions vs. RISC-V
+Low-Cost S-100 Bus Alternative for MCUs and FPGAs
+BeagleBoard PRU Capabilities and Comparison
+Introduction to Machine Learning
+Visualizing CNNs, Training, and Windowing
+Custom PCIe FPGA Accelerator Design
+Visual Symbols and Art of Forth
+Finding Collaborators for Multi-Disciplinary Tech
+Submitting an Ask HN Post
+Choosing Emacs Keybindings for TUI
+IBM OS/360 and OS/VS Lineage
+Comparing Three NVIDIA RTX GPUs
+Solar PPA vs. HELOC Financial Analysis
+NPUs, Hardware Additions, and FPGAs
+OWON Function Generator Model Comparison
+Airport Options for Hyde Park
+Modern Clock Generation Explained
+FPGA Emulation Project Planning
+Vintage Scope Cart Solutions
+Male Pin to Female Socket Adapters
+SkyTrain Connected Hotels: Vancouver & Bangkok
+Python ML and Math Libraries
+Exploring sw-MLPL GitHub Repositories
+Happiest Roofs for Home Insurance
+Conversation with Gemini
+suggest open source projects similar to JEV (typesafe.ai) that show how to use this faster/lower-RAM approach to training on slowly changing data (e.g., indexing blog, docs, websites that change each day to support "intelligent" routing of requests, answering questions.
+
+TypeSafe AI’s Jev is categorized as a "System One Model"—a model that skips generative token-by-token output (LLM reasoning) in favor of non-generative, parallel-sampled, typed probabilistic decisions (Choice, Score, Boolean). It processes an arbitrary input state and evaluates schema-constrained decision primitives with 70–500ms latency and minimal computational footprint.  
+DataCamp
++ 1
+
+If you want to build open-source architectures that replicate this fast, low-RAM, non-generative, online-updating pipeline for slowly changing operational context (daily website syncs, doc changes, dynamic ticket routing), you should explore several open-source ecosystems.
+
+1. Small Discriminative / Embedder Ensembles for Fast Classification & Routing
+Instead of running a full auto-regressive LLM to decide "Where does this request go?" or "Does this doc answer the question?", these architectures use hyper-lightweight discriminators (often encoders or small cross-encoders) that update rapidly without heavy retraining costs.
+
+LLMRouter  
+GitHub
+What it is: An open-source framework designed explicitly for fast, low-latency request routing and classification across multiple models or internal buckets.  
+GitHub
+
+How it handles changing data: Uses modular, non-generative routing backends like K-Nearest Neighbors (KNNRouter), SVMs (SVMRouter), and matrix factorizations.  
+GitHub
+
+Why it fits the Jev paradigm: When your website or API specs update daily, you don't retrain an LLM. You update the embedding cache/vector indices, and the lightweight router performs bounded classification in milliseconds with zero output generation cost.
+
+SetFit
+What it is: A joint framework by Hugging Face and Intel for Efficient Few-Shot Fine-Tuning of Sentence Transformers.
+
+How it handles changing data: Fine-tunes small, lightweight dense encoders (e.g., MiniLM, BGE-small) using contrastive learning on tiny datasets (often just 8–16 examples per class).
+
+Why it fits the Jev paradigm:
+
+Ultra-low RAM: Runs easily on CPU or small microservices.
+
+Fast Retraining: When a blog category changes or doc structure shifts daily, SetFit can retrain or adapt in under 30 seconds without massive GPU clusters.
+
+Speed: Inference latency is sub-10ms compared to multi-second LLM generations.
+
+2. Continual Knowledge & Graph-Driven Dynamic Indexing
+To handle slowly changing context (like daily docs updates) without retraining model weights or incurring high memory overhead from monolithic vector re-indexing, developers use graph structures or dynamic sliding-window indexes.
+
+HippoRAG 2  
+GitHub
+What it is: An open-source memory and retrieval framework inspired by human hippocampal memory structures.
+
+How it handles changing data: Instead of running full text regeneration or massive global vector index rebuilds, it uses dynamic Knowledge Graph (KG) representations overlaid on dense embeddings.
+
+Why it fits the Jev paradigm:
+
+Incremental indexing allows new daily blogs/docs to be appended into the associate memory graph with minimal compute.
+
+It performs fast, low-RAM path traversal to answer "does state X contain answer Y?" before handing control over to downstream systems.
+
+A-Mem (Agentic Memory)
+What it is: An agentic, dynamic indexing memory system modeled after Zettelkasten note-taking.
+
+How it handles changing data: It builds a self-organizing network of contextual nodes that updates dynamically as new web pages, blogs, or docs are ingested daily.
+
+Why it fits the Jev paradigm: It structures changing background knowledge into explicitly categorized state vectors without needing to fine-tune generative weights every time a doc changes.
+
+3. Machine-Centric & Schema-Constrained Decision Engines
+Jev's key hook is that it outputs strict types directly rather than parsing natural language text. You can mimic this pattern using open-source, constrained sampling inference engines with small model backends (like Qwen-1.5B or Llama-3.2-1B).  
+DataCamp
+
+Outlines
+What it is: A structured generation library that guides LLM decoding using Finite State Machines (FSMs) and Context-Free Grammars (CFGs).
+
+How it achieves Jev-like behavior:
+
+If you pair Outlines with a tiny 1B/3B parameter model, you can force the model to only output valid JSON, booleans, or specificenum choices.
+
+Because it biases logits at token generation time, invalid tokens are never considered, making it deterministic and type-safe.
+
+SGLang
+What it is: A high-performance execution engine for structured generation and LLM control flow.
+
+Why it fits the Jev paradigm:
+
+Implements RadixAttention to reuse key-value (KV) caches across requests sharing daily indexed context (e.g., your blog/docs context state).
+
+Provides native parallel sampling and schema enforcement, giving you the low-latency state evaluation that Jev targets.
+
+Summary Architectural Pattern
+If you are building a system to route requests or make decisions over daily changing data with minimal memory/cost, follow this open-source pattern:
+
+[ Incoming Request / State ]
+            │
+            ▼
+[ Incremental Ingestion ] ────► Ingests daily web updates into a HippoRAG / Graph-Vector store
+            │                   (No LLM retraining, sub-second update cost)
+            ▼
+[ Classifier / Router ]  ────► SetFit / LLMRouter / Outlines + 1B Model
+            │                   (Evaluates Choice, Score, Boolean in <100ms)
+            ▼
+[ Typed Decision / Target ] ──► (Billing, Technical, Doc Answer Location, etc.)
+This do not seem to be what I am looking for. There was something called Needle (needle3?)
+
+Needle 3 (developed by Cactus) is an ultra-lightweight foundation model designed explicitly for fast, low-RAM, machine-native operations (routing, tool calling, JSON extraction) rather than heavy generative chat.  
+Cactus Compute
+
+Needle 3 relies on a Simple Attention Network architecture—it strips out heavy MLPs/Feed-Forward Networks (FFNs), keeping only attention and gating mechanisms. This allows the entire model to run as an 8–29 MB binary with an "intelligence ladder" (selectable depth from 2 to 20 layers) that operates on ultra-low RAM consumer devices and microcontrollers.  
+Cactus Compute
+
+If you are looking for open-source projects and architectural designs similar to Needle 3—which use stripped-down, non-generative, fast, or low-RAM approaches for routing, schema extraction, and fast classification on changing data—here are the best frameworks and implementations available:
+
+1. Stripped-Down Attention / FFN-Less Architectures
+Needle 3’s core innovation is removing Feed-Forward Networks (MLPs) because internal parameter memorization isn't needed for routing and structured JSON extraction over provided data/RAG contexts.  
+Reddit
+
+Simple Attention Networks (SANs)
+
+What it is: Research models exploring transformer variants where the dense MLPs/FFNs are stripped out or replaced purely by low-rank linear projections and attention gating.
+
+How it aligns with Needle 3: Without MLPs, the model acts as a pure contextual attention router. It cannot "memorize" facts, but it excels at mapping inputs directly to structured tool calls or schema slots in sub-millisecond prefill times.
+
+MobileBERT / TinyBERT
+
+What it is: Compact, compressed encoder frameworks designed for hyper-fast sequence classification and extraction on tiny hardware (microcontrollers, edge nodes).
+
+How it handles changing data: These 10–30 MB models do not store world knowledge; instead, they act as rapid state-evaluators that process changing contexts (daily blogs, docs) fed in via simple attention vectors.
+
+2. High-Speed, Low-RAM Structured Extractors & Routers
+Like Needle 3 (which uses extract() with Pydantic shapes and tool triggers), these open-source projects bypass traditional auto-regressive generation to yield deterministic, typed output instantly:  
+Cactus Compute
+
+Outlines (with small backends)
+
+What it is: An open-source structured text generation library that guides decoding at the logit level using Context-Free Grammars (CFGs) and Finite State Machines (FSMs).
+
+Why it's similar: When paired with a tiny model (e.g., Qwen-1.5B or a 250M parameter encoder), Outlines forces the model to evaluate only valid JSON schema tokens or specific enum branches, delivering Needle-like zero-hallucination routing.
+
+SetFit
+
+What it is: An open-source framework by Hugging Face for efficient few-shot fine-tuning of sentence transformers (using small backends like MiniLM or BGE-small).
+
+Why it fits the Needle/Jev pattern:
+
+Ultra-Low Memory: Occupies ~50–100MB of RAM.
+
+Instant Training: Can be fine-tuned or adapted to new daily documentation/web states in 10 to 30 seconds on CPU.
+
+Fast Latency: Performs routing/classification in under 10ms.
+
+3. Open-Source Projects for Fast Incremental Context Indexing
+If your goal is handling slowly changing daily data (blogs, docs, site changes) with minimal memory overhead, rebuilding full vector indexes or retraining model weights is too slow. These projects manage live, low-RAM dynamic state:
+
+HippoRAG 2
+
+What it is: An open-source, neuro-biologically inspired memory framework.
+
+How it handles daily data: Instead of heavy model retraining or monolithic embedding databases, HippoRAG builds an incremental Knowledge Graph (KG) over daily text updates.
+
+Why it fits: It allows tiny models (like Needle 3) to query a lightweight memory graph without re-indexing your entire document store.
+
+LanceDB
+
+What it is: An open-source, serverless, embedded vector database written in Rust.
+
+Why it pairs with Needle 3: It requires zero background server memory (0 MB standing RAM) because it queries directly off disk/S3 using columnar Lance format. You can append new daily site scrapes in seconds and let a 20MB model like Needle 3 parse and route over the retrieved context.
+
+Ideal Needle-Style Tech Stack Summary
+If you want to replicate Needle 3’s design pattern (low-RAM, fast function calling, live indexing of changing docs):
+
+Inference Engine / Router: Use a tiny non-FFN / constrained 20M–100M parameter model via Needle 3 Python SDK or Outlines + TinyBERT.
+
+Dynamic Context Storage: LanceDB or HippoRAG 2 for zero-RAM, incrementally updated daily docs/web state.
+
+Execution Pattern: Restrict request handling to structured Pydantic schemas (e.g., extract() or Choice) to achieve sub-50ms deterministic decisions.
+
+
+
+
+Your Michael A. Wright chats aren’t used to improve our models. Gemini is AI and can make mistakes. Your privacy & GeminiOpens in a new window
+
+Searching the web

@@ -1,0 +1,2605 @@
+look at https://typesafe.ai/blog/introducing-system-one-models-and-jev and consider my docent support at 
+software-wrighter-lab/sw-campus -- so how can I train an LLM that fits-in and runs-in a browser to answer docent directed quesstions on my campus site?  
+
+You want a campus-specific docent model that is small enough to download and run entirely in-browser, answers questions about the campus, routes visitors to exhibits, explains what they are looking at, and can be retrained as the campus evolves.
+
+The useful lesson from TypeSafe’s System One/Jev work is not “copy Jev.” It is: constrain the docent’s job much more aggressively than a normal chatbot. Jev is built around unstructured input → typed, probabilistic decisions, with outputs chosen from a known schema rather than unconstrained prose. That is a very good fit for your campus.
+
+I would split the docent into two layers
+                    browser
+                       |
+             "Where can I try APL?"
+                       |
+                       v
+             +--------------------+
+             | Tiny docent model  |
+             | classifier/router  |
+             +--------------------+
+               |      |       |
+               v      v       v
+            intent  place   confidence
+               |      |       |
+               +------+-------+
+                      |
+                      v
+             deterministic code
+                      |
+          +-----------+------------+
+          |                        |
+          v                        v
+  retrieve campus fact       navigate UI
+          |
+          v
+  optional tiny generator
+          |
+          v
+ "APL is in Language Experiments..."
+
+The first model need not really be an LLM at all.
+
+That is where I think the System One idea is particularly relevant.
+
+1. Your existing snapshot is already almost a training corpus
+
+pages/docent/snapshot-a.json is unusually well structured for this problem.
+
+You already have:
+
+canonical place IDs
+aliases
+concepts
+hierarchical parents
+sample queries classified as:
+navigate
+explain
+recommend
+story
+ambiguous queries
+expected destination sets
+unsupported queries
+prewritten stories
+actual URLs
+
+For example, the snapshot explicitly associates variations such as:
+
+"APL"
+"the apl demo"
+"array programming"
+"the array language"
+"apl on cor24"
+
+with one canonical apl destination.
+
+Likewise you already have training examples conceptually like:
+
+navigate: where can I try apl
+navigate: show me array programming
+navigate: I want a programming language with glyphs
+explain: what is apl
+story: tell me about apl
+
+This is much better training material than simply dumping README files into a fine-tuning job.
+
+Your task is therefore closer to:
+
+f(question, current_location, campus_state)
+    -> DocentDecision
+
+than:
+
+f(question) -> arbitrary English
+2. Make DocentDecision the fundamental output
+
+I would define something approximately like:
+
+struct DocentDecision {
+    intent: Intent,
+    destination: Option<PlaceId>,
+    topic: Option<Topic>,
+    confidence: f32,
+}
+
+with something like:
+
+enum Intent {
+    Navigate,
+    Explain,
+    Recommend,
+    Story,
+    Status,
+    Clarify,
+    Unsupported,
+}
+
+You can make it richer later:
+
+struct DocentDecision {
+    intent: Intent,
+
+    primary: Option<PlaceId>,
+    alternatives: Vec<PlaceId>,
+
+    story: Option<StoryId>,
+
+    confidence: f32,
+    ambiguity: f32,
+}
+
+Then Rust/Yew owns the behavior.
+
+For:
+
+Where can I try APL?
+
+the model does not generate:
+
+You can find the wonderful APL exhibit nestled inside...
+
+It returns conceptually:
+
+intent       = Navigate   0.991
+destination  = apl        0.973
+
+Your code constructs the answer using current campus data:
+
+APL is in Computer Science → Language Experiments.
+[Take me there]
+
+That means a stale model can't hallucinate a nonexistent URL.
+
+This is almost exactly the software-oriented division TypeSafe is arguing for: use AI where fuzzy interpretation is necessary, then put ordinary deterministic software around it.
+
+3. This makes the browser model much smaller
+
+If you insist that the model itself generate good prose, you are likely looking at something in roughly the 250M–1B parameter class before it starts feeling reasonably conversational.
+
+That can run in current browsers. Transformers.js supports browser inference using WASM or WebGPU, including quantized models, and its 2026 v4 runtime supports newer architectures including MoE and Mamba-family designs.
+
+Hugging Face demonstrates browser inference with things like:
+
+SmolLM2-360M-Instruct
+1B-class Llama models
+WebGPU
+quantized weights
+inference in a Web Worker
+
+But I don't think you need that initially.
+
+I would aim dramatically lower:
+
+Docent component	Rough model size
+intent classifier	1–10M parameters
+destination/concept router	5–30M
+combined encoder/router	10–50M
+optional generative docent	100–400M
+general conversational model	500M–1B+
+
+A 20M parameter INT8 model is only about 20 MB of weights.
+
+At 4-bit:
+
+20M × 4 bits ~= 10 MB
+
+That is an entirely different browser UX from downloading a 500 MB model.
+
+And given how narrow your domain is, I suspect you could go below 20M.
+
+4. I would actually train a tiny campus transformer
+
+This would fit very naturally with moe-microscope.
+
+Instead of taking something like SmolLM and merely fine-tuning it, build an intentionally tiny model whose job can be understood end-to-end.
+
+Something like:
+
+tokens
+   |
+   v
+embedding
+   |
+   v
+2-4 transformer blocks
+   |
+   +--------------------+
+   |                    |
+   v                    v
+intent head          destination head
+   |                    |
+  7 classes           N places
+
+For example:
+
+vocab:              4K–8K
+embedding:          128–256
+layers:             2–6
+attention heads:    4
+context:            128–256 tokens
+places:             ~50–200
+intents:            ~7
+
+This could potentially land in the few-million-to-tens-of-millions parameter range.
+
+And importantly, it becomes a real educational exhibit:
+
+Here is the model currently answering your question.
+
+You could show:
+
+Question:
+"Where can I see an early processor?"
+
+Intent
+ Navigate      ████████████████ 92%
+ Explain       ██               6%
+ Story                          1%
+
+Destination
+ RCA 1802      ██████████████   74%
+ IBM 1130      ████             21%
+ APL                            2%
+
+That is much more interesting than embedding an opaque 1B model.
+
+5. Train the decision model with your current corpus
+
+Your snapshot is a seed dataset, not enough examples by itself.
+
+But it gives you a grammar for synthesizing training data.
+
+For every place:
+
+{
+  "id": "rca-1802",
+  "aliases": [...],
+  "concepts": [...],
+  "queries": [...]
+}
+
+generate variants.
+
+Navigation
+where is {alias}
+show me {alias}
+take me to {alias}
+I'd like to see {concept}
+do you have anything about {concept}
+where can I learn about {concept}
+Explanation
+what is {alias}
+tell me about {alias}
+what does {alias} demonstrate
+why is {alias} here
+Status
+does {alias} work yet
+is {alias} finished
+can I run {alias}
+what's implemented in {alias}
+Story
+tell me a story about {alias}
+what is interesting about {alias}
+tell me something historical about {concept}
+Recommendation
+I like {concept}
+what should I visit if I like {concept}
+show me something involving {concept}
+
+Then aggressively add paraphrases.
+
+Instead of 50 hand-written questions, easily create:
+
+50 places
+× 20 templates
+× 5 aliases/concepts
+≈ 5,000 examples
+
+Then augment those with another model offline to produce less templated language.
+
+Perhaps 20,000–100,000 examples.
+
+For a tiny classifier/router, that is plenty for an experiment.
+
+6. Ambiguity should be explicitly trained
+
+Your snapshot already has this excellent example:
+
+"show me an old computer"
+    -> IBM 1130
+    -> RCA 1802
+
+Don't force a one-hot answer.
+
+Train:
+
+IBM 1130    0.55
+RCA 1802    0.42
+other       0.03
+
+Then code can say:
+
+I have two good matches:
+
+IBM 1130 — a complete 1960s minicomputer
+RCA 1802 — a 1970s single-chip processor
+
+That is a much better docent interaction than hallucinating certainty.
+
+It also gives you something experimentally interesting to measure: calibration, which is one of TypeSafe's central claims for its System One models. Their model explicitly returns probabilities rather than pretending every answer is equally certain.
+
+You could directly measure:
+
+confidence bucket   actual accuracy
+
+0.9–1.0             96%
+0.8–0.9             86%
+0.7–0.8             74%
+...
+
+That would make your docent project surprisingly aligned with the Jev work without attempting to reproduce their proprietary architecture or RLCD method.
+
+7. But you still want conversational answers
+
+Here is where I would use a hybrid architecture.
+
+Instead of one model:
+
+          question
+              |
+              v
+     tiny System-One model
+              |
+        DocentDecision
+              |
+       +------+------+
+       |             |
+       v             v
+ deterministic   small generator
+    answer        if needed
+
+Most campus questions can be answered without generation.
+
+Type A — deterministic
+
+Where is APL?
+
+Navigate(apl)
+
+Answer from catalog.
+
+Type B — retrieval/template
+
+What is APL?
+
+Retrieve:
+
+title
+tagline
+summary
+story
+
+and present it.
+
+Type C — generative
+
+Why is APL historically interesting compared with Forth?
+
+Now a tiny generator becomes useful.
+
+The generator receives only:
+
+USER QUESTION
+
+RELEVANT CAMPUS FACTS:
+<APL facts>
+<Forth facts>
+
+Instruction:
+Answer only using these facts.
+
+Now even a 360M-ish model has a much easier problem.
+
+8. A 360M generator is currently very practical in-browser
+
+Transformers.js documentation explicitly shows SmolLM2-360M-Instruct running through WebGPU in a Web Worker.
+
+So a sensible second stage would be:
+
+SmolLM2 360M
+or similarly small instruct model
++
+Q4 weights
++
+WebGPU
++
+Worker
+
+A crude weight-only estimate is:
+
+360M × 4 bits ~= 180 MB
+
+Real download/runtime memory will be higher because of metadata, activations, KV cache, tokenizer data, runtime overhead, etc.
+
+Still very plausible for an optional enhanced docent.
+
+I would not make visitors download it before entering the campus.
+
+Instead:
+
+Campus loads                  ~normal site
+
+Docent basic                  +10–30 MB
+   ↓ immediately useful
+
+"Enable conversational docent"
+                              +~200 MB
+
+Cache the weights once downloaded.
+
+9. There is an even more interesting MoE version
+
+Given moe-microscope, this project almost begs for:
+
+Campus MicroMoE
+              tokens
+                |
+                v
+            embedding
+                |
+                v
+             router
+        ________|________
+       /        |        \
+      v         v         v
+ history    languages     ML
+ expert      expert      expert
+       \        |        /
+        \_______|_______/
+                |
+                v
+          intent/place heads
+
+Experts might specialize around:
+
+history
+computer architecture
+programming languages
+math
+ML/AI
+navigation
+campus status
+
+You do not need every expert for every question.
+
+This makes the docent simultaneously:
+
+useful,
+a tiny-MoE experiment,
+a browser inference experiment,
+an explainable-AI exhibit,
+a continuous-learning/retraining testbed.
+
+And the campus itself supplies the changing dataset.
+
+That is unusually coherent research-wise.
+
+10. The 1442/radio exhibit becomes your perfect update experiment
+
+You already deliberately excluded it from snapshot A.
+
+That's excellent.
+
+Run this experiment.
+
+Snapshot A
+
+Model knows:
+
+1130
+1802
+APL
+...
+
+It does not know:
+
+1442 radio demo
+
+Ask:
+
+Where can I hear the card reader play music?
+
+Expected:
+
+low confidence / unsupported / ambiguous
+
+Then publish Snapshot B with the 1442 exhibit.
+
+Retrain.
+
+Ask exactly the same held-out queries.
+
+Expected:
+
+navigate -> 1442-radio
+confidence -> high
+
+Then measure:
+
+new knowledge learned
+old knowledge retained
+model size delta
+training time
+examples required
+accuracy before/after
+catastrophic forgetting
+calibration change
+
+That makes this far more than a novelty chatbot.
+
+It becomes a concrete demonstration of:
+
+Can a tiny domain model efficiently learn an evolving world?
+
+Which connects directly to your broader continuous-model-learning work.
+
+11. I would not train the prose into the weights
+
+This distinction matters.
+
+Don't teach it:
+
+IBM introduced the 1130 in 1965...
+
+and rely on weights to remember that forever.
+
+Keep knowledge primarily in:
+
+snapshot.json
+stories.json
+catalog
+
+The model learns semantic mapping:
+
+"little IBM scientific machine"
+        ->
+ibm-1130
+
+The catalog contains the facts.
+
+That means when you change:
+
+status = planned
+
+to:
+
+status = working
+
+you do not retrain.
+
+Likewise URLs and descriptions do not require retraining.
+
+Retraining happens when the semantic world changes:
+
+new exhibit
+new concept
+new aliases
+new relationships
+
+That is a much cleaner lifecycle.
+
+12. I would also compare against a non-LLM baseline
+
+You should absolutely do this.
+
+Because your problem might turn out to be solvable by a tiny embedding model.
+
+Architecture:
+
+question
+   |
+tiny sentence encoder
+   |
+128-dimensional vector
+   |
+cosine similarity
+   |
+place/concept vectors
+
+Transformers.js explicitly supports browser feature extraction/embeddings on WebGPU, including small embedding models.
+
+Then:
+
+intent classifier + embedding retrieval
+
+might beat your home-grown transformer in:
+
+size
+speed
+training cost
+accuracy
+
+That isn't a failure.
+
+It gives moe-microscope a great experiment:
+
+Approach	Download	Accuracy	Calibration	Latency	Trainable?
+keyword/aliases	tiny	?	n/a	tiny	no
+embeddings	~10–30 MB	?	moderate	low	perhaps
+tiny dense transformer	?	?	?	?	yes
+tiny MoE	?	?	?	?	yes
+360M LLM	~hundreds MB	?	poor?	higher	expensive
+
+And now you're doing actual ML research rather than merely embedding an AI widget.
+
+13. I'd use this model stack
+
+For the first serious experiment:
+
+                 sw-campus
+                     |
+              snapshot-N.json
+                     |
+                     v
+            training generator
+                     |
+          +----------+-----------+
+          |                      |
+      positive               adversarial
+      examples                 examples
+          |                      |
+          +----------+-----------+
+                     |
+                     v
+             campus-micro model
+                     |
+             ONNX / custom weights
+                     |
+                     v
+             Rust/Yew browser
+                     |
+          WebGPU -> WASM fallback
+Model
+
+Start with:
+
+vocab              4096
+embedding          192
+transformer layers 4
+attention heads    4
+FFN                512–768
+context            128
+
+Output heads:
+
+intent         7
+place          N
+story          M
+supported      2
+
+Possibly:
+
+~5–15M parameters
+
+depending on exact dimensions.
+
+Then build a MoE variant:
+
+shared attention
++
+8 tiny FFN experts
+top-2 routing
+
+and compare it against dense.
+
+That's particularly appropriate for moe-microscope.
+
+14. Don't make free-form text generation the first milestone
+
+I'd sequence it like this:
+
+Experiment 0
+
+Rule-based alias matching.
+
+Your baseline.
+
+Experiment 1
+
+Tiny embedding retrieval.
+
+Test semantic matching.
+
+Experiment 2
+
+Tiny dense decision transformer.
+
+Train intent + destination jointly.
+
+Experiment 3
+
+Tiny MoE decision model.
+
+See whether experts specialize by campus domain.
+
+Experiment 4
+
+Calibrated ambiguity.
+
+Train it to know when it doesn't know.
+
+Experiment 5
+
+Snapshot A → B incremental retraining.
+
+Add the 1442/radio knowledge.
+
+Experiment 6
+
+Optional 100–400M generator.
+
+Use retrieved facts to turn structured results into conversational prose.
+
+That last stage is where browser LLM inference becomes relevant.
+
+Not before.
+
+15. The UX becomes quite nice
+
+Your lobby easel could say:
+
+┌─────────────────────────────────────┐
+│ Ask the Docent                     │
+│                                     │
+│ > something about early CPUs       │
+│                                     │
+│ I found two likely exhibits:        │
+│                                     │
+│ RCA 1802                     82%    │
+│ IBM 1130                     15%    │
+│                                     │
+│ [Visit 1802] [Compare them]         │
+│                                     │
+│ Why this answer?                    │
+└─────────────────────────────────────┘
+
+Click Why this answer?
+
+And because this is your microscope project:
+
+tokens:
+"something" "about" "early" "CPUs"
+
+router:
+architecture expert    0.71
+history expert         0.24
+languages expert       0.03
+
+top concepts:
+microprocessor         0.88
+processor architecture 0.81
+1970s computing        0.67
+
+destinations:
+RCA 1802               0.82
+IBM 1130               0.15
+
+That would fit the character of the campus far better than a generic chatbot popover.
+
+My preferred architecture
+
+I would not start by fine-tuning an existing LLM.
+
+Build:
+
+        ~5–20M parameter
+      Campus System-One Model
+
+trained specifically to perform:
+
+question
++
+current location
++
+possibly recent interaction
+        ↓
+intent
+destination(s)
+story/topic
+confidence
+
+Then let the existing sw-campus catalog provide the factual answer.
+
+Add a separately downloadable ~300–400M browser LLM later for questions genuinely requiring prose synthesis.
+
+So in shorthand:
+
+              SMALL MODEL
+                  |
+                  | understands
+                  v
+visitor --> semantic decision
+                  |
+                  | selects
+                  v
+             CAMPUS DATA
+                  |
+                  | grounds
+                  v
+              answer/UI
+                  |
+           [optional LLM]
+                  |
+                  v
+          nicer explanation
+
+That design borrows the most useful concept from Jev—AI as a fast probabilistic decision component embedded inside reliable software—without depending on Jev itself. TypeSafe explicitly positions Jev around classification, routing, scoring, extraction and branching rather than unrestricted token generation; your docent is unusually well matched to that model of computation.
+
+And because you already have snapshot-a.json, ambiguous examples, unsupported examples, stories, aliases, concepts, and the intentionally withheld 1442/radio knowledge, you are much closer to having the training/evaluation framework than it initially appears.
+
+Yes. Your “expensive compression, cheap decompression” mental model is a good way to think about this, with one qualification: I would not try to compress the facts themselves primarily into neural weights. I would spend the expensive nightly computation compressing your changing corpus into a small model plus a highly optimized semantic knowledge artifact.
+
+In other words:
+
+          NIGHTLY — expensive
+────────────────────────────────────────
+
+blog changes ───────┐
+campus changes ─────┤
+repo metadata ──────┼──> large teacher LLM
+video metadata ─────┤       + GPU
+links/relations ────┘         |
+                              v
+                    normalize / classify
+                    synthesize questions
+                    infer relationships
+                    generate embeddings
+                    train/distill router
+                    calibrate probabilities
+                              |
+                              v
+                    ┌───────────────────┐
+                    │ compressed corpus │
+                    │                   │
+                    │ tiny model        │
+                    │ knowledge index   │
+                    │ embeddings        │
+                    │ relationships     │
+                    │ summaries         │
+                    └─────────┬─────────┘
+                              │
+                         publish static
+                           artifacts
+                              │
+                              v
+
+          BROWSER — cheap
+────────────────────────────────────────
+
+                         visitor question
+                              |
+                         tiny model
+                              |
+                     typed JEV-like decision
+                              |
+                     tiny local retrieval
+                              |
+                    deterministic answer
+                              |
+                    optional tiny generator
+
+That's quite close conceptually to a JEV/System-One approach.
+
+What exactly is being “compressed”?
+
+I'd divide the result of the overnight process into three forms of compression.
+
+First is model compression. The expensive teacher turns lots of ways humans might express the same idea into training examples:
+
+"that little RCA processor"
+"the spacecraft CPU"
+"COSMAC"
+"the old 8 bit RCA chip"
+"the processor with sixteen registers"
+
+All collapse semantically toward:
+
+concept: rca-1802
+
+The tiny model learns that mapping. That's genuine statistical compression: thousands of examples become millions of reusable parameters.
+
+Second is knowledge compression. A 10,000-word article does not need to be shipped verbatim if the browser's primary job is discovery. The nightly job can create:
+
+title
+date
+URL
+50-word abstract
+concepts
+entities
+relationships
+aliases
+embedding
+representative questions
+
+Perhaps 2–10 KB describing something that was originally 50 KB.
+
+Third is relationship compression, which may be the most valuable part for your corpus. The expensive process discovers:
+
+blog:engram-revisited
+       |
+       +-- discusses --> concept:engram
+       |
+       +-- discusses --> concept:moe
+       |
+       +-- related --> repo:moe-microscope
+       |
+       +-- related --> campus:moe-microscope
+       |
+       +-- related --> blog:serial-parameter-machine
+
+The browser doesn't have to rediscover those relationships.
+
+You spent GPU cycles overnight to discover them once.
+
+That's very much your compress-expensively/decompress-cheaply analogy.
+
+And yes: both docents can “know it all”
+
+This is actually how I'd build it.
+
+There should not really be a separate campus brain and blog brain.
+
+There is one published Software Wrighter knowledge snapshot:
+
+sw-knowledge-2026-09-18/
+    manifest.json
+    concepts.bin
+    resources.json
+    relations.bin
+    embeddings.bin
+    router.onnx
+    tokenizer.json
+
+Both applications download it.
+
+                SW KNOWLEDGE SNAPSHOT
+                        |
+             +----------+----------+
+             |                     |
+             v                     v
+        Campus Docent         Blog Assistant
+             |                     |
+      campus context           blog context
+             |                     |
+             +----------+----------+
+                        |
+                   same knowledge
+
+Consequently, from the campus:
+
+Have you written anything about this?
+
+can find a blog post.
+
+From a blog article:
+
+Is there a demo for this?
+
+can find a campus exhibit.
+
+From either:
+
+Where is the source?
+
+can point to the repository.
+
+And:
+
+Do you have a video of this?
+
+can find the video.
+
+That is much better than independent bots.
+
+Metadata-only repos and videos is probably the right boundary
+
+I agree with your instinct not to ingest every repository and every video initially.
+
+Treat them differently.
+
+For a repository you might ingest:
+
+id
+organization
+repository name
+description
+README summary       # optional
+topics
+language
+homepage/demo URL
+campus relationship
+blog relationships
+last update
+
+You don't need every .rs file.
+
+Likewise a video:
+
+id
+title
+description
+date
+duration
+URL
+thumbnail
+associated project
+associated blog post
+concept tags
+
+You don't initially need to transcribe and embed every frame/minute.
+
+That keeps the claim made by the navigator precise:
+
+“I know about this repository/video.”
+
+rather than:
+
+“I know everything contained within it.”
+
+Later, video transcripts and selected repository documentation can simply become richer source types.
+
+Nightly ingestion is where the large model earns its keep
+
+This is the part I find particularly attractive about your architecture.
+
+Suppose tonight you publish:
+
+new blog post:
+"Running MoE Experts Across P100 GPUs"
+
+The overnight system sees the Git diff.
+
+It gives the new material to a much larger model and asks it to produce a strict schema:
+
+Resource {
+    kind: BlogPost,
+    concepts: [
+        mixture_of_experts,
+        gpu_offload,
+        p100,
+        distributed_inference
+    ],
+
+    aliases: [...],
+
+    related: [
+        repo:moe-microscope,
+        campus:moe-microscope,
+        repo:sw-os-ml
+    ],
+
+    questions: [
+        "Where did you discuss P100s?",
+        "Have you tried MoE on old GPUs?",
+        "What did you write about distributed experts?",
+        ...
+    ]
+}
+
+The teacher can produce hundreds of synthetic questions, including deliberately difficult ones.
+
+Then train/distill the tiny model.
+
+But importantly, don't automatically replace tonight's production model merely because training completed.
+
+Run regression tests first.
+
+The nightly pipeline should have a quality gate
+
+I'd make this central:
+
+             ingest changes
+                   |
+                   v
+              teacher LLM
+                   |
+             +-----+------+
+             |            |
+        update index   generate examples
+             |            |
+             +-----+------+
+                   |
+              train/distill
+                   |
+                   v
+             candidate model
+                   |
+        +----------+-----------+
+        |          |           |
+        v          v           v
+      old QA     new QA    adversarial QA
+        |          |           |
+        +----------+-----------+
+                   |
+             calibration test
+                   |
+              regression?
+              /         \
+            yes          no
+             |            |
+          reject        publish
+
+This is where your existing snapshot-A/snapshot-B concept becomes especially useful.
+
+The new knowledge must improve questions like:
+
+Where is the card-reader radio demo?
+
+without damaging:
+
+Where can I try APL?
+
+So you're measuring continual knowledge acquisition and catastrophic forgetting every night.
+
+But don't retrain unnecessarily
+
+There are actually two kinds of nightly change.
+
+Suppose you change:
+
+"APL demo is planned"
+
+to:
+
+"APL demo is working"
+
+No neural training is necessary.
+
+Just rebuild:
+
+resources.json
+
+The router already understands APL.
+
+Likewise a changed URL doesn't require retraining.
+
+But adding:
+
+new project: sw-mamba-moe
+concepts: mamba, SSM, MoE hybrid
+
+probably does warrant adding training examples and potentially retraining.
+
+So the overnight pipeline itself can decide:
+
+             change detected
+                    |
+            semantic analysis
+                    |
+        +-----------+-----------+
+        |                       |
+    factual change          semantic change
+        |                       |
+        v                       v
+    rebuild index           retrain router
+
+That could save a lot of needless GPU work.
+
+Where the JEV idea fits precisely
+
+I'd separate the two concepts.
+
+The knowledge snapshot isn't especially Jev-like. It's essentially precomputed RAG/search/knowledge-graph infrastructure.
+
+The browser decision engine is where the System-One/Jev idea becomes powerful.
+
+Instead of browser LLM generation:
+
+question -> tokens -> tokens -> tokens -> tokens...
+
+you want:
+
+question
+   |
+   v
+FindRequest {
+    intent: {
+        navigate:       .06,
+        explain:        .12,
+        find_resource:  .79,
+        ...
+    },
+
+    concepts: {
+        moe:             .94,
+        old_gpu:         .81,
+        offload:         .68
+    },
+
+    resource_kind: {
+        blog:            .72,
+        repo:            .58,
+        video:           .19,
+        campus:          .41
+    },
+
+    confidence:          .91
+}
+
+Then extremely cheap deterministic code operates on your already-compressed knowledge snapshot.
+
+That is the part analogous to decompression.
+
+There is another compression trick I'd exploit
+
+Don't ship one giant knowledge artifact if you don't need to.
+
+Have a tiny bootstrap:
+
+manifest               20 KB
+concept graph         200 KB
+resource catalog      500 KB
+embeddings              2 MB
+tiny router            10 MB
+
+Then optional shards:
+
+history.bin
+ml.bin
+languages.bin
+hardware.bin
+systems.bin
+blog-details.bin
+
+The router can decide:
+
+"Tell me about the old IBM card reader"
+                 |
+                 v
+history .96
+                 |
+                 v
+fetch/cache history.bin
+
+That's effectively MoE applied to knowledge storage as well as model computation.
+
+The browser only “activates” the relevant knowledge expert.
+
+That connects very nicely to your MoE/offloading work.
+
+An interesting consequence: the browser can know more than the model
+
+This distinction is important:
+
+       Tiny neural model
+          10–30 MB
+             |
+       knows LANGUAGE
+       knows CONCEPTS
+       knows ROUTING
+             |
+             v
+       Knowledge snapshot
+          perhaps 5–30 MB
+             |
+       knows RESOURCES
+       knows FACTS
+       knows RELATIONSHIPS
+       knows URLs
+
+Together they can appear to “know” a surprisingly large corpus.
+
+You don't need a 1B-parameter model containing all your work.
+
+A 10M-parameter model plus a 10–30 MB carefully compressed knowledge representation might provide a far better navigator.
+
+And because it's your corpus, you can optimize far more aggressively than a general-purpose assistant can.
+
+This also gives “know it all” a useful definition
+
+I would define coverage operationally:
+
+Every public Software Wrighter artifact should have at least one KnowledgeItem, and every KnowledgeItem should be reachable through concepts and relationships.
+
+So the graph eventually contains:
+
+                  concept: MoE
+                  /    |    \
+                 /     |     \
+              blog   campus   repo
+               |       |       |
+             posts   exhibit  source
+               |
+             video
+
+Then your nightly validation can literally report:
+
+Knowledge coverage
+──────────────────────────
+Blog posts          113 / 113
+Campus exhibits      47 / 47
+Repositories         86 / 86
+Videos               14 / 14
+
+Resources tagged        260
+Resources related       252
+Orphan resources          8
+Broken URLs               0
+
+That gives “the docent knows about everything” a measurable meaning rather than an aspirational one.
+
+I think your compression analogy can go even further
+
+What you're proposing resembles an ahead-of-time compiler for questions.
+
+Nighttime:
+
+HUGE COMPUTE
+     |
+     v
+"What could people possibly ask about this corpus?"
+     |
+     v
+precompute semantics
+relationships
+embeddings
+aliases
+summaries
+training examples
+routing behavior
+
+Daytime:
+
+SMALL COMPUTE
+
+visitor question
+       |
+       v
+match it against
+precomputed semantic structure
+       |
+       v
+answer
+
+That's almost:
+
+traditional LLM:
+    interpret + search + reason + generate
+    EVERY TIME
+
+your architecture:
+    interpret/reason/index EXPENSIVELY ONCE
+                  +
+    cheap classify/retrieve MANY TIMES
+
+That is why I think the idea is stronger than merely “put a tiny LLM in my website.”
+
+I'd make that asymmetry an explicit research objective for the project:
+
+How much offline computation can we spend to minimize online inference cost while retaining useful natural-language discovery over an evolving personal corpus?
+
+That ties the Jev/System-One idea, your tiny-MoE work, browser inference, continual retraining, and the campus/blog knowledge graph into one coherent experiment.
+
+So, be precise, which file(s) hold the weights?  which model (from scratch?) can I build this on to run economically in the browser?  I need concrete steps (a plan) of how to build this, step by step.  Also, how can I add this to moe-microscope to show a tiered-weitghts (bin on disk) model?  Finally, what are some pithy names for a new repo to create this across Software Wrighter works?  A better name than docent (which could be a "personality" or "role" when using this at the one museum building, "tour guide" at the campus or other "buildings" or "exhibits" and a different name/role for the blog or for live demos.  
+
+Yes. After looking at the current moe-microscope, I would make this two related implementations:
+
+moe-microscope remains the deliberately tiny, inspectable research model and gains a tiered-weight/storage experiment.
+A new Software Wrighter-wide navigator uses a somewhat larger but still browser-economic model and a generated knowledge index.
+
+Also, one correction from the earlier discussion: I would not claim that you can train Jev itself or reproduce RLCD from the public material. TypeSafe says Jev uses a new architecture and RLCD, but hasn't published enough implementation detail to build it. We can build a Jev-inspired structured decision model.
+
+1. Precisely: where are the weights?
+
+There are two sensible formats at different stages.
+
+During training
+
+If we build the model in PyTorch, the canonical training checkpoint should be:
+
+models/
+  navigator-v001/
+    config.json
+    tokenizer.json
+
+    checkpoint/
+      model.safetensors       <-- TRAINED WEIGHTS
+      optimizer.pt            <-- training only
+      trainer-state.json
+
+model.safetensors contains the learned matrices:
+
+token embedding
+attention Q/K/V/O
+router weights
+expert 0 FFN
+expert 1 FFN
+...
+expert N FFN
+intent head
+concept head
+
+The browser never needs optimizer.pt.
+
+Browser deployment
+
+Export the trained model to:
+
+public/model/
+  navigator.onnx             <-- graph + possibly small/shared weights
+  navigator.weights.bin      <-- large/external weights
+  tokenizer.json
+  config.json
+
+ONNX explicitly supports this arrangement. The .onnx graph stores each external tensor's filename, offset and length; ONNX Runtime Web can load the external data file separately.
+
+For your project, however, I would go one step beyond generic ONNX external data:
+
+model/
+  core.onnx
+
+  weights/
+    shared-q4.bin
+    expert-00-q4.bin
+    expert-01-q4.bin
+    expert-02-q4.bin
+    expert-03-q4.bin
+    expert-04-q4.bin
+    expert-05-q4.bin
+    expert-06-q4.bin
+    expert-07-q4.bin
+
+knowledge/
+  catalog.json
+  concepts.bin
+  embeddings.bin
+  relations.bin
+
+That makes the storage hierarchy visible.
+
+2. What model should you actually build?
+
+I would build this model from scratch, rather than fine-tune Qwen/SmolLM.
+
+But I would not build a generative LLM from scratch.
+
+Build a small encoder MoE classifier/ranker.
+
+My starting configuration would be approximately:
+
+Property	Initial target
+Vocabulary	8,192
+Context	128 tokens
+embedding dimension	256
+encoder layers	4
+attention heads	4
+shared FFN	512
+experts	8
+expert hidden dim	512
+top-k	2
+output	typed decisions
+initial parameters	roughly 15–30M
+deployment precision	INT8 initially; Q4 experiment next
+
+Why this rather than a 500M LLM?
+
+Because your desired operation is:
+
+natural language
+      ↓
+semantic representation
+      ↓
+intent + concepts + ranking
+
+not:
+
+natural language
+      ↓
+autoregressive generation of more natural language
+
+Jev similarly gives up string generation in favor of structured probabilistic decisions.
+
+A 20M-parameter model is approximately:
+
+FP32     80 MB
+FP16     40 MB
+INT8     20 MB
+INT4     10 MB
+
+That is the neighborhood I'd target.
+
+3. But don't make the model output resource IDs
+
+This is important.
+
+Don't train:
+
+question -> one of 273 URLs
+
+Train:
+
+question
+    ↓
+{
+  intent,
+  concepts[],
+  resource_kinds[],
+  time/relevance hints,
+  confidence
+}
+
+For example:
+
+Where was that thing about running MoE experts from disk?
+
+could produce:
+
+intent
+  FIND_RESOURCE       .97
+
+concept
+  mixture_of_experts  .96
+  expert_offload      .88
+  storage_hierarchy   .73
+
+resource_kind
+  blog                .62
+  repository          .59
+  campus              .34
+
+confidence             .93
+
+Then search knowledge/catalog.json.
+
+That lets tomorrow's blog article become searchable without changing the neural output vocabulary.
+
+4. Concrete build plan
+
+I would do this in about 12 milestones, with each milestone producing something measurable.
+
+1 — Create the canonical corpus schema
+
+New repo defines:
+
+Resource
+Concept
+Relation
+Question
+Decision
+
+Sources initially:
+
+sw-campus snapshot
+blog posts
+repo metadata
+video metadata
+
+No repository source ingestion and no video transcription yet.
+
+2 — Write four importers
+ingest-campus
+ingest-blog
+ingest-github-metadata
+ingest-video-metadata
+
+Produce:
+
+build/corpus/resources.jsonl
+build/corpus/relations.jsonl
+
+Every public artifact gets a stable ID:
+
+campus:apl
+blog:2026-...
+repo:sw-ml-study/moe-microscope
+video:sw-apl-mvp
+3 — Establish the non-neural baseline
+
+You already learned something important in moe-microscope: your deterministic matcher scores 0.685 while the best current trained docent scores only 0.407.
+
+Keep that matcher.
+
+The new model doesn't ship until it beats it.
+
+4 — Build a retrieval baseline
+
+Generate embeddings offline.
+
+Browser gets quantized embeddings:
+
+knowledge/embeddings.bin
+
+Test:
+
+question -> embedding -> cosine top-k
+
+Measure top-1, top-3 and MRR.
+
+5 — Generate teacher training data
+
+This is where your big overnight GPU system starts earning its keep.
+
+For every resource/concept, large teacher models generate:
+
+direct questions
+vague questions
+synonyms
+historical references
+cross-resource questions
+ambiguous questions
+negative questions
+unsupported questions
+
+Especially useful:
+
+the little old RCA CPU
+
+that project involving disk and experts
+
+your post about models recursively thinking
+
+do you have a demo related to this article?
+
+Generate perhaps 100K–500K examples.
+
+6 — Train the small dense model first
+
+Before MoE:
+
+8K vocab
+256 dimensions
+4 encoder blocks
+
+Outputs:
+
+intent
+concept probabilities
+resource-kind probabilities
+confidence
+
+This establishes whether MoE adds anything.
+
+7 — Train the MoE version
+
+Replace some/all FFNs with:
+
+               router
+          / / / | \ \ \
+        E0 E1 E2 ... E7
+             top-2
+
+Same parameter/active-compute accounting as moe-microscope.
+
+Compare:
+
+dense vs MoE
+stored parameters
+active parameters
+latency
+accuracy
+specialization
+8 — Calibrate it
+
+This is the most explicitly Jev-inspired part.
+
+A .93 result should actually be right roughly 93% of the time.
+
+Measure:
+
+ECE
+Brier score
+reliability diagram
+
+And train/test abstention:
+
+confidence < threshold
+       ↓
+"I found several possibilities."
+
+rather than fabricating certainty.
+
+9 — Export ONNX
+
+Canonical pipeline:
+
+PyTorch
+   ↓
+safetensors
+   ↓
+ONNX
+   ↓
+quantization
+   ↓
+browser artifacts
+
+ONNX Runtime Web supports custom ONNX models in-browser and WASM/WebGPU execution.
+
+10 — Add browser runtime
+
+I'd target:
+
+WebGPU preferred
+WASM fallback
+
+Current ONNX Runtime Web supports both; WebGPU browser coverage remains less universal than WASM.
+
+Run inference in a Web Worker so navigation/UI remains responsive.
+
+11 — Add nightly rebuilding
+git changes
+    ↓
+ingest changed resources
+    ↓
+teacher enriches metadata
+    ↓
+update knowledge index
+    ↓
+semantic change?
+   /             \
+ no              yes
+ |                |
+index only      retrain
+                  |
+               evaluate
+                  |
+              regression?
+               /       \
+             yes       no
+              |         |
+            reject    publish
+12 — Integrate everywhere
+
+Same runtime:
+
+                    sw-navigator
+                         |
+          +--------------+---------------+
+          |              |               |
+       campus           blog          live demo
+          |              |               |
+       "Guide"      "Research aide"    "Helper"
+
+Personality and UI change.
+
+Knowledge does not.
+
+5. The moe-microscope tiered-weights experiment
+
+This is particularly timely because your README already says the roadmap includes:
+
+“quantization and the packed file with the expert cache”
+
+So I would make the navigator a real workload for that experiment, rather than adding an unrelated demonstration.
+
+Call the experiment something like:
+
+TW01 — Tiered Weight Residency
+
+Start with your existing MicroMoE, where one full expert is only 1,072 parameters / 536 bytes INT4. That is too small to demonstrate meaningful I/O latency, so create a scaled storage fixture while preserving exactly the same logical routing.
+
+For example:
+
+weights.bin
+
++---------------------------+
+| header                    |
++---------------------------+
+| embeddings/shared weights |
++---------------------------+
+| router                    |
++---------------------------+
+| expert directory          |
++---------------------------+
+| expert 0                  |
+| padding to realistic size |
++---------------------------+
+| expert 1                  |
+| padding                   |
++---------------------------+
+              ...
++---------------------------+
+
+Directory:
+
+ExpertDirectoryEntry {
+    id,
+    offset,
+    compressed_size,
+    tensor_shape,
+    quantization,
+    checksum
+}
+
+Then implement:
+
+               weights.bin
+                    |
+                  mmap
+                    |
+             +------+------+
+             | expert cache|
+             +------+------+
+                    |
+              active experts
+                    |
+                   CPU
+6. Simulate three tiers first
+
+For moe-microscope:
+
+Tier 0     resident RAM
+           shared weights
+           router
+           hot experts
+
+Tier 1     SSD / mmap
+           warm experts
+
+Tier 2     HDD / file
+           cold experts
+
+Measure:
+
+Metric	Why
+expert bytes	storage
+cache hit %	locality
+bytes read/token	bandwidth
+load latency	I/O penalty
+expert compute	execution
+total token latency	actual result
+evictions	cache pressure
+
+Then visualize one request:
+
+TOKEN
+  |
+  v
+ROUTER
+  |
+  +---- E2 ---- RAM HIT --------> compute
+  |
+  +---- E7 ---- SSD MISS
+                 |
+                 v
+              read bin
+                 |
+                 v
+               cache
+                 |
+                 v
+              compute
+
+That fits moe-microscope extremely well.
+
+7. Then make the browser itself another storage hierarchy
+
+This is the fun part.
+
+The browser version has:
+
+SERVER
+  |
+  | HTTP Range / fetch
+  v
+Cache API / OPFS / IndexedDB
+  |
+  v
+browser RAM
+  |
+  v
+WebGPU buffer
+
+ONNX Runtime explicitly recommends browser caching for large models and supports external weight data.
+
+So your microscope could compare:
+
+SERVER -> browser cache -> RAM -> GPU
+
+against your MLOS experiments:
+
+HDD -> SSD -> RAM -> VRAM
+
+They are manifestations of the same residency problem.
+
+That's a particularly strong connection between the projects.
+
+8. I would eventually go beyond vanilla ONNX for experts
+
+For the first production browser version, use standard ONNX.
+
+But for the research version, I would experiment with:
+
+core.onnx
+experts.bin
+
+where experts.bin is explicitly your format.
+
+For example:
+
+0x0000  header
+0x1000  expert directory
+0x2000  expert 0 INT4
+0x6000  expert 1 INT4
+0xA000  expert 2 INT4
+...
+
+Then:
+
+router chooses E2 + E6
+          |
+          v
+Range GET offsets
+          |
+          v
+expert cache
+
+Now you can literally measure:
+
+stored model      80 MB
+resident model    18 MB
+active/token      11 MB
+bytes fetched       4 MB
+
+That's much closer to your wider MoE research than simply saying “ONNX happens to use external data.”
+
+9. Don't start with Qwen2.5-0.5B
+
+It is a useful comparison baseline, though.
+
+Transformers.js explicitly demonstrates Qwen2.5-0.5B-Instruct at Q4 on WebGPU.
+
+So benchmark:
+
+                   Download       Task
+
+Qwen2.5-0.5B Q4    ~250MB+        generate answer
+
+SW dense            ~10–30MB       decision/retrieve
+
+SW MoE              ~? stored      decision/retrieve
+                    smaller active
+
+The question becomes:
+
+How much general-purpose language-model machinery can we eliminate because we know the problem beforehand?
+
+That's a compelling experiment.
+
+10. Repo naming
+
+I agree strongly that docent is the wrong system name.
+
+Docent is a role.
+
+Likewise:
+
+Museum       -> Docent
+Campus       -> Guide
+Blog         -> Librarian / Research Aide
+Demo         -> Tutor
+Repository   -> Archivist
+
+Those can all be personas of one underlying engine.
+
+For the engine/repository, I'd favor short names related to finding and connecting knowledge.
+
+Strongest candidates
+
+sw-compass
+
+My favorite.
+
+Software Wrighter Compass
+
+It doesn't imply chat, LLM, museum, search engine, or one UI.
+
+It answers the essential problem:
+
+Where should I go to find what I'm thinking about?
+
+And personas fit beautifully:
+
+Compass
+  museum persona  = Docent
+  campus persona  = Guide
+  blog persona    = Librarian
+  demo persona    = Tutor
+
+sw-index
+
+Very precise, technical and understated.
+
+The downside is that it underplays the semantic/model component.
+
+sw-atlas
+
+Excellent if you want to emphasize the interconnected corpus:
+
+Atlas of Software Wrighter work
+
+Campus + blog + projects + videos all have places in the Atlas.
+
+sw-wayfinder
+
+Probably the most semantically accurate.
+
+Software Wrighter Wayfinder
+
+It finds paths through a corpus.
+
+Slightly longer, but distinctive.
+
+sw-beacon
+
+Short and memorable. More “points you toward something” than “understands the collection.”
+
+Other reasonable names
+
+One list, roughly grouped by feel:
+
+sw-compass — direction/discovery; strongest overall
+sw-atlas — corpus/knowledge graph
+sw-wayfinder — semantic navigation
+sw-index — deliberately plain/technical
+sw-beacon — points visitors toward relevant work
+sw-map — wonderfully simple but perhaps too generic
+sw-catalog — accurate but undersells ML
+sw-curator — good, but becomes another persona-like word
+sw-sherpa — guide metaphor, but again role/persona
+sw-lantern — discovery metaphor; perhaps too whimsical
+
+I'd choose sw-compass or sw-atlas.
+
+And I'd use terminology like:
+
+             SW Compass
+                 |
+        +--------+---------+
+        |        |         |
+      engine    corpus    model
+        |
+   +----+----+---------+
+   |         |         |
+ Docent     Guide    Librarian
+ museum    campus      blog
+
+That gives you a clean conceptual vocabulary.
+
+How I'd divide the repositories
+sw-compass
+│
+├── canonical Resource/Concept/Relation schema
+├── corpus ingestion
+├── nightly teacher pipeline
+├── training/evaluation
+├── browser model export
+├── knowledge snapshot
+└── reusable Yew/browser component
+
+moe-microscope
+│
+├── tiny analogue of Compass model
+├── dense vs MoE comparison
+├── expert specialization
+├── TW01 tiered weights
+├── expert cache
+├── quantization
+└── visual explanation of how Compass works
+
+sw-campus
+│
+└── Compass component
+      persona = Guide
+      museum persona = Docent
+
+blog
+│
+└── Compass component
+      persona = Librarian
+
+That separation also fixes something in the current moe-microscope: the existing docent work is paused because the learned model hasn't beaten its deterministic baseline. Rather than treating that as a dead end, it becomes the first baseline result for Compass. moe-microscope explains why and experiments with better routing; sw-compass owns the practical corpus and application.
+
+The first concrete implementation milestone I would do is therefore not training: create sw-compass, define Resource, Concept, Relation, and Decision, ingest the existing snapshot-a.json plus the blog's published-post metadata, and build a deterministic cross-corpus retrieval benchmark. That gives the neural model a target it has to earn the right to replace.
+
+I'm leaning towards sw-atlas.  what are the reasonable memory sizes for a browser on a typical laptop (low system RAM, no GPU)?  Since this code runs on the client browsers, I don't want it to bog down the user's system or browsing experience.  Like a PWA, this work should "progress" from minimal footprint (reduced capability like our matcher today) to comfortable tiered approach (full power if the client has more RAM and a faster CPU).
+
+Yes. sw-atlas fits this better than sw-compass if the repository is the corpus/index/model infrastructure, while Docent, Guide, Librarian, etc. are roles presented by individual sites.
+
+And I would make progressive capability a fundamental architectural requirement, not an optimization added later.
+
+Memory target: be much more conservative than browser limits
+
+Browser technical limits are far above what you should actually consume. For example, ONNX Runtime documents a roughly 2 GB Chrome ArrayBuffer ceiling and a 4 GB WebAssembly address-space limit. Those are hard technical boundaries, not reasonable application budgets.
+
+For sw-atlas, I'd establish these working-set targets:
+
+Tier	Atlas additional RAM	Download/cache	Intended client
+0 Minimal	<10 MB	<2 MB	anything
+1 Search	<25 MB	2–10 MB	low-memory laptop/mobile
+2 Smart	<64 MB	10–30 MB	ordinary CPU laptop
+3 Full	<128 MB	30–75 MB	comfortable laptop
+4 Enhanced	128–256 MB	optional	capable client/WebGPU
+
+I would treat 64 MB as the important design target and 128 MB as the normal self-imposed ceiling.
+
+A web page casually taking another 500 MB because “the machine has 8 GB” would be exactly what you don't want.
+
+Atlas should always start at Tier 0
+
+Think of it like progressive enhancement:
+
+                     sw-atlas
+                         |
+                  ┌──────┴──────┐
+                  │ TIER 0      │
+                  │ ~5–10 MB    │
+                  │             │
+                  │ matcher     │
+                  │ aliases     │
+                  │ metadata    │
+                  └──────┬──────┘
+                         │
+                   device capable?
+                         │
+                         ▼
+                  ┌─────────────┐
+                  │ TIER 1      │
+                  │ ~10–25 MB   │
+                  │             │
+                  │ embeddings  │
+                  │ semantic    │
+                  │ retrieval   │
+                  └──────┬──────┘
+                         │
+                   enough memory?
+                         │
+                         ▼
+                  ┌─────────────┐
+                  │ TIER 2      │
+                  │ ~25–64 MB   │
+                  │             │
+                  │ tiny Atlas  │
+                  │ model       │
+                  │ + retrieval │
+                  └──────┬──────┘
+                         │
+                     WebGPU?
+                         │
+                         ▼
+                  ┌─────────────┐
+                  │ TIER 3/4    │
+                  │ 64–256 MB   │
+                  │             │
+                  │ more experts│
+                  │ larger index│
+                  │ reranker    │
+                  └─────────────┘
+
+The page never waits for Atlas.
+
+That's important.
+
+The campus loads first. The blog loads first. Atlas comes alive progressively.
+
+Tier 0 — what you have today, generalized
+
+I'd actually make the deterministic matcher a first-class Atlas runtime, not something that gets thrown away once ML works.
+
+Approximately:
+
+atlas-core.wasm
+resources.min.json
+aliases.bin
+concepts.bin
+
+It knows:
+
+titles
+aliases
+concept tags
+resource types
+URLs
+relationships
+
+and performs:
+
+token matching
+alias matching
+concept matching
+simple scoring
+graph traversal
+
+Target:
+
+5–10 MB RAM, probably much less.
+
+This works everywhere.
+
+And because your current matcher already beats the trained docent in moe-microscope, this isn't merely a fallback. It's currently the champion implementation.
+
+Tier 1 — embeddings without an LLM
+
+This might actually be your sweet spot for low-end clients.
+
+Add compact resource embeddings.
+
+Suppose eventually you have:
+
+1,000 resources
+384 dimensions
+INT8
+
+That's only:
+
+$$ 1000 \times 384 = 384,000\text{ bytes} $$
+
+375 KiB.
+
+Even 10,000 chunks/resources would only be about 3.7 MiB of INT8 embedding data.
+
+So the index isn't the expensive part.
+
+The expensive part is generating the query embedding.
+
+You therefore want a very small encoder or perhaps your Atlas model's shared embedding/encoder machinery.
+
+This tier gives:
+
+that article where you used old GPUs for MoE
+
+without needing generative inference.
+
+Tier 2 — the real Atlas model
+
+This is where I'd revise my earlier 15–30M suggestion downward.
+
+Given your concern about being a good citizen in someone's browser, I'd initially target:
+
+5–10M parameters, INT8
+
+That means approximately:
+
+weights              5–10 MB
+runtime/activations   perhaps 10–30 MB
+knowledge             few MB
+Atlas working set     target <64 MB
+
+The exact runtime footprint has to be measured, rather than inferred from weight size.
+
+I'd design something more like:
+
+vocab                 4K–8K
+embedding             128–192
+encoder blocks        2–4
+heads                  4
+experts                4–8
+top-k                  1 or 2
+context                64–128
+
+Remember that people aren't writing novels into this thing.
+
+Queries are usually:
+
+where was your post about Engram?
+
+You don't need a 4K-token context window.
+
+128 tokens is luxurious for the routing request.
+
+Tier 3 — load more experts
+
+This is where your tiered-weight work becomes directly useful.
+
+Instead of:
+
+Atlas model = 40 MB
+
+make it:
+
+shared.bin             8 MB
+
+experts/
+  ml.bin               6 MB
+  history.bin          6 MB
+  languages.bin        6 MB
+  systems.bin          6 MB
+  hardware.bin         6 MB
+  ...
+
+Browser initially loads:
+
+shared                  8 MB
+matcher/index            5 MB
+                       -----
+                        13 MB
+
+User asks:
+
+What have you done with old Tesla GPUs?
+
+The router says:
+
+ML       .71
+hardware .24
+
+Atlas loads/cache-resurrects:
+
+experts/ml.bin
+experts/hardware.bin
+
+Perhaps another 12 MB.
+
+It doesn't need the APL/language/history experts.
+
+That gives you an actual:
+
+Stored capacity > resident capacity > active capacity
+
+architecture.
+
+Which is exactly what you've been exploring with MoE.
+
+Tier 4 — richer inference should be opt-in-ish
+
+I'd be cautious here.
+
+Perhaps:
+
+Full Atlas
+all experts cached
+larger reranker
+larger embedding encoder
+optional generative model
+
+But don't silently allocate 250 MB because WebGPU exists.
+
+I'd expose something unobtrusive like:
+
+Atlas: Basic · Smart · Full
+
+with Auto as the default.
+
+Not:
+
+Your computer has 16 GB, therefore I have decided to consume 400 MB.
+
+Don't trust navigator.deviceMemory too much
+
+There is a browser API:
+
+navigator.deviceMemory
+
+which gives a deliberately coarse estimate of device RAM. MDN notes that it is privacy-clamped/rounded and isn't supported by all major browsers.
+
+So I would use it as one weak signal, not the tier selector.
+
+Instead, Atlas should perform a tiny capability probe.
+
+                   Atlas startup
+                         |
+                         v
+              deviceMemory available?
+                         |
+                         v
+                  coarse hint
+                         |
+                         v
+               WASM SIMD available?
+                         |
+                         v
+               WebGPU available?
+                         |
+                         v
+             20-ms microbenchmark
+                         |
+                         v
+                 select initial tier
+
+And then observe itself.
+
+If inference is taking 800 ms and janking the browser:
+
+Tier 2 → Tier 1
+
+If everything is effortless:
+
+Tier 1 → Tier 2
+
+That's much better than guessing from hardware descriptions.
+
+Latency matters as much as memory
+
+I'd establish UX budgets too.
+
+Something like:
+
+Operation	Target
+page initial load attributable to Atlas	essentially zero
+matcher	<10 ms
+semantic retrieval	<50 ms
+model decision	<100–200 ms preferred
+complex rerank	<500 ms
+expert fetch	asynchronous
+anything >1 sec	visible progress
+
+And run model inference in a Web Worker.
+
+ONNX Runtime Web supports WASM CPU inference broadly across Chrome/Edge/Safari/Firefox; WebGPU availability is substantially narrower, so WASM should remain the compatibility baseline. ONNX itself recommends WASM for lightweight models and WebGPU for more compute-intensive inference.
+
+CPU-only should be a primary target
+
+I would explicitly define:
+
+Atlas Tier 2 MUST work well without WebGPU.
+
+WebGPU is an accelerator, not a requirement.
+
+Architecture:
+
+                 Atlas
+
+        ┌─────────┴──────────┐
+        │                    │
+       WASM                WebGPU
+        │                    │
+     baseline             accelerator
+        │                    │
+       CPU                  GPU
+
+This also prevents you from accidentally optimizing only for your own fairly capable machines.
+
+Cache weights, don't repeatedly download them
+
+ONNX Runtime specifically recommends Cache API/OPFS/IndexedDB-style caching for browser models so large model files don't need to be downloaded on every visit.
+
+For Atlas:
+
+First visit
+
+server
+  |
+  +--- core             2 MB
+  +--- index            3 MB
+  +--- shared model     8 MB
+  +--- ML expert        5 MB
+                        |
+                        v
+                 persistent cache
+
+
+Next visit
+
+persistent cache
+       |
+       v
+     Atlas
+
+And the nightly manifest says:
+
+atlas version:        20260919
+core hash:            ...
+ML expert hash:       unchanged
+history expert hash:  changed
+index hash:           changed
+
+Therefore tomorrow the browser downloads only:
+
+history expert
+new index
+
+rather than Atlas again.
+
+That makes the nightly-update architecture quite practical.
+
+sw-atlas could itself have a memory budget contract
+
+I'd put something like this into the repo from day one:
+
+Atlas Runtime Classes
+
+A0  Minimal
+    RAM target:       <= 10 MiB
+    model:            none
+    capability:       lexical/graph
+
+A1  Semantic
+    RAM target:       <= 25 MiB
+    model:            tiny embedding
+    capability:       semantic search
+
+A2  Intelligent
+    RAM target:       <= 64 MiB
+    model:            tiny router
+    capability:       intent/concept/ranking
+
+A3  Routed
+    RAM target:       <= 128 MiB
+    model:            MoE + selected experts
+    capability:       richer routing/reranking
+
+A4  Enhanced
+    RAM target:       <= 256 MiB
+    model:            optional enhancements
+    capability:       synthesis/richer interaction
+
+Those are Atlas budgets, not total browser-process memory.
+
+And I would make exceeding them a test failure.
+
+This gives moe-microscope a better experiment
+
+Rather than just:
+
+Here is an expert being swapped from disk.
+
+show the actual Atlas progression.
+
+             A0
+       ┌────────────┐
+       │ Matcher    │     6 MB
+       └─────┬──────┘
+             │
+             ▼
+             A1
+       ┌────────────┐
+       │ Embeddings │    18 MB
+       └─────┬──────┘
+             │
+             ▼
+             A2
+       ┌────────────┐
+       │ Shared MoE │    42 MB
+       └─────┬──────┘
+             │
+       question routed
+             │
+             ▼
+             A3
+       ┌────────────┐
+ disk  │ ML Expert  │ ──> RAM
+       └────────────┘
+
+stored Atlas:       75 MB
+resident:           53 MB
+active inference:   31 MB
+
+Now moe-microscope can measure three distinct quantities you've been emphasizing elsewhere:
+
+stored bytes ≠ resident bytes ≠ active bytes.
+
+That's a far better demonstration than simply making the model bigger.
+
+One change I'd make to the previous architecture
+
+I would therefore not ship the initial Atlas as a single 20 MB ONNX model.
+
+Start smaller:
+
+                    ALWAYS
+
+atlas-core.wasm
+catalog/index
+deterministic matcher
+        |
+        | ~5–10 MB
+        v
+
+                 ON DEMAND
+
+tiny semantic encoder
+        |
+        | +10-ish MB
+        v
+
+tiny shared neural router
+        |
+        | target total <64 MB
+        v
+
+selected expert shards
+        |
+        | target total <128 MB
+        v
+
+optional enhancements
+
+And importantly, capability should degrade gracefully in both directions. If the machine becomes memory-constrained or inference gets slow, Atlas can evict experts and fall all the way back to the matcher without breaking the experience.
+
+That makes sw-atlas much closer to a PWA philosophy: the site's core content works first; intelligence progressively enriches it according to what the client can comfortably afford.
