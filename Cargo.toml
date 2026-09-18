@@ -1,0 +1,21 @@
+[workspace]
+members = ["crates/atlas-core"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Michael A Wright"]
+license = "MIT"
+repository = "https://github.com/software-wrighter-lab/sw-atlas"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+
+[workspace.dependencies]
+atlas-core = { path = "crates/atlas-core" }
+
+[profile.release]
+opt-level = "z"
+lto = true

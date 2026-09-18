@@ -103,32 +103,38 @@ machinery that validates it, with no model in it at all.
 
 ## Building
 
-Nothing to build yet. The first saga step lands the Rust workspace and the
-`just check` gate; until then this section is the contract that step has to
-satisfy.
-
-Prerequisites: a stable Rust toolchain with the `wasm32-unknown-unknown`
-target, [just](https://just.systems), and `sw-checklist` (Software
-Wrighter's conformance checker, on the `PATH`). Training additionally
-needs [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl).
+Prerequisites: a stable Rust toolchain (2024 edition, 1.85 or newer),
+[just](https://just.systems), and `sw-checklist` (Software Wrighter's
+conformance checker, on the `PATH`). Later sagas add
+[sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) for training and the
+`wasm32-unknown-unknown` target for the browser runtime.
 
 ```sh
-rustup target add wasm32-unknown-unknown
 cargo install just
 ```
 
 Then:
 
 ```sh
-just ingest     # build the corpus from blog, campus, repo and video sources
-just report     # coverage: every artifact indexed, zero orphans, zero dead links
-just eval       # score every runtime class on the held-out questions
-just snapshot   # write the publishable snapshot with per-file hashes
-just check      # the pre-commit gate: fmt, clippy, tests, sw-checklist
+just            # list every recipe
+just check      # the pre-commit gate: fmt, clippy -D warnings, tests, sw-checklist
 ```
 
-No Python, and no hand-written JavaScript: the pipeline is Rust and
-sw-MLPL, and the browser runtime is Rust compiled to WebAssembly.
+The gate is green and `sw-checklist` is at zero failures and zero warnings.
+Keep it there.
+
+The pipeline recipes exist but are not implemented; each one exits non-zero
+naming the step that lands it, so this list stays honest:
+
+| Recipe | Does | Lands in |
+|---|---|---|
+| `just ingest` | build the corpus from the sibling sources | Saga 1, steps 3-6 |
+| `just report` | coverage, gated on orphans and dead links | Saga 1, step 7 |
+| `just eval` | score every runtime class on held-out questions | Saga 2 |
+| `just snapshot` | write the publishable snapshot with per-file hashes | Saga 8 |
+
+No Python and no hand-written JavaScript, anywhere: the pipeline is Rust
+and sw-MLPL, and the browser runtime will be Rust compiled to WebAssembly.
 
 ## Copyright
 

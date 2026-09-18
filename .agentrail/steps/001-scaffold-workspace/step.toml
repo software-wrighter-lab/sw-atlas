@@ -1,6 +1,6 @@
 number = 1
 slug = "scaffold-workspace"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md and CLAUDE.md first. Stand up the Rust workspace so every l..."
 role = "production"
 context_files = []

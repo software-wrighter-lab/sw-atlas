@@ -1,0 +1,13 @@
+[package]
+name = "atlas-core"
+description = "Canonical corpus schema for sw-atlas: resources, concepts, relations, questions, decisions"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
