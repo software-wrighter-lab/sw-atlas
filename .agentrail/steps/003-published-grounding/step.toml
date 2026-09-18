@@ -1,0 +1,9 @@
+number = 3
+slug = "published-grounding"
+status = "in-progress"
+description = "The blog draft _drafts/saw-atlas-typed-decisions.md (Saw #12, publishing 2026..."
+role = "meta"
+context_files = []
+created_at = "2026-09-18T11:39:58"
+task_type = "docs"
+commits = []

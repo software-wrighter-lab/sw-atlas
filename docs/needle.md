@@ -83,6 +83,25 @@ target is alignment and copying, not per-position feature transformation,
 and that at this scale FFN parameters -- about two thirds of a normal
 transformer -- are wasted on a structured task.
 
+**This is not only a vendor's design note.** Sukhbaatar and colleagues
+showed in 2019 that the feed-forward sub-layer can be merged into attention
+as *persistent memory vectors* -- a set of learned key-value pairs that
+play the same role -- and the feed-forward layer then removed without
+degrading performance [PM19]. He and Hofmann pushed the simplification
+further, removing skip connections, value and projection parameters and
+normalisation layers for 15% fewer parameters and 15% faster training at
+equal quality [ST23]. There is a published line of work here; what Needle
+adds is a trained checkpoint at the end of it.
+
+The 2019 result also names the principled fallback, which matters if the
+no-FFN model turns out to be short of capacity on this corpus: the answer
+is persistent memory slots inside attention, **not** an MLP bolted back on.
+Worth recording, because it is a loose thread rather than a solved problem:
+Needle's `TransformerConfig` declares `num_memory_slots: int = 64` and
+plumbs it through `train.py` and `finetune.py`, but nothing in
+`architecture.py` ever reads it. The idea is present in the configuration
+and absent from the model.
+
 If that holds for Atlas, a stale model cannot invent an exhibit *because
 it cannot hold one*, which is a far stronger guarantee than a training
 policy.
@@ -239,7 +258,7 @@ From [`jev-os-research.txt`](jev-os-research.txt):
 
 | Project | Verdict | Why |
 |---|---|---|
-| **SetFit** | adopt as an offline teacher, if anything | Few-shot contrastive finetuning of a sentence encoder, retrainable on CPU in seconds. That is genuinely the cheapest possible A1. But it is Python/HuggingFace, and Needle's contrastive head gives the same thing from a model we already need. Worth one measurement as a floor. |
+| **SetFit** [SF22] | the named floor for A1 | Few-shot contrastive finetuning of a Sentence-BERT-style bi-encoder [SB19], retrainable on CPU in seconds. Genuinely the cheapest possible A1, and the shape Atlas's own contrastive head copies. Python, so after the no-Python decision it is a published reference point rather than a tool: A1 must beat what SetFit-class numbers imply, measured on our own harness. |
 | **Outlines / SGLang** | not needed | Grammar-constrained decoding matters when a general LLM must be forced into a schema. Atlas's output is a ranked list plus a small typed record; Needle already ships `constrained.py`. SGLang's RadixAttention is a server-side concern and there is no server. |
 | **LanceDB** | reject, with a number | 300 resources at 384-dimension INT8 is 115 KiB. Ten thousand chunks would be 3.7 MiB. A flat cosine scan over that in WASM is faster than any index structure and needs no dependency. Revisit at ~100k chunks, which this corpus will not reach. |
 | **HippoRAG 2 / A-Mem** | reject for now | Both infer a knowledge graph from text. This corpus does not need inference: 65 posts declare `repo_url`, 75 declare `video_url`, 10 declare `demo_url`, 64 declare `papers`, 123 declare a series. The relations are hand-written and correct. Revisit if derived relations ever outnumber declared ones. |
@@ -266,3 +285,21 @@ resource is not index throughput. It is the visitor's RAM.
   Needle against the campus corpus and the MB01t questions, unmodified, and
   put the number in the table.** It costs a day and it decides the shape of
   everything after it.
+
+## 8. References
+
+Cited above by tag. Each is load-bearing for a specific decision, not
+background reading.
+
+| Tag | Work | What it decides here |
+|---|---|---|
+| **[PM19]** | Sukhbaatar, Grave, Lample, Jegou, Joulin, *Augmenting Self-attention with Persistent Memory*, [arXiv:1907.01470](https://arxiv.org/abs/1907.01470) | The FFN's job is memory, and it can be expressed as learned persistent key-value pairs inside attention and then removed. This is the published support for dropping the FFN (§3.1), and it names persistent memory slots as the principled way to add capacity back if the no-FFN model proves short of it. |
+| **[ST23]** | He, Hofmann, *Simplifying Transformer Blocks*, [arXiv:2311.01906](https://arxiv.org/abs/2311.01906) | 15% fewer parameters and 15% faster training by removing skip connections, value and projection parameters, and normalisation. Sets how far simplification can be pushed before quality moves, which bounds the architecture search in Saga 5. |
+| **[SB19]** | Reimers, Gurevych, *Sentence-BERT*, [arXiv:1908.10084](https://arxiv.org/abs/1908.10084) | The bi-encoder shape the A1/A2 retrieval head implements: encode independently, compare by cosine, rank. |
+| **[SF22]** | Tunstall et al., *Efficient Few-Shot Learning Without Prompts* (SetFit), [arXiv:2209.11055](https://arxiv.org/abs/2209.11055) | Few-shot contrastive finetuning on a CPU in seconds. The floor A1 has to clear, and evidence that a small contrastive head trained on a few examples per class is a serious baseline rather than a toy. |
+| **[CAL17]** | Guo, Pleiss, Sun, Weinberger, *On Calibration of Modern Neural Networks*, [arXiv:1706.04599](https://arxiv.org/abs/1706.04599) | Modern networks are systematically overconfident, and temperature scaling -- one parameter fitted on a validation set -- corrects most of it. Saga 7 uses ECE and reliability diagrams from this paper as its metrics and temperature scaling as its first method. |
+
+Needle itself: `cactus-compute/needle`, MIT, weights and trainer open; the
+architecture notes in `docs/simple_attention_networks.md` are specific
+enough to reimplement from, which after the no-Python decision (§5) is
+exactly how they are used.

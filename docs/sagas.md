@@ -75,9 +75,12 @@ Not started. Sizes are the plan's estimate, not a commitment.
   forgetting measurements only if zero-shot fails. Decides the nightly
   pipeline's design by measurement.
 
-- **Saga 7 `calibration` (CB01).** Reliability diagram, ECE, Brier,
-  abstention threshold, and the calibration report published in the
-  snapshot manifest so the UI can show it.
+- **Saga 7 `calibration` (CB01).** Reliability diagram, ECE and Brier
+  before any correction; temperature scaling fitted on held-out data and
+  the before/after reported (arXiv:1706.04599 is both the evidence that
+  the problem exists and the cheapest fix); the abstention threshold; and
+  the calibration report published in the snapshot manifest so the UI can
+  show it.
 
 - **Saga 8 `atlas-runtime`.** The browser crate: worker, hash-keyed loader
   over Cache API/OPFS with Range fetches, the A0-A4 ladder with its
@@ -105,6 +108,15 @@ Not started. Sizes are the plan's estimate, not a commitment.
   [`needle.md`](needle.md) section 5. The visible consequence is Saga 3
   above: the cheap measurement is gone, and the Rust inference path that
   Saga 8 would have written is pulled forward to replace it.
+- **2026-09-18, published grounding.** The Saw #12 draft in `../blog`
+  cites five papers that the plan had been missing. The no-FFN decision now
+  rests on arXiv:1907.01470 and arXiv:2311.01906 rather than on a vendor's
+  design note; the retrieval head cites Sentence-BERT and SetFit; the
+  calibration saga names ECE and temperature scaling from arXiv:1706.04599
+  instead of leaving its method open. The moe-microscope SAN01 request grew
+  from a two-arm to a three-arm comparison as a result, because the prior
+  art says persistent memory slots are the interesting third option.
+  See [`needle.md`](needle.md) section 8.
 - **2026-09-18, per-repository request files.** Asks on sibling
   repositories live in `docs/<repo>-requests.md`, one file per repository,
   because a single handoffs file makes it too easy for a reader of one

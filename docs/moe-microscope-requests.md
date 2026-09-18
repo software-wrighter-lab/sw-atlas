@@ -11,25 +11,45 @@ and [`needle.md`](needle.md).
 
 ## SAN01 — is no-FFN real? (highest value, blocks sw-atlas Saga 5)
 
-**Ask.** Take CD01 or CD01b, remove the feed-forward network, keep the
-parameter budget matched, retrain on the campus docent corpus that is
-already in that repository, and report what changes.
+**Ask.** Take CD01 or CD01b and run a three-way comparison at matched
+stored parameters on the campus docent corpus that is already in that
+repository:
+
+| Arm | Block | Question it answers |
+|---|---|---|
+| **dense** | attention + FFN | the control; CD01/CD01b as they stand |
+| **no-FFN** | attention only, gated residual | is the feed-forward layer earning its rent on this task? |
+| **persistent memory** | attention + learned persistent key-value slots, no FFN | if capacity is missing, is this the right way to add it back? |
+
+The third arm is the interesting one and it is why this request grew.
+Sukhbaatar et al. ([arXiv:1907.01470](https://arxiv.org/abs/1907.01470))
+showed the feed-forward sub-layer can be *merged into attention* as
+persistent key-value pairs and then removed without degrading performance:
+the FFN's role is memory, and memory has a cheaper form. So "no-FFN" is not
+one hypothesis but two — that the FFN is unnecessary, and that if it is
+necessary, persistent slots are the better shape.
+
+A note from reading the Needle source rather than its README: its
+`TransformerConfig` declares `num_memory_slots: int = 64` and threads it
+through `train.py` and `finetune.py`, but `architecture.py` never reads it.
+The idea is in the configuration and absent from the model, so nobody has
+measured it at this scale.
 
 **Why it matters here.** sw-atlas has adopted the Simple Attention Network
-shape on the strength of Cactus's claim that MLPs can be dropped entirely
-when a model relies on an external knowledge source. That claim is load
-bearing: it is what turns "facts live in the snapshot" from a training
-policy into an architectural guarantee, and it is why mixture-of-experts
-left the Atlas critical path. It has not been checked at a scale where
-every tensor can be printed, and that is exactly what the microscope is
-for.
+shape on the strength of that claim. It is load bearing: it turns "facts
+live in the snapshot" from a training policy into an architectural
+guarantee, and it is why mixture-of-experts left the Atlas critical path.
+It has not been checked at a scale where every tensor can be printed, which
+is exactly what the microscope is for.
 
 **What would make it decisive.** The existing CD01/CD01b rows are the
-control. A no-FFN twin at matched stored parameters, on the same corpus,
-same split, same held-out paraphrase set, reported in the docent results
-table alongside them. Both outcomes are useful. If no-FFN holds, sw-atlas
-proceeds with a stronger justification than a vendor's design note; if it
-loses, sw-atlas needs to know before Saga 5 rather than after.
+control. Three arms, same corpus, same split, same held-out paraphrase set,
+in the docent results table side by side, with stored and active parameters
+beside the quality numbers. All three outcomes are useful. If no-FFN holds,
+sw-atlas proceeds on published evidence plus a local measurement rather
+than a vendor's design note; if persistent memory wins, sw-atlas adopts it
+and says where it came from; if dense wins, sw-atlas needs to know before
+Saga 5 rather than after.
 
 **Timing.** Before sw-atlas Saga 5. sw-atlas Sagas 1 to 4 do not depend on
 the answer.
@@ -88,3 +108,13 @@ Not a request, a statement of the exchange:
   behaviour at scale comes back here.
 - The 1442 snapshot-A/snapshot-B experiment is run as designed, and its
   result is reported in both repositories.
+
+## References cited in these requests
+
+- Sukhbaatar, Grave, Lample, Jegou, Joulin, *Augmenting Self-attention with
+  Persistent Memory*, [arXiv:1907.01470](https://arxiv.org/abs/1907.01470).
+- He, Hofmann, *Simplifying Transformer Blocks*,
+  [arXiv:2311.01906](https://arxiv.org/abs/2311.01906).
+
+Both are summarised against the decisions they support in
+[`needle.md`](needle.md) section 8.

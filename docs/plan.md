@@ -225,7 +225,15 @@ No FFN is not an economy; it is the guarantee. Two thirds of a normal
 transformer's parameters are feed-forward, and they are where facts get
 memorised. Removing them makes invariant 2 structural: the model can align
 a question to a card it is shown, and it cannot hold a fact it was not
-shown. It also removes the mixture-of-experts story from this repository,
+shown. The published support is
+[arXiv:1907.01470](https://arxiv.org/abs/1907.01470), which merges the
+feed-forward sub-layer into attention as persistent key-value memory and
+then removes it without loss, and
+[arXiv:2311.01906](https://arxiv.org/abs/2311.01906), which strips further
+still for 15% fewer parameters at equal quality; see
+[`needle.md`](needle.md) §8. If capacity turns out to be short, the
+principled repair is persistent memory slots inside attention, not an MLP
+bolted back on. It also removes the mixture-of-experts story from this repository,
 because MoE routes among FFN experts and there are none — see §11.
 
 Starting configuration, to be revised by measurement, not by argument:
@@ -368,7 +376,8 @@ The campus plan already commits to writing `dist/catalog.json` canonically
 with its SHA-256; Atlas consumes that, not the mockup's JSON, once it
 exists.
 
-**Repos and videos** — metadata only, to begin with: id, name,
+**Repos and videos** — roughly 130 public repositories and 75 videos,
+metadata only to begin with: id, name,
 description, topics, language, homepage, last update for a repository;
 id, title, description, date, duration, URL, associated project for a
 video. No source files, no transcripts. This keeps the claim precise:
@@ -377,8 +386,9 @@ and selected repo documentation become richer source kinds later, behind
 their own milestone.
 
 So the first corpus is: 124 blog posts + 9–12 campus places (growing) +
-the public repositories (the research note's illustration says 86; Saga 1
-step 4 counts them) + ~75 videos — on the order of 300 resources. At 384-dimension INT8, 300
+roughly 130 public repositories + ~75 videos — on the order of 340
+resources. (The research note's illustration said 86 repositories; the
+count of record is the one Saga 1 step 6 produces.) At 384-dimension INT8, 300
 resource embeddings are 115 KiB. Even 10,000 chunks would be 3.7 MiB. The
 index is not the expensive part; the query encoder is.
 
@@ -601,12 +611,19 @@ pipeline's design decided by measurement rather than assumption.
 
 The most Jev-shaped part, and the one that makes the whole thing honest.
 Needle optimises exact match; it does not optimise knowing when it is
-wrong. The contrastive head's cosine margin is the raw material.
+wrong. The contrastive head's cosine margin is the raw material, and
+[arXiv:1706.04599](https://arxiv.org/abs/1706.04599) is the method: modern
+networks are systematically overconfident, and temperature scaling -- a
+single parameter fitted on held-out data -- removes most of it.
 
-1. **measure.** Reliability diagram, ECE, Brier, per-intent.
-2. **abstain.** Train the threshold; below it Atlas offers ranked
+1. **measure.** Reliability diagram, ECE and Brier, per intent, before any
+   correction, so the size of the problem is on the record.
+2. **temperature.** Fit one temperature on the validation split, re-measure,
+   and report the before and after. Cheap enough that not doing it would
+   need an excuse.
+3. **abstain.** Train the threshold; below it Atlas offers ranked
    alternatives or says it does not know.
-3. **report.** Published in the snapshot manifest so the UI can show it.
+4. **report.** Published in the snapshot manifest so the UI can show it.
 
 ```
 confidence bucket   n     accuracy
