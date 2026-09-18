@@ -1,9 +1,10 @@
 number = 3
 slug = "published-grounding"
-status = "in-progress"
+status = "completed"
 description = "The blog draft _drafts/saw-atlas-typed-decisions.md (Saw #12, publishing 2026..."
 role = "meta"
 context_files = []
 created_at = "2026-09-18T11:39:58"
+completed_at = "2026-09-18T11:58:08"
 task_type = "docs"
-commits = []
+commits = ["4bb90a7e89945f8a0ae042bb06f7856d05d53a39"]
