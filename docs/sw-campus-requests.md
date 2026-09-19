@@ -50,6 +50,14 @@ first a placeholder, then a title, then a demo — over several commits, so
 that no model can be said to have been trained before it existed. One
 commit, one date, one announcement.
 
+**Already noted, no action needed.** Snapshot A's 1130 wing arrival story
+already names the 1442 in passing, as one of the peripherals plugged into
+the machine. That is correct and should stay: the wing is about the machine
+and everything attached to it. It simply means the withheld knowledge is
+the exhibit and its demo — a destination — rather than the word, and
+sw-atlas's experiment is scored that way. A test in this repository pins
+that single mention so a later reader does not mistake it for a leak.
+
 ## EASEL-CONTRACT — what the Atlas runtime will offer (advance notice)
 
 **Not a request yet.** sw-atlas Saga 8 produces `atlas-runtime`, a Rust

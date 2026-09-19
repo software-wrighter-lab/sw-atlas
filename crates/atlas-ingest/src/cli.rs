@@ -14,7 +14,9 @@ canonical RON corpus: resources, concepts and relations, sorted so that a
 rebuild which changes nothing produces an identical file and an identical
 SHA-256. The hash is printed with the counts.
 
-The blog subcommand reads front matter only. It runs no model and reads no
+The campus subcommand prefers dist/catalog.json and falls back to the
+docent snapshot, recording which it used. The blog subcommand reads front
+matter only. It runs no model and reads no
 body text, because every fact it needs was written by hand at publication
 time: `abstract` is an authored summary, `keywords` is an authored alias
 list, and `repo_url`, `video_url`, `demo_url` and `papers` are authored
@@ -26,8 +28,9 @@ EXIT STATUS
      output could not be written
 
 AI CODING AGENT INSTRUCTIONS:
-  1. Run `atlas-ingest blog ../blog` from the repository root; the default
-     output is build/corpus/blog.ron, which is generated and not committed.
+  1. Run `atlas-ingest blog ../blog` or `atlas-ingest campus ../sw-campus`
+     from the repository root; the default output is under build/corpus/,
+     which is generated and not committed.
   2. A parse failure names the post and the field. Do not skip the post and
      do not loosen the schema to make it pass: the blog writes a shape this
      tool does not yet accept, and accepting it is the fix.
@@ -50,7 +53,7 @@ pub struct Cli {
     #[command(subcommand)]
     pub source: Source,
     /// Where to write the canonical corpus.
-    #[arg(long, default_value = "build/corpus/blog.ron", global = true)]
+    #[arg(long, default_value = "build/corpus/corpus.ron", global = true)]
     pub out: PathBuf,
 }
 
@@ -60,6 +63,12 @@ pub enum Source {
     /// The blog's `_posts` directory, from front matter alone.
     Blog {
         /// Path to a checkout of the blog repository.
+        repo: PathBuf,
+    },
+    /// The campus catalog: `dist/catalog.json` if it is published, and the
+    /// docent snapshot until it is.
+    Campus {
+        /// Path to a checkout of the sw-campus repository.
         repo: PathBuf,
     },
 }

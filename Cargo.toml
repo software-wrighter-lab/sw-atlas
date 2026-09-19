@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "crates/atlas-blog",
+    "crates/atlas-campus",
     "crates/atlas-core",
     "crates/atlas-corpus",
     "crates/atlas-decide",
@@ -21,12 +22,14 @@ missing_docs = "warn"
 
 [workspace.dependencies]
 atlas-blog = { path = "crates/atlas-blog" }
+atlas-campus = { path = "crates/atlas-campus" }
 atlas-core = { path = "crates/atlas-core" }
 atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
 clap = { version = "4", features = ["derive"] }
 ron = "0.12"
 serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 serde_yaml_ng = "0.10"
 sha2 = "0.10"
 

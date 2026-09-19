@@ -15,7 +15,7 @@ pub mod relation;
 
 pub use catalog::{Concept, Maturity, Resource, ResourceKind};
 pub use id::{ConceptId, ResourceId};
-pub use relation::{Provenance, Relation, RelationKind};
+pub use relation::{Link, Provenance, Relation, RelationKind, edge, link_id};
 
 /// Version of the corpus schema this build reads and writes.
 ///

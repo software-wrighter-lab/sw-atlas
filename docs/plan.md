@@ -608,6 +608,17 @@ the trained model, properly, with the machinery to act on the answer.
   nightly path
 ```
 
+**One caveat, found while ingesting snapshot A and easy to miss.** The
+1130 wing's arrival story lists the peripherals plugged into the machine,
+and the 1442 card read punch is one of them. The string is therefore
+already in the corpus before snapshot B exists. What is withheld is the
+*exhibit and its demo* — a destination, a URL, a place to be sent — not the
+word. So this experiment must ask where the card reader plays music, and
+score whether a destination was found; a retrieval tier that merely matches
+the token "1442" against catalog prose has not learned anything new, and a
+test in `atlas-ingest` pins that one mention so nobody later mistakes it
+for leakage or deletes it as noise.
+
 Exit: a recorded answer and, whichever branch it takes, the nightly
 pipeline's design decided by measurement rather than assumption.
 

@@ -1,0 +1,17 @@
+[package]
+name = "atlas-campus"
+description = "Read a published Software Wrighter campus catalog into an sw-atlas corpus"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+serde = { workspace = true }
+serde_json = { workspace = true }

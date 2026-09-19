@@ -1,7 +1,7 @@
 //! Assemble read posts into one validated corpus.
 
 use atlas_blog::{Error, frontmatter, links, post};
-use atlas_core::{Provenance, Relation, RelationKind, Resource, ResourceId};
+use atlas_core::{Provenance, Relation, RelationKind, Resource, ResourceId, edge};
 use atlas_corpus::{Corpus, content_hash};
 use std::path::Path;
 
@@ -47,7 +47,7 @@ fn add_post(
         series.push((name.clone(), part, resource.id.clone()));
     }
     for link in links::links(&front) {
-        let (target, relation) = links::edge(&resource.id, &link);
+        let (target, relation) = edge(&resource.id, &link);
         corpus.resources.push(target);
         corpus.relations.push(relation);
     }

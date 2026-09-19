@@ -1,5 +1,6 @@
 //! Edges between resources, and where each edge came from.
 
+use crate::catalog::{Resource, ResourceKind};
 use crate::id::ResourceId;
 use serde::{Deserialize, Serialize};
 
@@ -51,4 +52,63 @@ pub struct Relation {
     pub weight: f32,
     /// Where this edge came from.
     pub provenance: Provenance,
+}
+
+/// A link one resource declares to another, before either is a resource.
+///
+/// Both the blog's front matter and the campus catalog declare links this
+/// way, and both must resolve to the *same* identifier when they name the
+/// same thing -- that shared identity is what lets a visitor on the campus
+/// find the post about what they are looking at.
+pub struct Link {
+    /// What sort of thing it points at.
+    pub kind: ResourceKind,
+    /// Where it points.
+    pub url: String,
+    /// What the declarer called it, where they said.
+    pub title: Option<String>,
+}
+
+/// The identifier a link's target gets, derived from its URL.
+///
+/// Two sources naming one repository, video or paper produce one resource
+/// rather than two, however differently they wrote the URL.
+pub fn link_id(link: &Link) -> ResourceId {
+    let trimmed = link
+        .url
+        .trim_end_matches('/')
+        .trim_start_matches("https://")
+        .trim_start_matches("http://")
+        .trim_start_matches("www.");
+    let (prefix, tail) = match link.kind {
+        ResourceKind::Repo => ("repo", trimmed.trim_start_matches("github.com/")),
+        ResourceKind::Video => (
+            "video",
+            trimmed.rsplit(['/', '=']).next().unwrap_or(trimmed),
+        ),
+        ResourceKind::Demo => ("demo", trimmed),
+        _ => ("paper", trimmed),
+    };
+    ResourceId::new(format!("{prefix}:{tail}"))
+}
+
+/// The resource a link names and the edge that reaches it.
+pub fn edge(from: &ResourceId, link: &Link) -> (Resource, Relation) {
+    let kind = match link.kind {
+        ResourceKind::Repo => RelationKind::Implements,
+        ResourceKind::Video | ResourceKind::Demo => RelationKind::Demos,
+        ResourceKind::Paper => RelationKind::Cites,
+        _ => RelationKind::RelatedTo,
+    };
+    let to = link_id(link);
+    let title = link.title.clone().unwrap_or_default();
+    let target = Resource::stub(to.clone(), link.kind, title, link.url.clone());
+    let relation = Relation {
+        from: from.clone(),
+        kind,
+        to,
+        weight: 1.0,
+        provenance: Provenance::Declared,
+    };
+    (target, relation)
 }

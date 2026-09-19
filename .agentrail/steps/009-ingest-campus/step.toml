@@ -1,6 +1,6 @@
 number = 9
 slug = "ingest-campus"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md section 8 first. Write 'atlas-ingest campus ../sw-campus': ..."
 role = "production"
 context_files = []
