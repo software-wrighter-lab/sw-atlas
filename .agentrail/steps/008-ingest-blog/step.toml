@@ -1,9 +1,10 @@
 number = 8
 slug = "ingest-blog"
-status = "in-progress"
+status = "completed"
 description = "Read docs/plan.md sections 7 and 8 first. Write 'atlas-ingest blog ../blog': ..."
 role = "production"
 context_files = []
 created_at = "2026-09-18T10:07:20"
+completed_at = "2026-09-18T17:55:06"
 task_type = "rust-ingest"
-commits = []
+commits = ["fb3e7b44937c390e4e1281bc861aa6fb7a10734f"]

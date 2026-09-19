@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-ingest",
+  "state": {
+    "number": 8,
+    "step": "ingest-blog"
+  },
+  "action": "Ran the ingester against the real 124 posts early and let it fail loudly, which is how both undocumented front-matter shapes were found; verified determinism by ingesting twice and comparing bytes; fixed four sw-checklist findings by restructuring rather than by raising thresholds.",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-18T17:55:06"
+}
