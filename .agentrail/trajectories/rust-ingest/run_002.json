@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-ingest",
+  "state": {
+    "number": 9,
+    "step": "ingest-campus"
+  },
+  "action": "Checked whether the place kind was recoverable from the hierarchy before adding a schema field, and guarded the answer with a test; grepped the snapshot for 1442 rather than trusting the excluded field, which found the prose mention that would have quietly invalidated Saga 6; verified the cross-source join by diffing identifiers between the two generated corpora.",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-18T19:14:04"
+}
