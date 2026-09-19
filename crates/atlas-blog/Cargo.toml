@@ -1,0 +1,16 @@
+[package]
+name = "atlas-blog"
+description = "Turn the Software Wrighter blog's front matter into an sw-atlas corpus"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+serde = { workspace = true }
+serde_yaml_ng = { workspace = true }

@@ -1,0 +1,28 @@
+[package]
+name = "atlas-ingest"
+description = "Build the sw-atlas corpus from the sibling blog, campus, repository and video sources"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "atlas_ingest"
+path = "src/lib.rs"
+
+[[bin]]
+name = "atlas-ingest"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+ron = { workspace = true }
+
+[dependencies]
+atlas-blog.workspace = true
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+clap = { workspace = true }

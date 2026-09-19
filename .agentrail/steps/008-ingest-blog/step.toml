@@ -1,6 +1,6 @@
 number = 8
 slug = "ingest-blog"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md sections 7 and 8 first. Write 'atlas-ingest blog ../blog': ..."
 role = "production"
 context_files = []

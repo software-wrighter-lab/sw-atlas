@@ -1,5 +1,11 @@
 [workspace]
-members = ["crates/atlas-core", "crates/atlas-corpus", "crates/atlas-decide"]
+members = [
+    "crates/atlas-blog",
+    "crates/atlas-core",
+    "crates/atlas-corpus",
+    "crates/atlas-decide",
+    "crates/atlas-ingest",
+]
 resolver = "2"
 
 [workspace.package]
@@ -14,10 +20,14 @@ unsafe_code = "deny"
 missing_docs = "warn"
 
 [workspace.dependencies]
+atlas-blog = { path = "crates/atlas-blog" }
 atlas-core = { path = "crates/atlas-core" }
+atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
+clap = { version = "4", features = ["derive"] }
 ron = "0.12"
 serde = { version = "1", features = ["derive"] }
+serde_yaml_ng = "0.10"
 sha2 = "0.10"
 
 [profile.release]

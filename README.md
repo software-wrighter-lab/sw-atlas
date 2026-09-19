@@ -89,6 +89,18 @@ paraphrases, and the trained model scores **0.407**. The matcher is the
 champion. Nothing neural ships here until it beats that by 20 points on
 the same questions.
 
+What the corpus holds today, from the blog alone (`just ingest`, and the
+same bytes and hash on every rebuild):
+
+| | |
+|---|---:|
+| Posts | 124 |
+| Repositories named | 76 |
+| Videos named | 85 |
+| Demos named | 6 |
+| Papers cited | 153 |
+| Relations, every one `Declared` | 508 |
+
 | Run | Paraphrase dest | Intent | Unsupported recall | Class |
 |---|---:|---:|---:|---|
 | MB01t campus text matcher | **0.685** | 0.481 | 0.40 | A0 |
@@ -123,13 +135,15 @@ just check      # the pre-commit gate: fmt, clippy -D warnings, tests, sw-checkl
 The gate is green and `sw-checklist` is at zero failures and zero warnings.
 Keep it there.
 
-The pipeline recipes exist but are not implemented; each one exits non-zero
-naming the step that lands it, so this list stays honest:
+`just ingest` reads the blog and writes a canonical corpus. The remaining
+pipeline recipes exist but are not implemented; each exits non-zero naming
+the step that lands it, so this list stays honest:
 
 | Recipe | Does | Lands in |
 |---|---|---|
-| `just ingest` | build the corpus from the sibling sources | Saga 1, steps 3-6 |
-| `just report` | coverage, gated on orphans and dead links | Saga 1, step 7 |
+| `just ingest` | **done** — 124 posts from the blog's front matter | Saga 1, step 8 |
+| `just ingest-rest` | campus, repository and video metadata, concepts | Saga 1, steps 9-11 |
+| `just report` | coverage, gated on orphans and dead links | Saga 1, step 12 |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 8 |
 

@@ -15,11 +15,15 @@ check:
 fmt:
     cargo fmt --all
 
-# Build the corpus from the sibling sources (atlas-foundation steps 3-6).
+# Build the corpus from the sibling blog checkout.
 ingest *args:
-    @echo "just ingest {{args}}: not implemented yet." >&2
-    @echo "Lands in atlas-foundation steps 003 (blog), 004 (campus)," >&2
-    @echo "005 (repository and video metadata), 006 (concept graph)." >&2
+    cargo run --quiet -p atlas-ingest -- blog ../blog {{args}}
+
+# Where the other sources land (atlas-foundation steps 9 to 11).
+ingest-rest:
+    @echo "just ingest-rest: not implemented yet." >&2
+    @echo "Campus lands in step 009, repository and video metadata in" >&2
+    @echo "step 010, the concept graph in step 011." >&2
     @exit 1
 
 # Regenerate the coverage report and gate on orphans and dead links (step 7).

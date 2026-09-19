@@ -101,3 +101,27 @@ pub struct Concept {
     /// browser does not have to build the reverse index at startup.
     pub resources: Vec<ResourceId>,
 }
+
+impl Resource {
+    /// A resource known only by what something else said about it.
+    ///
+    /// A post declaring `repo_url` names a repository without describing
+    /// it; whatever reads that repository from its own source later fills
+    /// in the summary, date, concepts and maturity, and the identifier is
+    /// what joins the two.
+    pub fn stub(id: ResourceId, kind: ResourceKind, title: String, url: String) -> Self {
+        Self {
+            id,
+            kind,
+            title,
+            url,
+            date: String::new(),
+            summary: String::new(),
+            body: String::new(),
+            concepts: Vec::new(),
+            aliases: Vec::new(),
+            maturity: None,
+            source_hash: String::new(),
+        }
+    }
+}
