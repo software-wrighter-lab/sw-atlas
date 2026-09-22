@@ -103,6 +103,24 @@ that check comes back negative, the routed variant is the alternative —
 already built, already measured, already explained — and it returns to the
 Atlas plan as the model rather than the fallback.
 
+## MB01-STABLE — keep the matcher's weights and the paraphrase set still
+
+**Ask.** Treat three things as published artifacts that change only
+deliberately and visibly: the MB01 signal weights (title 2, aliases 3,
+concepts 4, tagline 1.5, partial 0.8, phrase +4), the MB01t text variant,
+and `fixtures/campus/paraphrases-a.json`. If any of them changes, say so in
+the commit message.
+
+**Why.** sw-atlas's Saga 2 ports that matcher to 643 artifacts and reports
+the result as MB02 beside MB01 and MB01t in one table. Those rows are only
+comparable if the weights are the same weights; if they drift, the sw-atlas
+row silently starts measuring something else. The same goes for the 54
+paraphrases: they are the seed of the larger held-out set sw-atlas is
+building, and a row measured against a changed split is not a row.
+
+Nothing needs to be frozen forever. This is a request for visibility, not
+for immutability.
+
 ## What sw-atlas gives back
 
 Not a request, a statement of the exchange:
@@ -110,9 +128,13 @@ Not a request, a statement of the exchange:
 - The CD00, CD01, CD01b, MB01 and MB01t rows are carried into the Atlas
   scoreboard with their origin recorded beside them, so the docent work is
   the first published result of a larger project rather than a paused saga.
-- The MB01/MB01t matcher is being ported from one campus to a corpus of
-  roughly 300 resources; whatever that reveals about the matcher's
-  behaviour at scale comes back here.
+- The MB01/MB01t matcher is being ported from one campus to a corpus that
+  turned out larger than the estimate: **643 artifacts, 703 normalized
+  concepts, 538 declared relations**, zero unreachable resources and zero
+  dead links, rebuilt byte-identically by one command. The docent
+  experiments here have run on 9 places; whether hashing, word vectors and
+  no-FFN behave the same two orders of magnitude up is a question this
+  corpus can now answer, and sw-atlas publishes the answer either way.
 - The 1442 snapshot-A/snapshot-B experiment is run as designed, and its
   result is reported in both repositories.
 

@@ -84,6 +84,54 @@ rather than discovered broken by a coverage gate.
   because `_posts` filenames do not change after publication. If that ever
   stops being true, an explicit id becomes worth the trouble.
 
+## What the ingester found, 2026-09-22
+
+Step 002 wrote this file from the plan. These are the things only running
+the ingester over all 126 posts could have turned up.
+
+**The front matter held up.** 126 posts parsed with no exceptions and no
+special cases, and every one of the 126 post URLs resolves. 508 declared
+relations came out of it: 78 repositories, 84 videos, 6 demos and 157 cited
+papers, plus the series chain. Nothing was inferred and no model was
+involved, which was the bet this file opened with.
+
+**One tiny ask: `video_url: ""`.** The post
+`2026-03-13-rabbit-hole-rust-to-unsupported-isa` writes an empty string for
+`video_url`. The ingester used to turn that into a resource with the
+identifier `video:` and no address; it now treats an empty URL as no link,
+so nothing is broken either way. Omitting the key when there is no video
+would say the same thing more clearly, and this is the only post that does
+it. Not worth a commit of its own.
+
+**A real ask, worth thinking about: whose repository is it?** `repo_url`
+and `repo_urls` mix two different things. 73 of the 78 repositories named
+are Software Wrighter's own; five belong to other people —
+`badlogic/pi-mono`, `crackanimad0r/MesaOS`, `lukehinds/nono`,
+`weagan/Engram` and `XSkill-Agent/XSkill`. To a reader that distinction is
+obvious from the owner; to an index it is a guess, and it matters: a
+visitor asking "show me your code for this" should not be sent to somebody
+else's repository, and "what have you built" should not count five projects
+that are not yours. Today sw-atlas separates them by comparing the owner
+against the list of accounts it fetches, which works only because that list
+happens to be complete. A convention would be better — a separate key, or
+listing third-party repositories under `papers` where citations already
+live. The blog should pick whichever is least annoying to write; sw-atlas
+will follow it.
+
+**Nine repositories the blog links to are GitHub forks**, among them
+`sw-game-dev/game-mcp-poc`, `sw-embed/sw-cor24-pascal` and
+`softwarewrighter/bdh`. The repository owner decided they belong in the
+corpus because he has written about them. Nothing is needed here; it is
+recorded because a reader of this file would otherwise wonder why a fork
+appears in the index.
+
+**Paper links: six hosts refuse robots and one is unreachable.** ACM,
+doi.org and openreview answer 403 to a link check, and
+`yann.lecun.org/exdb/publis/pdf/lecun-06.pdf` did not answer at all. None
+of them fails sw-atlas's link gate -- a host that dislikes robots is not a
+dead link -- and no change is requested. If a cited paper ever does rot, a
+DOI link survives longer than a publisher's PDF path.
+
 ## What sw-atlas gives back
 
 The Librarian: a question box on the blog that answers "have you written

@@ -82,6 +82,36 @@ What the runtime intends to provide, so the campus can design against it:
 
 sw-atlas will send a concrete interface proposal when Saga 9 opens.
 
+## What the ingester found, 2026-09-22
+
+**`dist/catalog.json` still does not exist**, so the ingester reads
+`pages/docent/snapshot-a.json` and records which file it used on every
+resource it produced. CATALOG-EXPORT above is therefore still the live
+request, and the switch will be visible in a commit rather than silent.
+
+**Snapshot A ingested cleanly.** 9 places, 4 repositories, 4 demos, 39
+concepts, 16 `PartOf` relations, and the 21 stories kept as catalog text
+rather than training text. Every campus URL resolves. The 1442 exclusion is
+asserted by a test in `crates/atlas-ingest/tests/campus.rs`, including the
+subtler half: the 1130 wing's arrival story mentions the card read punch in
+prose, so what is withheld is the exhibit and its demo, not the string.
+
+**Three identifiers already join the campus to the blog** with nothing
+inferred, because both derive an identifier from the URL:
+`repo:sw-comp-history/ibm-1130-rs`,
+`demo:sw-comp-history.github.io/ibm-1130-rs` and
+`repo:sw-embed/sw-cor24-apl`. A visitor standing at the 1130 exhibit can be
+shown the post about it today.
+
+**One small ask for when the catalog is published: keep concept labels as
+prose.** The campus writes `machine learning`; the blog writes
+`machine-learning`. sw-atlas normalizes both to one concept and then has to
+choose which spelling to show a visitor, and it prefers the prose one --
+`Chain of Thought` over `chain-of-thought`. If `dist/catalog.json`
+slugified its concepts on the way out, the corpus would lose the only
+human-readable spellings it has for several hundred concepts. Emit them as
+written.
+
 ## Not asked for
 
 - No change to the campus's existing keyword matcher. It is the champion

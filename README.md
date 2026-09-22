@@ -80,12 +80,17 @@ plan disagree, the plan wins.
 
 ## Status
 
-The corpus is built; nothing that answers a visitor is. Four ingesters turn
-the blog, the campus, the repository cache and the video scripts into a
-validated, canonical corpus with no model in it. There is no matcher over
-that corpus yet (Saga 2), no model (Saga 3) and no browser runtime (Saga 9),
-so nothing here can be demonstrated to a visitor today, and every quality
+**Saga 1 is closed: the corpus exists and is gated.** Four ingesters turn
+the blog, the campus, the repository cache and the video scripts into one
+validated, canonical corpus with no model in it, and two gates stand behind
+it -- zero resources that nothing can reach, zero URLs that 404.
+
+Nothing that answers a visitor is built yet. There is no matcher over this
+corpus (Saga 2), no model (Saga 3) and no browser runtime (Saga 9), so
+nothing here can be demonstrated to a visitor today, and every quality
 number below is inherited from `moe-microscope` rather than measured here.
+The scoreboard with its empty columns is
+[`docs/reference/results.md`](docs/reference/results.md).
 
 The honest starting scoreboard, inherited from
 [`moe-microscope`](https://github.com/sw-ml-study/moe-microscope)'s campus
@@ -171,8 +176,9 @@ the same 20 points. The reasoning is in
 
 Progress is driven by [agentrail](CLAUDE.md) sagas. `agentrail status`
 says where the current one stands; [`docs/sagas.md`](docs/sagas.md) holds
-the queue. The active saga is `atlas-foundation`: the corpus and the
-machinery that validates it, with no model in it at all.
+the queue. `atlas-foundation` is done in 19 steps; next is
+`atlas-baseline`, which ports the deterministic matcher to the whole corpus
+and builds the evaluation harness before there is anything to evaluate.
 
 ## Building
 
