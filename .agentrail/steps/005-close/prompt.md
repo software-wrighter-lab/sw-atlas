@@ -1,0 +1,1 @@
+Bring the request files up to date with whatever the harness found, queue Saga 3 in docs/sagas.md with what it needs and from whom (including PR05 from demo-decision-model and the confirmed question sets), update the README status, and close the saga with 'agentrail complete --done'.

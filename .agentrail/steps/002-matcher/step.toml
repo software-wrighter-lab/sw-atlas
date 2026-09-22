@@ -1,0 +1,8 @@
+number = 2
+slug = "matcher"
+status = "pending"
+description = "Read docs/plan.md section 10 (Saga 2) first. Port moe-microscope's MB01 and M..."
+role = "production"
+context_files = []
+created_at = "2026-09-22T14:23:13"
+commits = []
