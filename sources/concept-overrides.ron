@@ -1,0 +1,90 @@
+// Corrections to the concept normalizer, applied after it runs.
+//
+// The normalizer only unifies spellings (case, `-`, `_`, `/`, and a plural
+// when both forms occur). Everything here is a judgement a person made,
+// because no rule over the strings can make it: `moe` and `mixture of
+// experts` are one idea, `llm` and `large language monkeys` are not, and
+// the two pairs look identical to a program.
+//
+// Keys are concept identifiers as the normalizer forms them: lowercase,
+// words joined by hyphens. A key that no source wrote fails the build
+// rather than sitting here doing nothing. Read
+// docs/reference/concept-collisions.md, decide, write it down here, and
+// regenerate with `just concepts`.
+//
+// Not supported yet: splitting one label into two concepts. The video
+// index writes `Few-shot / Zero-shot` and `Bias / Variance` as single
+// labels, so each is one concept whose name contains two ideas. Fixing
+// that needs a `split` rule and a way to decide which resources get which
+// half; it is a candidate for the coverage-report step or later.
+Overrides(
+    // A concept key, and the keys that mean the same thing and fold into
+    // it. The left-hand key survives and the others become its aliases.
+    merge: {
+        // Acronyms. The expansion is the identifier because it reads as
+        // what it is; the acronym stays searchable as an alias.
+        // `moe-mixture-of-experts` is the video index's `MoE / Mixture of
+        // Experts`, one label naming the idea twice. `moe-microscope` is a
+        // repository and stays where it is.
+        "mixture-of-experts": ["moe", "moe-mixture-of-experts"],
+        "in-context-learning": ["icl", "icl-in-context-learning"],
+        "model-context-protocol": ["mcp"],
+        "recursive-language-models": ["rlm"],
+        "tiny-recursive-model": ["trm"],
+        "baby-dragon-hatchling": ["bdh"],
+
+        // `llm`, `pi` and `vm` are deliberately absent. The report pairs
+        // them with `large-language-monkeys` (a paper title), with
+        // `prompt-injection` and with `vibe-maintenance`, and all three
+        // are coincidences of initials.
+
+        // The same idea, written long and short.
+        "adam": ["adam-optimizer"],
+        "correlation-vs-causation": ["correlation-causation"],
+        "cost-vs-quality-tradeoffs": ["cost-quality-tradeoffs"],
+    },
+    // A concept key, and the broader concepts it sits under. Nothing in
+    // the sources declares a hierarchy, so every parent here is a
+    // judgement, taken from the "inside" rows of the report.
+    parents: {
+        "flash-attention": ["attention"],
+        "self-attention": ["attention"],
+        "context-window": ["context"],
+        "assembly-language": ["assembly"],
+        "coding-agent": ["agent"],
+        "multi-agent": ["agent"],
+        "agent-loop": ["agent"],
+        "bump-allocator": ["allocator"],
+        "gnu-apl": ["apl"],
+        "sw-apl": ["apl"],
+        "c-compiler": ["compiler"],
+        "compiler-backend": ["compiler"],
+        "retargetable-compiler": ["compiler"],
+        "cli-tools": ["cli"],
+    },
+    // A concept key, and the spelling to show a visitor instead of the one
+    // the corpus used most. For acronyms the corpus writes in lowercase.
+    labels: {
+        // Concepts whose identifier is an expansion the corpus only ever
+        // wrote as a slug or an acronym.
+        "mixture-of-experts": "Mixture of Experts",
+        "in-context-learning": "In-Context Learning",
+        "model-context-protocol": "Model Context Protocol",
+        "recursive-language-models": "Recursive Language Models",
+        "tiny-recursive-model": "Tiny Recursive Model",
+        "baby-dragon-hatchling": "Baby Dragon Hatchling",
+        "adam": "Adam",
+        "correlation-vs-causation": "Correlation vs Causation",
+        "cost-vs-quality-tradeoffs": "Cost vs Quality Tradeoffs",
+
+        "apl": "APL",
+        "llm": "LLM",
+        "cli": "CLI",
+        "wasm": "WebAssembly",
+    },
+    // Pairs the normalizer must not merge. This blocks the plural rule,
+    // which is the only merge it makes that a person might disagree with:
+    // a word ending in `s` that is not the plural of the word beside it.
+    // Empty today -- all eight plural pairs in the corpus are real.
+    keep_apart: [],
+)

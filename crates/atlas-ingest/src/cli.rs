@@ -1,6 +1,7 @@
 //! The command line, and the long help `sw-checklist` asks for.
 
-use clap::{Parser, Subcommand};
+use clap::{Args, Parser, Subcommand};
+use std::path::Path;
 use std::path::PathBuf;
 
 include!(concat!(env!("OUT_DIR"), "/build_facts.rs"));
@@ -82,25 +83,79 @@ pub enum Source {
     },
     /// Public repositories from the committed GitHub cache: every
     /// non-fork, and the forks a post or campus place links to.
-    Repos {
-        /// The cache `scripts/fetch-repos` writes.
-        #[arg(default_value = "cache/github-repos.json")]
-        cache: PathBuf,
-        /// A blog checkout, read for the repositories its posts link to.
-        #[arg(long, default_value = "../blog")]
-        blog: PathBuf,
-        /// A campus checkout, read for the repositories its places link to.
-        #[arg(long, default_value = "../sw-campus")]
-        campus: PathBuf,
-    },
+    Repos(Repos),
     /// Every video the blog declares, joined to its script in `shorts`.
-    Videos {
-        /// Path to a checkout of the blog repository.
-        blog: PathBuf,
-        /// Path to a checkout of the shorts repository.
-        shorts: PathBuf,
-        /// The hand-written video-to-project map.
-        #[arg(long, default_value = "sources/video-shorts.ron")]
-        map: PathBuf,
-    },
+    Videos(Videos),
+    /// One vocabulary over the corpora the other subcommands wrote.
+    Concepts(Concepts),
+}
+
+/// Where `repos` reads from.
+#[derive(Args)]
+pub struct Repos {
+    /// The cache `scripts/fetch-repos` writes.
+    #[arg(default_value = "cache/github-repos.json")]
+    pub cache: PathBuf,
+    /// A blog checkout, read for the repositories its posts link to.
+    #[arg(long, default_value = "../blog")]
+    pub blog: PathBuf,
+    /// A campus checkout, read for the repositories its places link to.
+    #[arg(long, default_value = "../sw-campus")]
+    pub campus: PathBuf,
+}
+
+/// Where `videos` reads from.
+#[derive(Args)]
+pub struct Videos {
+    /// Path to a checkout of the blog repository.
+    pub blog: PathBuf,
+    /// Path to a checkout of the shorts repository.
+    pub shorts: PathBuf,
+    /// The hand-written video-to-project map.
+    #[arg(long, default_value = "sources/video-shorts.ron")]
+    pub map: PathBuf,
+}
+
+/// Where `concepts` reads from, and where its report goes.
+#[derive(Args)]
+pub struct Concepts {
+    /// The corpora to unify.
+    #[arg(default_values_t = [
+        String::from("build/corpus/blog.ron"),
+        String::from("build/corpus/campus.ron"),
+        String::from("build/corpus/repos.ron"),
+        String::from("build/corpus/videos.ron"),
+    ])]
+    pub corpora: Vec<String>,
+    /// The committed corrections.
+    #[arg(long, default_value = "sources/concept-overrides.ron")]
+    pub overrides: PathBuf,
+    /// Where to write the collision report.
+    #[arg(long, default_value = "docs/reference/concept-collisions.md")]
+    pub report: PathBuf,
+}
+
+/// One line per thing a reader would want to check.
+pub fn report(corpus: &atlas_corpus::Corpus, out: &Path, hash: &str) -> String {
+    use atlas_core::ResourceKind::{Campus, Demo, Paper, Post, Repo, Video};
+    let count = |kind| corpus.resources.iter().filter(|r| r.kind == kind).count();
+    let rows = [
+        ("posts", count(Post)),
+        ("places", count(Campus)),
+        ("repos", count(Repo)),
+        ("videos", count(Video)),
+        ("demos", count(Demo)),
+        ("papers", count(Paper)),
+        ("concepts", corpus.concepts.len()),
+        ("relations", corpus.relations.len()),
+    ];
+    let counts: Vec<String> = rows
+        .iter()
+        .map(|(name, n)| format!("  {name:<10} {n}"))
+        .collect();
+    format!(
+        "wrote {}\n  hash       {hash}\n{}",
+        out.display(),
+        counts.join("\n")
+    )
 }

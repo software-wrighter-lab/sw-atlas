@@ -36,9 +36,10 @@ with `agentrail next`.
 11. `ingest-metadata` -- 251 repositories from the cache, 84 videos joined to their scripts. **done**
 12. `declared-forks` -- a fork is kept when the owner wrote about it. **done**
 13. `confirm-video-joins` -- the owner confirmed all 19 drafted video-to-project pairs. **done**
-14. `concept-graph` -- normalized concepts, aliases, parents, collision report.
-15. `coverage-report` -- `just report`, link checker, zero-orphan gate.
-16. `results-and-requests` -- seeded results table, request files, README, queue.
+14. `reference-steps-by-slug` -- documentation names steps, not numbers. **done**
+15. `concept-graph` -- 689 concepts, aliases, parents, collision report, override file. **done**
+16. `coverage-report` -- `just report`, link checker, zero-orphan gate.
+17. `results-and-requests` -- seeded results table, request files, README, queue.
 
 Exit: every public artifact has a Resource, every Resource is reachable
 through concepts and relations, zero orphans and zero broken URLs, and the

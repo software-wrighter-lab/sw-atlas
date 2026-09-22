@@ -23,27 +23,26 @@ ingest-blog *args:
 ingest-campus *args:
     cargo run --quiet -p atlas-ingest -- campus ../sw-campus --out build/corpus/campus.ron {{args}}
 
-# Public repositories from the committed GitHub cache (no network): every
-# non-fork, plus the forks a post or campus place links to.
+# Every non-fork, plus the forks a post or campus place links to.
+# Public repositories from the committed GitHub cache (no network).
 ingest-repos *args:
     cargo run --quiet -p atlas-ingest -- repos cache/github-repos.json --out build/corpus/repos.ron {{args}}
 
-# The blog's videos, joined to their scripts in the shorts checkout.
 # Override the checkout with SHORTS=/path/to/shorts.
+# The blog's videos, joined to their scripts in the shorts checkout.
 ingest-videos *args:
     cargo run --quiet -p atlas-ingest -- videos ../blog "${SHORTS:-../../softwarewrighter/shorts}" --out build/corpus/videos.ron {{args}}
 
-# Build every corpus that has an ingester.
-ingest: ingest-blog ingest-campus ingest-repos ingest-videos
+# Reads what the ingest recipes wrote, so run those first (or `just ingest`).
+# One concept vocabulary over the four corpora, with its collision report.
+concepts *args:
+    cargo run --quiet -p atlas-ingest -- concepts --out build/corpus/corpus.ron {{args}}
 
-# Where the remaining source lands (atlas-foundation step concept-graph).
-ingest-rest:
-    @echo "just ingest-rest: not implemented yet." >&2
-    @echo "The concept graph lands in step concept-graph." >&2
-    @exit 1
+# Build every corpus, then unify their concepts into build/corpus/corpus.ron.
+ingest: ingest-blog ingest-campus ingest-repos ingest-videos concepts
 
-# Regenerate the coverage report and gate on orphans and dead links.
 # Lands in atlas-foundation step coverage-report.
+# Regenerate the coverage report and gate on orphans and dead links.
 report:
     @echo "just report: not implemented yet." >&2
     @echo "Lands in atlas-foundation step coverage-report: it writes" >&2

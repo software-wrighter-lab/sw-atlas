@@ -38,7 +38,7 @@ fn run(source: &cli::Source, out: &Path) -> Result<String, Box<dyn std::error::E
         std::fs::create_dir_all(parent)?;
     }
     std::fs::write(out, &text)?;
-    Ok(report(&corpus, out, &hash))
+    Ok(cli::report(&corpus, out, &hash))
 }
 
 /// Read one source into a corpus.
@@ -46,45 +46,36 @@ fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error
     Ok(match source {
         cli::Source::Blog { repo } => assemble::blog(&repo.join("_posts"))?,
         cli::Source::Campus { repo } => atlas_campus::ingest(repo)?,
-        cli::Source::Repos {
-            cache,
-            blog,
-            campus,
-        } => {
-            let named = [
-                assemble::blog(&blog.join("_posts"))?,
-                atlas_campus::ingest(campus)?,
-            ];
-            atlas_repos::ingest(cache, &atlas_repos::declared(&named))?
+        cli::Source::Repos(args) => {
+            let blog = assemble::blog(&args.blog.join("_posts"))?;
+            let named = [blog, atlas_campus::ingest(&args.campus)?];
+            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named))?
         }
-        cli::Source::Videos { blog, shorts, map } => {
-            let posts = assemble::blog(&blog.join("_posts"))?;
-            atlas_video::ingest(&posts, &atlas_video::Sources { shorts, map })?
+        cli::Source::Videos(args) => {
+            let posts = assemble::blog(&args.blog.join("_posts"))?;
+            let sources = atlas_video::Sources {
+                shorts: &args.shorts,
+                map: &args.map,
+            };
+            atlas_video::ingest(&posts, &sources)?
         }
+        cli::Source::Concepts(args) => concepts(args)?,
     })
 }
 
-/// One line per thing a reader would want to check.
-fn report(corpus: &atlas_corpus::Corpus, out: &Path, hash: &str) -> String {
-    use atlas_core::ResourceKind::{Campus, Demo, Paper, Post, Repo, Video};
-    let count = |kind| corpus.resources.iter().filter(|r| r.kind == kind).count();
-    let rows = [
-        ("posts", count(Post)),
-        ("places", count(Campus)),
-        ("repos", count(Repo)),
-        ("videos", count(Video)),
-        ("demos", count(Demo)),
-        ("papers", count(Paper)),
-        ("concepts", corpus.concepts.len()),
-        ("relations", corpus.relations.len()),
-    ];
-    let counts: Vec<String> = rows
-        .iter()
-        .map(|(name, n)| format!("  {name:<10} {n}"))
-        .collect();
-    format!(
-        "wrote {}\n  hash       {hash}\n{}",
-        out.display(),
-        counts.join("\n")
-    )
+/// Unify the corpora the other subcommands wrote, and write the collision
+/// report beside the corpus.
+fn concepts(args: &cli::Concepts) -> Result<atlas_corpus::Corpus, Box<dyn std::error::Error>> {
+    let mut read = Vec::new();
+    for path in &args.corpora {
+        read.push(ron::from_str(&std::fs::read_to_string(path)?)?);
+    }
+    let ov = atlas_graph::overrides::Overrides::load(&args.overrides)?;
+    let (corpus, text, unknown) = atlas_graph::build(&read, &ov);
+    if let Some(first) = unknown.first() {
+        let count = unknown.len();
+        return Err(format!("{count} override keys name no concept, first: {first}").into());
+    }
+    std::fs::write(&args.report, text)?;
+    Ok(corpus)
 }

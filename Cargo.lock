@@ -98,6 +98,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "atlas-graph"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "ron",
+ "serde",
+]
+
+[[package]]
 name = "atlas-ingest"
 version = "0.1.0"
 dependencies = [
@@ -105,6 +115,7 @@ dependencies = [
  "atlas-campus",
  "atlas-core",
  "atlas-corpus",
+ "atlas-graph",
  "atlas-repos",
  "atlas-video",
  "clap",

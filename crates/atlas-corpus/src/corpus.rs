@@ -38,4 +38,32 @@ impl Corpus {
     pub fn concept_ids(&self) -> BTreeSet<&ConceptId> {
         self.concepts.iter().map(|c| &c.id).collect()
     }
+
+    /// One corpus from several, with each resource, concept and relation
+    /// appearing once.
+    ///
+    /// Sources describe each other: a post declares a video, and the video
+    /// ingester describes that same video. Both produce the identifier, so
+    /// the described resource wins over the stub that only named it, and a
+    /// stub carrying a title wins over one that does not.
+    pub fn merge(corpora: &[Self]) -> Self {
+        let mut out = Self::new();
+        for corpus in corpora {
+            out.resources.extend(corpus.resources.iter().cloned());
+            out.concepts.extend(corpus.concepts.iter().cloned());
+            out.relations.extend(corpus.relations.iter().cloned());
+        }
+        let known = |r: &Resource| {
+            usize::from(!r.source_hash.is_empty()) * 2 + usize::from(!r.title.is_empty())
+        };
+        out.resources
+            .sort_by(|a, b| (&a.id, known(b)).cmp(&(&b.id, known(a))));
+        out.resources.dedup_by(|a, b| a.id == b.id);
+        out.concepts.sort_by(|a, b| a.id.cmp(&b.id));
+        out.concepts.dedup_by(|a, b| a.id == b.id);
+        out.relations
+            .sort_by(|a, b| (&a.from, &a.kind, &a.to).cmp(&(&b.from, &b.kind, &b.to)));
+        out.relations.dedup();
+        out
+    }
 }

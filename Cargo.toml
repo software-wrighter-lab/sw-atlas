@@ -5,6 +5,7 @@ members = [
     "crates/atlas-core",
     "crates/atlas-corpus",
     "crates/atlas-decide",
+    "crates/atlas-graph",
     "crates/atlas-ingest",
     "crates/atlas-repos",
     "crates/atlas-video",
@@ -28,6 +29,7 @@ atlas-campus = { path = "crates/atlas-campus" }
 atlas-core = { path = "crates/atlas-core" }
 atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
+atlas-graph = { path = "crates/atlas-graph" }
 atlas-repos = { path = "crates/atlas-repos" }
 atlas-video = { path = "crates/atlas-video" }
 clap = { version = "4", features = ["derive"] }

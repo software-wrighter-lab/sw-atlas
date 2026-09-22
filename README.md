@@ -119,6 +119,13 @@ Concepts rule and 22 through a hand-written, owner-confirmed map; the
 other 32 are reached today through the posts that link to them
 ([`docs/video-sources.md`](docs/video-sources.md)).
 
+`just concepts` unifies the four into `build/corpus/corpus.ron`: 700
+spellings become 689 concepts, and every merge and every declined near miss
+is listed in [`docs/reference/concept-collisions.md`](docs/reference/concept-collisions.md)
+for a person to audit. The normalizer only unifies spellings; an acronym
+and its expansion, or a narrower idea inside a broader one, are judgements
+committed in [`sources/concept-overrides.ron`](sources/concept-overrides.ron).
+
 Three identifiers already appear in both the blog and the campus, because
 a target's identifier is derived from its URL: `repo:sw-comp-history/ibm-1130-rs`,
 `demo:sw-comp-history.github.io/ibm-1130-rs` and `repo:sw-embed/sw-cor24-apl`.
@@ -171,7 +178,8 @@ The gate is green and `sw-checklist` is at zero failures and zero warnings.
 Keep it there.
 
 `just ingest` reads the blog, the campus, the repository cache and the
-videos, and writes a canonical corpus for each. The remaining
+videos, writes a canonical corpus for each, and unifies their concepts
+into one vocabulary. The remaining
 pipeline recipes exist but are not implemented; each exits non-zero naming
 the step that lands it, so this list stays honest:
 
@@ -181,7 +189,7 @@ the step that lands it, so this list stays honest:
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, ingest-campus |
 | `just ingest-repos` | **done** — 251 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
 | `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, ingest-metadata |
-| `just ingest-rest` | the concept graph | Saga 1, concept-graph |
+| `just concepts` | **done** — 689 concepts over the four corpora, with a collision report | Saga 1, concept-graph |
 | `just report` | coverage, gated on orphans and dead links | Saga 1, coverage-report |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |
