@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-report",
+  "state": {
+    "number": 18,
+    "step": "coverage-report"
+  },
+  "action": "Ran the real link check over 642 URLs before trusting the gate; seeded-fault tests for both gates; crate split per house rule; sw-install for the new binary",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-22T13:20:45"
+}
