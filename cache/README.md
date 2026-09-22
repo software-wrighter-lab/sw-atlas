@@ -40,3 +40,13 @@ Two repositories are excluded for a different reason: they are public but
 are not artifacts a visitor could be sent to. They are named with their
 reasons in `sources/repo-exclusions.ron`, and `just report` states the
 count, so the exclusion cannot quietly shrink a coverage number.
+
+## `url-status.json`
+
+What the last link check found for every URL the corpus names: 642 URLs,
+635 resolving, none gone, six hosts refusing a robot and one not answering.
+Written by `just report-check`, which is the second and last step in this
+repository that touches the network. `just report` reads it and makes no
+request, so the coverage gate cannot fail because someone else's site is
+down. Refreshing it is a corpus change and belongs in its own commit with
+its counts.

@@ -130,6 +130,21 @@ for a person to audit. The normalizer only unifies spellings; an acronym
 and its expansion, or a narrower idea inside a broader one, are judgements
 committed in [`sources/concept-overrides.ron`](sources/concept-overrides.ron).
 
+`just report` turns all of it into a number with a gate behind it
+([`docs/reference/coverage.md`](docs/reference/coverage.md), written by the
+run):
+
+| | Indexed | Tagged | Related | Unreachable |
+|---|---:|---:|---:|---:|
+| All artifacts | 643 | 410 | 470 | **0** |
+
+Every one of the 642 distinct URLs has been checked: 635 resolve, **none is
+gone**, six are academic hosts that refuse a robot and one did not answer.
+Two gates fail the command: a resource nothing can reach, and a URL that
+404s. The link results are committed in `cache/url-status.json`, so the gate
+runs offline and does not depend on someone else's site being up; `just
+report-check` refreshes them over the network.
+
 Three identifiers already appear in both the blog and the campus, because
 a target's identifier is derived from its URL: `repo:sw-comp-history/ibm-1130-rs`,
 `demo:sw-comp-history.github.io/ibm-1130-rs` and `repo:sw-embed/sw-cor24-apl`.
@@ -194,7 +209,8 @@ the step that lands it, so this list stays honest:
 | `just ingest-repos` | **done** — 249 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
 | `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, ingest-metadata |
 | `just concepts` | **done** — 689 concepts over the four corpora, with a collision report | Saga 1, concept-graph |
-| `just report` | coverage, gated on orphans and dead links | Saga 1, coverage-report |
+| `just report` | **done** — coverage, gated on unreachable resources and dead links | Saga 1, coverage-report |
+| `just report-check` | **done** — re-check every URL over the network, refresh the committed cache | Saga 1, coverage-report |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |
 

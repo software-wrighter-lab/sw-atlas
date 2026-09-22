@@ -1,0 +1,16 @@
+[package]
+name = "atlas-links"
+description = "Check that every URL the sw-atlas corpus names still resolves, and commit the result"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+ureq = "3"

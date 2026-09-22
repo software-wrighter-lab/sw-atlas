@@ -1,0 +1,3214 @@
+{
+  "urls": {
+    "https://arxiv.org/abs/1206.5538": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1211.5063": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1301.3781": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1312.6114": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1312.6199": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1406.2661": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1409.0473": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1409.1259": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1409.3215": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1410.5401": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1412.3555": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1412.6980": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1502.03167": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1503.02531": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1506.01186": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1508.07909": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1512.00567": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1604.06174": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1606.06565": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1608.03983": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1609.04747": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1609.04836": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1610.02136": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1611.03530": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1612.00796": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1701.00160": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1701.06538": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1702.08608": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1703.04977": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1704.04289": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1705.05363": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1706.02677": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1706.03762": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1706.04599": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1710.03740": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1711.05101": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1712.09913": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1803.03635": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1806.01261": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1810.04805": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1810.11953": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1811.11682": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1902.00751": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1903.12261": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1906.02691": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1907.01470": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1908.10084": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1909.08053": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1911.02685": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/1912.02292": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2001.08361": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2002.08909": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2004.07780": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2005.11401": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2005.14165": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2006.11239": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2008.08186": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2009.01325": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2009.06732": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2010.01412": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2103.00020": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2103.13630": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2104.04473": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2104.08164": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2104.09864": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2106.01345": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2106.09685": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2201.02177": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2201.11903": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2202.03629": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2202.12837": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2203.02155": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2203.15556": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2205.14135": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2206.07682": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2208.01066": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2209.11055": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2210.01117": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2210.01911": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2211.05102": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2211.17192": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2212.07677": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2212.08073": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2301.05217": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2301.08243": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2302.00487": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2302.04761": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2303.11366": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2305.13172": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2305.13245": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2305.16291": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2305.17014": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2305.18290": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2306.05499": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2307.02483": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2308.01825": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2310.02029": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2310.06110": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2311.01906": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2312.00752": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2401.16876": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2402.14905": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2404.08471": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2405.04434": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2405.13861": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2407.21787": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2409.01832": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2409.12183": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2410.04887": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2410.06408": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2410.13136": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2412.04619": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2412.06769": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2501.09824": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2501.19104": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2501.19393": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2502.00661": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2502.02869": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2505.05410": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2505.15239": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2505.16128": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2505.24254": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2506.21734": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2507.13966": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2509.26507": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2510.04871": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2510.09580": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2512.05117": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2512.24601": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2512.24880": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.07372": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.15158": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.15160": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.21358": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.21391": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2601.22154": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2602.06043": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2602.08332": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2602.13904": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2602.16066": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2603.05706": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2603.12056": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://arxiv.org/abs/2603.14147": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://authors.library.caltech.edu/records/w41x7-8bn13": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/01/29/tbt-apl-horse-race/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/01/30/welcome-to-software-wrighter-lab/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/01/31/small-models-part1-tiny-recursive-model/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/01/deepseek-papers-part1-mhc/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/01/multi-hop-reasoning/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/01/small-models-part2-pocket-llm/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/02/deepseek-papers-part2-engram/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/02/game-mcp-poc/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/02/small-models-part3-hrm/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/03/many-eyes-learning/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/03/small-models-part4-bdh/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/04/five-ml-concepts-1/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/04/small-models-part5-billion-llm/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/05/five-ml-concepts-2/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/05/small-models-part6-efficient-frontier/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/05/tbt-pipelines-os390/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/06/five-ml-concepts-3/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/07/five-ml-concepts-4/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/08/five-ml-concepts-5/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/09/five-ml-concepts-6/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/10/five-ml-concepts-7/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/11/deepseek-papers-part3-engram-revisited/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/11/five-ml-concepts-8/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/12/dytopo-rs-dynamic-topology-multi-agent/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/12/five-ml-concepts-9/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/12/sleepy-coder-when-fine-tuning-fails/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/12/tbt-vector-graphics-games/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/13/five-ml-concepts-10/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/13/rlm-recursive-language-models/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/14/cat-finder-local-ml-rust/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/14/five-ml-concepts-11/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/14/neural-net-rs-educational-ml-platform/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/15/five-ml-concepts-12/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/16/five-ml-concepts-13/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/17/five-ml-concepts-14/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/18/five-ml-concepts-15/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/18/multi-hop-reasoning-distribution-trap/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/18/sleepy-coder-routing-prevents-forgetting/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/19/five-ml-concepts-16/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/19/tbt-toontalk-visual-programming/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/20/five-ml-concepts-17/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/20/midi-cli-rs-music-for-ai-agents/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/21/five-ml-concepts-18/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/21/json-et-al-data-serialization-formats/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/22/five-ml-concepts-19/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/22/icl-revisited-from-mystery-to-engineering/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/23/five-ml-concepts-20/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/23/midi-cli-rs-extending-with-custom-mood-packs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/24/five-ml-concepts-21/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/24/how-ai-learns-part1-time-scales/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/24/many-eyes-learning-part2-intrinsic-rewards/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/24/music-pipe-rs-unix-pipelines-for-midi/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/25/five-ml-concepts-22/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/25/how-ai-learns-part2-forgetting-vs-rot/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/26/five-ml-concepts-23/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/26/how-ai-learns-part3-weight-based/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/26/ibm-1130-system-emulator/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/27/five-ml-concepts-24/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/27/how-ai-learns-part4-memory-based/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/28/five-ml-concepts-25/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/28/how-ai-learns-part5-context-rlm/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/28/lucy-20-percent-ai-cluster-upgrade/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/02/28/music-pipe-rs-unix-composition/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/01/five-ml-concepts-26/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/01/how-ai-learns-part6-continuous-learning/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/02/five-ml-concepts-27/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/02/how-ai-learns-part7-full-architecture/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/03/five-ml-concepts-28/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/04/five-ml-concepts-29/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/05/five-ml-concepts-30/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/05/tbt-pjmai-rs-project-manager/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/06/rank-wav-audio-quality-ranking/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/08/saw-pjmai-rs-rig-langchain/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/09/mlf-01-neural-collapse/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/13/rabbit-hole-rust-to-unsupported-isa/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/15/saw-reg-rs-avoid-compaction-agentrail/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/16/mlf-02-icrl-in-context-reinforcement-learning/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/17/ai-tools-xskill-memory-layer-multimodal-agents/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/17/embedded-bmp280-pressure-sensor-driver/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/19/mlf-03-knowledge-graphs-domain-specific-superintelligence/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/19/tbt-reg-rs-regression-testing/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/21/bucket-list-things-ive-always-wanted-to-build/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/22/cor24-rs-assembly-emulator/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/22/saw-agentrail-rs-icrl-dual-memory/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/23/mlf-04-is-chain-of-thought-real/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/26/tbt-wiki-rs-six-wikis/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/03/29/saw-pjmai-reg-emacs-all-together-now/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/03/bucket-list-software-tools-landing-page/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/05/saw-saga-archiving-mlpl-plsw-cor24-compilers/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/12/saw-agent-coordination-fuzzit-vendoring/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/16/tbt-cor24-basic-startrek-trs80-robot-chase/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/20/embedded-forth-self-hosting-spectrum/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/23/ai-tools-agentrail-rs-mid-saga-flexibility/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/23/mlf-05-grokking-delayed-generalization/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/24/large-language-monkeys-scaling-inference/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/24/rabbit-hole-forth-life-after-hashing/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/25/rabbit-hole-forth-dictionary-compaction-specialized-images/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/26/rabbit-hole-forth-retargetable-codegen-forward-references/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/26/saw-tuplet-smalltalk-forth-from-forth/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/27/embedded-pascal-pcode-yagni-bump-to-reclaim/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/27/sw-checklist-ratchet-ai-coding-agents/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/28/personal-software-sw-launcher-one-ring/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/29/personal-software-vibe-maintenance/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/30/bucket-list-3d-source-new-languages-visible-compilers/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/04/30/tbt-mass-compile-pl-edit-aq-system/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/05/03/saw-espanso-kate-sharex-cor24-i2c-pluggable/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/05/16/energy-based-learning-hopfield-boltzmann-jepa/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/05/16/nono-sandbox-ai-agents/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/05/16/pi-minimal-agent/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/06/saw-mlpl-libraries-extensions-graphics-networking/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/08/bucket-list-operating-systems-and-ml-hardware/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/09/ai-tools-local-llm-loop-model-evaluation/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/09/personal-software-sudoku-learn-practice/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/10/ml-cnn-from-equations-mlpl/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/11/made-visible-swtos/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/12/made-visible-mesaos/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/12/software-wrighter-research-campus/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/13/made-visible-mlos/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/13/saw-building-a-tiny-mixture-of-experts/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/16/ai-tools-coding-agent-in-mlpl/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/17/tbt-apl-360-revisited/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/20/saw-atlas-typed-decisions/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://blog.softwarewrighter.com/2026/09/21/rabbit-hole-sage-y-combinator/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://dl.acm.org/doi/10.1145/1553374.1553380": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://dl.acm.org/doi/10.1145/2020408.2020496": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://dl.acm.org/doi/10.1145/2365952.2365972": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://doi.org/10.1207/s15516709cog0901_7": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://doi.org/10.3390/a11100159": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/XSkill-Agent/XSkill": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/badlogic/pi-mono": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/crackanimad0r/MesaOS": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/hardwarewrighter/blog": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/hardwarewrighter/disintegrating-circuits-projects": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/hardwarewrighter/hw-cor24-tang-nano": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/hardwarewrighter/lb-esp32-s3-n16r8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/hardwarewrighter/scpi-scripts": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/lukehinds/nono": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/software-wrighter-lab/blog": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/software-wrighter-lab/software-wrighter-lab.github.io": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/software-wrighter-lab/sw-atlas": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/software-wrighter-lab/sw-campus": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/MesaOS": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/ai-stack": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/alltalk-client-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/avoid-compaction": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/babyai-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/bdh": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/billion-llm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/blender-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/bucketlist": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/cc24": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/cli-gen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/crudibase": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/crudimobile": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/css-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/d3-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/demo-claude-mem": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/demo-ibm-1130-system": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/dev-proxy": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/devgroup": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/dialog-gen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/dytopo-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/efficient-llm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/emacs-agent": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/emacs-ai-api": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/engram-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/engramish-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/explainer": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/expo-rn-infinite-query-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/game-mcp-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/godot-poc-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/godot-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/guardian-cli": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/hybrid-vid": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/json2toon": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/label-it": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/local-llm-loop": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/mHC-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/many-eyes-learning": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/markdown-checker": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/micro-rlm-lab-py": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/microgpt-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/midi-cli-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/mlplunit": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/mobile-poc-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/modularizer": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/multi-hop-reasoning": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/musetalk-client-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/music-pipe-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/n_body": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/open-tts-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/overall": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/p24c": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pa24r": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pdf2md": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pl24r": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pocket-llm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/podcast-gen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pr24p": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/proact": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/pv24a": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/qrbrand": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rag-demo": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rlm-project": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rolodex": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rts_mock": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rts_monitor": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/rust-wasm-monitor": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/scan3data": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/shut_the_box": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sleepy-coder": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/speed-kings": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sse-chat": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/ssl-proxy-for-do": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/stars-glm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/stars-opus": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/street-signs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/styles-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sw-checklist": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sw-cli": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sw-co24-yocto-ed": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/sw-install": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/text-to-sfx-gen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/three-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/train-trm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/try-langchain-rust": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/try-ralphy": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/try-rig": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/tts-infra-dev": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/tutorial-editor": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/ui-test-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-fonts": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-games": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-meta": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-render-wgpu": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-shared": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vectorcade-web-yew": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/video_workflow_rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/vim-testing": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/viz-hrm-ft": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/wasm-text-sphere": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/web-dv24r": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/web-p24c": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/xmas-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/yt-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-audio-viz/umap": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/ep2ms": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/favicon": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/fuzzit": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/pjmai-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/rank-wav-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/reg-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/sed-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/sw-cli-gen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/sw-launcher": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/apl-horse-race": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/demos": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/ibm-1130-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/ibm-390-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/pipelines-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/rca-1802-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-asm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-codegen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-emulator": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-io": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-isa": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-cdp1802-target": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm-1130-peripherals": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-asm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-codegen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-emulator": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-forth": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-isa": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-comp-history/sw-ibm1130-target": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-emacs/graphical-experiments": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/bmp280": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/cor24-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/risc-v-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-apl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-assembler": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-basic": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-debugger": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-emulator": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-forth": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-fortran": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-hlasm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-isa": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-macrolisp": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-monitor": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-ocaml": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-pascal": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-plsw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-project": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-prolog": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-rpg-ii": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-rust": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-script": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-smalltalk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-snobol4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-tinyc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-x-pc-aotc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-x-tinyc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-yocto-ed": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-tos": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/swtos-live": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-apl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-assembler": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-basic": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-demos": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-forth": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-fortran": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-macrolisp": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-ocaml": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-pascal": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-plsw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-smalltalk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-snobol4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-x-assembler": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-x-tinyc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-tos": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-fun/sudoku": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-fun/tt-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-game-dev/game-mcp-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-game-dev/svg-combat-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-codegen-core": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-isa-core": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-rv32i-asm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-rv32i-codegen": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-rv32i-emulator": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-rv32i-isa": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-rv32i-target": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-target-core": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-tir": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-langtools/sw-tir-opt": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/Repeated-Sampling": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/cat-finder": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-abstract-algebra": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-algorithms": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-category-theory": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-coding-agent": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-combinators": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-data-structures": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-decision-model": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-design-patterns": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-extensions": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-file-processing": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-functional-pipelines": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-linear-algebra": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-memory": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-ml-microscope": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-ml-utils": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/demo-mlpl-libraries": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/emufpga": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/ml-viz": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/mlpl-live": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/moe-microscope": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/neural-net-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/sw-mlpl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/sw-os-ml": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-music-tools/rank-wav-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/DiscoveryOne": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/agentrail-domain-coding": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/agentrail-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/all-together-now": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/forthlet": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/gen-isa": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/nt-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/rust-to-prolog": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/sw-apl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/sw-fth-wasm": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/swvs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/tc24r": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/tf24a": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/tml24c": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/tuplet": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/tuplet-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/web-tc24r": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/web-tf24a": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/web-tml24c": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/wiki-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/sw-video-tools/media-pipeline-rs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://github.com/weagan/Engram": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://journalofbigdata.springeropen.com/articles/10.1186/s40537-019-0197-0": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://openreview.net/pdf/315d43ba26f55357a84cec9a7ed15a6610094f79.pdf": {
+      "status": "Blocked",
+      "code": 403,
+      "checked": "2026-09-22"
+    },
+    "https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://proceedings.mlr.press/v9/glorot10a.html": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-history": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-history/ibm-1130": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-history/ibm-1130/ibm-1130-emulator": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-history/processors": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-history/processors/rca-1802": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-science": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-science/language-experiments": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://software-wrighter-lab.github.io/sw-campus/#/campus/computer-science/language-experiments/apl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://softwarewrighter.github.io/music-pipe-rs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/35179.pdf": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-comp-history.github.io/ibm-1130-rs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-comp-history.github.io/rca-1802-rs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-comp-history.github.io/sw-cdp1802-io/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-embed.github.io/cor24-rs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-embed.github.io/web-sw-cor24-apl/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-embed.github.io/web-sw-cor24-forth/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-embed.github.io/web-sw-cor24-x-assembler/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-embed.github.io/web-sw-cor24-x-tinyc/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://sw-vibe-coding.github.io/wiki-rs/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://transformer-circuits.pub/2021/framework/index.html": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.bioinf.jku.at/publications/older/2604.pdf": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/-Y4T0_vETB4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/10fb0EjFND8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/3ezjk1CnZEU": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/6MluFFCb1cA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/8rzKVzfp2PU": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/95ng2EmBTbA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/B4uKx-DL1HY": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/BekrSjZ7f-4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/C5ICKluukxI": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/D4KrvmqOwEY": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/DDsrO5oYXa8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/DlxhTXcW-og": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/ElFwTSuHjnM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/GVLnOhmHYGc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/HdFa9C3ahkw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/JDtrfiBecNo": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/K7ucT7NV45g": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/KgtiBy4rdm4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/O6U06cGkKc4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/OOB56_OARnk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/OklW3RTV3I4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/P8OO48Nu6ik": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/QelUyffoo1g": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/ROje4xAMJKg": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/U-_yZZdZurU": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/WPAk79_UONE": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/Xk2hkc0bgi4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/YLgwkSiSOWw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/Zu3zreN8c0Q": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/_8_08H97LxM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/a_TolJdrnpM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/eK1t1DW9iTY": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/fyEuH1BprLI": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/iR4DYyzcdk8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/jQqyRdQAjPw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/jzCxPAX80zY": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/kKafshoP-7s": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/kLnD_wn7tLc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/lVPnKvi9VdA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/lkviAtRMgjc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/mBLFTyh1EKk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/n_NFFLCtj_M": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/osj1GQxG4uo": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/pldadqycEQs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/ppoONTOdqJQ": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/q_8qX-S9SxA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/wJvmBYTge7U": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/shorts/zWKmRxChRlA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=2RzJP2ofuuU": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=4eWyhWjF3dg": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=5DhaTPuyhys": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=9KQ3ohU4BHE": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=CC1GvHk5hL4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=F8iP4JLzQ80": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=MYTXVYDtCEU": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=TZT_cWWv9Oc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=TkdNCJi2jBA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=UNrzf4Wgbv4": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=_MkFUwLpnUM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=a-p4kojgJtM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=d5gaL4iOdLA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=f13s4K60mV8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=jMo5AaMRUkM": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=l6OjvtG2Nlk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=lxEFBzDjp3A": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=mi7mP-VVhik": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=nCi2uGWd7f0": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=oN6XyZdEHqY": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=obPamoOVS4s": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=pkhSwI97udw": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://www.youtube.com/watch?v=sy2Thj9R714": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://yann.lecun.org/exdb/publis/pdf/lecun-06.pdf": {
+      "status": "Error",
+      "code": 0,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/2KieDPrOl7k": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/872RLMBzC_8": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/CqdBxXXOeUs": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/JnlhHDtXWGg": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/YhAbOvWEkzE": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/nDNcbKE8KtE": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/qrcWMOfHN2s": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtu.be/vRfXYOaxXbo": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtube.com/shorts/BOuBFn5e1gA": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtube.com/shorts/aGoQHs6S1nk": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtube.com/shorts/fh21_zIK2ZE": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtube.com/shorts/jCUomUai-9U": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    },
+    "https://youtube.com/shorts/uvbfu0WKa3A": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-09-22"
+    }
+  }
+}

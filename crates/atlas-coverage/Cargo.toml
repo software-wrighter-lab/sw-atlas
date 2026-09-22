@@ -1,0 +1,32 @@
+[package]
+name = "atlas-coverage"
+description = "Turn the sw-atlas corpus into a coverage number, with a gate behind it"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "atlas_coverage"
+path = "src/lib.rs"
+
+[[bin]]
+name = "atlas-report"
+path = "src/main.rs"
+
+[dev-dependencies]
+atlas-links.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+atlas-links.workspace = true
+atlas-repos.workspace = true
+clap = { workspace = true }
+ron = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

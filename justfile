@@ -41,14 +41,15 @@ concepts *args:
 # Build every corpus, then unify their concepts into build/corpus/corpus.ron.
 ingest: ingest-blog ingest-campus ingest-repos ingest-videos concepts
 
-# Lands in atlas-foundation step coverage-report.
+# Offline by default: reads cache/url-status.json, makes no network call.
 # Regenerate the coverage report and gate on orphans and dead links.
-report:
-    @echo "just report: not implemented yet." >&2
-    @echo "Lands in atlas-foundation step coverage-report: it writes" >&2
-    @echo "docs/reference/coverage.md and exits non-zero on any orphan" >&2
-    @echo "resource or broken URL." >&2
-    @exit 1
+report *args:
+    cargo run --quiet -p atlas-coverage --bin atlas-report -- --today "$(date -u +%F)" {{args}}
+
+# Re-check every URL over the network and rewrite the committed cache.
+# A corpus change, so commit cache/url-status.json with its counts.
+report-check *args:
+    just report --check {{args}}
 
 # Score every runtime class on the held-out questions (saga atlas-baseline).
 eval *args:
