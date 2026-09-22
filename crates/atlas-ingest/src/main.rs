@@ -46,7 +46,17 @@ fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error
     Ok(match source {
         cli::Source::Blog { repo } => assemble::blog(&repo.join("_posts"))?,
         cli::Source::Campus { repo } => atlas_campus::ingest(repo)?,
-        cli::Source::Repos { cache } => atlas_repos::ingest(cache)?,
+        cli::Source::Repos {
+            cache,
+            blog,
+            campus,
+        } => {
+            let named = [
+                assemble::blog(&blog.join("_posts"))?,
+                atlas_campus::ingest(campus)?,
+            ];
+            atlas_repos::ingest(cache, &atlas_repos::declared(&named))?
+        }
         cli::Source::Videos { blog, shorts, map } => {
             let posts = assemble::blog(&blog.join("_posts"))?;
             atlas_video::ingest(&posts, &atlas_video::Sources { shorts, map })?

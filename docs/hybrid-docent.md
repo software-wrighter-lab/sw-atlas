@@ -169,11 +169,12 @@ The pipeline is the plan's Saga 11 shape, simplified by the TDM being cheap:
 ```
 
 The repo scope is already in the cache: `cache/github-repos.json` holds
-283 repositories, **242 of them non-fork** across 14 organisations (103
+283 repositories, **242 of them non-fork** across 15 accounts (103
 softwarewrighter, 43 sw-embed, 24 sw-ml-study, 20 sw-vibe-coding, 19
 sw-comp-history, ...). `fork == false` belongs in `atlas-ingest repos`
-(step 010) as the filter, not in the fetch script, so the cache stays the
-unfiltered record.
+(step 011) as the filter, not in the fetch script, so the cache stays the
+unfiltered record. Forks the blog or campus links to are kept (owner
+decision, 2026-09-22), which makes 251.
 
 Because the rerank head scores cards rather than ids, a new post should
 usually need **no** retraining at all, only an index rebuild. Saga 7 (SN01)

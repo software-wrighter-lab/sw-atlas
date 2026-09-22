@@ -101,18 +101,18 @@ every rebuild):
 |---|---:|---:|---:|---:|
 | Posts | 126 | — | — | — |
 | Places | — | 9 | — | — |
-| Repositories | 78 named | 4 named | 242 described | — |
+| Repositories | 78 named | 4 named | 251 described | — |
 | Videos | 84 named | — | — | 84 described, 33 with script |
 | Demos named | 6 | 4 | 3 | — |
 | Papers cited | 157 | — | — | — |
 | Concepts, provisional | 637 | 39 | 21 | 130 |
 | Relations, every one `Declared` | 518 | 16 | 3 | — |
 
-Repositories are the public, non-fork ones across 15 GitHub accounts and
-organisations, from a committed cache ([`cache/README.md`](cache/README.md)).
-Of the 80 repositories the blog and campus name, 66 join to that cache by
-identifier; the other 14 are nine forks and five repositories owned by
-other people. Videos take their scripts from the `shorts` repository: 30
+Repositories are the public ones across 15 GitHub accounts and
+organisations, from a committed cache ([`cache/README.md`](cache/README.md)):
+every non-fork, and the nine forks a blog post links to. Of the 80
+repositories the blog and campus name, 75 join to that cache by
+identifier; the other 5 are owned by other people. Videos take their scripts from the `shorts` repository: 30
 by the Five ML Concepts rule, 3 through a hand-written map, and the other
 51 are reached today through the posts that link to them
 ([`docs/video-sources.md`](docs/video-sources.md)).
@@ -177,10 +177,10 @@ the step that lands it, so this list stays honest:
 |---|---|---|
 | `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, step 8 |
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, step 9 |
-| `just ingest-repos` | **done** — 242 public non-fork repositories, from the cache | Saga 1, step 11 |
+| `just ingest-repos` | **done** — 251 public repositories: non-forks, and forks a post names | Saga 1, steps 11-12 |
 | `just ingest-videos` | **done** — 84 videos, 33 with scripts from `shorts` | Saga 1, step 11 |
-| `just ingest-rest` | the concept graph | Saga 1, step 12 |
-| `just report` | coverage, gated on orphans and dead links | Saga 1, step 13 |
+| `just ingest-rest` | the concept graph | Saga 1, step 13 |
+| `just report` | coverage, gated on orphans and dead links | Saga 1, step 14 |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |
 

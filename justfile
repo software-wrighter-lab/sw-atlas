@@ -23,7 +23,8 @@ ingest-blog *args:
 ingest-campus *args:
     cargo run --quiet -p atlas-ingest -- campus ../sw-campus --out build/corpus/campus.ron {{args}}
 
-# Public, non-fork repositories from the committed GitHub cache (no network).
+# Public repositories from the committed GitHub cache (no network): every
+# non-fork, plus the forks a post or campus place links to.
 ingest-repos *args:
     cargo run --quiet -p atlas-ingest -- repos cache/github-repos.json --out build/corpus/repos.ron {{args}}
 
@@ -35,16 +36,16 @@ ingest-videos *args:
 # Build every corpus that has an ingester.
 ingest: ingest-blog ingest-campus ingest-repos ingest-videos
 
-# Where the remaining source lands (atlas-foundation step 12).
+# Where the remaining source lands (atlas-foundation step 13).
 ingest-rest:
     @echo "just ingest-rest: not implemented yet." >&2
-    @echo "The concept graph lands in step 012." >&2
+    @echo "The concept graph lands in step 013." >&2
     @exit 1
 
-# Regenerate the coverage report and gate on orphans and dead links (step 13).
+# Regenerate the coverage report and gate on orphans and dead links (step 14).
 report:
     @echo "just report: not implemented yet." >&2
-    @echo "Lands in atlas-foundation step 013 (coverage-report): it writes" >&2
+    @echo "Lands in atlas-foundation step 014 (coverage-report): it writes" >&2
     @echo "docs/reference/coverage.md and exits non-zero on any orphan" >&2
     @echo "resource or broken URL." >&2
     @exit 1

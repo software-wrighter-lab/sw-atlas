@@ -5,21 +5,23 @@
 //! with topics and a language, a fork, one whose homepage is a live demo,
 //! and one GitHub knows almost nothing about.
 
-use atlas_core::{Provenance, RelationKind, ResourceKind};
+use atlas_core::{Provenance, RelationKind, ResourceId, ResourceKind};
 use atlas_corpus::{Corpus, validate};
+use std::collections::BTreeSet;
 use std::path::PathBuf;
 
-fn ingest(relative: &str) -> Corpus {
+fn ingest(relative: &str, declared: &[&str]) -> Corpus {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(relative);
-    atlas_repos::ingest(&path).expect("the cache ingests")
+    let declared: BTreeSet<ResourceId> = declared.iter().map(|id| ResourceId::new(*id)).collect();
+    atlas_repos::ingest(&path, &declared).expect("the cache ingests")
 }
 
 fn fixture() -> Corpus {
-    ingest("tests/fixtures/github-repos.json")
+    ingest("tests/fixtures/github-repos.json", &[])
 }
 
 #[test]
-fn forks_are_excluded_and_nothing_else_is() {
+fn undeclared_forks_are_excluded_and_nothing_else_is() {
     let corpus = fixture();
     let repos: Vec<&str> = corpus
         .resources
@@ -82,11 +84,46 @@ fn a_repository_github_knows_little_about_is_still_a_resource() {
 fn the_committed_cache_holds_242_public_non_fork_repositories() {
     // Pinned on purpose: refreshing the cache is a corpus change, and its
     // commit updates this number with the new count.
-    let corpus = ingest("../../cache/github-repos.json");
+    let corpus = ingest("../../cache/github-repos.json", &[]);
     let repos = corpus
         .resources
         .iter()
         .filter(|r| r.kind == ResourceKind::Repo);
     assert_eq!(repos.count(), 242);
     assert!(validate(&corpus).is_empty());
+}
+
+#[test]
+fn a_fork_the_owner_wrote_about_is_kept() {
+    let corpus = ingest(
+        "tests/fixtures/github-repos.json",
+        &["repo:sw-embed/bmp280"],
+    );
+    let fork = corpus
+        .resources
+        .iter()
+        .find(|r| r.id.as_str() == "repo:sw-embed/bmp280")
+        .expect("declared by a post, so kept");
+    assert_eq!(fork.summary, "Someone else's work, forked");
+}
+
+#[test]
+fn the_nine_forks_the_blog_names_are_all_in_the_committed_cache() {
+    let named = [
+        "repo:softwarewrighter/bdh",
+        "repo:softwarewrighter/MesaOS",
+        "repo:softwarewrighter/viz-hrm-ft",
+        "repo:sw-embed/bmp280",
+        "repo:sw-embed/sw-cor24-pascal",
+        "repo:sw-fun/tt-rs",
+        "repo:sw-game-dev/game-mcp-poc",
+        "repo:sw-ml-study/Repeated-Sampling",
+        "repo:sw-music-tools/rank-wav-rs",
+    ];
+    let corpus = ingest("../../cache/github-repos.json", &named);
+    let repos = corpus
+        .resources
+        .iter()
+        .filter(|r| r.kind == ResourceKind::Repo);
+    assert_eq!(repos.count(), 251, "242 non-forks and the nine");
 }

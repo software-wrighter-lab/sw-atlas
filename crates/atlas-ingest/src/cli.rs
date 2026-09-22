@@ -23,7 +23,8 @@ list, and `repo_url`, `video_url`, `demo_url` and `papers` are authored
 cross-corpus relations. All of them are recorded as Declared.
 
 The repos subcommand reads cache/github-repos.json, never the network, and
-keeps public repositories that are not forks: metadata only, no source.
+keeps public repositories that are not forks, plus the forks a post or
+campus place links to: metadata only, no source.
 The videos subcommand takes every video the blog declares and fills in its
 script from the shorts repository: Five ML Concepts episodes by rule, every
 other video only through a confirmed row in sources/video-shorts.ron.
@@ -79,11 +80,18 @@ pub enum Source {
         /// Path to a checkout of the sw-campus repository.
         repo: PathBuf,
     },
-    /// Public, non-fork repositories, from the committed GitHub cache.
+    /// Public repositories from the committed GitHub cache: every
+    /// non-fork, and the forks a post or campus place links to.
     Repos {
         /// The cache `scripts/fetch-repos` writes.
         #[arg(default_value = "cache/github-repos.json")]
         cache: PathBuf,
+        /// A blog checkout, read for the repositories its posts link to.
+        #[arg(long, default_value = "../blog")]
+        blog: PathBuf,
+        /// A campus checkout, read for the repositories its places link to.
+        #[arg(long, default_value = "../sw-campus")]
+        campus: PathBuf,
     },
     /// Every video the blog declares, joined to its script in `shorts`.
     Videos {

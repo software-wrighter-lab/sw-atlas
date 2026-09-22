@@ -14,8 +14,10 @@ the fields `atlas-ingest repos` reads: `full_name`, `description`,
 | | Count |
 |---|---:|
 | Repositories in the cache | 283 |
-| ... forks, excluded by the ingester | 41 |
-| ... public, not forks: the corpus | 242 |
+| ... not forks, all kept | 242 |
+| ... forks | 41 |
+| ... forks a blog post links to, kept | 9 |
+| In the corpus | 251 |
 | Organisations and users represented | 15 |
 
 Fetched 2026-09-19 (the file's timestamp; the script prints the time but
@@ -27,8 +29,8 @@ purpose, never from the gate: a changed cache is a corpus change, and
 belongs in its own commit that states the new counts and updates the
 count pinned in `crates/atlas-repos/tests/repos.rs`.
 
-**What is kept.** The cache keeps forks, so it remains a complete record
-of what GitHub reported. The ingester drops them, because a fork is
-someone else's work until the owner says otherwise. Nine forks are linked
-from blog posts and so exist in the blog corpus as stubs with no GitHub
-metadata; see the step 011 summary.
+**What is kept.** The cache keeps every fork, so it remains a complete
+record of what GitHub reported. The ingester keeps a fork only when the
+owner has written about it -- when a blog post or campus place links to
+it (owner decision, 2026-09-22). The other 32 forks are someone else's
+work sitting in an owner's account, and stay out.

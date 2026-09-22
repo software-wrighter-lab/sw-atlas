@@ -141,7 +141,7 @@ used to add a junk resource, which the blog reader now ignores.)
 **The 51 are not orphans.** Every one of them is linked from at least one
 blog post, whose authored abstract, keywords and tags describe it; the
 post is how a visitor finds the video today. The coverage report (step
-013) should count a video as covered when a post declares it, and report
+014) should count a video as covered when a post declares it, and report
 "has its own script" as a separate, informative column rather than as a
 gate.
 
