@@ -1,8 +1,9 @@
 number = 12
 slug = "declared-forks"
-status = "in-progress"
+status = "completed"
 description = "Owner decision, 2026-09-22: include a GitHub fork in the repository corpus wh..."
 role = "production"
 context_files = []
 created_at = "2026-09-22T10:29:54"
-commits = []
+completed_at = "2026-09-22T10:32:55"
+commits = ["22f5b2fa560be790df381b1926cf3ba902feb7b7"]
