@@ -103,10 +103,10 @@ vendored copy. Nothing here edits them.
 |---|---|---|---|
 | decision contract: Choice, Noul, Scale; confidence, margin | `lib/decision.mlpl` | vendor, hash-pinned | the typed output record, already tested |
 | hashed / exact-vocab featurizer, masked mean pool, Choice trainer | `lib/text.mlpl`, `lib/choice_model.mlpl` | vendor, hash-pinned | the trainer, and no Python (plan section 12.1) |
-| Rust forward pass with 1e-9 parity against MLPL | `crates/tdm-model` (`features.rs`, `model.rs`) | git dependency pinned to a rev, or port about 250 lines into a new `atlas-tdm` crate | its abstraction gate keeps demo identifiers out of this crate |
+| Rust forward pass with 1e-9 parity against MLPL | `crates/tdm-model` (`features.rs`, `model.rs`) | git dependency at tag `tdm-v0.1.0`, whose contract is written up upstream | its abstraction gate keeps demo identifiers out of this crate |
 | escalation policy: Act / NoneApplies / Escalate on min_known, confidence, margin | `crates/tdm-model/src/responder.rs` | copy the shape into the policy crate | this is the matcher-or-model arbitration |
 | bundle format with an embedded parity set | `crates/tdm-model/src/bundle.rs` | extend into `snapshot/model/tdm.json` | trainer/browser drift fails a test |
-| trace schema and validator; rejects output text that was not offered | `schemas/decision-trace-v1`, `crates/tdm-trace` | git dependency | "why this answer?" (plan Saga 9 step 5) at no cost |
+| trace schema and validator; rejects output text that was not offered | `schemas/decision-trace-v1`, `crates/tdm-trace` | git dependency at tag `tdm-v0.1.0` | "why this answer?" (plan Saga 9 step 5) at no cost |
 | Yew chat plus trace panel, training timeline | `crates/tdm-web` | pattern, not a dependency | the site's UI belongs to sw-campus / blog |
 | "freeze labels before training data exists" | its probes discipline | adopt as a rule | the thing that makes the comparison honest |
 
@@ -259,11 +259,14 @@ section 10 carries it:
    not a replacement for the design.
 
 Work order filed in
-[`demo-decision-model-requests.md`](demo-decision-model-requests.md), asking for
-(a) PR05 dynamic choice sets, because the card rerank head needs exactly
-that trainer, and (b) a small tagged release of `tdm-model` / `tdm-trace`
-to pin against. Its NV01 ("demo 02: campus navigation, `lib/` unchanged")
-is effectively this project, so the finding flows both ways.
+[`demo-decision-model-requests.md`](demo-decision-model-requests.md), which
+asked for (a) PR05 dynamic choice sets, because the card rerank head needs
+exactly that trainer, and (b) a tagged release of `tdm-model` /
+`tdm-trace` to pin against. Both were answered on 2026-09-22: the tag is
+`tdm-v0.1.0`, and PR05 is upstream's to build, so step 3 of the saga waits
+on it rather than writing a second one. Its NV01 ("demo 02: campus
+navigation, `lib/` unchanged") is effectively this project, so the finding
+flows both ways.
 
 ## 8. The first measurement
 

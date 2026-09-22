@@ -1,0 +1,8 @@
+number = 16
+slug = "upstream-crate-tag"
+status = "in-progress"
+description = "demo-decision-model answered both sw-atlas requests on 2026-09-22, relayed by..."
+role = "meta"
+context_files = []
+created_at = "2026-09-22T11:58:57"
+commits = []
