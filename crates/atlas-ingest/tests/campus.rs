@@ -67,7 +67,7 @@ fn the_place_kind_equals_its_depth_so_it_need_not_be_stored() {
 #[test]
 fn the_1442_is_not_a_place_in_snapshot_a() {
     // Reserved for snapshot B. moe-microscope's incremental-learning
-    // experiment and this project's Saga 6 both spend it exactly once.
+    // experiment and this project's SN01 (Saga 7) both spend it exactly once.
     let corpus = corpus();
     let named: Vec<&str> = corpus
         .resources
@@ -79,11 +79,11 @@ fn the_1442_is_not_a_place_in_snapshot_a() {
 }
 
 #[test]
-fn but_the_1442_is_mentioned_in_prose_and_saga_6_must_account_for_it() {
+fn but_the_1442_is_mentioned_in_prose_and_sn01_must_account_for_it() {
     // The 1130 wing's arrival story lists the peripherals plugged into the
     // machine, and the 1442 is one of them. So the withheld knowledge is
     // the *exhibit and its demo*, not the string: a retrieval tier reading
-    // catalog text can match the word today. Saga 6 has to ask where the
+    // catalog text can match the word today. SN01 has to ask where the
     // card reader plays music, not whether "1442" appears anywhere.
     let corpus = corpus();
     let mentions = corpus
@@ -91,10 +91,7 @@ fn but_the_1442_is_mentioned_in_prose_and_saga_6_must_account_for_it() {
         .iter()
         .filter(|r| r.body.contains("1442"))
         .count();
-    assert_eq!(
-        mentions, 1,
-        "one story mentions it; see docs/plan.md, Saga 6"
-    );
+    assert_eq!(mentions, 1, "one story mentions it; see docs/plan.md, SN01");
 }
 
 #[test]

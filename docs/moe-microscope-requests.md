@@ -11,6 +11,13 @@ and [`needle.md`](needle.md).
 
 ## SAN01 — is no-FFN real? (highest value, blocks sw-atlas Saga 5)
 
+**Status, 2026-09-22: answered.** moe-microscope ran it as SAN01 and SAN01b
+(its `docs/experiments/SAN01.md`): no-FFN matches or beats its dense twin on
+every held-out column, and the matchers still win on paraphrases. The
+"Saga 5" below is now sw-atlas Saga 6 (AT01): the hybrid docent was
+inserted as Saga 3 and later sagas shifted by one ([`plan.md`](plan.md)
+section 10).
+
 **Ask.** Take CD01 or CD01b and run a three-way comparison at matched
 stored parameters on the campus docent corpus that is already in that
 repository:

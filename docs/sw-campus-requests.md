@@ -34,8 +34,8 @@ an ordinary content commit, and say so in the commit message.
 
 **Why.** The 1442's absence from snapshot A was deliberate, and it has
 since become load bearing for two repositories. moe-microscope reserved it
-as the snapshot A to B incremental-learning experiment; sw-atlas Saga 3 and
-Saga 6 both use it as the one piece of the world that a trained model
+as the snapshot A to B incremental-learning experiment; sw-atlas Sagas 4 and
+7 (NP01, SN01) both use it as the one piece of the world that a trained model
 provably has never seen. It is the only clean held-out resource in the
 entire corpus, and it can only be spent once.
 
@@ -60,7 +60,7 @@ that single mention so a later reader does not mistake it for a leak.
 
 ## EASEL-CONTRACT — what the Atlas runtime will offer (advance notice)
 
-**Not a request yet.** sw-atlas Saga 8 produces `atlas-runtime`, a Rust
+**Not a request yet.** sw-atlas Saga 9 produces `atlas-runtime`, a Rust
 crate a Yew app mounts with a role parameter. The campus docent saga's
 steps 4 and 5 currently plan a `Predictor` trait with a deterministic
 matcher behind it and an `mlpl-wasm` bridge in front. Those two designs
@@ -72,14 +72,15 @@ What the runtime intends to provide, so the campus can design against it:
   in the museum) that changes vocabulary and defaults, not knowledge.
 - A ranked list of resources with calibrated confidences, plus an abstain
   signal, rather than a single answer.
-- A "why this answer?" payload: matcher signals at A0, nearest neighbours
-  and cosine margins at A2, the decoded record at A3.
+- A "why this answer?" payload: matcher signals at A0, the hybrid docent's
+  candidates, typed decisions and policy rule (sw-atlas Saga 3, HT01),
+  nearest neighbours and cosine margins at A2, the decoded record at A3.
 - Progressive capability, starting at a deterministic matcher in under
   10 MiB that works on any device, promoted only when the machine can
   afford it and demoted the moment it cannot. The campus page must render
   and be useful before Atlas has loaded anything.
 
-sw-atlas will send a concrete interface proposal when Saga 8 opens.
+sw-atlas will send a concrete interface proposal when Saga 9 opens.
 
 ## Not asked for
 

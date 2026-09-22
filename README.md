@@ -115,6 +115,17 @@ it without anything having inferred the connection.
 | CD01b docent + word vectors | 0.407 | 0.407 | 0.30 | A2 |
 | CD01 dense docent | 0.296 | 0.481 | 0.30 | A2 |
 
+Read the columns rather than the winner: the matchers find destinations
+well and read intent badly, and every trained docent was asked to replace
+the matcher rather than help it. So the next model is not a rival. In the
+hybrid docent (Saga 3, HT01), the matcher proposes candidates, a typed
+decision model reused from
+[`demo-decision-model`](https://github.com/sw-ml-study/demo-decision-model)
+decides intent and reranks those candidates, and ordinary Rust decides
+which one to trust. It ships only if the combination beats the matcher by
+the same 20 points. The reasoning is in
+[`docs/hybrid-docent.md`](docs/hybrid-docent.md).
+
 Progress is driven by [agentrail](CLAUDE.md) sagas. `agentrail status`
 says where the current one stands; [`docs/sagas.md`](docs/sagas.md) holds
 the queue. The active saga is `atlas-foundation`: the corpus and the
@@ -150,10 +161,10 @@ the step that lands it, so this list stays honest:
 |---|---|---|
 | `just ingest-blog` | **done** — 124 posts from the blog's front matter | Saga 1, step 8 |
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, step 9 |
-| `just ingest-rest` | repository and video metadata, concepts | Saga 1, steps 10-11 |
-| `just report` | coverage, gated on orphans and dead links | Saga 1, step 12 |
+| `just ingest-rest` | repository and video metadata, concepts | Saga 1, steps 11-12 |
+| `just report` | coverage, gated on orphans and dead links | Saga 1, step 13 |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
-| `just snapshot` | write the publishable snapshot with per-file hashes | Saga 8 |
+| `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |
 
 No Python and no hand-written JavaScript, anywhere: the pipeline is Rust
 and sw-MLPL, and the browser runtime will be Rust compiled to WebAssembly.

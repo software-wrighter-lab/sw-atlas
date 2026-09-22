@@ -46,11 +46,26 @@ Not started. Sizes are the plan's estimate, not a commitment.
   harness before there is anything to evaluate: held-out authored
   questions, a cross-corpus paraphrase set, off-topic and ambiguous
   questions, and the metric set (intent, destination, top-3, MRR,
-  unsupported recall, ambiguous top-2, ECE, Brier, latency, bytes). Exit:
-  the number every later saga must beat, measured over ~300 resources.
-  Sagas 1 and 2 together are a useful product with no model in it.
+  unsupported recall, ambiguous top-2, ECE, Brier, latency, bytes), plus
+  A0-oracle@k, the ceiling for Saga 3's reranker. Frozen sets are
+  labelled and hashed before any training template exists; the paraphrase
+  set holds at least 300 rows. Exit: the number every later saga must
+  beat, measured over ~300 resources. Sagas 1 and 2 together are a useful
+  product with no model in it.
 
-- **Saga 3 `needle-probe` (NP01).** Decisive, and more expensive than it
+- **Saga 3 `hybrid-tdm` (HT01).** The matcher and a model stop being
+  rivals. A0 proposes candidates; a typed decision model reused from
+  `demo-decision-model` decides intent, resource kind and Nouls
+  (off-topic, follow-up, meta) and reranks the candidates by card; Rust
+  policy arbitrates and quotes catalog text into fixed frames. Five steps:
+  vendor the TDM pieces hash-pinned, train the heads in sw-MLPL, the card
+  rerank head, the policy crate with meta answers computed from the
+  catalog, and an evaluation of A0, A0-oracle@k, model alone, hybrid and
+  ablations with paired intervals. Exit: HT01 rows, and the hybrid ships
+  only if it clears the MB02 bar. Reasoning in
+  [`hybrid-docent.md`](hybrid-docent.md).
+
+- **Saga 4 `needle-probe` (NP01).** Decisive, and more expensive than it
   was: the no-Python decision (plan.md section 12.1) means the probe needs
   a Rust forward pass over the SAN before it can measure anything. Five
   steps: determine whether the published weights are reachable from Rust at
@@ -60,54 +75,63 @@ Not started. Sizes are the plan's estimate, not a commitment.
   answer to "can a tiny no-FFN model beat 284 keyword signals on this
   corpus?", and the shape of everything after it.
 
-- **Saga 4 `atlas-questions`.** Templates over aliases and concepts,
+- **Saga 5 `atlas-questions`.** Templates over aliases and concepts,
   teacher-generated vague and adversarial phrasings, held-out resources for
   generalisation, ambiguity as a distribution, provenance on every row, and
   a leakage check by hash against the frozen evaluation sets.
 
-- **Saga 5 `atlas-model` (AT01).** One encoder, two heads: the contrastive
+- **Saga 6 `atlas-model` (AT01).** One encoder, two heads: the contrastive
   retrieval head (A2) and the typed decision decoder (A3), the tokenizer,
   the export with depth shards, and an inference twin that asserts parity
   with the trained model on every corpus row.
 
-- **Saga 6 `new-resources` (SN01).** Does a new exhibit need a retrain?
+- **Saga 7 `new-resources` (SN01).** Does a new exhibit need a retrain?
   The 1442 asked of the trained model, zero-shot first; finetuning and the
   forgetting measurements only if zero-shot fails. Decides the nightly
   pipeline's design by measurement.
 
-- **Saga 7 `calibration` (CB01).** Reliability diagram, ECE and Brier
+- **Saga 8 `calibration` (CB01).** Reliability diagram, ECE and Brier
   before any correction; temperature scaling fitted on held-out data and
   the before/after reported (arXiv:1706.04599 is both the evidence that
   the problem exists and the cheapest fix); the abstention threshold; and
   the calibration report published in the snapshot manifest so the UI can
   show it.
 
-- **Saga 8 `atlas-runtime`.** The browser crate: worker, hash-keyed loader
+- **Saga 9 `atlas-runtime`.** The browser crate: worker, hash-keyed loader
   over Cache API/OPFS with Range fetches, the A0-A4 ladder with its
   capability probe and demotion, budget tests in a headless browser, and
   the "why this answer?" panel.
 
-- **Saga 9 `atlas-in-the-wild`.** The campus easel and the blog librarian
+- **Saga 10 `atlas-in-the-wild`.** The campus easel and the blog librarian
   mount the same runtime with different role data; one snapshot, three
   personas, and a test that the same question from two roles resolves to
   the same resource.
 
-- **Saga 10 `atlas-nightly`.** Change classification, index rebuild as the
+- **Saga 11 `atlas-nightly`.** Change classification, index rebuild as the
   normal path, training as the exception, the regression gate, and
   per-file hashes so a repeat visitor transfers only what changed.
 
-- **Saga 11 `atlas-prose` (GN01).** A4: a small opt-in generator that
+- **Saga 12 `atlas-prose` (GN01).** A4: a small opt-in generator that
   receives retrieved facts only, for the questions that genuinely need
   synthesis. Never downloaded before it is asked for.
 
 ## Decisions taken mid-saga
 
+- **2026-09-22, the hybrid docent.** The repository owner adopted
+  [`hybrid-docent.md`](hybrid-docent.md): the deterministic matcher and a
+  typed decision model from `demo-decision-model` are combined rather than
+  compared as rivals, and the combination is inserted as Saga 3 (HT01)
+  ahead of the Needle probe. Later sagas shift up by one; milestone IDs do
+  not change. Requests for the PR05 card scorer and a pinned revision are
+  in [`demo-decision-model-requests.md`](demo-decision-model-requests.md).
+  Recorded in Saga 1 as step 010, `hybrid-tdm-decision`.
+
 - **2026-09-18, no Python.** Rust and/or sw-MLPL only, decided by the
   repository owner. Needle's architecture is adopted; its JAX toolchain is
   not. Recorded with its cost in [`plan.md`](plan.md) section 12.1 and
-  [`needle.md`](needle.md) section 5. The visible consequence is Saga 3
+  [`needle.md`](needle.md) section 5. The visible consequence is Saga 4
   above: the cheap measurement is gone, and the Rust inference path that
-  Saga 8 would have written is pulled forward to replace it.
+  Saga 9 would have written is pulled forward to replace it.
 - **2026-09-18, published grounding.** The Saw #12 draft in `../blog`
   cites five papers that the plan had been missing. The no-FFN decision now
   rests on arXiv:1907.01470 and arXiv:2311.01906 rather than on a vendor's

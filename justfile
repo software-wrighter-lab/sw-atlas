@@ -26,17 +26,17 @@ ingest-campus *args:
 # Build every corpus that has an ingester.
 ingest: ingest-blog ingest-campus
 
-# Where the remaining sources land (atlas-foundation steps 10 and 11).
+# Where the remaining sources land (atlas-foundation steps 11 and 12).
 ingest-rest:
     @echo "just ingest-rest: not implemented yet." >&2
-    @echo "Repository and video metadata land in step 010, the concept" >&2
-    @echo "graph in step 011." >&2
+    @echo "Repository and video metadata land in step 011, the concept" >&2
+    @echo "graph in step 012." >&2
     @exit 1
 
-# Regenerate the coverage report and gate on orphans and dead links (step 7).
+# Regenerate the coverage report and gate on orphans and dead links (step 13).
 report:
     @echo "just report: not implemented yet." >&2
-    @echo "Lands in atlas-foundation step 007 (coverage-report): it writes" >&2
+    @echo "Lands in atlas-foundation step 013 (coverage-report): it writes" >&2
     @echo "docs/reference/coverage.md and exits non-zero on any orphan" >&2
     @echo "resource or broken URL." >&2
     @exit 1

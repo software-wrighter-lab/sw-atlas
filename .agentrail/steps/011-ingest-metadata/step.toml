@@ -1,6 +1,6 @@
-number = 10
+number = 11
 slug = "ingest-metadata"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md section 8 first. Write 'atlas-ingest repos' and 'atlas-inge..."
 role = "production"
 context_files = []

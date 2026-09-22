@@ -93,6 +93,7 @@ the Guide uses.
 | `sw-campus` | campus content and UI; mounts the runtime as Guide/Docent | the model, the index |
 | `blog` | posts and front matter; mounts the runtime as Librarian | the model, the index |
 | `sw-os-ml` | residency and known-next-use in a kernel | anything in a browser |
+| `demo-decision-model` | the typed decision primitives, their trainer, the Rust forward pass and trace format | the corpus, the matcher, the policy that arbitrates between them |
 
 Two rules keep this honest. `moe-microscope` never grows a corpus; sw-atlas
 never invents a mechanism. When a mechanism proves out in the microscope it
@@ -119,7 +120,7 @@ intention.
    reach it as cards in its context, the way Needle receives a tool list.
    A status change (`planned` -> `working`), a new URL, an edited abstract
    rebuilds the index and retrains nothing. Whether a *new resource* also
-   retrains nothing is the open question Saga 6 answers first.
+   retrains nothing is the open question Saga 7 answers first.
 3. **The page never waits for Atlas.** Campus content, blog content and
    demos render first. Atlas arrives progressively and can be absent.
 4. **A0 always works and is never deleted.** The deterministic matcher is a
@@ -445,6 +446,12 @@ measured row in the results table and a `just check`-clean commit. IDs
 follow the `moe-microscope` convention so the two scoreboards can be read
 side by side.
 
+Saga numbers shifted by one on 2026-09-22, when the hybrid docent was
+inserted as Saga 3. The milestone IDs (MB02, HT01, NP01, AT01, SN01, CB01,
+GN01) did not change, and are the stable way to refer to a saga.
+[`needle.md`](needle.md) and requests already answered keep the numbers
+they were written with.
+
 ### Saga 1 — foundation (`atlas-schema`)
 
 1. **schema.** `atlas-core` crate: the five types, RON serde, a canonical
@@ -488,7 +495,12 @@ evaluate.
    set (no alias appearing verbatim), off-topic questions, ambiguous
    questions with expected sets. Reports intent accuracy, destination
    accuracy, top-3, MRR, unsupported recall, ambiguous top-2, ECE, Brier,
-   p50/p95 latency, and bytes in all five senses.
+   p50/p95 latency, and bytes in all five senses. Also A0-oracle@k: the
+   share of questions whose answer is in the matcher's top k, which is
+   the ceiling for Saga 3's reranker. Every frozen set is labelled and
+   hashed before any training template exists, and the paraphrase set
+   holds at least 300 rows: at 54 rows the 95% interval on one accuracy
+   is about ±13 points, too wide to resolve a +20 bar.
 3. **scoreboard.** `docs/reference/results.md`, seeded with the transferred
    rows:
 
@@ -505,11 +517,55 @@ milestone must beat.** Adopt `moe-microscope`'s bar unchanged: +20 points
 of paraphrase destination accuracy over the stronger matcher, +20 points of
 intent accuracy, unsupported recall ≥ 0.8.
 
-### Saga 3 — the Needle probe (**NP01**)
+### Saga 3 — the hybrid docent (`hybrid-tdm`, **HT01**)
+
+Adopted 2026-09-22 from [`hybrid-docent.md`](hybrid-docent.md), which holds
+the reasoning. Every trained docent so far was asked to do the matcher's
+job and lost; the matchers recall destinations well and read intent badly.
+So the matcher and a model stop being rivals. A0 proposes candidate
+resources; a typed decision model reused from
+[`demo-decision-model`](https://github.com/sw-ml-study/demo-decision-model) decides
+intent, the resource kind wanted and a handful of Nouls (off-topic,
+follow-up, meta), and reranks the matcher's candidates by scoring their
+cards; ordinary Rust policy arbitrates, and the answer is a frame with
+catalog text quoted into it. Pooled encoder, typed heads, no FFN: the zero-
+layer rung of §6's depth ladder, which SAN01 showed loses nothing against
+its dense twin.
+
+1. **vendor.** The TDM decision contract, featurizer and Choice trainer
+   (`lib/decision.mlpl`, `lib/text.mlpl`, `lib/choice_model.mlpl`) vendored
+   hash-pinned; `tdm-trace` and the `tdm-model` forward pass pinned to a
+   tagged revision or ported into an `atlas-tdm` crate with the parity set.
+2. **heads.** Intent, kind and Noul heads trained in sw-MLPL on Saga 2's
+   training rows and templates, never on its frozen sets.
+3. **rerank.** A card-scoring head, `f(h_query, h_card)`, over the
+   matcher's top-k, so that a resource published after training can still
+   be chosen. Depends on the PR05 request in
+   [`demo-decision-model-requests.md`](demo-decision-model-requests.md), or
+   is written here if that has not landed.
+4. **policy.** The arbitration crate: act, rerank, offer alternatives or
+   abstain, with thresholds fitted on validation and carried as data; meta
+   answers (counts, newest, "why did you send me there?") computed from the
+   catalog and the trace, never from the weights.
+5. **eval.** Arms A0, A0-oracle@k, TDM alone, hybrid, and the hybrid's
+   ablations, on every frozen set; paired McNemar and a bootstrap interval
+   on each margin; confidently-wrong rate; the questions A0 got right and
+   the hybrid got wrong, listed by text.
+
+Exit: HT01 rows in the scoreboard. The hybrid ships only against the bar
+in Saga 2's exit, with the interval's lower bound above zero, inside A1's
+budget. If it misses, that is the published result and A0 keeps serving.
+If A0-oracle@k shows the matcher is not proposing the right answers, the
+finding is that a second candidate source (A1 retrieval) comes first.
+
+### Saga 4 — the Needle probe (**NP01**)
 
 The cheapest decisive experiment still available after the no-Python
 decision (§12.1). The question it answers gates everything after it: *can a
-tiny no-FFN model beat 284 keyword signals on this corpus?*
+tiny no-FFN model beat 284 keyword signals on this corpus?* Since Saga 3,
+it is also measured against the hybrid: if HT01 clears the bar, a Needle
+encoder is a candidate replacement for the encoder *inside* the hybrid,
+not a replacement for the design.
 
 1. **weights-or-not.** Determine whether Needle's published weights are
    reachable from Rust at acceptable cost: `needle.pkl` is 52 MB of pickled
@@ -522,7 +578,7 @@ tiny no-FFN model beat 284 keyword signals on this corpus?*
    embedding, ZCRMSNorm, gated residual, GQA with RoPE, cross-attention,
    the contrastive head, and a dequant path for INT8 and INT4. Written
    against the design notes in `simple_attention_networks.md`, which are
-   specific enough to reimplement from. This is Saga 8 work pulled forward,
+   specific enough to reimplement from. This is Saga 9 work pulled forward,
    not extra work.
 3. **probe.** With whatever weights step 1 secured, score the contrastive
    head (recall@1..5) and, if there is a decoder path, exact match, on
@@ -540,7 +596,7 @@ Exit: rows in the scoreboard for the matcher, the retrieval head and, if
 reached, the decoder; and a recorded answer to the gating question. A *no*
 is as valuable as a yes and is published either way.
 
-### Saga 4 — question generation (`atlas-questions`)
+### Saga 5 — question generation (`atlas-questions`)
 
 1. **templates.** Per resource and concept: navigation, explanation,
    status, story, recommendation, find-resource and compare templates over
@@ -564,17 +620,17 @@ of 100 teacher rows recorded with its error rate. Needle's guidance of ~120
 examples per tool sets the floor: ~300 resources means ~36,000 rows at
 minimum, which the templates alone supply.
 
-### Saga 5 — the model (**AT01**, retrieval and decision in one)
+### Saga 6 — the model (**AT01**, retrieval and decision in one)
 
 The merged milestone: what were separate embedding and decision tiers are
 two heads on one encoder.
 
 1. **tokenizer.** Corpus-fitted BPE, 8,192, committed with a hash.
 2. **train-or-finetune.** Per open decision 1: either finetune upstream
-   Needle on the Saga 4 corpus, or train the ported architecture in-house.
+   Needle on the Saga 5 corpus, or train the ported architecture in-house.
    Same corpus, same eval, either way.
 3. **retrieval-head (A2).** Contrastive head scored as recall@1..5 and MRR
-   against MB02 and against Saga 3's unmodified-Needle row.
+   against MB02 and against Saga 4's unmodified-Needle row.
 4. **decision-head (A3).** Typed `Decision` decoding with a constrained
    grammar, scored on exact match, and only for the intents that need
    arguments.
@@ -585,9 +641,9 @@ two heads on one encoder.
 Exit: AT01 in the scoreboard against MB02, EM-floor and NP01. Under budget:
 A2 inside 64 MiB and 200 ms on CPU-only WASM; A3 inside 128 MiB and 500 ms.
 
-### Saga 6 — new resources without retraining (**SN01**)
+### Saga 7 — new resources without retraining (**SN01**)
 
-Saga 3 asked this of a model that had never seen the corpus. Ask it now of
+Saga 4 asked this of a model that had never seen the corpus. Ask it now of
 the trained model, properly, with the machinery to act on the answer.
 
 ```
@@ -622,7 +678,7 @@ for leakage or deletes it as noise.
 Exit: a recorded answer and, whichever branch it takes, the nightly
 pipeline's design decided by measurement rather than assumption.
 
-### Saga 7 — calibration (**CB01**)
+### Saga 8 — calibration (**CB01**)
 
 The most Jev-shaped part, and the one that makes the whole thing honest.
 Needle optimises exact match; it does not optimise knowing when it is
@@ -650,7 +706,7 @@ confidence bucket   n     accuracy
 Exit: ECE recorded; a 0.9 answer is right about 90% of the time or the
 number is published showing that it is not.
 
-### Saga 8 — the runtime crate (`atlas-runtime`)
+### Saga 9 — the runtime crate (`atlas-runtime`)
 
 1. **worker.** Inference off the main thread; message protocol.
 2. **loader.** Manifest, hash-keyed Cache API/OPFS, Range fetch per shard,
@@ -665,7 +721,7 @@ number is published showing that it is not.
 Exit: one crate that a Yew app mounts in a few lines, with a role
 parameter, that degrades to A0 on a 2015 laptop.
 
-### Saga 9 — integration (`atlas-in-the-wild`)
+### Saga 10 — integration (`atlas-in-the-wild`)
 
 1. **campus.** The Guide/Docent easel mounts `atlas-runtime`. Replaces the
    mockup matcher only when the bar is met; `?atlas=0` hides it.
@@ -676,9 +732,9 @@ parameter, that degrades to A0 on a 2015 laptop.
 
 Exit: two sites, one snapshot, one runtime, three personas.
 
-### Saga 10 — nightly (`atlas-nightly`)
+### Saga 11 — nightly (`atlas-nightly`)
 
-Shaped by Saga 6. If new resources work without retraining, the normal path
+Shaped by Saga 7. If new resources work without retraining, the normal path
 is an index rebuild and training is the exception.
 
 ```
@@ -709,7 +765,7 @@ Rejection is a normal outcome and must leave yesterday's snapshot serving.
 Exit: a night that adds a post and publishes only the changed files; a
 night that rejects a regression and says why.
 
-### Saga 11 — A4, optional prose (**GN01**)
+### Saga 12 — A4, optional prose (**GN01**)
 
 Only now, and only opt-in. A small instruct model in a worker that receives
 *retrieved facts only* and is instructed to use nothing else, for the
@@ -754,7 +810,7 @@ exactly the kind of claim the microscope exists to check, at a scale where
 every tensor can be printed. The campus docent corpus is already there, and
 CD01/CD01b are dense-FFN models trained on it: strip the FFN, keep the
 budget, and report what changes. If no-FFN loses on this corpus, Atlas
-needs to know before Saga 5, not after.
+needs to know before Saga 6, not after.
 
 **MOE-RETURN — the fallback.** Mixture-of-experts leaves the Atlas critical
 path because there are no FFNs to route among (§6). That is a bet on
@@ -786,18 +842,18 @@ Flagged rather than assumed. Work proceeds on the stated default.
    State the price, because a resolved decision that hides its own cost is
    worse than an open one:
 
-   - **Saga 3 is no longer a one-day probe.** Running upstream Needle
+   - **Saga 4 is no longer a one-day probe.** Running upstream Needle
      unmodified was cheap precisely because someone else had written the
      runtime. A Rust forward pass over the published weights has to be
      written first — an encoder-decoder with no FFN is attention, a norm,
      a gated residual, RoPE and a dequant path, so it is a bounded job
      rather than a small one, and it is work that was going to be done in
-     Saga 8 regardless, pulled forward.
+     Saga 9 regardless, pulled forward.
    - **The published checkpoint is a Python pickle.** Loading
      `needle.pkl` from Rust is the first obstacle, and it may be cheaper
      to read the Hugging Face copy in whatever tensor format it offers, or
      to treat the weights as unavailable and train from scratch on this
-     corpus. Saga 3's first step is to find out which, and to say so.
+     corpus. Saga 4's first step is to find out which, and to say so.
    - **The decisive question is delayed, not avoided.** "Can a tiny no-FFN
      model beat the matcher on this corpus?" still gates everything, and
      it now costs weeks rather than an afternoon to ask. That is the
@@ -865,7 +921,7 @@ Flagged rather than assumed. Work proceeds on the stated default.
 | Teacher questions are unlike real ones | high eval scores, poor live behaviour | log real queries (locally, opt-in), measure the gap |
 | Budgets quietly slip | A2 creeping past 64 MiB | budgets are tests; the build fails |
 | Nightly churn annoys visitors | large transfers on repeat visits | per-file hashes; measure bytes per returning visit |
-| Scope | 11 sagas | Sagas 1–2 have standalone value: a validated corpus and a cross-corpus matcher are a working site feature with no model at all, and Saga 3 is one day |
+| Scope | 12 sagas | Sagas 1–2 have standalone value: a validated corpus and a cross-corpus matcher are a working site feature with no model at all, and Saga 3 reuses a trained, parity-tested model rather than building one |
 
 ## 14. Non-goals
 
