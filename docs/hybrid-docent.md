@@ -172,8 +172,8 @@ The repo scope is already in the cache: `cache/github-repos.json` holds
 283 repositories, **242 of them non-fork** across 15 accounts (103
 softwarewrighter, 43 sw-embed, 24 sw-ml-study, 20 sw-vibe-coding, 19
 sw-comp-history, ...). `fork == false` belongs in `atlas-ingest repos`
-(step 011) as the filter, not in the fetch script, so the cache stays the
-unfiltered record. Forks the blog or campus links to are kept (owner
+(step ingest-metadata) as the filter, not in the fetch script, so the cache
+stays the unfiltered record. Forks the blog or campus links to are kept (owner
 decision, 2026-09-22), which makes 251.
 
 Because the rerank head scores cards rather than ids, a new post should
@@ -246,8 +246,8 @@ frozen set (plan risk "teacher questions are unlike real ones").
 Adopted by the repository owner on 2026-09-22; [`plan.md`](plan.md)
 section 10 carries it:
 
-1. Finish Saga 1 (`atlas-foundation`) unchanged; its step 010 records this
-   decision.
+1. Finish Saga 1 (`atlas-foundation`) unchanged; its hybrid-tdm-decision
+   step records this decision.
 2. Saga 2 `atlas-baseline` unchanged, with two additions: the A0-oracle@k
    row, and eval sets sized for section 6 rule 4.
 3. **A new Saga 3 `hybrid-tdm` (HT01)** ahead of the Needle probe:

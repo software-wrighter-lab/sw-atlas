@@ -122,7 +122,7 @@ shorts workflow, the hand-written map stops being necessary. That is a
 suggestion for that repository, not a requirement: 46 lines written once
 is cheaper than changing a pipeline.
 
-## Status after ingest (step 011, 2026-09-22)
+## Status after ingest (step ingest-metadata, 2026-09-22)
 
 `just ingest-videos` reads the blog and `shorts` and writes 84 video
 resources, one per video a post declares. (Step 007 counted 75 `video_url`
@@ -140,10 +140,9 @@ used to add a junk resource, which the blog reader now ignores.)
 
 **The 32 are not orphans.** Every one of them is linked from at least one
 blog post, whose authored abstract, keywords and tags describe it; the
-post is how a visitor finds the video today. The coverage report (step
-014) should count a video as covered when a post declares it, and report
-"has its own script" as a separate, informative column rather than as a
-gate.
+post is how a visitor finds the video today. The coverage-report step
+should count a video as covered when a post declares it, and report "has
+its own script" as a separate, informative column rather than as a gate.
 
 **The join map is settled.** The owner confirmed all 19 drafted rows on
 2026-09-22, so `sources/video-shorts.ron` holds 22 confirmed rows and no
@@ -158,4 +157,4 @@ scripts are not on this machine. The owner will copy that text into this
 repository. When it arrives, extend `atlas-ingest videos` to read it the
 way it reads `shorts` -- fill `summary` and `body`, keyed by video URL
 through a committed map, no title matching -- and update the table above.
-Queued in [`sagas.md`](sagas.md).
+Queued in [`sagas.md`](sagas.md), "Waiting on the owner".

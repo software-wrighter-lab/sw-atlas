@@ -103,22 +103,24 @@ every rebuild):
 | Places | — | 9 | — | — |
 | Repositories | 78 named | 4 named | 251 described | — |
 | Videos | 84 named | — | — | 84 described, 52 with script |
-| Demos named | 6 | 4 | 3 | — |
+| Demos named | 6 | 4 | 4 | — |
 | Papers cited | 157 | — | — | — |
 | Concepts, provisional | 637 | 39 | 21 | 130 |
-| Relations, every one `Declared` | 518 | 16 | 3 | — |
+| Relations, every one `Declared` | 518 | 16 | 4 | — |
 
 Repositories are the public ones across 15 GitHub accounts and
 organisations, from a committed cache ([`cache/README.md`](cache/README.md)):
 every non-fork, and the nine forks a blog post links to. Of the 80
 repositories the blog and campus name, 75 join to that cache by
-identifier; the other 5 are owned by other people. Videos take their scripts from the `shorts` repository: 30
-by the Five ML Concepts rule and 22 through a hand-written, owner-confirmed
-map; the other 32 are reached today through the posts that link to them
+identifier; the other 5 are owned by other people.
+
+Videos take their scripts from the `shorts` repository: 30 by the Five ML
+Concepts rule and 22 through a hand-written, owner-confirmed map; the
+other 32 are reached today through the posts that link to them
 ([`docs/video-sources.md`](docs/video-sources.md)).
 
-Three identifiers already appear in both the blog and the campus, because a target's identifier is
-derived from its URL: `repo:sw-comp-history/ibm-1130-rs`,
+Three identifiers already appear in both the blog and the campus, because
+a target's identifier is derived from its URL: `repo:sw-comp-history/ibm-1130-rs`,
 `demo:sw-comp-history.github.io/ibm-1130-rs` and `repo:sw-embed/sw-cor24-apl`.
 A visitor standing in front of the 1130 exhibit can be shown the post about
 it without anything having inferred the connection.
@@ -175,12 +177,12 @@ the step that lands it, so this list stays honest:
 
 | Recipe | Does | Lands in |
 |---|---|---|
-| `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, step 8 |
-| `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, step 9 |
-| `just ingest-repos` | **done** — 251 public repositories: non-forks, and forks a post names | Saga 1, steps 11-12 |
-| `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, step 11 |
-| `just ingest-rest` | the concept graph | Saga 1, step 13 |
-| `just report` | coverage, gated on orphans and dead links | Saga 1, step 14 |
+| `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, ingest-blog |
+| `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, ingest-campus |
+| `just ingest-repos` | **done** — 251 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
+| `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, ingest-metadata |
+| `just ingest-rest` | the concept graph | Saga 1, concept-graph |
+| `just report` | coverage, gated on orphans and dead links | Saga 1, coverage-report |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |
 

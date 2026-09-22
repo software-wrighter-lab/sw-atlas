@@ -1,0 +1,8 @@
+number = 14
+slug = "reference-steps-by-slug"
+status = "in-progress"
+description = "Three inserted steps in one session shifted the later step numbers three time..."
+role = "meta"
+context_files = []
+created_at = "2026-09-22T10:44:48"
+commits = []
