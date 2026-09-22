@@ -1,0 +1,1 @@
+Documentation and justfile messages now reference steps by slug (concept-graph, coverage-report, ingest-metadata) instead of by number, because three inserts in one session shifted numbers three times and left stale references each time. Numbers kept only where historical. Also fixed README repos column: 4 demo edges and 4 relations, not 3, since an included fork has a homepage.
