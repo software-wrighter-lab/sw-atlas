@@ -23,14 +23,22 @@ ingest-blog *args:
 ingest-campus *args:
     cargo run --quiet -p atlas-ingest -- campus ../sw-campus --out build/corpus/campus.ron {{args}}
 
-# Build every corpus that has an ingester.
-ingest: ingest-blog ingest-campus
+# Public, non-fork repositories from the committed GitHub cache (no network).
+ingest-repos *args:
+    cargo run --quiet -p atlas-ingest -- repos cache/github-repos.json --out build/corpus/repos.ron {{args}}
 
-# Where the remaining sources land (atlas-foundation steps 11 and 12).
+# The blog's videos, joined to their scripts in the shorts checkout.
+# Override the checkout with SHORTS=/path/to/shorts.
+ingest-videos *args:
+    cargo run --quiet -p atlas-ingest -- videos ../blog "${SHORTS:-../../softwarewrighter/shorts}" --out build/corpus/videos.ron {{args}}
+
+# Build every corpus that has an ingester.
+ingest: ingest-blog ingest-campus ingest-repos ingest-videos
+
+# Where the remaining source lands (atlas-foundation step 12).
 ingest-rest:
     @echo "just ingest-rest: not implemented yet." >&2
-    @echo "Repository and video metadata land in step 011, the concept" >&2
-    @echo "graph in step 012." >&2
+    @echo "The concept graph lands in step 012." >&2
     @exit 1
 
 # Regenerate the coverage report and gate on orphans and dead links (step 13).

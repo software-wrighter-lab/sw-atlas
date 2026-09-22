@@ -80,7 +80,12 @@ plan disagree, the plan wins.
 
 ## Status
 
-Pre-implementation. The plan is written; nothing is built.
+The corpus is built; nothing that answers a visitor is. Four ingesters turn
+the blog, the campus, the repository cache and the video scripts into a
+validated, canonical corpus with no model in it. There is no matcher over
+that corpus yet (Saga 2), no model (Saga 3) and no browser runtime (Saga 9),
+so nothing here can be demonstrated to a visitor today, and every quality
+number below is inherited from `moe-microscope` rather than measured here.
 
 The honest starting scoreboard, inherited from
 [`moe-microscope`](https://github.com/sw-ml-study/moe-microscope)'s campus
@@ -92,17 +97,27 @@ the same questions.
 What the corpus holds today (`just ingest`, and the same bytes and hash on
 every rebuild):
 
-| | Blog | Campus |
-|---|---:|---:|
-| Posts | 124 | — |
-| Places | — | 9 |
-| Repositories named | 76 | 4 |
-| Videos named | 85 | — |
-| Demos named | 6 | 4 |
-| Papers cited | 153 | — |
-| Relations, every one `Declared` | 508 | 16 |
+| | Blog | Campus | Repos | Videos |
+|---|---:|---:|---:|---:|
+| Posts | 126 | — | — | — |
+| Places | — | 9 | — | — |
+| Repositories | 78 named | 4 named | 242 described | — |
+| Videos | 84 named | — | — | 84 described, 33 with script |
+| Demos named | 6 | 4 | 3 | — |
+| Papers cited | 157 | — | — | — |
+| Concepts, provisional | 637 | 39 | 21 | 130 |
+| Relations, every one `Declared` | 518 | 16 | 3 | — |
 
-Three identifiers already appear in both, because a target's identifier is
+Repositories are the public, non-fork ones across 15 GitHub accounts and
+organisations, from a committed cache ([`cache/README.md`](cache/README.md)).
+Of the 80 repositories the blog and campus name, 66 join to that cache by
+identifier; the other 14 are nine forks and five repositories owned by
+other people. Videos take their scripts from the `shorts` repository: 30
+by the Five ML Concepts rule, 3 through a hand-written map, and the other
+51 are reached today through the posts that link to them
+([`docs/video-sources.md`](docs/video-sources.md)).
+
+Three identifiers already appear in both the blog and the campus, because a target's identifier is
 derived from its URL: `repo:sw-comp-history/ibm-1130-rs`,
 `demo:sw-comp-history.github.io/ibm-1130-rs` and `repo:sw-embed/sw-cor24-apl`.
 A visitor standing in front of the 1130 exhibit can be shown the post about
@@ -153,15 +168,18 @@ just check      # the pre-commit gate: fmt, clippy -D warnings, tests, sw-checkl
 The gate is green and `sw-checklist` is at zero failures and zero warnings.
 Keep it there.
 
-`just ingest` reads the blog and the campus and writes a canonical corpus for each. The remaining
+`just ingest` reads the blog, the campus, the repository cache and the
+videos, and writes a canonical corpus for each. The remaining
 pipeline recipes exist but are not implemented; each exits non-zero naming
 the step that lands it, so this list stays honest:
 
 | Recipe | Does | Lands in |
 |---|---|---|
-| `just ingest-blog` | **done** — 124 posts from the blog's front matter | Saga 1, step 8 |
+| `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, step 8 |
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, step 9 |
-| `just ingest-rest` | repository and video metadata, concepts | Saga 1, steps 11-12 |
+| `just ingest-repos` | **done** — 242 public non-fork repositories, from the cache | Saga 1, step 11 |
+| `just ingest-videos` | **done** — 84 videos, 33 with scripts from `shorts` | Saga 1, step 11 |
+| `just ingest-rest` | the concept graph | Saga 1, step 12 |
 | `just report` | coverage, gated on orphans and dead links | Saga 1, step 13 |
 | `just eval` | score every runtime class on held-out questions | Saga 2 |
 | `just snapshot` | write the publishable snapshot with per-file hashes | Saga 9 |

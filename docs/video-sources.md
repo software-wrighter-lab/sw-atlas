@@ -121,3 +121,39 @@ If a per-project `published.txt` (url, date, id) ever becomes part of the
 shorts workflow, the hand-written map stops being necessary. That is a
 suggestion for that repository, not a requirement: 46 lines written once
 is cheaper than changing a pipeline.
+
+## Status after ingest (step 011, 2026-09-22)
+
+`just ingest-videos` reads the blog and `shorts` and writes 84 video
+resources, one per video a post declares. (Step 007 counted 75 `video_url`
+fields; `video_urls` lists add the rest, and one post's `video_url: ""`
+used to add a junk resource, which the blog reader now ignores.)
+
+| | Videos |
+|---|---:|
+| Declared by the blog | 84 |
+| ... with a script or description from `shorts` | 33 |
+| ... by the Five ML Concepts rule (episodes 1-30) | 30 |
+| ... by a confirmed row in `sources/video-shorts.ron` | 3 |
+| ... with concepts from `concepts-status.txt` (episodes 1-26) | 26 |
+| ... with no text of their own yet | 51 |
+
+**The 51 are not orphans.** Every one of them is linked from at least one
+blog post, whose authored abstract, keywords and tags describe it; the
+post is how a visitor finds the video today. The coverage report (step
+013) should count a video as covered when a post declares it, and report
+"has its own script" as a separate, informative column rather than as a
+gate.
+
+**Proposed joins.** `sources/video-shorts.ron` holds 19 proposed rows with
+the evidence for each, drafted from `shorts` descriptions and commit
+subjects. None is ingested until the owner moves it into `confirmed`.
+
+**TODO, waiting on the owner.** Most of the 51 are long-form videos that
+were never shorts (the Throwback Thursday, COR24 and music-tool videos,
+among others), so no join map can reach them: their descriptions and
+scripts are not on this machine. The owner will copy that text into this
+repository. When it arrives, extend `atlas-ingest videos` to read it the
+way it reads `shorts` -- fill `summary` and `body`, keyed by video URL
+through a committed map, no title matching -- and update the table above.
+Queued in [`sagas.md`](sagas.md).

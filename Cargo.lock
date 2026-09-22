@@ -105,8 +105,30 @@ dependencies = [
  "atlas-campus",
  "atlas-core",
  "atlas-corpus",
+ "atlas-repos",
+ "atlas-video",
  "clap",
  "ron",
+]
+
+[[package]]
+name = "atlas-repos"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "atlas-video"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "ron",
+ "serde",
 ]
 
 [[package]]

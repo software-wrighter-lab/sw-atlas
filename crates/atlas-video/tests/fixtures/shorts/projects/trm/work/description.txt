@@ -1,0 +1,3 @@
+Under 1000 Parameters Beats GPT-4 at Mazes
+
+The best large language models score zero on hard mazes.

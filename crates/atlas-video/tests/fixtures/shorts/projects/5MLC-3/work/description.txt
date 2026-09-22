@@ -1,0 +1,4 @@
+EPISODE 3 - Five machine learning concepts.
+
+In this episode:
+1. Loss Function

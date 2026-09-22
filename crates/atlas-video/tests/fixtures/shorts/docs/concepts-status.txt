@@ -1,0 +1,14 @@
+# 5 ML Concepts - Status Report
+# Generated: 2026-02-26
+
+## PART 1: COVERED CONCEPTS (5 total, episodes 1-3)
+
+Backpropagation (Ep 1)
+Embedding (Ep 1)
+Loss Function (Ep 3)
+Few-shot / Zero-shot (Ep 3)
+LoRA (Ep 3)
+
+## NOTES
+
+- Not a concept line (Ep 9

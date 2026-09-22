@@ -13,9 +13,12 @@ use crate::frontmatter::{FrontMatter, Titled};
 use atlas_core::{Link, ResourceKind};
 
 /// Every link a post declares, in one list.
+///
+/// An empty URL is how the blog writes "no link here" (`video_url: ""`),
+/// so it declares nothing rather than a resource with no address.
 pub fn links(front: &FrontMatter) -> Vec<Link> {
     let single = |kind, url: &Option<String>, title: Option<String>| {
-        url.as_ref().map(|u| Link {
+        url.as_ref().filter(|u| !u.trim().is_empty()).map(|u| Link {
             kind,
             url: u.clone(),
             title,
@@ -39,6 +42,7 @@ fn listed(kind: ResourceKind, items: &[Titled], names: &[String]) -> Vec<Link> {
     items
         .iter()
         .enumerate()
+        .filter(|(_, item)| !item.url().trim().is_empty())
         .map(|(i, item)| Link {
             kind,
             url: item.url().to_string(),

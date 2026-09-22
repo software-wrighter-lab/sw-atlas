@@ -24,10 +24,7 @@ fn main() -> ExitCode {
 
 /// Ingest, validate, write, and describe what happened.
 fn run(source: &cli::Source, out: &Path) -> Result<String, Box<dyn std::error::Error>> {
-    let corpus = match source {
-        cli::Source::Blog { repo } => assemble::blog(&repo.join("_posts"))?,
-        cli::Source::Campus { repo } => atlas_campus::ingest(repo)?,
-    };
+    let corpus = read(source)?;
     let problems = atlas_corpus::validate(&corpus);
     if let Some(first) = problems.first() {
         return Err(format!(
@@ -42,6 +39,19 @@ fn run(source: &cli::Source, out: &Path) -> Result<String, Box<dyn std::error::E
     }
     std::fs::write(out, &text)?;
     Ok(report(&corpus, out, &hash))
+}
+
+/// Read one source into a corpus.
+fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error::Error>> {
+    Ok(match source {
+        cli::Source::Blog { repo } => assemble::blog(&repo.join("_posts"))?,
+        cli::Source::Campus { repo } => atlas_campus::ingest(repo)?,
+        cli::Source::Repos { cache } => atlas_repos::ingest(cache)?,
+        cli::Source::Videos { blog, shorts, map } => {
+            let posts = assemble::blog(&blog.join("_posts"))?;
+            atlas_video::ingest(&posts, &atlas_video::Sources { shorts, map })?
+        }
+    })
 }
 
 /// One line per thing a reader would want to check.

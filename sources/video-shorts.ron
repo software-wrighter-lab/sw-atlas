@@ -1,0 +1,123 @@
+// Which shorts project each published video was made in.
+//
+// Hand-written, never inferred. Titles changed between production and
+// publication, so a title match that looks right can be wrong -- the
+// failure this project exists to avoid. Read by `atlas-ingest videos`.
+//
+// Keys are video URLs as a blog post declares them (any form that post
+// uses; they are compared by video id). Values are directories under
+// ~/github/softwarewrighter/shorts/projects/. Five ML Concepts episodes are
+// NOT listed here: episode N maps to 5MLC-N (episode 1 to daily5-20260203)
+// by a rule in crates/atlas-video/src/episodes.rs.
+//
+// `confirmed` rows are Provenance::Declared and are the only rows ingested.
+// `proposed` rows are candidates with the evidence for them, drafted on
+// 2026-09-22 from shorts' descriptions and commit subjects. They are not
+// ingested. To accept one, move it into `confirmed`; to reject it, delete
+// it. Videos absent from both lists have no known shorts project (most
+// long-form videos were never shorts) and keep an empty script.
+JoinMap(
+    confirmed: {
+        // The three pairs recorded in docs/video-sources.md.
+        "https://www.youtube.com/shorts/O6U06cGkKc4": "trm",
+        "https://www.youtube.com/shorts/fyEuH1BprLI": "pocket-llm",
+        "https://www.youtube.com/shorts/KgtiBy4rdm4": "many-eyes-learning",
+    },
+    proposed: [
+        (
+            url: "https://www.youtube.com/shorts/ElFwTSuHjnM",
+            project: "MLF-01",
+            evidence: "ML Frontier 1: Neural Collapse; description opens 'ML Frontier 01 - Neural Collapse'",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/D4KrvmqOwEY",
+            project: "MLF-02a",
+            evidence: "ML Frontier 2: ICRL; description opens 'ML Frontier Episode 2 - In-Context Reinforcement Learning'",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/6MluFFCb1cA",
+            project: "MLF-03a",
+            evidence: "ML Frontier 3: Structure Beats Scale; commit 'Add MLF-03a Structure Beats Scale YouTube Short'",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/mBLFTyh1EKk",
+            project: "MLF-04",
+            evidence: "ML Frontier 4: Is Chain of Thought Real?; description opens with the same title",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/QelUyffoo1g",
+            project: "xskill",
+            evidence: "XSkill: A Memory Layer for Multimodal Agents; description opens with the same title",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/n_NFFLCtj_M",
+            project: "game-mcp-poc",
+            evidence: "Trash Talkin' Tic Tac Toe; commit 'Add Game MCP PoC YouTube Short (Trash Talkin' Tic Tac Toe)'",
+        ),
+        (
+            url: "https://youtube.com/shorts/aGoQHs6S1nk",
+            project: "engram-poc-mlx",
+            evidence: "DeepSeek's Engram Paper Tested on Mac; description names DeepSeek's Engram paper, project is MLX",
+        ),
+        (
+            url: "https://youtube.com/shorts/uvbfu0WKa3A",
+            project: "engram-poc-unsloth",
+            evidence: "Engram PoC: Now With CUDA Power; description opens 'ENGRAM Part 2: Now on NVIDIA CUDA with Unsloth.'",
+        ),
+        (
+            url: "https://youtube.com/shorts/fh21_zIK2ZE",
+            project: "mHC-poc-mlx",
+            evidence: "DeepSeek's mHC Fix for Gradient Explosion; description is about deep networks breaking at scale. Medium: 'Deep Networks Fixed by Deepseek mHC' (long-form) may be the same project",
+        ),
+        (
+            url: "https://youtube.com/shorts/BOuBFn5e1gA",
+            project: "mHC-cuda",
+            evidence: "Sinkhorn on Blackwell (mHC part 2); description opens 'mHC goes CUDA. Phase 2 complete.'",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/zWKmRxChRlA",
+            project: "icl-revisited",
+            evidence: "Learning More About In-Context Learning; description opens on in-context learning since GPT-3",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/3ezjk1CnZEU",
+            project: "json-et-al",
+            evidence: "JSON or Something Better?; description opens 'JSON is everywhere - but it's not the only option.'",
+        ),
+        (
+            url: "https://youtu.be/YhAbOvWEkzE",
+            project: "sleepy-coder",
+            evidence: "LLM Learns While You Sleep; title.txt 'This AI Learns From Its Mistakes While It Sleeps'. Medium: a youtu.be link, may be a long-form cut",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/pldadqycEQs",
+            project: "bdh",
+            evidence: "This AI Has a Visible Brain; description 'LLMs are black boxes. BDH ... is different -- a brain-inspired language model'. Medium",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/_8_08H97LxM",
+            project: "dytopo-rs",
+            evidence: "Smarter Agent Communication; description 'Dynamic Topology Routing for Multi-Agent AI'. Medium",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/wJvmBYTge7U",
+            project: "lucy-20-percent",
+            evidence: "Home Lab AI Cluster: Lucy Levels Up; description 'Upgrade - From 10% to 20% Brain Power'. Weak: lucy-10-percent also exists",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/B4uKx-DL1HY",
+            project: "efficient-llm",
+            evidence: "Max AI Per Watt; description 'Maximum AI capability on minimum hardware'. Weak",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/DlxhTXcW-og",
+            project: "billion-llm",
+            evidence: "Which Small AI Fits YOUR Laptop?; description 'One billion parameters. The sweet spot'. Weak: efficient-llm is as plausible",
+        ),
+        (
+            url: "https://www.youtube.com/shorts/q_8qX-S9SxA",
+            project: "hrm",
+            evidence: "Planner + Doer = Genius; HRM's high-level planner and low-level worker. Weak: inferred from the model, not from any text",
+        ),
+    ],
+)

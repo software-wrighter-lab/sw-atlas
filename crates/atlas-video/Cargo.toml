@@ -1,0 +1,17 @@
+[package]
+name = "atlas-video"
+description = "Join the blog's published videos to the authored scripts in the shorts repository"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+ron = { workspace = true }
+serde = { workspace = true }

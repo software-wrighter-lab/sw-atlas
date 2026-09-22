@@ -1,0 +1,9 @@
+// Test map: one confirmed row, one proposal that must be ignored.
+JoinMap(
+    confirmed: {
+        "https://youtu.be/O6U06cGkKc4": "trm",
+    },
+    proposed: [
+        (url: "https://www.youtube.com/shorts/QelUyffoo1g", project: "xskill", evidence: "same title"),
+    ],
+)

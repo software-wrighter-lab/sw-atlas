@@ -1,0 +1,33 @@
+#!/bin/sh
+# Refresh the committed GitHub metadata cache.
+#
+# The only step in this repository that touches the network. It writes
+# cache/github-repos.json, which is committed, so `just ingest-repos` and
+# every test are reproducible offline and a corpus rebuild cannot be
+# changed by someone else's push.
+#
+# Requires the `gh` CLI, authenticated. Run it deliberately, not from the
+# gate: the cache changing is a corpus change and belongs in its own
+# commit with its counts.
+set -eu
+
+out="cache/github-repos.json"
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+fields='.[] | {
+  full_name, description, topics, language, homepage,
+  pushed_at, fork, archived, stargazers_count
+}'
+
+{
+  gh api "users/softwarewrighter/repos?type=owner&per_page=100" --paginate -q "$fields"
+  for org in $(gh api user/orgs --paginate -q '.[].login'); do
+    gh api "orgs/$org/repos?type=public&per_page=100" --paginate -q "$fields" || true
+  done
+} > "$tmp"
+
+jq -s 'unique_by(.full_name) | sort_by(.full_name)' "$tmp" > "$out"
+
+printf 'wrote %s\n  repositories %s\n  fetched      %s\n' \
+  "$out" "$(jq 'length' "$out")" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"

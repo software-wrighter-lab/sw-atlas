@@ -1,0 +1,6 @@
+[
+  {"archived": false, "description": "APL for the COR24", "fork": false, "full_name": "sw-embed/sw-cor24-apl", "homepage": null, "language": "Rust", "pushed_at": "2026-09-10T12:00:00Z", "stargazers_count": 1, "topics": ["apl", "array-languages"]},
+  {"archived": false, "description": "Someone else's work, forked", "fork": true, "full_name": "sw-embed/bmp280", "homepage": null, "language": "C", "pushed_at": "2026-01-01T00:00:00Z", "stargazers_count": 0, "topics": []},
+  {"archived": false, "description": "A painted research campus", "fork": false, "full_name": "software-wrighter-lab/sw-campus", "homepage": "https://software-wrighter-lab.github.io/sw-campus/", "language": "HTML", "pushed_at": "2026-09-20T08:00:00Z", "stargazers_count": 0, "topics": []},
+  {"archived": false, "description": null, "fork": false, "full_name": "sw-ml-study/emufpga", "homepage": "", "language": null, "pushed_at": null, "stargazers_count": 0, "topics": []}
+]

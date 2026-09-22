@@ -6,6 +6,8 @@ members = [
     "crates/atlas-corpus",
     "crates/atlas-decide",
     "crates/atlas-ingest",
+    "crates/atlas-repos",
+    "crates/atlas-video",
 ]
 resolver = "2"
 
@@ -26,6 +28,8 @@ atlas-campus = { path = "crates/atlas-campus" }
 atlas-core = { path = "crates/atlas-core" }
 atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
+atlas-repos = { path = "crates/atlas-repos" }
+atlas-video = { path = "crates/atlas-video" }
 clap = { version = "4", features = ["derive"] }
 ron = "0.12"
 serde = { version = "1", features = ["derive"] }

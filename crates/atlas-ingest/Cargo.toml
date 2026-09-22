@@ -27,4 +27,6 @@ atlas-blog.workspace = true
 atlas-campus.workspace = true
 atlas-core.workspace = true
 atlas-corpus.workspace = true
+atlas-repos.workspace = true
+atlas-video.workspace = true
 clap = { workspace = true }

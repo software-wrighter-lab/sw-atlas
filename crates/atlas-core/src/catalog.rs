@@ -102,6 +102,21 @@ pub struct Concept {
     pub resources: Vec<ResourceId>,
 }
 
+impl Concept {
+    /// A concept as a source declared it, before the concept graph step
+    /// merges it with its synonyms: the label as written, and an
+    /// identifier that is the label lowercased.
+    pub fn provisional(label: &str) -> Self {
+        Self {
+            id: ConceptId::new(label.trim().to_lowercase()),
+            label: label.trim().to_string(),
+            aliases: Vec::new(),
+            parents: Vec::new(),
+            resources: Vec::new(),
+        }
+    }
+}
+
 impl Resource {
     /// A resource known only by what something else said about it.
     ///
