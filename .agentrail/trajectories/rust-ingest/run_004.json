@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-ingest",
+  "state": {
+    "number": 15,
+    "step": "concept-graph"
+  },
+  "action": "New atlas-graph crate (normalize/overrides/report); curated overrides by reading the generated report; 7 tests incl. acronym-not-merged and unknown-override; just check green with zero warnings",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-22T11:52:49"
+}

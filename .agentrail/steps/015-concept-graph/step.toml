@@ -1,9 +1,10 @@
 number = 15
 slug = "concept-graph"
-status = "pending"
+status = "completed"
 description = "Read docs/plan.md section 7 first. Build the Concept set from the union of bl..."
 role = "production"
 context_files = []
 created_at = "2026-09-18T10:10:30"
+completed_at = "2026-09-22T11:52:49"
 task_type = "rust-ingest"
-commits = []
+commits = ["ae88b8484d436e776e95c45791d86f1a677285a1"]
