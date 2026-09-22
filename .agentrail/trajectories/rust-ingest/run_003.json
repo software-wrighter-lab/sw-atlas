@@ -1,0 +1,11 @@
+{
+  "task_type": "rust-ingest",
+  "state": {
+    "number": 11,
+    "step": "ingest-metadata"
+  },
+  "action": "New crates atlas-repos and atlas-video (atlas-ingest at module limit); fixtures + pinned real-cache test; rebuild determinism checked by hash; just check green",
+  "result": "success",
+  "reward": 1,
+  "timestamp": "2026-09-22T10:25:31"
+}
