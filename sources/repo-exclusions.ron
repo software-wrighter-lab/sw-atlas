@@ -1,0 +1,12 @@
+// Public repositories that are not publishable artifacts.
+//
+// Excluding something shrinks the denominator of every coverage number, so
+// each row says why, and `just report` states the count. The bar is high:
+// a thin project with a description stays in the corpus. Only a repository
+// that a visitor could never want to be sent to belongs here.
+Exclusions(
+    excluded: {
+        "softwarewrighter/images": "Static images for GitHub Pages: an asset host, not a project.",
+        "softwarewrighter/placeholder": "Its own description is \"repo for future use\"; there is nothing to send a visitor to yet.",
+    },
+)

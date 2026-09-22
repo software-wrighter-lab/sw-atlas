@@ -1,6 +1,6 @@
-number = 17
+number = 18
 slug = "coverage-report"
-status = "pending"
+status = "in-progress"
 description = "Read docs/plan.md section 10, Saga 1 step 5 first. Write 'just report': regen..."
 role = "validation"
 context_files = []

@@ -49,7 +49,8 @@ fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error
         cli::Source::Repos(args) => {
             let blog = assemble::blog(&args.blog.join("_posts"))?;
             let named = [blog, atlas_campus::ingest(&args.campus)?];
-            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named))?
+            let skip = atlas_repos::exclusions::Exclusions::load(&args.exclusions)?;
+            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named), &skip)?
         }
         cli::Source::Videos(args) => {
             let posts = assemble::blog(&args.blog.join("_posts"))?;

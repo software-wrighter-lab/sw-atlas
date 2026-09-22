@@ -39,8 +39,9 @@ with `agentrail next`.
 14. `reference-steps-by-slug` -- documentation names steps, not numbers. **done**
 15. `concept-graph` -- 689 concepts, aliases, parents, collision report, override file. **done**
 16. `upstream-crate-tag` -- demo-decision-model answered both requests: tag `tdm-v0.1.0`, and PR05 is theirs. **done**
-17. `coverage-report` -- `just report`, link checker, zero-orphan gate.
-18. `results-and-requests` -- seeded results table, request files, README, queue.
+17. `repo-reachability` -- an organisation concept and a committed exclusion list; zero orphan repositories. **done**
+18. `coverage-report` -- `just report`, link checker, zero-orphan gate.
+19. `results-and-requests` -- seeded results table, request files, README, queue.
 
 Exit: every public artifact has a Resource, every Resource is reachable
 through concepts and relations, zero orphans and zero broken URLs, and the

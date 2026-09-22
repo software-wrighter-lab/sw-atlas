@@ -101,26 +101,30 @@ every rebuild):
 |---|---:|---:|---:|---:|
 | Posts | 126 | — | — | — |
 | Places | — | 9 | — | — |
-| Repositories | 78 named | 4 named | 251 described | — |
+| Repositories | 78 named | 4 named | 249 described | — |
 | Videos | 84 named | — | — | 84 described, 52 with script |
 | Demos named | 6 | 4 | 4 | — |
 | Papers cited | 157 | — | — | — |
-| Concepts, provisional | 637 | 39 | 21 | 130 |
+| Concepts, provisional | 637 | 39 | 36 | 130 |
 | Relations, every one `Declared` | 518 | 16 | 4 | — |
 
 Repositories are the public ones across 15 GitHub accounts and
 organisations, from a committed cache ([`cache/README.md`](cache/README.md)):
-every non-fork, and the nine forks a blog post links to. Of the 80
+every non-fork, and the nine forks a blog post links to, less two that are
+not artifacts (an asset host and a placeholder, excluded by name and reason
+in [`sources/repo-exclusions.ron`](sources/repo-exclusions.ron)). Of the 80
 repositories the blog and campus name, 75 join to that cache by
-identifier; the other 5 are owned by other people.
+identifier; the other 5 are owned by other people. Every repository also
+carries its GitHub organisation as a concept, which is what makes the 22
+with neither a topic nor a language reachable at all.
 
 Videos take their scripts from the `shorts` repository: 30 by the Five ML
 Concepts rule and 22 through a hand-written, owner-confirmed map; the
 other 32 are reached today through the posts that link to them
 ([`docs/video-sources.md`](docs/video-sources.md)).
 
-`just concepts` unifies the four into `build/corpus/corpus.ron`: 700
-spellings become 689 concepts, and every merge and every declined near miss
+`just concepts` unifies the four into `build/corpus/corpus.ron`: 714
+spellings become 703 concepts, and every merge and every declined near miss
 is listed in [`docs/reference/concept-collisions.md`](docs/reference/concept-collisions.md)
 for a person to audit. The normalizer only unifies spellings; an acronym
 and its expansion, or a narrower idea inside a broader one, are judgements
@@ -187,7 +191,7 @@ the step that lands it, so this list stays honest:
 |---|---|---|
 | `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, ingest-blog |
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, ingest-campus |
-| `just ingest-repos` | **done** — 251 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
+| `just ingest-repos` | **done** — 249 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
 | `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, ingest-metadata |
 | `just concepts` | **done** — 689 concepts over the four corpora, with a collision report | Saga 1, concept-graph |
 | `just report` | coverage, gated on orphans and dead links | Saga 1, coverage-report |

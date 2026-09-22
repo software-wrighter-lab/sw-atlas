@@ -102,6 +102,9 @@ pub struct Repos {
     /// A campus checkout, read for the repositories its places link to.
     #[arg(long, default_value = "../sw-campus")]
     pub campus: PathBuf,
+    /// The committed list of repositories that are not artifacts.
+    #[arg(long, default_value = "sources/repo-exclusions.ron")]
+    pub exclusions: PathBuf,
 }
 
 /// Where `videos` reads from.

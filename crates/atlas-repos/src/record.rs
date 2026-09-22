@@ -42,13 +42,24 @@ impl Record {
         }
     }
 
-    /// The concepts this repository declares: its topics, then its
-    /// language, lowercased the way the other ingesters lowercase theirs.
+    /// The concepts this repository declares: its topics, its language, and
+    /// the organisation that owns it, lowercased the way the other ingesters
+    /// lowercase theirs.
+    ///
+    /// The organisation is a coarse subject grouping rather than an idea --
+    /// `sw-comp-history` and `sw-langtools` say what a repository is for --
+    /// and it is what makes every repository reachable: 22 of them have
+    /// neither a topic nor a language, and 15 had nothing pointing at them
+    /// at all. The alternative was a `ResourceKind::Organisation`, which
+    /// would widen the schema and add a kind the model has to predict, in
+    /// the middle of a saga, to say something the identifier already says.
     pub fn concepts(&self) -> Vec<ConceptId> {
+        let organisation = self.full_name.split('/').next().unwrap_or_default();
         let mut out: Vec<ConceptId> = self
             .topics
             .iter()
             .chain(self.language.iter())
+            .chain(std::iter::once(&organisation.to_string()))
             .map(|label| ConceptId::new(label.trim().to_lowercase()))
             .collect();
         out.sort();

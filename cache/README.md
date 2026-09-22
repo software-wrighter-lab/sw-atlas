@@ -17,7 +17,8 @@ the fields `atlas-ingest repos` reads: `full_name`, `description`,
 | ... not forks, all kept | 242 |
 | ... forks | 41 |
 | ... forks a blog post links to, kept | 9 |
-| In the corpus | 251 |
+| ... excluded as not artifacts | 2 |
+| In the corpus | 249 |
 | Organisations and users represented | 15 |
 
 Fetched 2026-09-19 (the file's timestamp; the script prints the time but
@@ -34,3 +35,8 @@ record of what GitHub reported. The ingester keeps a fork only when the
 owner has written about it -- when a blog post or campus place links to
 it (owner decision, 2026-09-22). The other 32 forks are someone else's
 work sitting in an owner's account, and stay out.
+
+Two repositories are excluded for a different reason: they are public but
+are not artifacts a visitor could be sent to. They are named with their
+reasons in `sources/repo-exclusions.ron`, and `just report` states the
+count, so the exclusion cannot quietly shrink a coverage number.
