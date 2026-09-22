@@ -1,8 +1,9 @@
 number = 10
 slug = "hybrid-tdm-decision"
-status = "in-progress"
+status = "completed"
 description = "Owner decision, 2026-09-22: adopt docs/hybrid-docent.md. The deterministic ma..."
 role = "meta"
 context_files = []
 created_at = "2026-09-22T08:38:49"
-commits = []
+completed_at = "2026-09-22T08:46:48"
+commits = ["d8567fbc649dc14e09e5f6e171b9e404520e4509"]
