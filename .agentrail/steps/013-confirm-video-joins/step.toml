@@ -1,0 +1,8 @@
+number = 13
+slug = "confirm-video-joins"
+status = "in-progress"
+description = "Owner confirmed all 19 proposed rows in sources/video-shorts.ron on 2026-09-2..."
+role = "production"
+context_files = []
+created_at = "2026-09-22T10:41:47"
+commits = []

@@ -132,24 +132,26 @@ used to add a junk resource, which the blog reader now ignores.)
 | | Videos |
 |---|---:|
 | Declared by the blog | 84 |
-| ... with a script or description from `shorts` | 33 |
+| ... with a script or description from `shorts` | 52 |
 | ... by the Five ML Concepts rule (episodes 1-30) | 30 |
-| ... by a confirmed row in `sources/video-shorts.ron` | 3 |
+| ... by a confirmed row in `sources/video-shorts.ron` | 22 |
 | ... with concepts from `concepts-status.txt` (episodes 1-26) | 26 |
-| ... with no text of their own yet | 51 |
+| ... with no text of their own yet | 32 |
 
-**The 51 are not orphans.** Every one of them is linked from at least one
+**The 32 are not orphans.** Every one of them is linked from at least one
 blog post, whose authored abstract, keywords and tags describe it; the
 post is how a visitor finds the video today. The coverage report (step
 014) should count a video as covered when a post declares it, and report
 "has its own script" as a separate, informative column rather than as a
 gate.
 
-**Proposed joins.** `sources/video-shorts.ron` holds 19 proposed rows with
-the evidence for each, drafted from `shorts` descriptions and commit
-subjects. None is ingested until the owner moves it into `confirmed`.
+**The join map is settled.** The owner confirmed all 19 drafted rows on
+2026-09-22, so `sources/video-shorts.ron` holds 22 confirmed rows and no
+proposals. Each keeps the evidence it was drafted from as a comment, but
+it is in the corpus because the owner said yes. A future candidate goes in
+the empty `proposed` list and is not ingested until it moves up.
 
-**TODO, waiting on the owner.** Most of the 51 are long-form videos that
+**TODO, waiting on the owner.** The remaining 32 are long-form videos that
 were never shorts (the Throwback Thursday, COR24 and music-tool videos,
 among others), so no join map can reach them: their descriptions and
 scripts are not on this machine. The owner will copy that text into this

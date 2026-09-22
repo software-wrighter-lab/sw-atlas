@@ -23,15 +23,22 @@ later have to earn the right to improve on.
 The step list is in [`.agentrail/plan.md`](../.agentrail/plan.md); read it
 with `agentrail next`.
 
-1. `scaffold-workspace` -- workspace, `atlas-core` stub, justfile, gate green. **done**
-2. `decision-and-requests` -- the no-Python decision recorded; per-repository request files.
-3. `corpus-schema` -- the five types, RON serde, canonical writer, validation.
-4. `ingest-blog` -- 124 posts from front matter; declared cross-corpus links.
-5. `ingest-campus` -- snapshot A; the 1442 exclusion asserted by a test.
-6. `ingest-metadata` -- repository and video metadata, metadata only.
-7. `concept-graph` -- normalized concepts, aliases, parents, collision report.
-8. `coverage-report` -- `just report`, link checker, zero-orphan gate.
-9. `results-and-requests` -- seeded results table, request files, README, queue.
+ 1. `scaffold-workspace` -- workspace, `atlas-core` stub, justfile, gate green. **done**
+ 2. `decision-and-requests` -- the no-Python decision; per-repository request files. **done**
+ 3. `published-grounding` -- the papers the plan rests on, cited. **done**
+ 4. `corpus-boundary` -- repository source deferred on principle, video text on availability. **done**
+ 5. `corpus-schema` -- the five types, RON serde, canonical writer, validation. **done**
+ 6. `logo-asset` -- corrected artwork. **done**
+ 7. `video-source-survey` -- where the video scripts are, and what joins them. **done**
+ 8. `ingest-blog` -- 126 posts from front matter; declared cross-corpus links. **done**
+ 9. `ingest-campus` -- snapshot A; the 1442 exclusion asserted by a test. **done**
+10. `hybrid-tdm-decision` -- the hybrid docent adopted and queued as Saga 3. **done**
+11. `ingest-metadata` -- 251 repositories from the cache, 84 videos joined to their scripts. **done**
+12. `declared-forks` -- a fork is kept when the owner wrote about it. **done**
+13. `confirm-video-joins` -- the owner confirmed all 19 drafted video-to-project pairs. **done**
+14. `concept-graph` -- normalized concepts, aliases, parents, collision report.
+15. `coverage-report` -- `just report`, link checker, zero-orphan gate.
+16. `results-and-requests` -- seeded results table, request files, README, queue.
 
 Exit: every public artifact has a Resource, every Resource is reachable
 through concepts and relations, zero orphans and zero broken URLs, and the
@@ -43,15 +50,13 @@ Work that is ready to specify but blocked on data only the owner has.
 Each becomes an `agentrail insert` in whichever saga is active when the
 data arrives.
 
-- **More video text.** 51 of the 84 videos the blog declares have no
+- **More video text.** 32 of the 84 videos the blog declares have no
   script or description in the corpus: most are long-form videos that
   were never shorts, and their text is not on this machine. The owner will
   copy it into this repository; then extend `atlas-ingest videos` to read
   it, keyed by video URL through a committed map, no title matching. Until
   then those videos are reached through the posts that link to them. See
   [`video-sources.md`](video-sources.md), "Status after ingest".
-- **Proposed video joins.** 19 rows in `sources/video-shorts.ron` await a
-  yes or no; accepting one is moving it into `confirmed`.
 
 ## Queued
 
@@ -132,6 +137,17 @@ Not started. Sizes are the plan's estimate, not a commitment.
   synthesis. Never downloaded before it is asked for.
 
 ## Decisions taken mid-saga
+
+- **2026-09-22, forks the owner wrote about are in.** A GitHub fork is
+  part of the published work when a blog post or campus place links to it,
+  and is excluded otherwise. Nine qualify today, which makes 251
+  repositories. Recorded as step 012, `declared-forks`.
+
+- **2026-09-22, the video join map is settled.** The owner confirmed all
+  19 drafted video-to-project pairs, including the two ambiguous ones
+  (Lucy is `lucy-20-percent`, "Which Small AI Fits YOUR Laptop?" is
+  `billion-llm`), so 52 of 84 videos carry their script. Recorded as step
+  013, `confirm-video-joins`.
 
 - **2026-09-22, the hybrid docent.** The repository owner adopted
   [`hybrid-docent.md`](hybrid-docent.md): the deterministic matcher and a
