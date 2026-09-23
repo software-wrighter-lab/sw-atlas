@@ -1,8 +1,9 @@
 number = 1
 slug = "demo-identity"
-status = "in-progress"
+status = "completed"
 description = "Two faults found while sampling the corpus for question drafting, both in how..."
 role = "production"
 context_files = []
 created_at = "2026-09-22T19:16:58"
-commits = []
+completed_at = "2026-09-22T20:43:51"
+commits = ["5b8e5904c43466ba54fe1bba4e30ca232dbabcf1"]
