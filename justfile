@@ -33,6 +33,10 @@ ingest-repos *args:
 ingest-videos *args:
     cargo run --quiet -p atlas-ingest -- videos ../blog "${SHORTS:-../../softwarewrighter/shorts}" --out build/corpus/videos.ron {{args}}
 
+# Count, freeze and check the frozen evaluation sets.
+questions *args:
+    cargo run --quiet -p atlas-questions -- {{args}}
+
 # Reads what the ingest recipes wrote, so run those first (or `just ingest`).
 # One concept vocabulary over the four corpora, with its collision report.
 concepts *args:

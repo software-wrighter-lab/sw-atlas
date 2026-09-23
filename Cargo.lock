@@ -152,6 +152,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "atlas-questions"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "clap",
+ "ron",
+ "serde",
+]
+
+[[package]]
 name = "atlas-repos"
 version = "0.1.0"
 dependencies = [

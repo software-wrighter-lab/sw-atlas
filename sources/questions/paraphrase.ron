@@ -1,0 +1,168 @@
+// Cross-corpus paraphrases: the set where a model earns its place.
+//
+// A row here describes a thing in a visitor's words, never the author's. No
+// alias of the expected answer and no word of its title may appear
+// verbatim -- `atlas-questions` enforces that against the corpus, because a
+// drafter cannot hold every alias of 643 resources in mind. A question that
+// contains its own answer measures lookup, not understanding, and the
+// matcher wins those by construction.
+//
+// Every row below was drafted by a model on 2026-09-22 and is Unconfirmed.
+// None of them is a yardstick until the repository owner has passed over
+// it. Confirm by changing status to Confirmed; reject by deleting the row
+// and, where it is worth saying, leaving its note behind as a comment.
+//
+// The set is frozen by the hash `just questions` prints. Adding or editing
+// a row changes that hash, which is the point: a set that changed after a
+// measurement is not the set that measurement was made against.
+QuestionSet(
+    name: "paraphrase",
+    note: "Phrasings that share no alias and no title word with their answer. Target: at least 300 confirmed rows before any model is trained. Drafted in batches; batch 1 is 112 rows across every resource kind.",
+    rows: [
+        // --- the 1960s machines, the wing and its exhibits ---
+        (text: "the machine with the toggle switches and the row of little lights", expect: ["campus:ibm-1130"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: "the console panel, described by someone who saw a photo"),
+        (text: "i want to flip switches on an old mainframe in my browser", expect: ["campus:ibm-1130-emulator"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which exhibit lets me run a program on a machine from before floppy disks", expect: ["campus:ibm-1130-emulator"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "you wrote about punching holes in cards for input", expect: ["blog:2026-02-26-ibm-1130-system-emulator"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the tiny eight bit chip that ended up on a spacecraft", expect: ["campus:rca-1802"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: "the 1802 flew on Galileo; a visitor may only remember that"),
+        (text: "where do i try the simulator for that low power seventies processor", expect: ["campus:rca-1802"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the part of the site where chip designs are shown like exhibits", expect: ["campus:processors"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where are the old computers", expect: ["campus:computer-history"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: "vaguest reasonable navigation question"),
+        (text: "the building for embedded work and toolchains", expect: ["campus:computer-science"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the wing where you keep the small made up languages", expect: ["campus:language-experiments"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the notation with the greek letters you type sideways", expect: ["campus:apl"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "i heard you can run iverson's notation in a web page here", expect: ["campus:apl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- the throwback posts, remembered vaguely ---
+        (text: "the story about betting on ponies in your first program", expect: ["blog:2026-01-29-tbt-apl-horse-race"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what machine did you learn to program on as a student", expect: ["blog:2026-01-29-tbt-apl-horse-race"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the post about mainframes moving records instead of bytes through a chain of programs", expect: ["blog:2026-02-05-tbt-pipelines-os390"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "you had an assistant rebuild those glowing line arcade cabinets", expect: ["blog:2026-02-12-tbt-vector-graphics-games"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the 1995 thing where you teach little characters by demonstration", expect: ["blog:2026-02-19-tbt-toontalk-visual-programming"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "six versions of the same encyclopedia software in one program", expect: ["blog:2026-03-26-tbt-wiki-rs-six-wikis"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the tool that catches when output changes unexpectedly, which you first wrote decades ago", expect: ["blog:2026-03-19-tbt-reg-rs-regression-testing"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the shell helper that remembers where all your work lives", expect: ["blog:2026-03-05-tbt-pjmai-rs-project-manager"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "those three games from the seventies you brought back, including one with a bell for red alert", expect: ["blog:2026-04-16-tbt-cor24-basic-startrek-trs80-robot-chase"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what you worked on at ibm in the eighties, tooling for a shared mainframe service", expect: ["blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the 1968 version you could actually type at", expect: ["blog:2026-09-17-tbt-apl-360-revisited"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- small models series, described by their result ---
+        (text: "under a thousand parameters beating the big models at mazes", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "running a language model on a phone with no signal", expect: ["blog:2026-02-01-small-models-part2-pocket-llm"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "twenty seven million parameters beating a much bigger reasoner on that puzzle benchmark", expect: ["blog:2026-02-02-small-models-part3-hrm"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the model inspired by brains where most of it stays quiet", expect: ["blog:2026-02-03-small-models-part4-bdh"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why a billion is the sweet spot for capability per watt", expect: ["blog:2026-02-04-small-models-part5-billion-llm"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "benchmarking which of the little models my laptop can actually run", expect: ["blog:2026-02-05-small-models-part6-efficient-frontier"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where should i start with your series on models that are deliberately tiny", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "series entry point"),
+
+        // --- the deepseek and frontier posts ---
+        (text: "the paper about keeping training stable no matter how deep the network goes", expect: ["blog:2026-02-01-deepseek-papers-part1-mhc"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "you implemented their idea for not recomputing patterns the model already knows", expect: ["blog:2026-02-02-deepseek-papers-part2-engram"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the follow up where you moved from imitating that memory trick to really doing it", expect: ["blog:2026-02-11-deepseek-papers-part3-engram-revisited"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why do deep networks end up in such tidy geometric arrangements", expect: ["blog:2026-03-09-mlf-01-neural-collapse"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "can a transformer pick up a policy just from examples in its prompt", expect: ["blog:2026-03-16-mlf-02-icrl-in-context-reinforcement-learning"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the research claiming arrangement matters more than size", expect: ["blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is thinking step by step actually thinking", expect: ["blog:2026-03-23-mlf-04-is-chain-of-thought-real"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the thing where a network suddenly generalises thousands of steps after it stopped improving", expect: ["blog:2026-04-23-mlf-05-grokking-delayed-generalization"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "sampling a small model over and over instead of buying a bigger one", expect: ["blog:2026-04-24-large-language-monkeys-scaling-inference"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the approach that treats intelligence as making good configurations cheap", expect: ["blog:2026-05-16-energy-based-learning-hopfield-boltzmann-jepa"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- how ai learns, by the question each part answers ---
+        (text: "people say an ai learned something but they mean four different things", expect: ["blog:2026-02-24-how-ai-learns-part1-time-scales"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the difference between a model losing old skills and losing the thread in a long conversation", expect: ["blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which of your posts covers changing the network itself rather than its prompt", expect: ["blog:2026-02-26-how-ai-learns-part3-weight-based"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "storing things outside the model and looking them up", expect: ["blog:2026-02-27-how-ai-learns-part4-memory-based"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why a huge prompt window is not the whole answer", expect: ["blog:2026-02-28-how-ai-learns-part5-context-rlm"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "absorbing new skills over time without wrecking the old ones", expect: ["blog:2026-03-01-how-ai-learns-part6-continuous-learning"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "your sketch of a whole agent that keeps learning, with the parts named", expect: ["blog:2026-03-02-how-ai-learns-part7-full-architecture"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what should i read after the piece on memory outside the weights", expect: ["blog:2026-02-28-how-ai-learns-part5-context-rlm"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "series successor"),
+
+        // --- personal software and the tools ---
+        (text: "i have cat pictures scattered everywhere and want to find them offline", expect: ["blog:2026-02-14-cat-finder-local-ml-rust"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "a place to watch a network train with nothing hidden behind a framework", expect: ["blog:2026-02-14-neural-net-rs-educational-ml-platform"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the command line thing that writes tunes for coding assistants", expect: ["blog:2026-02-20-midi-cli-rs-music-for-ai-agents"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how do i add my own moods to that composer tool", expect: ["blog:2026-02-23-midi-cli-rs-extending-with-custom-mood-packs"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "chaining small programs together to compose, the way pipes work", expect: ["blog:2026-02-24-music-pipe-rs-unix-pipelines-for-midi"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the one where several instruments play together in the browser", expect: ["blog:2026-02-28-music-pipe-rs-unix-composition"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "sorting recordings by which ones sound cleanest", expect: ["blog:2026-03-06-rank-wav-audio-quality-ranking"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "a puzzle app that teaches the harder techniques instead of showing me adverts", expect: ["blog:2026-09-09-personal-software-sudoku-learn-practice"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "jumping between projects from the terminal with history and completion", expect: ["blog:2026-03-07-pjmai-rs-navigation-history-and-fuzzy-completion"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the write up about agents fixing bugs rather than writing features", expect: ["blog:2026-04-29-personal-software-vibe-maintenance"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "thirteen little language implementations behind one starter", expect: ["blog:2026-04-28-personal-software-sw-launcher-one-ring"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- ai tools ---
+        (text: "giving an assistant a memory that survives between sessions", expect: ["blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "putting a coding assistant in a box so it cannot wreck anything", expect: ["blog:2026-05-16-nono-sandbox-ai-agents"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the agent you liked because it refuses to become a whole platform", expect: ["blog:2026-05-16-pi-minimal-agent"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "stopping an ai from writing sprawling functions by measuring them", expect: ["blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what happens when the plan you gave an agent turns out to be wrong halfway", expect: ["blog:2026-04-23-ai-tools-agentrail-rs-mid-saga-flexibility"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "trying local models in a loop that plans, does, then checks", expect: ["blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "an assistant small enough to read all of, in your own array language", expect: ["blog:2026-09-16-ai-tools-coding-agent-in-mlpl"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "teaching an assistant to play noughts and crosses and talk rubbish while doing it", expect: ["blog:2026-02-02-game-mcp-poc"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- the operating systems drawn ---
+        (text: "you drew a memory map instead of describing it, for a small kernel", expect: ["blog:2026-09-11-made-visible-swtos"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the second system the picture tool drew, the ordinary sixty four bit one", expect: ["blog:2026-09-12-made-visible-mesaos"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the one where memory means something different because it holds a model", expect: ["blog:2026-09-13-made-visible-mlos"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which of those three drawings breaks the pattern of the other two", expect: ["blog:2026-09-13-made-visible-mlos"], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- languages, compilers, the embedded work ---
+        (text: "compiling for a chip the compiler has never heard of", expect: ["blog:2026-03-13-rabbit-hole-rust-to-unsupported-isa"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how much of that stack based language can be written in itself", expect: ["blog:2026-04-20-embedded-forth-self-hosting-spectrum"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what looking a word up costs in that stack language", expect: ["blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "after you dropped the hashing, what took its place", expect: ["blog:2026-04-24-rabbit-hole-forth-life-after-hashing"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "shrinking the word list and shipping specialised images instead", expect: ["blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "generating code for several targets and the trouble with references that point forward", expect: ["blog:2026-04-26-rabbit-hole-forth-retargetable-codegen-forward-references"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "a driver for that pressure chip that grew into a patent demonstration", expect: ["blog:2026-03-17-embedded-bmp280-pressure-sensor-driver"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "learning machine code in a browser tab with three panes", expect: ["blog:2026-03-22-cor24-rs-assembly-emulator"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the allocator that only ever moved forward until it needed to give memory back", expect: ["blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "expressing an image filtering layer as three nested sums in a symbol heavy notation", expect: ["blog:2026-09-10-ml-cnn-from-equations-mlpl"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how do you make an unnamed function call itself when evaluation is eager", expect: ["blog:2026-09-21-rabbit-hole-sage-y-combinator"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- the lab itself, the campus, the index ---
+        (text: "why did you build a painted map of your projects", expect: ["blog:2026-09-12-software-wrighter-research-campus"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the post about a small model that decides and an index that remembers", expect: ["blog:2026-09-20-saw-atlas-typed-decisions"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "a magnifying glass for a routed model with only a few thousand weights", expect: ["blog:2026-09-13-saw-building-a-tiny-mixture-of-experts"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what are you hoping to build eventually, the long list", expect: ["blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how are the kernels and the machine learning hardware emulator coming along", expect: ["blog:2026-09-08-bucket-list-operating-systems-and-ml-hardware"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "source code in three dimensions and compilers you can watch", expect: ["blog:2026-04-30-bucket-list-3d-source-new-languages-visible-compilers"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how is the home machine learning rig coming along", expect: ["blog:2026-02-28-lucy-20-percent-ai-cluster-upgrade"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- the weekly roundups, by their contents ---
+        (text: "the week two command line tools got emacs packages", expect: ["blog:2026-03-29-saw-pjmai-reg-emacs-all-together-now"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the roundup where logic puzzles about lions and unicorns got solved", expect: ["blog:2026-04-19-saw-prolog-many-agents-self-hosting-mlpl"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the week with a new whitespace language and a talking window system", expect: ["blog:2026-04-26-saw-tuplet-smalltalk-forth-from-forth"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "four months and two thousand commits across fifteen repositories", expect: ["blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "three tools that turned out to be the same problem wearing different hats", expect: ["blog:2026-05-03-saw-espanso-kate-sharex-cor24-i2c-pluggable"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- learning, forgetting, routing ---
+        (text: "what went wrong when you taught a model new work and it dropped the old", expect: ["blog:2026-02-12-sleepy-coder-when-fine-tuning-fails"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "sending different work to different parts of the model so nothing gets overwritten", expect: ["blog:2026-02-18-sleepy-coder-routing-prevents-forgetting"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the small model that went from nothing to three quarters right in five minutes", expect: ["blog:2026-02-01-multi-hop-reasoning"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "training on the easy examples made it worse, and you measured that", expect: ["blog:2026-02-18-multi-hop-reasoning-distribution-trap"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "one explorer failed and five succeeded, on the same sparse reward problem", expect: ["blog:2026-02-03-many-eyes-learning"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "adding curiosity and a web picture to the many explorers work", expect: ["blog:2026-02-24-many-eyes-learning-part2-intrinsic-rewards"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "when the data will not fit in the window, grow the workspace instead", expect: ["blog:2026-02-13-rlm-recursive-language-models"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how that prompt learning idea went from a surprise to something you can engineer", expect: ["blog:2026-02-22-icl-revisited-from-mystery-to-engineering"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "when several assistants talk to each other, how should they be wired", expect: ["blog:2026-02-12-dytopo-rs-dynamic-topology-multi-agent"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is there something better than the usual curly brace data format", expect: ["blog:2026-02-21-json-et-al-data-serialization-formats"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- videos, described rather than named ---
+        (text: "a short clip explaining five ideas in half a minute each, the very first one", expect: ["video:Zu3zreN8c0Q"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "do you have anything to watch about attention and walking downhill to reduce error", expect: ["video:-Y4T0_vETB4"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: "episode 2 covers gradient descent and attention"),
+        (text: "a clip about the tidy geometry deep networks fall into", expect: ["video:ElFwTSuHjnM"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the video about whether reasoning out loud is real reasoning", expect: ["video:mBLFTyh1EKk"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the clip where an assistant plays a board game and insults you", expect: ["video:n_NFFLCtj_M"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "something to watch about a model on a handset with no connection", expect: ["video:fyEuH1BprLI"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the short one about a thousand weights winning at mazes", expect: ["video:O6U06cGkKc4"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is there a recording of the old blue machine with the console lights running", expect: ["video:2RzJP2ofuuU"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- repositories, by what they are for ---
+        (text: "where is the code for the browser emulator of that 1960s system", expect: ["repo:sw-comp-history/ibm-1130-rs"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: "shared identifier: the campus and the blog both name it"),
+        (text: "the source for the array language that runs on your homemade cpu", expect: ["repo:sw-embed/sw-cor24-apl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which repository holds the checker that keeps functions short", expect: ["repo:softwarewrighter/sw-checklist"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the code behind the painted map of the projects", expect: ["repo:software-wrighter-lab/sw-campus"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where do the experiments with a routed tiny model live", expect: ["repo:sw-ml-study/moe-microscope"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the repository for the language you wrote the machine learning work in", expect: ["repo:sw-ml-study/sw-mlpl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+    ],
+)

@@ -1,0 +1,26 @@
+[package]
+name = "atlas-questions"
+description = "The frozen evaluation sets for sw-atlas, and the checks that keep them honest"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "atlas_questions"
+path = "src/lib.rs"
+
+[[bin]]
+name = "atlas-questions"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+clap = { workspace = true }
+ron = { workspace = true }
+serde = { workspace = true }

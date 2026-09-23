@@ -1,0 +1,25 @@
+// Questions with more than one correct answer.
+//
+// Scored as a set, never as one answer: the metric is whether the expected
+// resources are the top ones, and a system that confidently picks one of
+// several right answers and hides the rest is behaving worse than one that
+// offers them. The campus matcher scored 0.091 here and the best docent
+// 0.545, so this is the column where a ranked answer earns its keep.
+QuestionSet(
+    name: "ambiguous",
+    note: "Drafted 2026-09-22, unconfirmed. Every listed resource is genuinely a correct answer.",
+    rows: [
+        (text: "what have you written about forgetting", expect: ["blog:2026-02-12-sleepy-coder-when-fine-tuning-fails", "blog:2026-02-18-sleepy-coder-routing-prevents-forgetting", "blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "show me the music tools", expect: ["blog:2026-02-20-midi-cli-rs-music-for-ai-agents", "blog:2026-02-24-music-pipe-rs-unix-pipelines-for-midi", "blog:2026-03-06-rank-wav-audio-quality-ranking"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the stack language rabbit holes", expect: ["blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name", "blog:2026-04-24-rabbit-hole-forth-life-after-hashing", "blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images", "blog:2026-04-26-rabbit-hole-forth-retargetable-codegen-forward-references"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which posts draw a system's memory", expect: ["blog:2026-09-11-made-visible-swtos", "blog:2026-09-12-made-visible-mesaos", "blog:2026-09-13-made-visible-mlos"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the emulators i can run in a browser", expect: ["campus:ibm-1130-emulator", "campus:rca-1802", "campus:apl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "your writing on models that are far too small to work", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model", "blog:2026-02-02-small-models-part3-hrm", "blog:2026-02-03-small-models-part4-bdh"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the deepseek implementations", expect: ["blog:2026-02-01-deepseek-papers-part1-mhc", "blog:2026-02-02-deepseek-papers-part2-engram", "blog:2026-02-11-deepseek-papers-part3-engram-revisited"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "tools for keeping coding agents in line", expect: ["blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents", "blog:2026-05-16-nono-sandbox-ai-agents", "blog:2026-04-23-ai-tools-agentrail-rs-mid-saga-flexibility"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where do the vintage machines live", expect: ["campus:computer-history", "campus:ibm-1130", "campus:processors"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: "a place and its two children are all defensible"),
+        (text: "anything about the reasoning frontier", expect: ["blog:2026-03-23-mlf-04-is-chain-of-thought-real", "blog:2026-03-16-mlf-02-icrl-in-context-reinforcement-learning", "blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the weekly roundups about the array language", expect: ["blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking", "blog:2026-04-19-saw-prolog-many-agents-self-hosting-mlpl", "blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "project navigation and regression testing", expect: ["blog:2026-03-29-saw-pjmai-reg-emacs-all-together-now", "blog:2026-03-07-pjmai-rs-navigation-history-and-fuzzy-completion", "blog:2026-03-19-tbt-reg-rs-regression-testing"], intent: Compare, origin: Teacher, status: Unconfirmed, note: "two subjects, one question"),
+    ],
+)

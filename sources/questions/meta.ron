@@ -1,0 +1,33 @@
+// Questions about the index rather than about the corpus.
+//
+// These are answered by ordinary code counting the snapshot, or by the
+// role's canned text, or by replaying the last turn's trace -- never by the
+// weights. They are here because a visitor asks them constantly, they are
+// the questions an LLM docent gets confidently wrong, and this one cannot:
+// a count computed from the catalog is either right or a bug.
+QuestionSet(
+    name: "meta",
+    note: "Drafted 2026-09-22, unconfirmed. Answered deterministically; `expect` is empty because the answer is computed, not retrieved.",
+    rows: [
+        (text: "how many posts have you written", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "count from the catalog"),
+        (text: "how many of your repositories are public", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "count"),
+        (text: "how many videos are there", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "count"),
+        (text: "what is the newest thing here", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "max date"),
+        (text: "what did you publish most recently about small models", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "max date within a concept"),
+        (text: "how many posts mention that routed expert idea", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "count within a concept"),
+        (text: "what subjects do you write about most", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "concept frequency"),
+        (text: "how far back does this go", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "min date"),
+        (text: "are you an llm", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text; the honest answer is no, and why"),
+        (text: "are you chatgpt", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text"),
+        (text: "how do you work", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text"),
+        (text: "do you make things up", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text: the model cannot name a resource that is not in the catalog"),
+        (text: "can you see what i typed before", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text: memory is the program's, and local"),
+        (text: "why did you send me there", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "replays the last turn's trace"),
+        (text: "what made you pick that one", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "trace"),
+        (text: "how sure are you", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "trace: the confidence the policy acted on"),
+        (text: "what else did you consider", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "trace: the runners up"),
+        (text: "what can you actually do", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text"),
+        (text: "who made you", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text"),
+        (text: "what don't you know about", expect: [], intent: Meta, origin: Teacher, status: Unconfirmed, note: "role text: the corpus boundary, stated"),
+    ],
+)
