@@ -112,6 +112,24 @@ slugified its concepts on the way out, the corpus would lose the only
 human-readable spellings it has for several hundred concepts. Emit them as
 written.
 
+## DEMO-NAMES — the demos have no names of their own
+
+**Ask.** Where the catalog links to a live demo, give the link a name
+rather than a verb. `[run](...)` beside the 1130 exhibit tells a reader what
+to click and tells an index nothing; `[IBM 1130 System Emulator](...)`, or a
+`title` field beside the URL, tells both.
+
+**Why.** sw-atlas ingested three demos titled `run` and one titled
+`io demo`, which are labels on a button rather than names of a thing. It now
+drops such labels and leaves the title empty, because an empty title is
+honest and a resolver can fall back to the name of the exhibit that declared
+the link -- but that means a visitor asking for the emulator by name is
+matched through the exhibit rather than the demo. The campus and the blog
+are the only places that know what these demos are called.
+
+Cheap, and worth doing in the same pass as CATALOG-EXPORT above: if
+`dist/catalog.json` carries a name per link, sw-atlas needs no rule at all.
+
 ## Not asked for
 
 - No change to the campus's existing keyword matcher. It is the champion

@@ -141,9 +141,9 @@ run):
 
 | | Indexed | Tagged | Related | Unreachable |
 |---|---:|---:|---:|---:|
-| All artifacts | 643 | 410 | 470 | **0** |
+| All artifacts | 642 | 410 | 469 | **0** |
 
-Every one of the 642 distinct URLs has been checked: 635 resolve, **none is
+Every one of the 641 distinct URLs has been checked: 634 resolve, **none is
 gone**, six are academic hosts that refuse a robot and one did not answer.
 Two gates fail the command: a resource nothing can reach, and a URL that
 404s. The link results are committed in `cache/url-status.json`, so the gate

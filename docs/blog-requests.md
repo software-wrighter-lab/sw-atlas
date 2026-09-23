@@ -125,6 +125,12 @@ corpus because he has written about them. Nothing is needed here; it is
 recorded because a reader of this file would otherwise wonder why a fork
 appears in the index.
 
+**Demo links, when there are any: a name rather than a verb.** The same ask
+as the campus's DEMO-NAMES. A post's `demo_url` carries no title today, and
+where a link's text is `run` or `source` sw-atlas now treats it as a button
+label and leaves the resource's title empty rather than inventing one. Six
+posts declare a demo; naming them costs a few words each.
+
 **Paper links: six hosts refuse robots and one is unreachable.** ACM,
 doi.org and openreview answer 403 to a link check, and
 `yann.lecun.org/exdb/publis/pdf/lecun-06.pdf` did not answer at all. None

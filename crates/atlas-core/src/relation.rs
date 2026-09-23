@@ -72,14 +72,19 @@ pub struct Link {
 /// The identifier a link's target gets, derived from its URL.
 ///
 /// Two sources naming one repository, video or paper produce one resource
-/// rather than two, however differently they wrote the URL.
+/// rather than two, however differently they wrote the URL. That is why the
+/// tail is normalized rather than used as written: the campus links to its
+/// own page twice, once as `.../sw-campus` and once as `.../sw-campus/#`,
+/// and a corpus holding both would let a matcher score against a duplicate.
 pub fn link_id(link: &Link) -> ResourceId {
-    let trimmed = link
-        .url
+    let url = link.url.trim();
+    let addressed = url.split('#').next().unwrap_or(url);
+    let trimmed = addressed
         .trim_end_matches('/')
         .trim_start_matches("https://")
         .trim_start_matches("http://")
-        .trim_start_matches("www.");
+        .trim_start_matches("www.")
+        .trim_end_matches('/');
     let (prefix, tail) = match link.kind {
         ResourceKind::Repo => ("repo", trimmed.trim_start_matches("github.com/")),
         ResourceKind::Video => (
@@ -92,6 +97,24 @@ pub fn link_id(link: &Link) -> ResourceId {
     ResourceId::new(format!("{prefix}:{tail}"))
 }
 
+/// Whether a declarer's link text is a button label rather than a name.
+///
+/// The campus writes `[run](...)` beside an exhibit and the blog writes
+/// `[source](...)`; neither is what the thing is called. A demo titled
+/// `run` is worse than a demo with no title, because a visitor asking for
+/// the 1130 emulator would never type it and a resolver can always fall
+/// back to the name of whatever declared the link. So a label is dropped
+/// rather than promoted to a title, and this list is deliberately short:
+/// anything not obviously a button stays, because guessing which names are
+/// real is exactly the inference this corpus refuses to make.
+fn is_label(text: &str) -> bool {
+    const LABELS: [&str; 14] = [
+        "run", "demo", "io demo", "play", "open", "launch", "try", "try it", "here", "link",
+        "source", "code", "view", "more",
+    ];
+    LABELS.contains(&text.trim().to_lowercase().as_str())
+}
+
 /// The resource a link names and the edge that reaches it.
 pub fn edge(from: &ResourceId, link: &Link) -> (Resource, Relation) {
     let kind = match link.kind {
@@ -101,7 +124,11 @@ pub fn edge(from: &ResourceId, link: &Link) -> (Resource, Relation) {
         _ => RelationKind::RelatedTo,
     };
     let to = link_id(link);
-    let title = link.title.clone().unwrap_or_default();
+    let named = link.title.clone().filter(|text| !is_label(text));
+    let title = match link.kind {
+        ResourceKind::Demo | ResourceKind::Video => named.unwrap_or_default(),
+        _ => link.title.clone().unwrap_or_default(),
+    };
     let target = Resource::stub(to.clone(), link.kind, title, link.url.clone());
     let relation = Relation {
         from: from.clone(),
