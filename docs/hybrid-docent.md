@@ -43,56 +43,115 @@ is measurably good at.
 
 ## 2. The division of labour
 
+Revised 2026-09-24 by a measurement from upstream, recorded in section 2a.
+The short version: the model is never asked to choose among candidates it
+has not trained on, and concepts are what carries a new resource.
+
 ```
  visitor sentence  +  conversation memory (program-owned)
         |
         +--------------------+---------------------------+
         |                    |                           |
         v                    v                           |
-  A0 matcher (MB02)    TDM, one forward pass             |
-  deterministic        pooled encoder, typed heads:      |
-  - top-k candidate      Choice  intent (10 classes)     |
-    resources with       Choice  resource kind wanted    |
-    hit signals          Noul    is-meta, is-followup,   |
-  - lexical score          off-topic, wants-link, ...    |
-                         Choice  rerank over the k       |
-                           candidates (dynamic set:      |
-                           score = f(h_query, h_card))   |
+  A0 matcher (MB02)    TDM, one forward pass,            |
+  deterministic        every head a FIXED label set:     |
+  - reads every word     Choice  intent (10 classes)     |
+    of every card        Choice  resource kind wanted    |
+  - top-k candidates     Noul*   concepts (~703, multi-  |
+    with their signals           label, one sigmoid each)|
+  - strong on names      Noul    off-topic, meta,        |
+    and brand-new text           follow-up, wants-link   |
+        |                    |                           |
+        |         concepts -> catalog lookup             |
+        |         (deterministic; a post indexed         |
+        |          after training is reachable the       |
+        |          moment it carries a known concept)    |
         |                    |                           |
         +---------+----------+                           |
                   v                                      |
         policy (ordinary Rust, thresholds are data)  <---+
-          - A0 confident and TDM agrees      -> act
-          - A0 confident, TDM disagrees      -> A0 wins unless TDM
-                                                margin > tau (fitted)
-          - A0 weak, TDM confident in rerank -> act on TDM pick
-          - both weak                        -> ranked alternatives
-          - off-topic Noul high              -> "I only know about ..."
+          - A0 confident and the model agrees  -> act
+          - A0 confident, model disagrees      -> A0 wins unless the
+                                                  model's margin > tau
+          - A0 weak, concepts confident        -> act on the concept
+                                                  lookup's ranking
+          - rerank, but only among candidates the model trained on;
+            a cold candidate keeps the matcher's order untouched
+          - both weak, or off-topic Noul high  -> abstain, then suggest
                   |
                   v
         answer = frame + catalog text, quoted, never composed
 ```
 
-The model never emits a URL, a resource id or prose (invariant 1). It picks
-among candidates the matcher and the catalog already produced. That is the
-TDM rule, "every string a user sees is one of the candidates the program
-offered", and the Atlas rule, "the catalog resolves", in one mechanism.
+The model still never emits a URL, a resource id or prose (invariant 1). It
+emits an intent, a kind, a set of concepts and a few propositions;
+deterministic code turns those into places and links.
 
 **Why this is best-of-both rather than a compromise:**
 
 | Failure | Matcher alone | TDM alone | Hybrid |
 |---|---|---|---|
 | exact title/alias ("sw-cor24-apl") | right | often wrong, unseen token | matcher confident, acts |
-| paraphrase ("the language with strange symbols") | sometimes | if seen in training | TDM reranks the matcher's top-k |
-| intent ("is it finished?" vs "where is it?") | regex, 0.48 | learned head | TDM |
-| off-topic ("what's the weather") | brittle | trained NONE class | Noul plus both-weak rule |
-| a new post published last night | right, it is in the catalog | unknown label | matcher proposes it; the rerank head scores cards, not labels, so it can pick it without retraining |
+| paraphrase ("the language with strange symbols") | sometimes | if the words trained | concepts narrow the field; a warm card may be reranked |
+| intent ("is it finished?" vs "where is it?") | regex, 0.48 | learned head | the model, and this is its clearest win |
+| off-topic ("what's the weather") | brittle | trained NONE class | Noul plus the both-weak rule |
+| a new post published last night | right, it is in the catalog | no label for it | it carries known concepts, so the concept lookup reaches it; reranking leaves it where the matcher put it |
 | visitor misspells | fuzzy substring | exact vocab misses | either one can recover it |
 
-The last-but-one row is why the rerank head must be a **dynamic-choice
-scorer** (demo-decision-model's PR05, `f(h_state, h_question, h_choice)`)
-and not a fixed softmax over resource ids. A head over ids needs retraining
-for every new post and breaks invariant 2.
+### 2a. What changed, and the measurement that changed it
+
+The earlier version of this section put a **dynamic-choice scorer** at the
+centre: score every candidate card as text, so a card written after training
+could still win. `demo-decision-model` built exactly that as PR05 and
+measured it (their lesson DC01, on their DOCTOR corpus, `mlpl-repl 0.22.0`):
+
+| Rows | full field (51 cards) | five cards, four trained | five cards, all cold |
+|---|---:|---:|---:|
+| cards that trained | 85.3% | 97.4% | 95.9% |
+| cards held out of training entirely | **0.4%** | 36.5% | 18.6% (chance is 20%) |
+
+Where cards trained, the generality costs about a point against a fixed head
+(85.3% against model 4's 86.1% on the same rows) -- that part transfers.
+Where they did not, the right card essentially never wins, and among
+candidates that are all cold the scorer cannot tell which fits.
+
+Their caveat is fair and matters here: a DOCTOR rule card is a decomposition
+pattern whose overlap with its input is function words, while an Atlas query
+and an Atlas card share *content* words ("sleep" against a card about
+sleep). So 0.4% is a lower bound from an unfriendly regime, not a verdict on
+card scorers, and the number this project must act on is its own. What DC01
+does settle is that "a candidate written after training can be chosen" is
+not a property of the architecture, and a design that assumed it was
+assuming.
+
+So the assumption is gone. Concepts do that job instead: the concept head is
+a fixed label set over a curated vocabulary that changes at the pace of the
+concept graph rather than the pace of publishing, a new resource arrives
+carrying concepts that already exist, and the catalog resolves them without
+the model scoring anything it has not seen. Reranking survives in the place
+DC01 shows it works -- a small field of warm cards -- and cold candidates
+keep the matcher's order, which turns "never worse than A0 on a new post"
+from a hope into a property of the wiring.
+
+### 2b. What this project is claiming, and what it is not
+
+Upstream also measured the comparison this project will be asked about
+(their LB01, same bounded-choice method, nothing generated): on 24 held-out
+spam and phishing messages a local `llama3.2:3b` scored 0.792 **zero-shot**
+against their trained model's 0.750, `gemma4:31b` scored 1.000, and the 3B
+model was better calibrated untouched (ECE 0.006) than theirs after
+temperature scaling (0.097). Their conclusion is the one to carry: a trained
+typed decision model earns its place where no pretrained model has the
+knowledge.
+
+That is the test this design has to pass, and it is the reason to expect it
+can. Nothing pretrained has seen 642 private artifacts, 703 curated concepts
+or which post supersedes which; and a generative model in the browser is
+ruled out below A4 anyway. So the claim is: **offline, a few hundred
+kilobytes, no server, and unable to invent an exhibit** -- over a corpus no
+foundation model knows. The claim is *not* that it beats a large model with
+the catalog in its prompt at reading a sentence. When the comparison row is
+measured here it will be published whichever way it falls.
 
 ## 3. What to reuse from demo-decision-model, and how
 
@@ -107,6 +166,8 @@ vendored copy. Nothing here edits them.
 | escalation policy: Act / NoneApplies / Escalate on min_known, confidence, margin | `crates/tdm-model/src/responder.rs` | copy the shape into the policy crate | this is the matcher-or-model arbitration |
 | bundle format with an embedded parity set | `crates/tdm-model/src/bundle.rs` | extend into `snapshot/model/tdm.json` | trainer/browser drift fails a test |
 | trace schema and validator; rejects output text that was not offered | `schemas/decision-trace-v1`, `crates/tdm-trace` | git dependency at tag `tdm-v0.1.0` | "why this answer?" (plan Saga 9 step 5) at no cost |
+| card scorer (PR05): `Scorer::rank`, candidates as text at call time | `lib/scorer.mlpl`, `crates/tdm-model/src/scorer.rs` | git dependency at tag `tdm-v0.1.0`; used only for warm reranking (section 2a) | delivered 2026-09-24 with the measurement that bounds where it may be used |
+| in-browser training of a bundled program | `scripts/bundle-program`, their Live Editor | pattern, for a demo rather than the product | shows a model this size trains from scratch in seconds; the nightly path stays the product |
 | Yew chat plus trace panel, training timeline | `crates/tdm-web` | pattern, not a dependency | the site's UI belongs to sw-campus / blog |
 | "freeze labels before training data exists" | its probes discipline | adopt as a rule | the thing that makes the comparison honest |
 
@@ -176,9 +237,12 @@ sw-comp-history, ...). `fork == false` belongs in `atlas-ingest repos`
 stays the unfiltered record. Forks the blog or campus links to are kept (owner
 decision, 2026-09-22), which makes 251.
 
-Because the rerank head scores cards rather than ids, a new post should
-usually need **no** retraining at all, only an index rebuild. Saga 7 (SN01)
-measures that; the scheduled retrain covers vocabulary drift.
+A new post needs **no** retraining to be findable: it is indexed with
+concepts that already exist, and the concept head plus the catalog reach it
+(section 2a). What the scheduled retrain buys is vocabulary drift and
+*warming* -- a card the model has trained on can be reranked, a cold one
+keeps the matcher's order. Saga 7 (SN01) measures the difference, and DC01
+says to expect it to be large.
 
 ## 6. Verification: how to show the hybrid improves on the matcher
 
@@ -212,7 +276,8 @@ but present in the served catalog, the 1442 pattern).
 | A0-oracle@k | "correct answer is in the matcher's top-k": the **ceiling** for any reranker, and the first number to measure (section 8) |
 | TDM | model alone, destination by rerank over all cards |
 | H | hybrid, policy in section 2 |
-| H-ablations | H without the rerank head; H without intent head; H with a hand-set tau instead of a fitted one |
+| H-ablations | H without the rerank head; H without the concept head; H without the intent head; H with a hand-set tau instead of a fitted one |
+| H-warm vs H-cold | the same hybrid measured over candidates it trained on and candidates held out entirely, upstream's DC01 harness shape: full field, small warm field, small cold field. The cold field is the diagnostic that separates a weak reranker from a biased one, and it is the number that says whether the concept path is carrying new resources on its own |
 
 **Metrics** (the plan's list, plus three for the hybrid claim): intent
 accuracy, dest@1, top-3, MRR, unsupported recall, ambiguous top-2, ECE,
@@ -251,22 +316,31 @@ section 10 carries it:
 2. Saga 2 `atlas-baseline` unchanged, with two additions: the A0-oracle@k
    row, and eval sets sized for section 6 rule 4.
 3. **A new Saga 3 `hybrid-tdm` (HT01)** ahead of the Needle probe:
-   vendor the TDM pieces; train intent, kind and Nouls plus the card
-   rerank head in sw-MLPL; the Rust `atlas-tdm` crate with parity; the
-   policy crate; eval all arms; publish the row either way.
+   vendor the TDM pieces at tag `tdm-v0.1.0`; train the intent, kind,
+   concept and Noul heads in sw-MLPL; the Rust `atlas-tdm` crate with
+   parity; the policy crate, including the suggestion and next-question
+   generation an abstention needs; eval all arms, warm and cold; publish
+   the row either way.
 4. The Needle probe (NP01) becomes Saga 4 and competes against H, not A0.
    If H clears the bar, Needle becomes an upgrade to the encoder inside H,
    not a replacement for the design.
 
 Work order filed in
 [`demo-decision-model-requests.md`](demo-decision-model-requests.md), which
-asked for (a) PR05 dynamic choice sets, because the card rerank head needs
-exactly that trainer, and (b) a tagged release of `tdm-model` /
-`tdm-trace` to pin against. Both were answered on 2026-09-22: the tag is
-`tdm-v0.1.0`, and PR05 is upstream's to build, so step 3 of the saga waits
-on it rather than writing a second one. Its NV01 ("demo 02: campus
-navigation, `lib/` unchanged") is effectively this project, so the finding
-flows both ways.
+asked for (a) PR05 dynamic choice sets and (b) a tagged release of
+`tdm-model` / `tdm-trace` to pin against. **Both were delivered by
+2026-09-24**: the tag is `tdm-v0.1.0` at commit `b476842`, and PR05 is
+`lib/scorer.mlpl` with `Scorer::rank` taking candidates as text at call
+time. PR05 arrived with DC01, which is why section 2 was rewritten rather
+than merely annotated -- the most useful thing that request produced was a
+negative result that saved this project from shipping a design built on an
+assumption. Upstream now carries
+`docs/reference/downstream-requests.md`, so an ask no longer travels only
+by someone relaying it.
+
+Their NV01 ("demo 02: campus navigation, `lib/` unchanged") is effectively
+this project, so the finding flows both ways: whatever forces a change to
+the vendored `lib/` here is reported back there.
 
 ## 8. The first measurement
 

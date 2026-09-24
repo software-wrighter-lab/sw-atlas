@@ -169,10 +169,16 @@ the matcher rather than help it. So the next model is not a rival. In the
 hybrid docent (Saga 3, HT01), the matcher proposes candidates, a typed
 decision model reused from
 [`demo-decision-model`](https://github.com/sw-ml-study/demo-decision-model)
-decides intent and reranks those candidates, and ordinary Rust decides
-which one to trust. It ships only if the combination beats the matcher by
-the same 20 points. The reasoning is in
-[`docs/hybrid-docent.md`](docs/hybrid-docent.md).
+decides intent, resource kind and concepts, and ordinary Rust resolves those
+against the catalog and decides which source to trust. It ships only if the
+combination beats the matcher by the same 20 points.
+
+Upstream measured the alternative design before this project built it: a
+scorer that reads candidates as text manages 0.4% on candidates held out of
+training, so concepts rather than card scoring are what carry a newly indexed
+resource, and reranking is confined to candidates the model has trained on.
+The reasoning, and what this project does and does not claim against a large
+model, is in [`docs/hybrid-docent.md`](docs/hybrid-docent.md).
 
 Progress is driven by [agentrail](CLAUDE.md) sagas. `agentrail status`
 says where the current one stands; [`docs/sagas.md`](docs/sagas.md) holds

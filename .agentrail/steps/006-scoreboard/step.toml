@@ -1,4 +1,4 @@
-number = 5
+number = 6
 slug = "scoreboard"
 status = "pending"
 description = "The harness writes the measured MB02 and MB02-oracle@k rows into docs/referen..."

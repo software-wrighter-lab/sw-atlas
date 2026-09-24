@@ -76,13 +76,13 @@ What it needs before it starts, and from whom:
 - **Not needed yet.** PR05 from `demo-decision-model` (Saga 3 step 3), and
   the text for the 32 videos without scripts.
 
-## Waiting on another repository
+## Delivered by another repository
 
-- **PR05, the card scorer, is upstream's.** `demo-decision-model` accepted
-  the request on 2026-09-22 and is building it; sw-atlas must not write its
-  own. Saga 3 step 3 (the card rerank head) waits on their delivery, and
-  sw-atlas supplies the evaluation instead. Their crates are pinnable today
-  at tag `tdm-v0.1.0`. See
+- **PR05 and the pinnable tag are both done** (2026-09-22 and 2026-09-24).
+  `demo-decision-model` shipped `lib/scorer.mlpl` and `Scorer::rank`, and
+  the tag `tdm-v0.1.0` at commit `b476842`. Nothing in this project waits on
+  them any more. PR05 arrived with the DC01 measurement that rewrote
+  [`hybrid-docent.md`](hybrid-docent.md) section 2; see
   [`demo-decision-model-requests.md`](demo-decision-model-requests.md).
 
 ## Waiting on the owner
@@ -117,15 +117,19 @@ Not started. Sizes are the plan's estimate, not a commitment.
   product with no model in it.
 
 - **Saga 3 `hybrid-tdm` (HT01).** The matcher and a model stop being
-  rivals. A0 proposes candidates; a typed decision model reused from
-  `demo-decision-model` decides intent, resource kind and Nouls
-  (off-topic, follow-up, meta) and reranks the candidates by card; Rust
-  policy arbitrates and quotes catalog text into fixed frames. Five steps:
-  vendor the TDM pieces (Rust crates at tag `tdm-v0.1.0`), train the heads
-  in sw-MLPL, the card rerank head from upstream's PR05, the policy crate with meta answers computed from the
-  catalog, and an evaluation of A0, A0-oracle@k, model alone, hybrid and
-  ablations with paired intervals. Exit: HT01 rows, and the hybrid ships
-  only if it clears the MB02 bar. Reasoning in
+  rivals. A0 proposes candidates and reads every word of every card; a typed
+  decision model reused from `demo-decision-model` decides intent, resource
+  kind, concepts (a multi-label head over the curated vocabulary) and the
+  Nouls; deterministic code resolves concepts to resources, arbitrates, and
+  quotes catalog text into fixed frames. Reranking is confined to cards the
+  model trained on, because upstream's DC01 measured a card scorer at 0.4%
+  on cards held out of training; concepts are what carry a newly indexed
+  resource instead. Five steps: vendor the pieces at tag `tdm-v0.1.0`, train
+  the heads in sw-MLPL, warm-field reranking with PR05, the policy crate
+  including the suggestions and next questions an abstention needs, and an
+  evaluation of A0, A0-oracle@k, model alone, hybrid, ablations and the
+  warm/cold split with paired intervals. Exit: HT01 rows, and the hybrid
+  ships only if it clears the MB02 bar. Reasoning in
   [`hybrid-docent.md`](hybrid-docent.md).
 
 - **Saga 4 `needle-probe` (NP01).** Decisive, and more expensive than it
@@ -190,6 +194,17 @@ Not started. Sizes are the plan's estimate, not a commitment.
   (Lucy is `lucy-20-percent`, "Which Small AI Fits YOUR Laptop?" is
   `billion-llm`), so 52 of 84 videos carry their script. Recorded as step
   013, `confirm-video-joins`.
+
+- **2026-09-24, concepts carry new resources, not a card scorer.**
+  Upstream's DC01 measured a question-conditioned card scorer at 0.4% in a
+  full field of cards held out of training (36.5% in a five-card field,
+  chance when all candidates are cold), against 85.3% where cards trained.
+  The hybrid design no longer rests on scoring unseen cards: every head is a
+  fixed label set, a multi-label concept head plus the catalog reaches a
+  newly indexed resource, and reranking is confined to warm candidates while
+  cold ones keep the matcher's order. Their corpus is harsher than this one,
+  so this project owes its own measurement, using their hold-out harness.
+  Recorded as step `hybrid-design-after-dc01`.
 
 - **2026-09-22, the hybrid docent.** The repository owner adopted
   [`hybrid-docent.md`](hybrid-docent.md): the deterministic matcher and a

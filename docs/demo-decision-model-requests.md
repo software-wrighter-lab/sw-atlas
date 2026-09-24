@@ -15,17 +15,45 @@ resource wanted and a few Nouls, and reranks the candidates. sw-atlas
 vendors the MLPL library hash-pinned and pins the Rust crates to a tag. It
 edits nothing there.
 
-**Answered 2026-09-22, relayed by the repository owner.** The tag exists
-(see TAG below) and upstream owns PR05. Both items below record what was
-asked and what came back; neither is an open ask any more.
+**Both delivered by 2026-09-24.** The tag landed on 2026-09-22 and PR05 on
+2026-09-24, with a measurement this project had to act on. Neither item
+below is an open ask; both are records, and the PR05 record is the one to
+read before building on it.
 
-## PR05 — dynamic choice sets (upstream owns it; Saga 3 step 3 waits)
+## PR05 — dynamic choice sets (delivered, and it changed the design)
 
-**Status, 2026-09-22: accepted upstream and in progress.** The owner
-relayed that demo-decision-model is mid-build on PR05 and that sw-atlas
-must **not** write its own scorer. Saga 3 step 3 therefore waits on their
-delivery instead of carrying a fallback, and sw-atlas contributes the
-evaluation rather than the trainer.
+**Status, 2026-09-24: delivered.** `lib/scorer.mlpl` and
+`crates/tdm-model/src/scorer.rs`, where `Scorer::rank` takes candidates as
+text at call time, mlplunit-tested, demo-neutral, parity with the trainer to
+`1e-9` on the rounded weights a consumer receives, and reachable at tag
+`tdm-v0.1.0`. Their lesson is
+[`DC01`](https://github.com/sw-ml-study/demo-decision-model/blob/main/docs/experiments/DC01-dynamic-choice-sets.md).
+
+**The measurement, which matters more than the code.** Trained over 8,336
+tuples spanning two questions, with twelve rules held out entirely (their
+corpus, `mlpl-repl 0.22.0`):
+
+| Rows | full field (51 cards) | five cards, four trained | five cards, all cold |
+|---|---:|---:|---:|
+| cards that trained | 85.3% | 97.4% | 95.9% |
+| cards held out entirely | **0.4%** | 36.5% | 18.6% (chance 20%) |
+
+Generality costs about a point where candidates trained (85.3% against a
+fixed head's 86.1% on the same rows). Where they did not, the right card
+essentially never wins.
+
+**What sw-atlas did about it.** Rewrote
+[`hybrid-docent.md`](hybrid-docent.md) section 2: concepts became the bridge
+that carries a newly indexed resource, every head is a fixed label set, and
+reranking is confined to candidates the model trained on, with cold ones
+keeping the matcher's order. Their caveat -- their cards share only function
+words with their inputs, ours share content words -- is why this project
+still owes its own measurement rather than adopting 0.4% as its own number;
+their hold-out harness shape (full field, small warm field, small cold
+field) is adopted for it.
+
+Filed as the step `hybrid-design-after-dc01`. A request that came back with
+a negative result was worth more than one that came back with a feature.
 
 **Ask.** Deliver the queued PR05 lesson: a question-conditioned scorer
 `score_i = f(h_state, h_question, h_choice_i)` trained over
@@ -45,10 +73,12 @@ last night can be chosen without retraining" is possible. sw-atlas Saga 7
 with no demo identifiers, parity against the Rust forward pass, and a
 measured accuracy on choices held out of training.
 
-**The fallback is withdrawn.** An earlier version of this file said that
-sw-atlas would write the scorer itself if it got there first. It will not:
-two implementations of one contract is the duplication these request files
-exist to prevent.
+**The fallback was withdrawn and stayed withdrawn.** An earlier version of
+this file said sw-atlas would write the scorer itself if it got there first.
+It did not, and upstream's version arrived with an evaluation this project
+would not have thought to run on itself -- twelve candidates held out
+*entirely*, then scored in a field where every alternative is equally
+unfamiliar. That harness is the reusable part.
 
 ## TAG — a revision to pin (delivered)
 
@@ -101,10 +131,34 @@ bundle versions a given sw-atlas snapshot can load.
 
 Until 2026-09-22 this file was the only record of either request, and
 nothing in demo-decision-model referenced it, so an agent working there
-could not have known. Both items travelled by the owner relaying them by
-hand. Upstream is adding a request file on its own side so the next ask
-survives without a relay; sw-atlas keeps this file as its half of the
-record and should not assume it is read.
+could not have known; both items travelled by the owner relaying them by
+hand. **That is fixed from their side:** they now carry
+`docs/reference/downstream-requests.md`, which records what was asked, what
+was delivered and where the answer is. The channel is therefore two files
+that cite each other rather than one file and a person, and the next ask
+should be written here and expected to be read there -- while still saying
+so out loud in a session summary, because neither file is a notification.
+
+## What their other measurements changed here
+
+Not requests, and worth recording because they moved this project's own
+claims:
+
+- **LB01.** On 24 held-out spam and phishing messages, scored by the same
+  bounded-choice method with nothing generated, a local `llama3.2:3b` got
+  0.792 zero-shot against their trained model's 0.750, `gemma4:31b` got
+  1.000, and the 3B model was better calibrated untouched (ECE 0.006) than
+  theirs after temperature scaling (0.097). sw-atlas now states plainly
+  what it claims -- offline, a few hundred kilobytes, no server, cannot
+  invent an exhibit, over a corpus no pretrained model has seen -- and what
+  it does not: beating a large model that has the catalog in its prompt.
+  [`hybrid-docent.md`](hybrid-docent.md) section 2b.
+- **In-browser training.** They ship a flattened program that trains in
+  their Live Editor at 512 slots by 24 dimensions, 30 steps, reaching 0.81
+  validation against the 0.879 of the model they ship. It is evidence that a
+  model this size trains from scratch in seconds, which makes a
+  train-it-yourself demo cheap here later; the nightly build stays the
+  product.
 
 ## What sw-atlas gives back
 

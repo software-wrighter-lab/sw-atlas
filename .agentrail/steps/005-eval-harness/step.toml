@@ -1,4 +1,4 @@
-number = 4
+number = 5
 slug = "eval-harness"
 status = "pending"
 description = "Read docs/hybrid-docent.md section 6 first. Write 'just eval': intent accurac..."

@@ -536,17 +536,29 @@ its dense twin.
    (`lib/decision.mlpl`, `lib/text.mlpl`, `lib/choice_model.mlpl`) vendored
    hash-pinned; `tdm-trace` and the `tdm-model` forward pass pinned to a
    tagged revision or ported into an `atlas-tdm` crate with the parity set.
-2. **heads.** Intent, kind and Noul heads trained in sw-MLPL on Saga 2's
-   training rows and templates, never on its frozen sets.
-3. **rerank.** A card-scoring head, `f(h_query, h_card)`, over the
-   matcher's top-k, so that a resource published after training can still
-   be chosen. Depends on the PR05 request in
-   [`demo-decision-model-requests.md`](demo-decision-model-requests.md), or
-   is written here if that has not landed.
+2. **heads.** Intent, kind, a multi-label concept head over the curated
+   vocabulary, and the Nouls, trained in sw-MLPL on Saga 2's training rows
+   and templates, never on its frozen sets. Every head is a fixed label
+   set, which is what keeps a newly indexed resource reachable: it arrives
+   carrying concepts that already exist, and deterministic code resolves
+   them.
+3. **rerank, where it works.** The PR05 card scorer (delivered upstream at
+   tag `tdm-v0.1.0`) over the matcher's top-k, confined to candidates the
+   model trained on. Upstream's DC01 measured a card scorer at 0.4% in a
+   full field of cards held out of training, 36.5% in a five-card field and
+   chance when every candidate is cold, against 85.3% where cards trained;
+   their regime is harsher than this one, so this project measures its own,
+   with their hold-out harness. A cold candidate keeps the matcher's order,
+   which makes "never worse than A0 on a new post" structural.
 4. **policy.** The arbitration crate: act, rerank, offer alternatives or
    abstain, with thresholds fitted on validation and carried as data; meta
    answers (counts, newest, "why did you send me there?") computed from the
-   catalog and the trace, never from the weights.
+   catalog and the trace, never from the weights. An abstention is not a
+   dead end: with an exact vocabulary an unknown word contributes no
+   feature, so a missing-evidence signal is real, and the program answers it
+   with nearest concepts, "did you mean" from concept aliases, and next
+   questions generated from the catalog -- counts per concept, series
+   successors, "is there a video of that?" where a relation exists.
 5. **eval.** Arms A0, A0-oracle@k, TDM alone, hybrid, and the hybrid's
    ablations, on every frozen set; paired McNemar and a bootstrap interval
    on each margin; confidently-wrong rate; the questions A0 got right and
