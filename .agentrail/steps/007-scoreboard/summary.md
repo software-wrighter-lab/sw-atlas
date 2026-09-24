@@ -1,0 +1,1 @@
+BLOCKED: Begun in error: the cursor had advanced past the pending matcher and eval-harness steps (003, 004) because an earlier reorder left them behind a completed step. No scoreboard work was done. The matcher is being inserted at the cursor instead; reopen this when the harness has numbers for it.

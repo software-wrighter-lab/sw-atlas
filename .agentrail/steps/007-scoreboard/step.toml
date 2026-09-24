@@ -1,6 +1,6 @@
-number = 6
+number = 7
 slug = "scoreboard"
-status = "pending"
+status = "blocked"
 description = "The harness writes the measured MB02 and MB02-oracle@k rows into docs/referen..."
 role = "production"
 context_files = []
