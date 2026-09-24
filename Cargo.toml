@@ -9,7 +9,9 @@ members = [
     "crates/atlas-graph",
     "crates/atlas-ingest",
     "crates/atlas-links",
+    "crates/atlas-match",
     "crates/atlas-questions",
+    "crates/atlas-signals",
     "crates/atlas-repos",
     "crates/atlas-video",
 ]
@@ -35,7 +37,9 @@ atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
 atlas-graph = { path = "crates/atlas-graph" }
 atlas-links = { path = "crates/atlas-links" }
+atlas-match = { path = "crates/atlas-match" }
 atlas-questions = { path = "crates/atlas-questions" }
+atlas-signals = { path = "crates/atlas-signals" }
 atlas-repos = { path = "crates/atlas-repos" }
 atlas-video = { path = "crates/atlas-video" }
 clap = { version = "4", features = ["derive"] }

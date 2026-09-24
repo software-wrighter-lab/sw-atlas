@@ -1,0 +1,21 @@
+[package]
+name = "atlas-match"
+description = "MB02: moe-microscope's deterministic docent matcher, ported to the whole sw-atlas corpus"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dev-dependencies]
+atlas-signals.workspace = true
+ron = { workspace = true }
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-core.workspace = true
+atlas-corpus.workspace = true
+atlas-decide.workspace = true
+atlas-signals.workspace = true
