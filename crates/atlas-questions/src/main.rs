@@ -44,7 +44,35 @@ struct Args {
     /// The directory of sets.
     #[arg(long, default_value = "sources/questions")]
     sets: PathBuf,
+    /// Write a review form to this path instead of checking: every row on one
+    /// line with a mark column the repository owner edits in place.
+    #[arg(long)]
+    form: Option<PathBuf>,
 }
+
+/// What the review form says about itself, above the rows.
+const FORM_HEADER: &str = "\
+# Evaluation questions: review form
+#
+# Edit in place, then say so; the marks are applied to sources/questions/*.ron.
+# Replace the leading `_` on a row with one character:
+#
+#     Y   confirmed: a question a visitor might type, expected answer right
+#     N   rejected: the row is deleted
+#     ?   unsure: the row stays drafted and is discussed
+#
+# A row left `_` is unreviewed and is never used as a yardstick. `Y ALL` under
+# a heading confirms that whole section; an individual N or ? beats it.
+#
+# Confirming is the owner's judgement, not an agent's: rows drafted and
+# confirmed by the same party measure that party's idea of the corpus rather
+# than the corpus. The mechanical checks are run separately by `just
+# questions` -- every expected id resolves, and no paraphrase contains an
+# alias or title of its own answer.
+#
+# Columns are separated by ` :: `, not `|`, because a follow-up row contains a
+# `|` inside the question itself.
+";
 
 fn main() -> ExitCode {
     match run(&Args::parse()) {
@@ -71,13 +99,33 @@ fn sets(dir: &std::path::Path) -> Result<Vec<QuestionSet>, String> {
     paths.iter().map(|path| QuestionSet::load(path)).collect()
 }
 
+/// Write the review form: one line per row, marks left for a person.
+fn form(sets: &[QuestionSet], path: &std::path::Path) -> Result<String, String> {
+    let mut out = String::from(FORM_HEADER);
+    let mut rows = 0;
+    for set in sets {
+        let rule = "=".repeat(70);
+        out.push_str(&format!("\n{rule}\n# {} :: {}\n", set.name, set.note));
+        for (n, row) in set.rows.iter().enumerate() {
+            out.push_str(&row.review_line(n + 1));
+            rows += 1;
+        }
+    }
+    std::fs::write(path, out).map_err(|e| e.to_string())?;
+    Ok(format!("wrote {} with {rows} rows", path.display()))
+}
+
 /// Count, freeze, check.
 fn run(args: &Args) -> Result<String, String> {
+    let all = sets(&args.sets)?;
+    if let Some(path) = &args.form {
+        return form(&all, path);
+    }
     let text = std::fs::read_to_string(&args.corpus).map_err(|e| e.to_string())?;
     let corpus: atlas_corpus::Corpus = ron::from_str(&text).map_err(|e| e.to_string())?;
     let mut lines = Vec::new();
     let mut problems = Vec::new();
-    for set in sets(&args.sets)? {
+    for set in all {
         let (confirmed, drafted) = set.counted();
         let digest = &set.digest()[..16];
         lines.push(format!(

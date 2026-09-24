@@ -86,6 +86,26 @@ pub struct Row {
     pub note: String,
 }
 
+impl Row {
+    /// This row as the owner's review form shows it: the mark it already
+    /// carries, its number, its words, and what it expects. The separator is
+    /// ` :: ` rather than `|` because a follow-up row contains a `|` inside
+    /// the question itself.
+    pub fn review_line(&self, number: usize) -> String {
+        let expect = if self.expect.is_empty() {
+            "(nothing: the answer is computed or refused)".to_string()
+        } else {
+            self.expect.join(" + ")
+        };
+        let mark = if self.status == Status::Confirmed {
+            "Y"
+        } else {
+            "_"
+        };
+        format!("{mark} {number:>3} :: {} :: {expect}\n", self.text)
+    }
+}
+
 /// One set: a file of rows with a name and the reason it exists.
 #[derive(Debug, Clone, Deserialize)]
 pub struct QuestionSet {

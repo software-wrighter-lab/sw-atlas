@@ -1,0 +1,424 @@
+# Evaluation questions: review form
+#
+# Edit in place, then say so; the marks are applied to sources/questions/*.ron.
+# Replace the leading `_` on a row with one character:
+#
+#     Y   confirmed: a question a visitor might type, expected answer right
+#     N   rejected: the row is deleted
+#     ?   unsure: the row stays drafted and is discussed
+#
+# A row left `_` is unreviewed and is never used as a yardstick. `Y ALL` under
+# a heading confirms that whole section; an individual N or ? beats it.
+#
+# Confirming is the owner's judgement, not an agent's: rows drafted and
+# confirmed by the same party measure that party's idea of the corpus rather
+# than the corpus. The mechanical checks are run separately by `just
+# questions` -- every expected id resolves, and no paraphrase contains an
+# alias or title of its own answer.
+#
+# Columns are separated by ` :: `, not `|`, because a follow-up row contains a
+# `|` inside the question itself.
+
+======================================================================
+# ambiguous :: 12 rows, all confirmed by the repository owner on 2026-09-24. Every listed resource is genuinely a correct answer.
+Y   1 :: what have you written about forgetting :: blog:2026-02-12-sleepy-coder-when-fine-tuning-fails + blog:2026-02-18-sleepy-coder-routing-prevents-forgetting + blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+Y   2 :: show me the music tools :: blog:2026-02-20-midi-cli-rs-music-for-ai-agents + blog:2026-02-24-music-pipe-rs-unix-pipelines-for-midi + blog:2026-03-06-rank-wav-audio-quality-ranking
+Y   3 :: the stack language rabbit holes :: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name + blog:2026-04-24-rabbit-hole-forth-life-after-hashing + blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images + blog:2026-04-26-rabbit-hole-forth-retargetable-codegen-forward-references
+Y   4 :: which posts draw a system's memory :: blog:2026-09-11-made-visible-swtos + blog:2026-09-12-made-visible-mesaos + blog:2026-09-13-made-visible-mlos
+Y   5 :: the emulators i can run in a browser :: campus:ibm-1130-emulator + campus:rca-1802 + campus:apl
+Y   6 :: your writing on models that are far too small to work :: blog:2026-01-31-small-models-part1-tiny-recursive-model + blog:2026-02-02-small-models-part3-hrm + blog:2026-02-03-small-models-part4-bdh
+Y   7 :: the deepseek implementations :: blog:2026-02-01-deepseek-papers-part1-mhc + blog:2026-02-02-deepseek-papers-part2-engram + blog:2026-02-11-deepseek-papers-part3-engram-revisited
+Y   8 :: tools for keeping coding agents in line :: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents + blog:2026-05-16-nono-sandbox-ai-agents + blog:2026-04-23-ai-tools-agentrail-rs-mid-saga-flexibility
+Y   9 :: where do the vintage machines live :: campus:computer-history + campus:ibm-1130 + campus:processors
+Y  10 :: anything about the reasoning frontier :: blog:2026-03-23-mlf-04-is-chain-of-thought-real + blog:2026-03-16-mlf-02-icrl-in-context-reinforcement-learning + blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence
+Y  11 :: the weekly roundups about the array language :: blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking + blog:2026-04-19-saw-prolog-many-agents-self-hosting-mlpl + blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers
+Y  12 :: project navigation and regression testing :: blog:2026-03-29-saw-pjmai-reg-emacs-all-together-now + blog:2026-03-07-pjmai-rs-navigation-history-and-fuzzy-completion + blog:2026-03-19-tbt-reg-rs-regression-testing
+
+======================================================================
+# exact-name :: 16 rows, all confirmed by the repository owner on 2026-09-24. Aliases and titles appear verbatim on purpose here.
+Y   1 :: where is the IBM 1130 wing :: campus:ibm-1130
+Y   2 :: take me to the APL exhibit :: campus:apl
+Y   3 :: RCA COSMAC 1802 :: campus:rca-1802
+Y   4 :: show me sw-checklist :: repo:softwarewrighter/sw-checklist
+Y   5 :: moe-microscope :: repo:sw-ml-study/moe-microscope
+Y   6 :: where is sw-cor24-apl :: repo:sw-embed/sw-cor24-apl
+Y   7 :: the Tiny Recursive Model post :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+Y   8 :: Engram Revisited :: blog:2026-02-11-deepseek-papers-part3-engram-revisited
+Y   9 :: midi-cli-rs :: blog:2026-02-20-midi-cli-rs-music-for-ai-agents
+Y  10 :: XSkill :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+Y  11 :: Grokking :: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+Y  12 :: wiki-rs :: blog:2026-03-26-tbt-wiki-rs-six-wikis
+Y  13 :: Five ML Concepts #11 :: blog:2026-02-14-five-ml-concepts-11
+Y  14 :: neural collapse :: blog:2026-03-09-mlf-01-neural-collapse
+Y  15 :: pjmai-rs :: blog:2026-03-05-tbt-pjmai-rs-project-manager
+Y  16 :: the COR24 assembly emulator :: blog:2026-03-22-cor24-rs-assembly-emulator
+
+======================================================================
+# follow-up :: 10 rows, all confirmed by the repository owner on 2026-09-24. Each text is `previous turn | this turn`; the harness splits on the bar.
+Y   1 :: the post about a thousand parameters beating the big models | is there a video of that :: video:O6U06cGkKc4
+Y   2 :: the machine with the console lights | where is the code :: repo:sw-comp-history/ibm-1130-rs
+Y   3 :: the array language on your homemade cpu | can i try it in the browser :: demo:sw-embed.github.io/web-sw-cor24-apl
+Y   4 :: how ai learns part one | what comes next :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+Y   5 :: the small models series | which one should i read first :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+Y   6 :: that memory layer for assistants | is it finished :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+Y   7 :: the campus | what is in the computer science building :: campus:computer-science
+Y   8 :: the forth work | what did you do after dropping the hash :: blog:2026-04-24-rabbit-hole-forth-life-after-hashing
+Y   9 :: your music tools | which one arranges bach :: blog:2026-02-28-music-pipe-rs-unix-composition
+Y  10 :: the tiny routed model microscope | where is that published :: repo:sw-ml-study/moe-microscope
+
+======================================================================
+# meta :: 20 rows, confirmed by the repository owner on 2026-09-24, who marked every one `Meta` rather than `Y`: the question is real, and its answer is computed from the catalog or replayed from the trace rather than retrieved, which is why `expect` is empty. Scored as: did the policy route to a meta answer at all, not which resource it picked.
+Y   1 :: how many posts have you written :: (nothing: the answer is computed or refused)
+Y   2 :: how many of your repositories are public :: (nothing: the answer is computed or refused)
+Y   3 :: how many videos are there :: (nothing: the answer is computed or refused)
+Y   4 :: what is the newest thing here :: (nothing: the answer is computed or refused)
+Y   5 :: what did you publish most recently about small models :: (nothing: the answer is computed or refused)
+Y   6 :: how many posts mention that routed expert idea :: (nothing: the answer is computed or refused)
+Y   7 :: what subjects do you write about most :: (nothing: the answer is computed or refused)
+Y   8 :: how far back does this go :: (nothing: the answer is computed or refused)
+Y   9 :: are you an llm :: (nothing: the answer is computed or refused)
+Y  10 :: are you chatgpt :: (nothing: the answer is computed or refused)
+Y  11 :: how do you work :: (nothing: the answer is computed or refused)
+Y  12 :: do you make things up :: (nothing: the answer is computed or refused)
+Y  13 :: can you see what i typed before :: (nothing: the answer is computed or refused)
+Y  14 :: why did you send me there :: (nothing: the answer is computed or refused)
+Y  15 :: what made you pick that one :: (nothing: the answer is computed or refused)
+Y  16 :: how sure are you :: (nothing: the answer is computed or refused)
+Y  17 :: what else did you consider :: (nothing: the answer is computed or refused)
+Y  18 :: what can you actually do :: (nothing: the answer is computed or refused)
+Y  19 :: who made you :: (nothing: the answer is computed or refused)
+Y  20 :: what don't you know about :: (nothing: the answer is computed or refused)
+
+======================================================================
+# off-topic :: 20 rows, all confirmed by the repository owner on 2026-09-24. The corpus must abstain on every one.
+Y   1 :: what is the weather tomorrow :: (nothing: the answer is computed or refused)
+Y   2 :: book me a table for two at eight :: (nothing: the answer is computed or refused)
+Y   3 :: who won the cup final :: (nothing: the answer is computed or refused)
+Y   4 :: how do i get a mortgage :: (nothing: the answer is computed or refused)
+Y   5 :: translate this into portuguese :: (nothing: the answer is computed or refused)
+Y   6 :: write me a poem about autumn :: (nothing: the answer is computed or refused)
+Y   7 :: what do you think of my code :: (nothing: the answer is computed or refused)
+Y   8 :: your posts about kubernetes operators :: (nothing: the answer is computed or refused)
+Y   9 :: the article where you cover react hooks :: (nothing: the answer is computed or refused)
+Y  10 :: your work on quantum error correction :: (nothing: the answer is computed or refused)
+Y  11 :: what did you write about ios app review :: (nothing: the answer is computed or refused)
+Y  12 :: the piece on database sharding at scale :: (nothing: the answer is computed or refused)
+Y  13 :: where can i buy the ibm 1130 :: (nothing: the answer is computed or refused)
+Y  14 :: will you fix the bug in my forth interpreter :: (nothing: the answer is computed or refused)
+Y  15 :: what is apl's market share :: (nothing: the answer is computed or refused)
+Y  16 :: how much does your home ai cluster cost to run per month :: (nothing: the answer is computed or refused)
+Y  17 :: can you train a model for my company :: (nothing: the answer is computed or refused)
+Y  18 :: which of your repositories has the most stars :: (nothing: the answer is computed or refused)
+Y  19 :: what is the population of denmark :: (nothing: the answer is computed or refused)
+Y  20 :: explain the offside rule :: (nothing: the answer is computed or refused)
+
+======================================================================
+# paraphrase :: Phrasings that share no alias and no title word with their answer. 308 rows, all confirmed by the repository owner on 2026-09-24 by section (17 sections, every one accepted; nothing rejected). Past the 300 the bar needs.
+Y   1 :: the machine with the toggle switches and the row of little lights :: campus:ibm-1130
+Y   2 :: i want to flip switches on an old mainframe in my browser :: campus:ibm-1130-emulator
+Y   3 :: which exhibit lets me run a program on a machine from before floppy disks :: campus:ibm-1130-emulator
+Y   4 :: you wrote about punching holes in cards for input :: blog:2026-02-26-ibm-1130-system-emulator
+Y   5 :: the tiny eight bit chip that ended up on a spacecraft :: campus:rca-1802
+Y   6 :: where do i try the simulator for that low power seventies processor :: campus:rca-1802
+Y   7 :: the part of the site where chip designs are shown like exhibits :: campus:processors
+Y   8 :: where are the old computers :: campus:computer-history
+Y   9 :: the building for embedded work and toolchains :: campus:computer-science
+Y  10 :: the wing where you keep the small made up languages :: campus:language-experiments
+Y  11 :: the notation with the greek letters you type sideways :: campus:apl
+Y  12 :: i heard you can run iverson's notation in a web page here :: campus:apl
+Y  13 :: the story about betting on ponies in your first program :: blog:2026-01-29-tbt-apl-horse-race
+Y  14 :: what machine did you learn to program on as a student :: blog:2026-01-29-tbt-apl-horse-race
+Y  15 :: the post about mainframes moving records instead of bytes through a chain of programs :: blog:2026-02-05-tbt-pipelines-os390
+Y  16 :: you had an assistant rebuild those glowing line arcade cabinets :: blog:2026-02-12-tbt-vector-graphics-games
+Y  17 :: the 1995 thing where you teach little characters by demonstration :: blog:2026-02-19-tbt-toontalk-visual-programming
+Y  18 :: six versions of the same encyclopedia software in one program :: blog:2026-03-26-tbt-wiki-rs-six-wikis
+Y  19 :: the tool that catches when output changes unexpectedly, which you first wrote decades ago :: blog:2026-03-19-tbt-reg-rs-regression-testing
+Y  20 :: the shell helper that remembers where all your work lives :: blog:2026-03-05-tbt-pjmai-rs-project-manager
+Y  21 :: those three games from the seventies you brought back, including one with a bell for red alert :: blog:2026-04-16-tbt-cor24-basic-startrek-trs80-robot-chase
+Y  22 :: what you worked on at ibm in the eighties, tooling for a shared mainframe service :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+Y  23 :: the 1968 version you could actually type at :: blog:2026-09-17-tbt-apl-360-revisited
+Y  24 :: under a thousand parameters beating the big models at mazes :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+Y  25 :: running a language model on a phone with no signal :: blog:2026-02-01-small-models-part2-pocket-llm
+Y  26 :: twenty seven million parameters beating a much bigger reasoner on that puzzle benchmark :: blog:2026-02-02-small-models-part3-hrm
+Y  27 :: the model inspired by brains where most of it stays quiet :: blog:2026-02-03-small-models-part4-bdh
+Y  28 :: why a billion is the sweet spot for capability per watt :: blog:2026-02-04-small-models-part5-billion-llm
+Y  29 :: benchmarking which of the little models my laptop can actually run :: blog:2026-02-05-small-models-part6-efficient-frontier
+Y  30 :: where should i start with your series on models that are deliberately tiny :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+Y  31 :: the paper about keeping training stable no matter how deep the network goes :: blog:2026-02-01-deepseek-papers-part1-mhc
+Y  32 :: you implemented their idea for not recomputing patterns the model already knows :: blog:2026-02-02-deepseek-papers-part2-engram
+Y  33 :: the follow up where you moved from imitating that memory trick to really doing it :: blog:2026-02-11-deepseek-papers-part3-engram-revisited
+Y  34 :: why do deep networks end up in such tidy geometric arrangements :: blog:2026-03-09-mlf-01-neural-collapse
+Y  35 :: can a transformer pick up a policy just from examples in its prompt :: blog:2026-03-16-mlf-02-icrl-in-context-reinforcement-learning
+Y  36 :: the research claiming arrangement matters more than size :: blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence
+Y  37 :: is thinking step by step actually thinking :: blog:2026-03-23-mlf-04-is-chain-of-thought-real
+Y  38 :: the thing where a network suddenly generalises thousands of steps after it stopped improving :: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+Y  39 :: sampling a small model over and over instead of buying a bigger one :: blog:2026-04-24-large-language-monkeys-scaling-inference
+Y  40 :: the approach that treats intelligence as making good configurations cheap :: blog:2026-05-16-energy-based-learning-hopfield-boltzmann-jepa
+Y  41 :: people say an ai learned something but they mean four different things :: blog:2026-02-24-how-ai-learns-part1-time-scales
+Y  42 :: the difference between a model losing old skills and losing the thread in a long conversation :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+Y  43 :: which of your posts covers changing the network itself rather than its prompt :: blog:2026-02-26-how-ai-learns-part3-weight-based
+Y  44 :: storing things outside the model and looking them up :: blog:2026-02-27-how-ai-learns-part4-memory-based
+Y  45 :: why a huge prompt window is not the whole answer :: blog:2026-02-28-how-ai-learns-part5-context-rlm
+Y  46 :: absorbing new skills over time without wrecking the old ones :: blog:2026-03-01-how-ai-learns-part6-continuous-learning
+Y  47 :: your sketch of a whole agent that keeps learning, with the parts named :: blog:2026-03-02-how-ai-learns-part7-full-architecture
+Y  48 :: what should i read after the piece on memory outside the weights :: blog:2026-02-28-how-ai-learns-part5-context-rlm
+Y  49 :: i have cat pictures scattered everywhere and want to find them offline :: blog:2026-02-14-cat-finder-local-ml-rust
+Y  50 :: a place to watch a network train with nothing hidden behind a framework :: blog:2026-02-14-neural-net-rs-educational-ml-platform
+Y  51 :: the command line thing that writes tunes for coding assistants :: blog:2026-02-20-midi-cli-rs-music-for-ai-agents
+Y  52 :: how do i add my own moods to that composer tool :: blog:2026-02-23-midi-cli-rs-extending-with-custom-mood-packs
+Y  53 :: chaining small programs together to compose, the way pipes work :: blog:2026-02-24-music-pipe-rs-unix-pipelines-for-midi
+Y  54 :: the one where several instruments play together in the browser :: blog:2026-02-28-music-pipe-rs-unix-composition
+Y  55 :: sorting recordings by which ones sound cleanest :: blog:2026-03-06-rank-wav-audio-quality-ranking
+Y  56 :: a puzzle app that teaches the harder techniques instead of showing me adverts :: blog:2026-09-09-personal-software-sudoku-learn-practice
+Y  57 :: jumping between projects from the terminal with history and completion :: blog:2026-03-07-pjmai-rs-navigation-history-and-fuzzy-completion
+Y  58 :: the write up about agents fixing bugs rather than writing features :: blog:2026-04-29-personal-software-vibe-maintenance
+Y  59 :: thirteen little language implementations behind one starter :: blog:2026-04-28-personal-software-sw-launcher-one-ring
+Y  60 :: giving an assistant a memory that survives between sessions :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+Y  61 :: putting a coding assistant in a box so it cannot wreck anything :: blog:2026-05-16-nono-sandbox-ai-agents
+Y  62 :: the agent you liked because it refuses to become a whole platform :: blog:2026-05-16-pi-minimal-agent
+Y  63 :: stopping an ai from writing sprawling functions by measuring them :: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents
+Y  64 :: what happens when the plan you gave an agent turns out to be wrong halfway :: blog:2026-04-23-ai-tools-agentrail-rs-mid-saga-flexibility
+Y  65 :: trying local models in a loop that plans, does, then checks :: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+Y  66 :: an assistant small enough to read all of, in your own array language :: blog:2026-09-16-ai-tools-coding-agent-in-mlpl
+Y  67 :: teaching an assistant to play noughts and crosses and talk rubbish while doing it :: blog:2026-02-02-game-mcp-poc
+Y  68 :: you drew a memory map instead of describing it, for a small kernel :: blog:2026-09-11-made-visible-swtos
+Y  69 :: the second system the picture tool drew, the ordinary sixty four bit one :: blog:2026-09-12-made-visible-mesaos
+Y  70 :: the one where memory means something different because it holds a model :: blog:2026-09-13-made-visible-mlos
+Y  71 :: which of those three drawings breaks the pattern of the other two :: blog:2026-09-13-made-visible-mlos
+Y  72 :: compiling for a chip the compiler has never heard of :: blog:2026-03-13-rabbit-hole-rust-to-unsupported-isa
+Y  73 :: how much of that stack based language can be written in itself :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+Y  74 :: what looking a word up costs in that stack language :: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name
+Y  75 :: after you dropped the hashing, what took its place :: blog:2026-04-24-rabbit-hole-forth-life-after-hashing
+Y  76 :: shrinking the word list and shipping specialised images instead :: blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images
+Y  77 :: generating code for several targets and the trouble with references that point forward :: blog:2026-04-26-rabbit-hole-forth-retargetable-codegen-forward-references
+Y  78 :: a driver for that pressure chip that grew into a patent demonstration :: blog:2026-03-17-embedded-bmp280-pressure-sensor-driver
+Y  79 :: learning machine code in a browser tab with three panes :: blog:2026-03-22-cor24-rs-assembly-emulator
+Y  80 :: the allocator that only ever moved forward until it needed to give memory back :: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+Y  81 :: expressing an image filtering layer as three nested sums in a symbol heavy notation :: blog:2026-09-10-ml-cnn-from-equations-mlpl
+Y  82 :: how do you make an unnamed function call itself when evaluation is eager :: blog:2026-09-21-rabbit-hole-sage-y-combinator
+Y  83 :: why did you build a painted map of your projects :: blog:2026-09-12-software-wrighter-research-campus
+Y  84 :: the post about a small model that decides and an index that remembers :: blog:2026-09-20-saw-atlas-typed-decisions
+Y  85 :: a magnifying glass for a routed model with only a few thousand weights :: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+Y  86 :: what are you hoping to build eventually, the long list :: blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build
+Y  87 :: how are the kernels and the machine learning hardware emulator coming along :: blog:2026-09-08-bucket-list-operating-systems-and-ml-hardware
+Y  88 :: source code in three dimensions and compilers you can watch :: blog:2026-04-30-bucket-list-3d-source-new-languages-visible-compilers
+Y  89 :: how is the home machine learning rig coming along :: blog:2026-02-28-lucy-20-percent-ai-cluster-upgrade
+Y  90 :: the week two command line tools got emacs packages :: blog:2026-03-29-saw-pjmai-reg-emacs-all-together-now
+Y  91 :: the roundup where logic puzzles about lions and unicorns got solved :: blog:2026-04-19-saw-prolog-many-agents-self-hosting-mlpl
+Y  92 :: the week with a new whitespace language and a talking window system :: blog:2026-04-26-saw-tuplet-smalltalk-forth-from-forth
+Y  93 :: four months and two thousand commits across fifteen repositories :: blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking
+Y  94 :: three tools that turned out to be the same problem wearing different hats :: blog:2026-05-03-saw-espanso-kate-sharex-cor24-i2c-pluggable
+Y  95 :: what went wrong when you taught a model new work and it dropped the old :: blog:2026-02-12-sleepy-coder-when-fine-tuning-fails
+Y  96 :: sending different work to different parts of the model so nothing gets overwritten :: blog:2026-02-18-sleepy-coder-routing-prevents-forgetting
+Y  97 :: the small model that went from nothing to three quarters right in five minutes :: blog:2026-02-01-multi-hop-reasoning
+Y  98 :: training on the easy examples made it worse, and you measured that :: blog:2026-02-18-multi-hop-reasoning-distribution-trap
+Y  99 :: one explorer failed and five succeeded, on the same sparse reward problem :: blog:2026-02-03-many-eyes-learning
+Y 100 :: adding curiosity and a web picture to the many explorers work :: blog:2026-02-24-many-eyes-learning-part2-intrinsic-rewards
+Y 101 :: when the data will not fit in the window, grow the workspace instead :: blog:2026-02-13-rlm-recursive-language-models
+Y 102 :: how that prompt learning idea went from a surprise to something you can engineer :: blog:2026-02-22-icl-revisited-from-mystery-to-engineering
+Y 103 :: when several assistants talk to each other, how should they be wired :: blog:2026-02-12-dytopo-rs-dynamic-topology-multi-agent
+Y 104 :: is there something better than the usual curly brace data format :: blog:2026-02-21-json-et-al-data-serialization-formats
+Y 105 :: a short clip explaining five ideas in half a minute each, the very first one :: video:Zu3zreN8c0Q
+Y 106 :: do you have anything to watch about attention and walking downhill to reduce error :: video:-Y4T0_vETB4
+Y 107 :: a clip about the tidy geometry deep networks fall into :: video:ElFwTSuHjnM
+Y 108 :: the video about whether reasoning out loud is real reasoning :: video:mBLFTyh1EKk
+Y 109 :: the clip where an assistant plays a board game and insults you :: video:n_NFFLCtj_M
+Y 110 :: something to watch about a model on a handset with no connection :: video:fyEuH1BprLI
+Y 111 :: the short one about a thousand weights winning at mazes :: video:O6U06cGkKc4
+Y 112 :: is there a recording of the old blue machine with the console lights running :: video:2RzJP2ofuuU
+Y 113 :: where is the code for the browser emulator of that 1960s system :: repo:sw-comp-history/ibm-1130-rs
+Y 114 :: the source for the array language that runs on your homemade cpu :: repo:sw-embed/sw-cor24-apl
+Y 115 :: which repository holds the checker that keeps functions short :: repo:softwarewrighter/sw-checklist
+Y 116 :: the code behind the painted map of the projects :: repo:software-wrighter-lab/sw-campus
+Y 117 :: where do the experiments with a routed tiny model live :: repo:sw-ml-study/moe-microscope
+Y 118 :: the repository for the language you wrote the machine learning work in :: repo:sw-ml-study/sw-mlpl
+Y 119 :: where is the code for the old mainframe assembler emulator :: repo:sw-comp-history/ibm-390-rs
+Y 120 :: the browser thing that runs those record processing chains :: repo:sw-comp-history/pipelines-rs
+Y 121 :: the repository with the card punch and printer emulation for that 1960s machine :: repo:sw-comp-history/sw-ibm-1130-peripherals
+Y 122 :: which repository writes down the opcodes and addressing modes of that machine :: repo:sw-comp-history/sw-ibm1130-isa
+Y 123 :: the nostalgia project rebuilding your very first program :: repo:sw-comp-history/apl-horse-race
+Y 124 :: the page that gathers links to everything runnable in one place :: repo:sw-comp-history/demos
+Y 125 :: your emulator for the open instruction set everyone is excited about :: repo:sw-embed/risc-v-rs
+Y 126 :: the tiny stack language kernel for your soft cpu :: repo:sw-embed/sw-cor24-forth
+Y 127 :: the lisp with closures, collection and tail calls on your chip :: repo:sw-embed/sw-cor24-macrolisp
+Y 128 :: your own systems programming language modelled on an ibm one :: repo:sw-embed/sw-cor24-plsw
+Y 129 :: the logic language running on a warren style machine :: repo:sw-embed/sw-cor24-prolog
+Y 130 :: the seventies business report language you did in assembler :: repo:sw-embed/sw-cor24-rpg-ii
+Y 131 :: the objects language you implemented on top of a tiny interpreter :: repo:sw-embed/sw-cor24-smalltalk
+Y 132 :: the string pattern language built with your systems language as its tool :: repo:sw-embed/sw-cor24-snobol4
+Y 133 :: the editor you drive over a serial line to change memory buffers :: repo:sw-embed/sw-cor24-yocto-ed
+Y 134 :: the very small operating system you wrote for your own processor :: repo:sw-embed/sw-tos
+Y 135 :: where the stable kernel demonstrations are hosted :: repo:sw-embed/swtos-live
+Y 136 :: the terminal style interpreter inspired by nineteen seventies timesharing :: repo:sw-embed/sw-cor24-basic
+Y 137 :: the compiler that turns p-code into native code before it runs :: repo:sw-embed/sw-cor24-x-pc-aotc
+Y 138 :: the scientific language compiler you are still researching :: repo:sw-embed/sw-cor24-fortran
+Y 139 :: the functional language from inria, ported to your chip :: repo:sw-embed/sw-cor24-ocaml
+Y 140 :: the little program that lets you poke at memory and registers by hand :: repo:sw-embed/sw-cor24-monitor
+Y 141 :: the umbrella repository that links every part of the chip project :: repo:sw-embed/sw-cor24-project
+Y 142 :: the thing that starts those embedded programs on an emulator :: repo:sw-cli-tools/sw-launcher
+Y 143 :: the generator for help and version output in your command line programs :: repo:sw-cli-tools/sw-cli-gen
+Y 144 :: the portable subset of that old stream editor :: repo:sw-cli-tools/sed-rs
+Y 145 :: your fuzz testing tool :: repo:sw-cli-tools/fuzzit
+Y 146 :: the thing that makes small site icons out of text and colours :: repo:sw-cli-tools/favicon
+Y 147 :: a command that just prints milliseconds since the epoch :: repo:sw-cli-tools/ep2ms
+Y 148 :: the tool that trims an assistant's context before it fills up :: repo:softwarewrighter/avoid-compaction
+Y 149 :: the proxy for reaching ports inside a container network :: repo:softwarewrighter/dev-proxy
+Y 150 :: the mechanism that keeps two assistants from treading on each other :: repo:softwarewrighter/devgroup
+Y 151 :: the tool that has a model police your process while you code :: repo:softwarewrighter/guardian-cli
+Y 152 :: the converter from that curly brace format into a token saving one :: repo:softwarewrighter/json2toon
+Y 153 :: the little sign you drag around the screen while recording :: repo:softwarewrighter/label-it
+Y 154 :: the checker that makes sure a readme will render properly :: repo:softwarewrighter/markdown-checker
+Y 155 :: the tiny transformer you ran on processor, apple and nvidia hardware :: repo:softwarewrighter/microgpt-rs
+Y 156 :: the editor package for an assistant that writes code :: repo:softwarewrighter/emacs-agent
+Y 157 :: the sandbox for playing with models that call themselves recursively :: repo:softwarewrighter/micro-rlm-lab-py
+Y 158 :: the words going round a ball done with nothing but stylesheets :: repo:softwarewrighter/css-text-sphere
+Y 159 :: the hardware side: your processor running on a cheap programmable board :: repo:hardwarewrighter/hw-cor24-tang-nano
+Y 160 :: the scripts that drive a bench scope and power supply :: repo:hardwarewrighter/scpi-scripts
+Y 161 :: where the meetup keeps its project wishlist :: repo:hardwarewrighter/disintegrating-circuits-projects
+Y 162 :: the narration client you use for video voiceovers :: repo:softwarewrighter/alltalk-client-rs
+Y 163 :: the tool that writes two sided dialogue with a model :: repo:softwarewrighter/dialog-gen
+Y 164 :: the tool you use to produce those teaching videos :: repo:softwarewrighter/explainer
+Y 165 :: the paper that introduced the architecture everything is built on now :: paper:arxiv.org/abs/1706.03762
+Y 166 :: which paper shows modern networks are overconfident and one number fixes most of it :: paper:arxiv.org/abs/1706.04599
+Y 167 :: the paper on cheap adapters instead of retraining the whole model :: paper:arxiv.org/abs/2106.09685
+Y 168 :: the sparse routing paper with an absurd parameter count in the title :: paper:arxiv.org/abs/1701.06538
+Y 169 :: the paper where a network keeps improving long after it should have finished :: paper:arxiv.org/abs/2201.02177
+Y 170 :: the work about throwing most of a network away and keeping the winners :: paper:arxiv.org/abs/1803.03635
+Y 171 :: the paper on stopping a model losing what it already knew :: paper:arxiv.org/abs/1612.00796
+Y 172 :: the study where bigger models and more data made things worse for a while :: paper:arxiv.org/abs/1912.02292
+Y 173 :: the paper about how much compute to spend for a given model size :: paper:arxiv.org/abs/2203.15556
+Y 174 :: the one where the model teaches itself to call tools :: paper:arxiv.org/abs/2302.04761
+Y 175 :: the paper on fetching documents at answer time instead of memorising them :: paper:arxiv.org/abs/2005.11401
+Y 176 :: the sequence model that scales linearly instead of quadratically :: paper:arxiv.org/abs/2312.00752
+Y 177 :: the paper that folds the feed forward layer into attention as memory :: paper:arxiv.org/abs/1907.01470
+Y 178 :: the paper that strips a transformer block down to fewer parts :: paper:arxiv.org/abs/2311.01906
+Y 179 :: the paper on sentence level embeddings with twinned networks :: paper:arxiv.org/abs/1908.10084
+Y 180 :: the one about few shot classification without any prompting :: paper:arxiv.org/abs/2209.11055
+Y 181 :: the paper on rotary positions in attention :: paper:arxiv.org/abs/2104.09864
+Y 182 :: the grouped query attention paper :: paper:arxiv.org/abs/2305.13245
+Y 183 :: a clip that covers random disabling of units and learning from preferences :: video:C5ICKluukxI
+Y 184 :: the short about telling correct positives from finding all of them :: video:jQqyRdQAjPw
+Y 185 :: the episode about whether stated probabilities match real outcomes :: video:WPAk79_UONE
+Y 186 :: the clip covering how surprised a model is by data, and losing old skills :: video:lkviAtRMgjc
+Y 187 :: a short about test data contaminating a benchmark :: video:Xk2hkc0bgi4
+Y 188 :: the episode with compressing and reconstructing networks in it :: video:ppoONTOdqJQ
+Y 189 :: something to watch about learning a policy from examples in the prompt :: video:D4KrvmqOwEY
+Y 190 :: the clip arguing arrangement matters more than size :: video:6MluFFCb1cA
+Y 191 :: the video where a network suddenly gets it long after training should have ended :: video:GVLnOhmHYGc
+Y 192 :: a recording about those glowing line arcade cabinets :: video:lxEFBzDjp3A
+Y 193 :: the video about reading a book that will not fit in the window :: video:l6OjvtG2Nlk
+Y 194 :: is there a recording about finding something buried in a very long novel :: video:d5gaL4iOdLA
+Y 195 :: the talk about several encyclopedia engines sharing one program :: video:sy2Thj9R714
+Y 196 :: a video about picking the cleanest sounding take quickly :: video:F8iP4JLzQ80
+Y 197 :: the clip where photos of a pet are found without the internet :: video:pkhSwI97udw
+Y 198 :: the recording about a memory layer for assistants that handle more than text :: video:QelUyffoo1g
+Y 199 :: a short about hardware that runs models fastest :: video:B4uKx-DL1HY
+Y 200 :: the written version of the episode covering random unit disabling :: blog:2026-02-12-five-ml-concepts-9
+Y 201 :: the post listing the five ideas that included telling apart correct and complete :: blog:2026-02-15-five-ml-concepts-12
+Y 202 :: the written episode that covers sliding filters over images :: blog:2026-02-13-five-ml-concepts-10
+Y 203 :: the post about a landing page for the chip tooling :: blog:2026-04-03-bucket-list-software-tools-landing-page
+Y 204 :: the week you built a panel for coordinating two different assistants :: blog:2026-04-12-saw-agent-coordination-fuzzit-vendoring
+Y 205 :: the week your process tool learned to archive and a new array notation appeared :: blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers
+Y 206 :: the post where three rust developer tools got sharpened at once :: blog:2026-03-15-saw-reg-rs-avoid-compaction-agentrail
+Y 207 :: the piece where your process tool went from skeleton to two kinds of memory :: blog:2026-03-22-saw-agentrail-rs-icrl-dual-memory
+Y 208 :: the first weekly roundup, with a rust agent framework and a chain library in it :: blog:2026-03-08-saw-pjmai-rs-rig-langchain
+Y 209 :: which repository turns an intermediate form into actual instructions for that open chip :: repo:sw-langtools/sw-rv32i-codegen
+Y 210 :: the part of the toolchain that assembles text into instruction bytes :: repo:sw-langtools/sw-rv32i-asm
+Y 211 :: the piece that describes calling conventions and register classes for a target :: repo:sw-langtools/sw-rv32i-target
+Y 212 :: the single static assignment form with block parameters that your compilers share :: repo:sw-langtools/sw-tir
+Y 213 :: where the optimisation passes that work on any target live :: repo:sw-langtools/sw-tir-opt
+Y 214 :: the scaffolding for register allocation and branch relaxation :: repo:sw-langtools/sw-codegen-core
+Y 215 :: the traits every instruction set description in your toolchain implements :: repo:sw-langtools/sw-isa-core
+Y 216 :: the emulator that just executes instructions for that open chip :: repo:sw-langtools/sw-rv32i-emulator
+Y 217 :: the demos that visualise groups and rings in your array notation :: repo:sw-ml-study/demo-abstract-algebra
+Y 218 :: the birds from that mockingbird book, done in your own notation :: repo:sw-ml-study/demo-combinators
+Y 219 :: where you implemented the gang of four patterns in an array notation :: repo:sw-ml-study/demo-design-patterns
+Y 220 :: the demos for hashmaps and friends :: repo:sw-ml-study/demo-memory
+Y 221 :: how you load compiled rust into that interpreter as an extension :: repo:sw-ml-study/demo-extensions
+Y 222 :: the typed decision demo inspired by that new model category :: repo:sw-ml-study/demo-decision-model
+Y 223 :: the libraries written in the notation itself, with their tests and docs :: repo:sw-ml-study/demo-mlpl-libraries
+Y 224 :: the repository for emulating programmable hardware for inference with less memory :: repo:sw-ml-study/emufpga
+Y 225 :: the released build of that notation you can try on the web :: repo:sw-ml-study/mlpl-live
+Y 226 :: your operating system aimed specifically at running models :: repo:sw-ml-study/sw-os-ml
+Y 227 :: the training side of that thousand parameter maze solver :: repo:softwarewrighter/train-trm
+Y 228 :: the visual tools for looking at what a model is doing :: repo:sw-ml-study/ml-viz
+Y 229 :: the meta repository that ties the wireframe game platform together :: repo:softwarewrighter/vectorcade-meta
+Y 230 :: the renderer for those wireframe games :: repo:softwarewrighter/vectorcade-render-wgpu
+Y 231 :: the letter shapes drawn as lines for the arcade platform :: repo:softwarewrighter/vectorcade-fonts
+Y 232 :: the web shell that hosts the wireframe games in a page :: repo:softwarewrighter/vectorcade-web-yew
+Y 233 :: the framework for testing user interfaces built in that rust web library :: repo:softwarewrighter/ui-test-rs
+Y 234 :: the debugger for the p-code machine, in a web page :: repo:softwarewrighter/web-dv24r
+Y 235 :: where you can run those pascal examples without installing anything :: repo:softwarewrighter/web-p24c
+Y 236 :: the framework that hands video production jobs to assistants :: repo:softwarewrighter/video_workflow_rs
+Y 237 :: the editor that prepares screen captures with narration for publishing :: repo:softwarewrighter/yt-rs
+Y 238 :: the project for scenario driven speech synthesis infrastructure :: repo:softwarewrighter/tts-infra-dev
+Y 239 :: the demo where an assistant writes code that makes sound effects :: repo:softwarewrighter/text-to-sfx-gen
+Y 240 :: the three dimensional language built on tuples :: repo:sw-vibe-coding/DiscoveryOne
+Y 241 :: the reusable skills and validators that teach your process tool about languages :: repo:sw-vibe-coding/agentrail-domain-coding
+Y 242 :: the puzzle game compiled to run in a browser :: repo:sw-fun/sudoku
+Y 243 :: the interactive web game drawn with scalable graphics :: repo:sw-game-dev/svg-combat-rs
+Y 244 :: the tool that draws high dimensional data down to two dimensions :: repo:sw-audio-viz/umap
+Y 245 :: your experiments putting pictures inside that famously text based editor :: repo:sw-emacs/graphical-experiments
+Y 246 :: the christmas lights thing :: repo:softwarewrighter/xmas-rs
+Y 247 :: what should i look at if i only have five minutes and like old hardware :: campus:computer-history
+Y 248 :: i want to see something that actually runs, not just source :: campus:ibm-1130-emulator
+Y 249 :: the write up about your index of everything and the small decider in front of it :: blog:2026-09-20-saw-atlas-typed-decisions
+Y 250 :: which post explains why you keep every number you publish regenerable :: blog:2026-09-20-saw-atlas-typed-decisions
+Y 251 :: the piece about a model whose parts you can print and read :: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+Y 252 :: where do i read about the tool that stops an assistant writing sprawling code :: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents
+Y 253 :: what did you conclude about teaching a model new tasks one after another :: blog:2026-03-01-how-ai-learns-part6-continuous-learning
+Y 254 :: the article on four different things people mean by learning :: blog:2026-02-24-how-ai-learns-part1-time-scales
+Y 255 :: something about a phone sized model that answers without a network :: blog:2026-02-01-small-models-part2-pocket-llm
+Y 256 :: the post where a tiny model beat a much larger one on a puzzle set :: blog:2026-02-02-small-models-part3-hrm
+Y 257 :: what is the cheapest capable model to run on my own machine :: blog:2026-02-05-small-models-part6-efficient-frontier
+Y 258 :: i want the story about your first job and the tools you built there :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+Y 259 :: you wrote about a language with no lowercase letters :: blog:2026-09-17-tbt-apl-360-revisited
+Y 260 :: the post about pressing keys on a console that has no keyboard :: blog:2026-02-26-ibm-1130-system-emulator
+Y 261 :: which article covers a kernel written mostly in its own language :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+Y 262 :: the piece about naming things costing time at runtime :: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name
+Y 263 :: what have you published about routing work to parts of a network :: blog:2026-02-18-sleepy-coder-routing-prevents-forgetting
+Y 264 :: the writing about several agents exploring at once :: blog:2026-02-03-many-eyes-learning
+Y 265 :: your post on curiosity as a reward :: blog:2026-02-24-many-eyes-learning-part2-intrinsic-rewards
+Y 266 :: where you compared serialisation formats :: blog:2026-02-21-json-et-al-data-serialization-formats
+Y 267 :: the article about an index that answers without a server :: blog:2026-09-12-software-wrighter-research-campus
+Y 268 :: what did you build that browser based machine code trainer with :: blog:2026-03-22-cor24-rs-assembly-emulator
+Y 269 :: the post where an allocator grew a way to hand memory back :: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+Y 270 :: the article about a sensor driver that became patent evidence :: blog:2026-03-17-embedded-bmp280-pressure-sensor-driver
+Y 271 :: which post covers making a compiler target something it was never meant to :: blog:2026-03-13-rabbit-hole-rust-to-unsupported-isa
+Y 272 :: the piece about a home cluster getting more capable :: blog:2026-02-28-lucy-20-percent-ai-cluster-upgrade
+Y 273 :: where you wrote about an assistant that keeps notes between sessions :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+Y 274 :: the post about boundaries for a tool that edits your files :: blog:2026-05-16-nono-sandbox-ai-agents
+Y 275 :: your writing about a deliberately unambitious assistant :: blog:2026-05-16-pi-minimal-agent
+Y 276 :: the article about evaluating small local models in a loop :: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+Y 277 :: which post is about a puzzle program that teaches rather than nags :: blog:2026-09-09-personal-software-sudoku-learn-practice
+Y 278 :: the post where memory for a whole system is drawn in three dimensions :: blog:2026-09-11-made-visible-swtos
+Y 279 :: where you explain the difference between two kinds of drift :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+Y 280 :: the writing about energy as a way to frame learning :: blog:2026-05-16-energy-based-learning-hopfield-boltzmann-jepa
+Y 281 :: your post about sampling many times rather than scaling up :: blog:2026-04-24-large-language-monkeys-scaling-inference
+Y 282 :: the article where structured facts make a small model an expert :: blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence
+Y 283 :: what did you write about models whose stated thinking does not match what they did :: blog:2026-03-23-mlf-04-is-chain-of-thought-real
+Y 284 :: the post about a brain inspired model with most units quiet :: blog:2026-02-03-small-models-part4-bdh
+Y 285 :: where you wrote about keeping training steady however many layers there are :: blog:2026-02-01-deepseek-papers-part1-mhc
+Y 286 :: the piece about caching patterns a model keeps recomputing :: blog:2026-02-02-deepseek-papers-part2-engram
+Y 287 :: your article about making that cache real instead of pretending :: blog:2026-02-11-deepseek-papers-part3-engram-revisited
+Y 288 :: i want to type instructions and watch them execute, in a page :: demo:sw-embed.github.io/cor24-rs
+Y 289 :: where can i try the stack language in the browser :: demo:sw-embed.github.io/web-sw-cor24-forth
+Y 290 :: the runnable version of that small c compiler :: demo:sw-embed.github.io/web-sw-cor24-x-tinyc
+Y 291 :: can i assemble something for your chip without installing anything :: demo:sw-embed.github.io/web-sw-cor24-x-assembler
+Y 292 :: the page where the old console panel lights actually blink :: demo:sw-comp-history.github.io/ibm-1130-rs
+Y 293 :: where the eight bit simulator runs in a tab :: demo:sw-comp-history.github.io/rca-1802-rs
+Y 294 :: the input and output demonstration for that low power chip :: demo:sw-comp-history.github.io/sw-cdp1802-io
+Y 295 :: the wiki engine you can poke at online :: demo:sw-vibe-coding.github.io/wiki-rs
+Y 296 :: where the music pipeline demo plays :: demo:softwarewrighter.github.io/music-pipe-rs
+Y 297 :: is there anywhere i can see everything you have published at once :: campus:campus
+Y 298 :: which part of the campus holds the language toys :: campus:language-experiments
+Y 299 :: the exhibit about a chip used in spacecraft, where is it :: campus:rca-1802
+Y 300 :: what runs on the machine with the peripherals plugged into it :: campus:ibm-1130
+Y 301 :: the short about a cluster at home getting a second graphics card :: video:wJvmBYTge7U
+Y 302 :: a clip about a model that repairs its own mistakes overnight :: video:YhAbOvWEkzE
+Y 303 :: the video about wiring several assistants together sensibly :: video:_8_08H97LxM
+Y 304 :: the clip about a model with a brain you can look inside :: video:pldadqycEQs
+Y 305 :: something to watch about which small model suits a given laptop :: video:DlxhTXcW-og
+Y 306 :: the post where a compiler chain got sharpened along with a process tool :: blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers
+Y 307 :: where you wrote about a shell that follows you between projects :: blog:2026-03-07-pjmai-rs-navigation-history-and-fuzzy-completion
+Y 308 :: the piece about catching a change in output before anyone notices :: blog:2026-03-19-tbt-reg-rs-regression-testing

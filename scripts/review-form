@@ -1,0 +1,13 @@
+#!/bin/sh
+# Write sources/questions/REVIEW.txt: every evaluation row on one line, with a
+# mark column the repository owner edits in place.
+#
+# Confirmation is the owner's judgement and cannot be delegated to an agent:
+# rows drafted and confirmed by the same party measure that party's idea of the
+# corpus. This script only formats them for reading.
+#
+# The separator is ` :: ` and not `|`, because a follow-up row contains a `|`
+# inside the question itself and the first version of this form misparsed its
+# own output because of it.
+set -eu
+cargo run --quiet -p atlas-questions -- --form sources/questions/REVIEW.txt

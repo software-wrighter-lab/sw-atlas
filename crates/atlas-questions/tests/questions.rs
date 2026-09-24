@@ -139,6 +139,10 @@ fn every_committed_set_is_internally_consistent() {
     let mut rows = 0;
     for entry in std::fs::read_dir(&dir).expect("the sets are committed") {
         let path = entry.expect("readable").path();
+        // REVIEW.txt lives here too: it is the owner's marking form, not a set.
+        if path.extension().is_none_or(|e| e != "ron") {
+            continue;
+        }
         let set = QuestionSet::load(&path).expect("parses");
         let problems = rules::problems(&set, &corpus);
         assert!(problems.is_empty(), "{}: {problems:?}", set.name);

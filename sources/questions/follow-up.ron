@@ -7,17 +7,17 @@
 // of that?" has no subject in it.
 QuestionSet(
     name: "follow-up",
-    note: "Drafted 2026-09-22, unconfirmed. Each text is `previous turn | this turn`; the harness splits on the bar.",
+    note: "10 rows, all confirmed by the repository owner on 2026-09-24. Each text is `previous turn | this turn`; the harness splits on the bar.",
     rows: [
-        (text: "the post about a thousand parameters beating the big models | is there a video of that", expect: ["video:O6U06cGkKc4"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "the machine with the console lights | where is the code", expect: ["repo:sw-comp-history/ibm-1130-rs"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "the array language on your homemade cpu | can i try it in the browser", expect: ["demo:sw-embed.github.io/web-sw-cor24-apl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "how ai learns part one | what comes next", expect: ["blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "series successor, from the declared chain"),
-        (text: "the small models series | which one should i read first", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "that memory layer for assistants | is it finished", expect: ["blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents"], intent: Status, origin: Teacher, status: Unconfirmed, note: "status of a named subject"),
-        (text: "the campus | what is in the computer science building", expect: ["campus:computer-science"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "the forth work | what did you do after dropping the hash", expect: ["blog:2026-04-24-rabbit-hole-forth-life-after-hashing"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "your music tools | which one arranges bach", expect: ["blog:2026-02-28-music-pipe-rs-unix-composition"], intent: FindResource, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "the tiny routed model microscope | where is that published", expect: ["repo:sw-ml-study/moe-microscope"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the post about a thousand parameters beating the big models | is there a video of that", expect: ["video:O6U06cGkKc4"], intent: FindResource, origin: Teacher, status: Confirmed, note: ""),
+        (text: "the machine with the console lights | where is the code", expect: ["repo:sw-comp-history/ibm-1130-rs"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
+        (text: "the array language on your homemade cpu | can i try it in the browser", expect: ["demo:sw-embed.github.io/web-sw-cor24-apl"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
+        (text: "how ai learns part one | what comes next", expect: ["blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot"], intent: Recommend, origin: Teacher, status: Confirmed, note: "series successor, from the declared chain"),
+        (text: "the small models series | which one should i read first", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: Recommend, origin: Teacher, status: Confirmed, note: ""),
+        (text: "that memory layer for assistants | is it finished", expect: ["blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents"], intent: Status, origin: Teacher, status: Confirmed, note: "status of a named subject"),
+        (text: "the campus | what is in the computer science building", expect: ["campus:computer-science"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
+        (text: "the forth work | what did you do after dropping the hash", expect: ["blog:2026-04-24-rabbit-hole-forth-life-after-hashing"], intent: FindResource, origin: Teacher, status: Confirmed, note: ""),
+        (text: "your music tools | which one arranges bach", expect: ["blog:2026-02-28-music-pipe-rs-unix-composition"], intent: FindResource, origin: Teacher, status: Confirmed, note: ""),
+        (text: "the tiny routed model microscope | where is that published", expect: ["repo:sw-ml-study/moe-microscope"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
     ],
 )
