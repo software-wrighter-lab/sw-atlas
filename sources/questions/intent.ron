@@ -1,0 +1,103 @@
+// Questions that test what the visitor wants, not which resource answers.
+//
+// A set drafted to find the right resource teaches a model that every
+// question is FindResource. This one exists so intent can be measured
+// against something better than a constant.
+QuestionSet(
+    name: "intent",
+    note: "Drafted 2026-09-24, unconfirmed. Written because AT01 measured a five-class intent head at 0.697 against a 0.737 always-FindResource baseline: 72% of the other sets are FindResource, so they cannot teach or measure intent. These rows are spread across the intents instead, so that a constant answer scores badly. The no-alias rule of the paraphrase set does NOT apply here -- an intent question may name its subject, because naming it is how a visitor asks whether a thing is finished or how two things differ. Scoring: intent on every row; destination only where a row names one, and `expect` is empty where the question is genuinely open. Compare is the intent A0's keyword rules cannot express at all, which is why it is here in numbers.",
+    rows: [
+
+        // --- Status ---
+        (text: "is the card reader exhibit finished yet", expect: ["campus:ibm-1130"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how far along is the forth kernel", expect: ["blog:2026-04-20-embedded-forth-self-hosting-spectrum"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "did you ever finish the sudoku app", expect: ["blog:2026-09-09-personal-software-sudoku-learn-practice"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what works today on the campus", expect: ["campus:campus"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is the apl interpreter usable or still a toy", expect: ["campus:apl"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "has the fortran compiler for your chip started", expect: ["repo:sw-embed/sw-cor24-fortran"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what state is the home cluster in now", expect: ["blog:2026-02-28-lucy-20-percent-ai-cluster-upgrade"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is the tiny operating system running on real hardware yet", expect: ["repo:sw-embed/sw-tos"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how much of the pascal toolchain is working", expect: ["blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which of the language experiments are actually finished", expect: ["campus:language-experiments"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is the index you are building usable yet", expect: ["blog:2026-09-20-saw-atlas-typed-decisions"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what is still planned rather than built", expect: [], intent: Status, origin: Teacher, status: Unconfirmed, note: "genuinely open: the answer is a list"),
+        (text: "progress on the risc-v emulator", expect: ["repo:sw-embed/risc-v-rs"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is anything in the museum wing unfinished", expect: ["campus:computer-history"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- Explain ---
+        (text: "what is a bump allocator", expect: ["blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "explain in-context learning to me", expect: ["blog:2026-02-22-icl-revisited-from-mystery-to-engineering"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why does grokking happen at all", expect: ["blog:2026-04-23-mlf-05-grokking-delayed-generalization"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what does a mixture of experts actually route", expect: ["blog:2026-09-13-saw-building-a-tiny-mixture-of-experts"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how does your chip differ from a normal cpu", expect: ["blog:2026-03-22-cor24-rs-assembly-emulator"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what is catastrophic forgetting", expect: ["blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why would anyone write a kernel in forth", expect: ["blog:2026-04-20-embedded-forth-self-hosting-spectrum"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what does a typed decision model decide", expect: ["blog:2026-09-20-saw-atlas-typed-decisions"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how does the memory visualiser work", expect: ["blog:2026-09-11-made-visible-swtos"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why is apl written with those symbols", expect: ["campus:apl"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what is the point of a p-code machine", expect: ["repo:sw-embed/sw-cor24-x-pc-aotc"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "explain what an engram cache does", expect: ["blog:2026-02-02-deepseek-papers-part2-engram"], intent: Explain, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "why do you keep every number regenerable", expect: [], intent: Explain, origin: Teacher, status: Unconfirmed, note: "a question about method, not a resource"),
+        (text: "what does sharpening the saw mean in your titles", expect: [], intent: Explain, origin: Teacher, status: Unconfirmed, note: "about the series convention"),
+
+        // --- Navigate ---
+        (text: "take me to the 1130 wing", expect: ["campus:ibm-1130"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "go to the apl exhibit", expect: ["campus:apl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "show me the computer history museum", expect: ["campus:computer-history"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where is the moe microscope repository", expect: ["repo:sw-ml-study/moe-microscope"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "open the campus map", expect: ["campus:campus"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "take me to where i can run the 1802 simulator", expect: ["demo:sw-comp-history.github.io/rca-1802-rs"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "i want the source for the campus itself", expect: ["repo:software-wrighter-lab/sw-campus"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where do the language experiments live", expect: ["campus:language-experiments"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "get me to the processors exhibit", expect: ["campus:processors"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "show me the wiki engine demo", expect: ["demo:sw-vibe-coding.github.io/wiki-rs"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "take me to the checklist tool", expect: ["repo:softwarewrighter/sw-checklist"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "where is the array language itself", expect: ["repo:sw-ml-study/sw-mlpl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- Recommend ---
+        (text: "what should i read first about small models", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "suggest something to watch if i have five minutes", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open: any short video is defensible"),
+        (text: "i like old hardware, what should i see", expect: ["campus:computer-history"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "recommend a post about compilers", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open: several are right"),
+        (text: "what is worth seeing if i only visit one exhibit", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open"),
+        (text: "i am interested in calibration, where do i start", expect: ["blog:2026-02-16-five-ml-concepts-13"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what should i look at after the campus map", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open: any building"),
+        (text: "suggest a repository to read if i like interpreters", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open"),
+        (text: "what would you show someone who has never been here", expect: ["campus:campus"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "anything good for a rust programmer curious about ml", expect: ["repo:sw-ml-study/sw-mlpl"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which video should i start with", expect: ["video:Zu3zreN8c0Q"], intent: Recommend, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what next after the forth rabbit holes", expect: [], intent: Recommend, origin: Teacher, status: Unconfirmed, note: "open: the series continues"),
+
+        // --- Compare ---
+        (text: "how does forth compare with apl on your chip", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: "two resources; A0 cannot express this intent at all"),
+        (text: "which is better for memory, rag or an engram cache", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "difference between your two 1130 emulators", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is the tiny recursive model smaller than the hierarchical one", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "compare the pascal and c compilers for your chip", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which of the small models runs best on a laptop", expect: ["blog:2026-02-05-small-models-part6-efficient-frontier"], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what changed between engram part one and part two", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "swtos versus mesaos, what is different", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how do your two music tools differ", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "apl or forth, which did you enjoy implementing more", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "prompt engineering compared with fine tuning", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "which is faster, the emulator or the fpga", expect: [], intent: Compare, origin: Teacher, status: Unconfirmed, note: ""),
+
+        // --- Story ---
+        (text: "tell me the story of your first program", expect: ["blog:2026-01-29-tbt-apl-horse-race"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what is the background of the campus idea", expect: ["blog:2026-09-12-software-wrighter-research-campus"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "give me an anecdote about the 1130", expect: ["campus:ibm-1130"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "history of the mass compile tooling", expect: ["blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "tell me about working at ibm", expect: ["blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what is the story behind the bucket list", expect: ["blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "again", expect: [], intent: Story, origin: Teacher, status: Unconfirmed, note: "the mockup's rule: repeat the last story"),
+        (text: "tell me another one", expect: [], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "how did the vector arcade project start", expect: ["repo:softwarewrighter/vectorcade-meta"], intent: Story, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "the background to your throwback thursday posts", expect: [], intent: Story, origin: Teacher, status: Unconfirmed, note: "about the series"),
+
+        // --- Unsupported ---
+        (text: "what is your hourly rate", expect: [], intent: Unsupported, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "can you email the author for me", expect: [], intent: Unsupported, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "what did you have for breakfast", expect: [], intent: Unsupported, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "delete my account", expect: [], intent: Unsupported, origin: Teacher, status: Unconfirmed, note: ""),
+    ],
+)

@@ -67,6 +67,87 @@ Y   9 :: your music tools | which one arranges bach :: blog:2026-02-28-music-pip
 Y  10 :: the tiny routed model microscope | where is that published :: repo:sw-ml-study/moe-microscope
 
 ======================================================================
+# intent :: Drafted 2026-09-24, unconfirmed. Written because AT01 measured a five-class intent head at 0.697 against a 0.737 always-FindResource baseline: 72% of the other sets are FindResource, so they cannot teach or measure intent. These rows are spread across the intents instead, so that a constant answer scores badly. The no-alias rule of the paraphrase set does NOT apply here -- an intent question may name its subject, because naming it is how a visitor asks whether a thing is finished or how two things differ. Scoring: intent on every row; destination only where a row names one, and `expect` is empty where the question is genuinely open. Compare is the intent A0's keyword rules cannot express at all, which is why it is here in numbers.
+_   1 :: is the card reader exhibit finished yet :: campus:ibm-1130
+_   2 :: how far along is the forth kernel :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+_   3 :: did you ever finish the sudoku app :: blog:2026-09-09-personal-software-sudoku-learn-practice
+_   4 :: what works today on the campus :: campus:campus
+_   5 :: is the apl interpreter usable or still a toy :: campus:apl
+_   6 :: has the fortran compiler for your chip started :: repo:sw-embed/sw-cor24-fortran
+_   7 :: what state is the home cluster in now :: blog:2026-02-28-lucy-20-percent-ai-cluster-upgrade
+_   8 :: is the tiny operating system running on real hardware yet :: repo:sw-embed/sw-tos
+_   9 :: how much of the pascal toolchain is working :: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+_  10 :: which of the language experiments are actually finished :: campus:language-experiments
+_  11 :: is the index you are building usable yet :: blog:2026-09-20-saw-atlas-typed-decisions
+_  12 :: what is still planned rather than built :: (nothing: the answer is computed or refused)
+_  13 :: progress on the risc-v emulator :: repo:sw-embed/risc-v-rs
+_  14 :: is anything in the museum wing unfinished :: campus:computer-history
+_  15 :: what is a bump allocator :: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+_  16 :: explain in-context learning to me :: blog:2026-02-22-icl-revisited-from-mystery-to-engineering
+_  17 :: why does grokking happen at all :: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+_  18 :: what does a mixture of experts actually route :: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+_  19 :: how does your chip differ from a normal cpu :: blog:2026-03-22-cor24-rs-assembly-emulator
+_  20 :: what is catastrophic forgetting :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+_  21 :: why would anyone write a kernel in forth :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+_  22 :: what does a typed decision model decide :: blog:2026-09-20-saw-atlas-typed-decisions
+_  23 :: how does the memory visualiser work :: blog:2026-09-11-made-visible-swtos
+_  24 :: why is apl written with those symbols :: campus:apl
+_  25 :: what is the point of a p-code machine :: repo:sw-embed/sw-cor24-x-pc-aotc
+_  26 :: explain what an engram cache does :: blog:2026-02-02-deepseek-papers-part2-engram
+_  27 :: why do you keep every number regenerable :: (nothing: the answer is computed or refused)
+_  28 :: what does sharpening the saw mean in your titles :: (nothing: the answer is computed or refused)
+_  29 :: take me to the 1130 wing :: campus:ibm-1130
+_  30 :: go to the apl exhibit :: campus:apl
+_  31 :: show me the computer history museum :: campus:computer-history
+_  32 :: where is the moe microscope repository :: repo:sw-ml-study/moe-microscope
+_  33 :: open the campus map :: campus:campus
+_  34 :: take me to where i can run the 1802 simulator :: demo:sw-comp-history.github.io/rca-1802-rs
+_  35 :: i want the source for the campus itself :: repo:software-wrighter-lab/sw-campus
+_  36 :: where do the language experiments live :: campus:language-experiments
+_  37 :: get me to the processors exhibit :: campus:processors
+_  38 :: show me the wiki engine demo :: demo:sw-vibe-coding.github.io/wiki-rs
+_  39 :: take me to the checklist tool :: repo:softwarewrighter/sw-checklist
+_  40 :: where is the array language itself :: repo:sw-ml-study/sw-mlpl
+_  41 :: what should i read first about small models :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+_  42 :: suggest something to watch if i have five minutes :: (nothing: the answer is computed or refused)
+_  43 :: i like old hardware, what should i see :: campus:computer-history
+_  44 :: recommend a post about compilers :: (nothing: the answer is computed or refused)
+_  45 :: what is worth seeing if i only visit one exhibit :: (nothing: the answer is computed or refused)
+_  46 :: i am interested in calibration, where do i start :: blog:2026-02-16-five-ml-concepts-13
+_  47 :: what should i look at after the campus map :: (nothing: the answer is computed or refused)
+_  48 :: suggest a repository to read if i like interpreters :: (nothing: the answer is computed or refused)
+_  49 :: what would you show someone who has never been here :: campus:campus
+_  50 :: anything good for a rust programmer curious about ml :: repo:sw-ml-study/sw-mlpl
+_  51 :: which video should i start with :: video:Zu3zreN8c0Q
+_  52 :: what next after the forth rabbit holes :: (nothing: the answer is computed or refused)
+_  53 :: how does forth compare with apl on your chip :: (nothing: the answer is computed or refused)
+_  54 :: which is better for memory, rag or an engram cache :: (nothing: the answer is computed or refused)
+_  55 :: difference between your two 1130 emulators :: (nothing: the answer is computed or refused)
+_  56 :: is the tiny recursive model smaller than the hierarchical one :: (nothing: the answer is computed or refused)
+_  57 :: compare the pascal and c compilers for your chip :: (nothing: the answer is computed or refused)
+_  58 :: which of the small models runs best on a laptop :: blog:2026-02-05-small-models-part6-efficient-frontier
+_  59 :: what changed between engram part one and part two :: (nothing: the answer is computed or refused)
+_  60 :: swtos versus mesaos, what is different :: (nothing: the answer is computed or refused)
+_  61 :: how do your two music tools differ :: (nothing: the answer is computed or refused)
+_  62 :: apl or forth, which did you enjoy implementing more :: (nothing: the answer is computed or refused)
+_  63 :: prompt engineering compared with fine tuning :: (nothing: the answer is computed or refused)
+_  64 :: which is faster, the emulator or the fpga :: (nothing: the answer is computed or refused)
+_  65 :: tell me the story of your first program :: blog:2026-01-29-tbt-apl-horse-race
+_  66 :: what is the background of the campus idea :: blog:2026-09-12-software-wrighter-research-campus
+_  67 :: give me an anecdote about the 1130 :: campus:ibm-1130
+_  68 :: history of the mass compile tooling :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+_  69 :: tell me about working at ibm :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+_  70 :: what is the story behind the bucket list :: blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build
+_  71 :: again :: (nothing: the answer is computed or refused)
+_  72 :: tell me another one :: (nothing: the answer is computed or refused)
+_  73 :: how did the vector arcade project start :: repo:softwarewrighter/vectorcade-meta
+_  74 :: the background to your throwback thursday posts :: (nothing: the answer is computed or refused)
+_  75 :: what is your hourly rate :: (nothing: the answer is computed or refused)
+_  76 :: can you email the author for me :: (nothing: the answer is computed or refused)
+_  77 :: what did you have for breakfast :: (nothing: the answer is computed or refused)
+_  78 :: delete my account :: (nothing: the answer is computed or refused)
+
+======================================================================
 # meta :: 20 rows, confirmed by the repository owner on 2026-09-24, who marked every one `Meta` rather than `Y`: the question is real, and its answer is computed from the catalog or replayed from the trace rather than retrieved, which is why `expect` is empty. Scored as: did the policy route to a meta answer at all, not which resource it picked.
 Y   1 :: how many posts have you written :: (nothing: the answer is computed or refused)
 Y   2 :: how many of your repositories are public :: (nothing: the answer is computed or refused)
