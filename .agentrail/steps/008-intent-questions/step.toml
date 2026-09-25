@@ -1,0 +1,9 @@
+number = 8
+slug = "intent-questions"
+status = "completed"
+description = "AT01 showed a five-class intent head scoring 0.697 against a 0.737 always-Fin..."
+role = "production"
+context_files = []
+created_at = "2026-09-24T17:45:09"
+completed_at = "2026-09-24T17:48:41"
+commits = ["449294bf91a2d07a3e3b5d5646f69980884d7bda"]
