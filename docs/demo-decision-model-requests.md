@@ -139,6 +139,39 @@ that cite each other rather than one file and a person, and the next ask
 should be written here and expected to be read there -- while still saying
 so out loud in a session summary, because neither file is a notification.
 
+## AT01 — they measured our hybrid on our data, unasked
+
+**2026-09-24, their step 024, commit `b78a2e1`, lesson `AT01`.** Nobody asked
+for this. They took a read-only copy of this repository's corpus and question
+sets -- 642 resources, 386 questions, 72 resources held out entirely -- and
+measured the hybrid docent itself, as demo 02 of their own NV01 (a second
+domain with `lib/` unchanged). It is the most useful thing this collaboration
+has produced, and three of its four findings cost us work.
+
+1. **A `NaN` defect we would have vendored.** `lib/scorer.mlpl` guarded its
+   zero-norm case after `sqrt`: correct forward, `NaN` backward. One card whose
+   every word is unknown turns every parameter into `NaN` on the first Adam
+   step, and training still completes and prints numbers -- accuracy 0.000 with
+   MRR exactly 1.000. Their twelve hand-written cards could not produce such a
+   card; our 642-resource catalog does. Fixed upstream (epsilon inside the
+   root), recorded as their finding Q6 with a probe. **Vendor at or after
+   `b78a2e1`.**
+2. **The rerank head does not work at 308 questions:** 0.023 warm, 0.032 cold,
+   against 0.050 for random, training loss 0.011. Memorised, transferred
+   nothing; warm equals cold, so the held-out cards are not the problem. Saga 3
+   gains a synthetic-positives step before the rerank head.
+3. **Our ceiling is our own recall@k**, 0.63 at k=20 with their stand-in
+   matcher. MB02's recall@k is now the headline number of Saga 2.
+4. **Intent beat nothing:** 0.697 against a 0.737 always-`FindResource`
+   baseline, and the is-off-topic Noul exactly at its always-false baseline,
+   because 72% of our questions are `FindResource`. The harness will print
+   majority-class baselines beside every accuracy, and the sets need an
+   intent-balanced supplement.
+
+Their caveats, kept: the sets were `Unconfirmed` when they ran (confirmed
+2026-09-24), the matcher was theirs and not MB02, one configuration per head,
+no sweep.
+
 ## What their other measurements changed here
 
 Not requests, and worth recording because they moved this project's own

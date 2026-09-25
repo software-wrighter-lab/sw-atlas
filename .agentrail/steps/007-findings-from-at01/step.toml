@@ -1,0 +1,8 @@
+number = 7
+slug = "findings-from-at01"
+status = "in-progress"
+description = "demo-decision-model ran sw-atlas's own problem on sw-atlas's own data (their ..."
+role = "meta"
+context_files = []
+created_at = "2026-09-24T17:36:16"
+commits = []

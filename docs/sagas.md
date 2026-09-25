@@ -87,6 +87,13 @@ What it needs before it starts, and from whom:
 
 ## Waiting on the owner
 
+- **An intent-balanced question supplement.** 72% of the 386 confirmed
+  questions are `FindResource`, because they were drafted to test whether the
+  right resource is found. AT01 showed that a head trained on them cannot beat
+  always answering `FindResource`. Perhaps 60 to 100 rows spread over
+  `Navigate`, `Explain`, `Status`, `Recommend`, `Compare` and `Unsupported`
+  would fix it; drafting them is agent work, confirming them is not.
+
 Work that is ready to specify but blocked on data only the owner has.
 Each becomes an `agentrail insert` in whichever saga is active when the
 data arrives.
@@ -194,6 +201,19 @@ Not started. Sizes are the plan's estimate, not a commitment.
   (Lucy is `lucy-20-percent`, "Which Small AI Fits YOUR Laptop?" is
   `billion-llm`), so 52 of 84 videos carry their script. Recorded as step
   013, `confirm-video-joins`.
+
+- **2026-09-24, the rerank head is unfunded, and intent cannot be learned
+  from these sets.** `demo-decision-model` measured this project's hybrid on
+  this project's data unasked (their AT01): the card scorer scored 0.023
+  against 0.050 for random, having memorised its 174 training rows; a
+  five-class intent head scored 0.697 against a 0.737 always-`FindResource`
+  baseline; and the whole hybrid is capped by its first stage's recall@k,
+  0.63 at k=20 with their stand-in matcher. They also found and fixed a
+  `NaN` defect in `lib/scorer.mlpl` that this project would have vendored.
+  Consequences: Saga 3 gains a synthetic-positives step before the rerank
+  head, the harness prints a majority-class baseline beside every accuracy,
+  MB02's own recall@k becomes the headline of Saga 2, and the question sets
+  need an intent-balanced supplement. Recorded as step `findings-from-at01`.
 
 - **2026-09-24, concepts carry new resources, not a card scorer.**
   Upstream's DC01 measured a question-conditioned card scorer at 0.4% in a

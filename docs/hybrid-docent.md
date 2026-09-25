@@ -133,6 +133,60 @@ DC01 shows it works -- a small field of warm cards -- and cold candidates
 keep the matcher's order, which turns "never worse than A0 on a new post"
 from a hope into a property of the wiring.
 
+### 2a-bis. Then they ran it on our data, and it does not work yet
+
+On 2026-09-24 `demo-decision-model` took this project's own corpus and
+question sets and measured the hybrid itself (their lesson AT01, their step
+024): 642 resources, 386 questions, 72 resources held out entirely so the 91
+questions pointing at them are exactly the "published last night" case. Four
+findings, and none of them is comfortable.
+
+**A defect this project would have vendored.** `lib/scorer.mlpl` normalized a
+card to unit length with the zero-norm case guarded *after* `sqrt` -- correct
+forward, `NaN` backward. One card whose every word is unknown to the
+vocabulary turns every parameter into `NaN` on the first Adam step, silently:
+training completes and prints an accuracy of 0.000 with an MRR of exactly
+1.000, which is the signature of comparing against `NaN`. Demo 01's twelve
+hand-written cards never contained such a card; a 642-resource catalog does.
+Fixed upstream with an epsilon inside the root and pinned by a probe (their
+finding Q6), so **the vendor must be taken at or after commit `b78a2e1`**.
+
+**The rerank head does not work at this data scale.** Reranking their
+matcher's top 20: 0.023 warm and 0.032 cold, against **0.050 for reranking at
+random**, with training loss down at 0.011. It memorized its 174 training
+questions and transferred nothing, and warm equals cold, so this is not the
+held-out cards failing -- 308 questions cannot fit a 78,000-parameter space
+over a 2,340-word vocabulary. The design is **unfunded, not refuted**: the
+open number is how many labelled questions per resource it needs, and the
+next experiment is synthetic positives -- each card's own title and summary
+as pseudo-queries to teach the shared space, then fine-tuning on the real
+questions. That multiplies the training pairs about tenfold without a single
+new hand-written question, and it becomes a step of Saga 3 before the rerank
+head rather than after it.
+
+**The ceiling is the matcher's recall, not the model's cleverness.** Their
+stand-in matcher reached recall@20 of 0.63, so reranking the top 20 caps
+accuracy at 0.63 however good the reranker gets, and raising *k* makes the
+reranking problem harder rather than easier. Their matcher is an IDF-weighted
+token overlap and not this project's MB02, so the number that governs Saga 3
+is MB02's own recall@k -- which makes it the most important thing Saga 2
+produces, ahead of MB02's accuracy.
+
+**Intent beat nothing.** A five-class intent Choice scored 0.697 against a
+0.737 always-`FindResource` baseline, and the is-off-topic Noul landed exactly
+on its always-false baseline. The cause is in our sets, not their model: 72%
+of the 386 questions are `FindResource`, because they were drafted to test
+whether a system finds the right resource. A set drafted to test destinations
+does not teach intent. Two consequences: the harness reports the
+majority-class baseline beside every accuracy and never a bare one, and the
+sets need an intent-balanced supplement -- owner work, since he confirmed the
+existing rows.
+
+All of it carries their caveat, which is worth repeating: the sets were still
+marked `Unconfirmed` when they ran (they are confirmed now), the matcher was
+theirs rather than MB02, and each head was trained in one configuration with
+no sweep. Read the direction, not the decimals.
+
 ### 2b. What this project is claiming, and what it is not
 
 Upstream also measured the comparison this project will be asked about
@@ -288,6 +342,12 @@ Brier, p50/p95 latency, bytes; plus
 - **coverage/accuracy curve** over the abstention threshold.
 - **regression rows**: questions A0 got right that H got wrong, listed by
   text in the report, not just counted.
+- **the majority-class baseline beside every accuracy**, never a bare
+  accuracy. AT01 measured an intent head at 0.697 where always answering
+  `FindResource` scores 0.737; without the baseline in the same table that
+  reads as a result.
+- **recall@k for every candidate source**, because it is the ceiling on
+  anything that reranks: AT01 capped at 0.63 with k=20 on these sets.
 
 **Statistics.** Paired, because every arm answers the same questions:
 McNemar's test on per-question dest@1 (A0 vs H), and a paired bootstrap

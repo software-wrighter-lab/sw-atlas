@@ -497,8 +497,11 @@ evaluate.
    accuracy, top-3, MRR, unsupported recall, ambiguous top-2, ECE, Brier,
    p50/p95 latency, and bytes in all five senses. Also A0-oracle@k: the
    share of questions whose answer is in the matcher's top k, which is
-   the ceiling for Saga 3's reranker. Every frozen set is labelled and
-   hashed before any training template exists, and the paraphrase set
+   the ceiling for Saga 3's reranker and, after AT01, the most important
+   number this saga produces: their stand-in matcher capped at 0.63 with
+   k=20 on these questions, and no reranker can exceed its first stage.
+   Every frozen set is labelled and hashed before any training template
+   exists, and the paraphrase set
    holds at least 300 rows: at 54 rows the 95% interval on one accuracy
    is about ±13 points, too wide to resolve a +20 bar.
 3. **scoreboard.** `docs/reference/results.md`, seeded with the transferred
@@ -542,15 +545,25 @@ its dense twin.
    set, which is what keeps a newly indexed resource reachable: it arrives
    carrying concepts that already exist, and deterministic code resolves
    them.
-3. **rerank, where it works.** The PR05 card scorer (delivered upstream at
-   tag `tdm-v0.1.0`) over the matcher's top-k, confined to candidates the
-   model trained on. Upstream's DC01 measured a card scorer at 0.4% in a
+3. **supervision before reranking.** AT01 measured the card scorer at 0.023
+   against 0.050 for random on this corpus: 308 questions cannot fit a
+   78,000-parameter space, and it memorised its 174 training rows. So the
+   rerank head is funded before it is trained -- synthetic positives from each
+   card's own title and summary as pseudo-queries, which multiplies the pairs
+   about tenfold with no new hand-written question, then fine-tuning on the
+   real ones. If that still does not beat the matcher on the same split, the
+   reranker is not the mechanism and the concept path carries the saga alone.
+
+4. **rerank, where it works.** The PR05 card scorer (delivered upstream at
+   tag `tdm-v0.1.0`, vendored at or after commit `b78a2e1` for the NaN fix
+   AT01 found) over the matcher's top-k, confined to candidates the model
+   trained on. Upstream's DC01 measured a card scorer at 0.4% in a
    full field of cards held out of training, 36.5% in a five-card field and
    chance when every candidate is cold, against 85.3% where cards trained;
    their regime is harsher than this one, so this project measures its own,
    with their hold-out harness. A cold candidate keeps the matcher's order,
    which makes "never worse than A0 on a new post" structural.
-4. **policy.** The arbitration crate: act, rerank, offer alternatives or
+5. **policy.** The arbitration crate: act, rerank, offer alternatives or
    abstain, with thresholds fitted on validation and carried as data; meta
    answers (counts, newest, "why did you send me there?") computed from the
    catalog and the trace, never from the weights. An abstention is not a
@@ -559,8 +572,10 @@ its dense twin.
    with nearest concepts, "did you mean" from concept aliases, and next
    questions generated from the catalog -- counts per concept, series
    successors, "is there a video of that?" where a relation exists.
-5. **eval.** Arms A0, A0-oracle@k, TDM alone, hybrid, and the hybrid's
-   ablations, on every frozen set; paired McNemar and a bootstrap interval
+6. **eval.** Arms A0, A0-oracle@k, TDM alone, hybrid, and the hybrid's
+   ablations, on every frozen set, every accuracy printed beside its
+   majority-class baseline because AT01's intent head scored 0.697 where
+   always answering `FindResource` scores 0.737; paired McNemar and a bootstrap interval
    on each margin; confidently-wrong rate; the questions A0 got right and
    the hybrid got wrong, listed by text.
 
