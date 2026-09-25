@@ -18,6 +18,11 @@
 #
 # Columns are separated by ` :: `, not `|`, because a follow-up row contains a
 # `|` inside the question itself.
+#
+# SHORT ON TIME? sources/questions/NEEDS-REVIEW.txt lists the rows that
+# actually need a judgement -- the ones where the corpus offers a sibling the
+# key might have preferred, or where the drafter left a doubt. The rest had one
+# plausible answer and the drafter owns them.
 
 ======================================================================
 # ambiguous :: 12 rows, all confirmed by the repository owner on 2026-09-24. Every listed resource is genuinely a correct answer.
@@ -69,7 +74,7 @@ Y  10 :: the tiny routed model microscope | where is that published :: repo:sw-m
 ======================================================================
 # intent :: Drafted 2026-09-24, unconfirmed. Written because AT01 measured a five-class intent head at 0.697 against a 0.737 always-FindResource baseline: 72% of the other sets are FindResource, so they cannot teach or measure intent. These rows are spread across the intents instead, so that a constant answer scores badly. The no-alias rule of the paraphrase set does NOT apply here -- an intent question may name its subject, because naming it is how a visitor asks whether a thing is finished or how two things differ. Scoring: intent on every row; destination only where a row names one, and `expect` is empty where the question is genuinely open. Compare is the intent A0's keyword rules cannot express at all, which is why it is here in numbers.
 _   1 :: is the card reader exhibit finished yet :: campus:ibm-1130
-_   2 :: how far along is the forth kernel :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+_   2 :: how far along is the forth kernel :: repo:sw-embed/sw-cor24-forth
 _   3 :: did you ever finish the sudoku app :: blog:2026-09-09-personal-software-sudoku-learn-practice
 _   4 :: what works today on the campus :: campus:campus
 _   5 :: is the apl interpreter usable or still a toy :: campus:apl

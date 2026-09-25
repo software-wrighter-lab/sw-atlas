@@ -1,0 +1,280 @@
+# Rows that need the owner's eye
+#
+# Triage, not truth. A row is listed because the corpus offers a sibling the
+# key might have preferred -- the matcher ranks another resource above the
+# expected one and the two share a concept -- or because the drafter left a
+# doubt note. Everything not listed had one plausible answer, and the drafter
+# owns those: confirming them is mechanical rather than a judgement.
+#
+# Row numbers match sources/questions/<set>.ron and the review form. Mark in
+# the form (sources/questions/REVIEW.txt), not here.
+
+======================================================================
+# paraphrase: 85 need a look, 223 the drafter owns
+======================================================================
+  1 :: the machine with the toggle switches and the row of little lights :: campus:ibm-1130
+      drafter's note: the console panel, described by someone who saw a photo
+  5 :: the tiny eight bit chip that ended up on a spacecraft :: campus:rca-1802
+      drafter's note: the 1802 flew on Galileo; a visitor may only remember that
+  8 :: where are the old computers :: campus:computer-history
+      drafter's note: vaguest reasonable navigation question
+ 10 :: the wing where you keep the small made up languages :: campus:language-experiments
+      a sibling outranks the key: blog:2026-04-26-saw-tuplet-smalltalk-forth-from-forth
+ 11 :: the notation with the greek letters you type sideways :: campus:apl
+      a sibling outranks the key: blog:2026-09-17-tbt-apl-360-revisited
+ 12 :: i heard you can run iverson's notation in a web page here :: campus:apl
+      a sibling outranks the key: blog:2026-09-17-tbt-apl-360-revisited
+ 13 :: the story about betting on ponies in your first program :: blog:2026-01-29-tbt-apl-horse-race
+      a sibling outranks the key: blog:2026-02-12-tbt-vector-graphics-games
+ 25 :: running a language model on a phone with no signal :: blog:2026-02-01-small-models-part2-pocket-llm
+      a sibling outranks the key: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+ 26 :: twenty seven million parameters beating a much bigger reasoner on that puzzle benchmark :: blog:2026-02-02-small-models-part3-hrm
+      a sibling outranks the key: blog:2026-02-04-small-models-part5-billion-llm
+ 27 :: the model inspired by brains where most of it stays quiet :: blog:2026-02-03-small-models-part4-bdh
+      a sibling outranks the key: blog:2026-02-27-how-ai-learns-part4-memory-based
+ 29 :: benchmarking which of the little models my laptop can actually run :: blog:2026-02-05-small-models-part6-efficient-frontier
+      a sibling outranks the key: blog:2026-04-24-large-language-monkeys-scaling-inference
+ 30 :: where should i start with your series on models that are deliberately tiny :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+      drafter's note: series entry point
+ 32 :: you implemented their idea for not recomputing patterns the model already knows :: blog:2026-02-02-deepseek-papers-part2-engram
+      a sibling outranks the key: blog:2026-09-20-saw-atlas-typed-decisions
+ 34 :: why do deep networks end up in such tidy geometric arrangements :: blog:2026-03-09-mlf-01-neural-collapse
+      a sibling outranks the key: blog:2026-02-01-deepseek-papers-part1-mhc
+ 36 :: the research claiming arrangement matters more than size :: blog:2026-03-19-mlf-03-knowledge-graphs-domain-specific-superintelligence
+      a sibling outranks the key: blog:2026-02-24-many-eyes-learning-part2-intrinsic-rewards
+ 39 :: sampling a small model over and over instead of buying a bigger one :: blog:2026-04-24-large-language-monkeys-scaling-inference
+      a sibling outranks the key: blog:2026-09-20-saw-atlas-typed-decisions
+ 42 :: the difference between a model losing old skills and losing the thread in a long conversation :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+      a sibling outranks the key: blog:2026-03-01-how-ai-learns-part6-continuous-learning
+ 44 :: storing things outside the model and looking them up :: blog:2026-02-27-how-ai-learns-part4-memory-based
+      a sibling outranks the key: blog:2026-09-13-made-visible-mlos
+ 46 :: absorbing new skills over time without wrecking the old ones :: blog:2026-03-01-how-ai-learns-part6-continuous-learning
+      a sibling outranks the key: blog:2026-03-22-saw-agentrail-rs-icrl-dual-memory
+ 47 :: your sketch of a whole agent that keeps learning, with the parts named :: blog:2026-03-02-how-ai-learns-part7-full-architecture
+      a sibling outranks the key: blog:2026-09-16-ai-tools-coding-agent-in-mlpl
+ 48 :: what should i read after the piece on memory outside the weights :: blog:2026-02-28-how-ai-learns-part5-context-rlm
+      drafter's note: series successor; a sibling outranks the key: blog:2026-09-13-made-visible-mlos
+ 49 :: i have cat pictures scattered everywhere and want to find them offline :: blog:2026-02-14-cat-finder-local-ml-rust
+      a sibling outranks the key: blog:2026-09-09-personal-software-sudoku-learn-practice
+ 51 :: the command line thing that writes tunes for coding assistants :: blog:2026-02-20-midi-cli-rs-music-for-ai-agents
+      a sibling outranks the key: blog:2026-02-28-music-pipe-rs-unix-composition
+ 54 :: the one where several instruments play together in the browser :: blog:2026-02-28-music-pipe-rs-unix-composition
+      a sibling outranks the key: blog:2026-09-20-saw-atlas-typed-decisions
+ 55 :: sorting recordings by which ones sound cleanest :: blog:2026-03-06-rank-wav-audio-quality-ranking
+      a sibling outranks the key: blog:2026-02-24-music-pipe-rs-unix-pipelines-for-midi
+ 59 :: thirteen little language implementations behind one starter :: blog:2026-04-28-personal-software-sw-launcher-one-ring
+      a sibling outranks the key: blog:2026-04-30-bucket-list-3d-source-new-languages-visible-compilers
+ 60 :: giving an assistant a memory that survives between sessions :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+      a sibling outranks the key: blog:2026-02-11-deepseek-papers-part3-engram-revisited
+ 61 :: putting a coding assistant in a box so it cannot wreck anything :: blog:2026-05-16-nono-sandbox-ai-agents
+      a sibling outranks the key: blog:2026-09-16-ai-tools-coding-agent-in-mlpl
+ 64 :: what happens when the plan you gave an agent turns out to be wrong halfway :: blog:2026-04-23-ai-tools-agentrail-rs-mid-saga-flexibility
+      a sibling outranks the key: blog:2026-04-28-personal-software-sw-launcher-one-ring
+ 66 :: an assistant small enough to read all of, in your own array language :: blog:2026-09-16-ai-tools-coding-agent-in-mlpl
+      a sibling outranks the key: blog:2026-09-10-ml-cnn-from-equations-mlpl
+ 72 :: compiling for a chip the compiler has never heard of :: blog:2026-03-13-rabbit-hole-rust-to-unsupported-isa
+      a sibling outranks the key: blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build
+ 76 :: shrinking the word list and shipping specialised images instead :: blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images
+      a sibling outranks the key: blog:2026-09-08-bucket-list-operating-systems-and-ml-hardware
+ 79 :: learning machine code in a browser tab with three panes :: blog:2026-03-22-cor24-rs-assembly-emulator
+      a sibling outranks the key: blog:2026-02-14-neural-net-rs-educational-ml-platform
+ 87 :: how are the kernels and the machine learning hardware emulator coming along :: blog:2026-09-08-bucket-list-operating-systems-and-ml-hardware
+      a sibling outranks the key: blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build
+ 92 :: the week with a new whitespace language and a talking window system :: blog:2026-04-26-saw-tuplet-smalltalk-forth-from-forth
+      a sibling outranks the key: blog:2026-09-17-tbt-apl-360-revisited
+ 96 :: sending different work to different parts of the model so nothing gets overwritten :: blog:2026-02-18-sleepy-coder-routing-prevents-forgetting
+      a sibling outranks the key: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+ 97 :: the small model that went from nothing to three quarters right in five minutes :: blog:2026-02-01-multi-hop-reasoning
+      a sibling outranks the key: blog:2026-03-02-five-ml-concepts-27
+102 :: how that prompt learning idea went from a surprise to something you can engineer :: blog:2026-02-22-icl-revisited-from-mystery-to-engineering
+      a sibling outranks the key: blog:2026-02-09-five-ml-concepts-6
+106 :: do you have anything to watch about attention and walking downhill to reduce error :: video:-Y4T0_vETB4
+      drafter's note: episode 2 covers gradient descent and attention
+113 :: where is the code for the browser emulator of that 1960s system :: repo:sw-comp-history/ibm-1130-rs
+      drafter's note: shared identifier: the campus and the blog both name it; a sibling outranks the key: blog:2026-03-22-cor24-rs-assembly-emulator
+116 :: the code behind the painted map of the projects :: repo:software-wrighter-lab/sw-campus
+      a sibling outranks the key: blog:2026-02-14-cat-finder-local-ml-rust
+118 :: the repository for the language you wrote the machine learning work in :: repo:sw-ml-study/sw-mlpl
+      a sibling outranks the key: blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking
+119 :: where is the code for the old mainframe assembler emulator :: repo:sw-comp-history/ibm-390-rs
+      a sibling outranks the key: blog:2026-04-28-personal-software-sw-launcher-one-ring
+125 :: your emulator for the open instruction set everyone is excited about :: repo:sw-embed/risc-v-rs
+      a sibling outranks the key: blog:2026-03-22-cor24-rs-assembly-emulator
+126 :: the tiny stack language kernel for your soft cpu :: repo:sw-embed/sw-cor24-forth
+      a sibling outranks the key: blog:2026-03-22-cor24-rs-assembly-emulator
+145 :: your fuzz testing tool :: repo:sw-cli-tools/fuzzit
+      a sibling outranks the key: blog:2026-04-12-saw-agent-coordination-fuzzit-vendoring
+151 :: the tool that has a model police your process while you code :: repo:softwarewrighter/guardian-cli
+      a sibling outranks the key: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+163 :: the tool that writes two sided dialogue with a model :: repo:softwarewrighter/dialog-gen
+      a sibling outranks the key: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+183 :: a clip that covers random disabling of units and learning from preferences :: video:C5ICKluukxI
+      a sibling outranks the key: blog:2026-02-12-five-ml-concepts-9
+184 :: the short about telling correct positives from finding all of them :: video:jQqyRdQAjPw
+      a sibling outranks the key: blog:2026-02-15-five-ml-concepts-12
+200 :: the written version of the episode covering random unit disabling :: blog:2026-02-12-five-ml-concepts-9
+      a sibling outranks the key: blog:2026-02-24-five-ml-concepts-21
+201 :: the post listing the five ideas that included telling apart correct and complete :: blog:2026-02-15-five-ml-concepts-12
+      a sibling outranks the key: blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking
+202 :: the written episode that covers sliding filters over images :: blog:2026-02-13-five-ml-concepts-10
+      a sibling outranks the key: blog:2026-09-10-ml-cnn-from-equations-mlpl
+203 :: the post about a landing page for the chip tooling :: blog:2026-04-03-bucket-list-software-tools-landing-page
+      a sibling outranks the key: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+204 :: the week you built a panel for coordinating two different assistants :: blog:2026-04-12-saw-agent-coordination-fuzzit-vendoring
+      a sibling outranks the key: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+205 :: the week your process tool learned to archive and a new array notation appeared :: blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers
+      a sibling outranks the key: blog:2026-09-17-tbt-apl-360-revisited
+207 :: the piece where your process tool went from skeleton to two kinds of memory :: blog:2026-03-22-saw-agentrail-rs-icrl-dual-memory
+      a sibling outranks the key: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+208 :: the first weekly roundup, with a rust agent framework and a chain library in it :: blog:2026-03-08-saw-pjmai-rs-rig-langchain
+      a sibling outranks the key: blog:2026-02-12-dytopo-rs-dynamic-topology-multi-agent
+216 :: the emulator that just executes instructions for that open chip :: repo:sw-langtools/sw-rv32i-emulator
+      a sibling outranks the key: blog:2026-03-22-cor24-rs-assembly-emulator
+221 :: how you load compiled rust into that interpreter as an extension :: repo:sw-ml-study/demo-extensions
+      a sibling outranks the key: blog:2026-09-17-tbt-apl-360-revisited
+222 :: the typed decision demo inspired by that new model category :: repo:sw-ml-study/demo-decision-model
+      a sibling outranks the key: blog:2026-09-20-saw-atlas-typed-decisions
+226 :: your operating system aimed specifically at running models :: repo:sw-ml-study/sw-os-ml
+      a sibling outranks the key: blog:2026-09-08-bucket-list-operating-systems-and-ml-hardware
+228 :: the visual tools for looking at what a model is doing :: repo:sw-ml-study/ml-viz
+      a sibling outranks the key: blog:2026-09-09-ai-tools-local-llm-loop-model-evaluation
+233 :: the framework for testing user interfaces built in that rust web library :: repo:softwarewrighter/ui-test-rs
+      a sibling outranks the key: blog:2026-02-14-neural-net-rs-educational-ml-platform
+242 :: the puzzle game compiled to run in a browser :: repo:sw-fun/sudoku
+      a sibling outranks the key: blog:2026-09-09-personal-software-sudoku-learn-practice
+243 :: the interactive web game drawn with scalable graphics :: repo:sw-game-dev/svg-combat-rs
+      a sibling outranks the key: blog:2026-09-09-personal-software-sudoku-learn-practice
+249 :: the write up about your index of everything and the small decider in front of it :: blog:2026-09-20-saw-atlas-typed-decisions
+      a sibling outranks the key: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+251 :: the piece about a model whose parts you can print and read :: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+      a sibling outranks the key: blog:2026-09-13-made-visible-mlos
+252 :: where do i read about the tool that stops an assistant writing sprawling code :: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents
+      a sibling outranks the key: blog:2026-02-14-cat-finder-local-ml-rust
+253 :: what did you conclude about teaching a model new tasks one after another :: blog:2026-03-01-how-ai-learns-part6-continuous-learning
+      a sibling outranks the key: blog:2026-09-20-saw-atlas-typed-decisions
+255 :: something about a phone sized model that answers without a network :: blog:2026-02-01-small-models-part2-pocket-llm
+      a sibling outranks the key: blog:2026-03-02-five-ml-concepts-27
+256 :: the post where a tiny model beat a much larger one on a puzzle set :: blog:2026-02-02-small-models-part3-hrm
+      a sibling outranks the key: blog:2026-01-31-small-models-part1-tiny-recursive-model
+258 :: i want the story about your first job and the tools you built there :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+      drafter's note: the 1980s IBM systems work
+260 :: the post about pressing keys on a console that has no keyboard :: blog:2026-02-26-ibm-1130-system-emulator
+      a sibling outranks the key: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+262 :: the piece about naming things costing time at runtime :: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name
+      a sibling outranks the key: blog:2026-04-25-rabbit-hole-forth-dictionary-compaction-specialized-images
+263 :: what have you published about routing work to parts of a network :: blog:2026-02-18-sleepy-coder-routing-prevents-forgetting
+      a sibling outranks the key: blog:2026-03-02-five-ml-concepts-27
+264 :: the writing about several agents exploring at once :: blog:2026-02-03-many-eyes-learning
+      a sibling outranks the key: blog:2026-01-30-welcome-to-software-wrighter-lab
+267 :: the article about an index that answers without a server :: blog:2026-09-12-software-wrighter-research-campus
+      a sibling outranks the key: blog:2026-02-02-game-mcp-poc
+268 :: what did you build that browser based machine code trainer with :: blog:2026-03-22-cor24-rs-assembly-emulator
+      a sibling outranks the key: blog:2026-02-14-neural-net-rs-educational-ml-platform
+271 :: which post covers making a compiler target something it was never meant to :: blog:2026-03-13-rabbit-hole-rust-to-unsupported-isa
+      a sibling outranks the key: blog:2026-03-21-bucket-list-things-ive-always-wanted-to-build
+278 :: the post where memory for a whole system is drawn in three dimensions :: blog:2026-09-11-made-visible-swtos
+      a sibling outranks the key: blog:2026-09-13-made-visible-mlos
+279 :: where you explain the difference between two kinds of drift :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+      a sibling outranks the key: blog:2026-02-18-five-ml-concepts-15
+283 :: what did you write about models whose stated thinking does not match what they did :: blog:2026-03-23-mlf-04-is-chain-of-thought-real
+      a sibling outranks the key: blog:2026-09-13-made-visible-mlos
+285 :: where you wrote about keeping training steady however many layers there are :: blog:2026-02-01-deepseek-papers-part1-mhc
+      a sibling outranks the key: blog:2026-02-24-how-ai-learns-part1-time-scales
+308 :: the piece about catching a change in output before anyone notices :: blog:2026-03-19-tbt-reg-rs-regression-testing
+      a sibling outranks the key: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+
+======================================================================
+# intent: 31 need a look, 47 the drafter owns
+======================================================================
+  1 :: is the card reader exhibit finished yet :: campus:ibm-1130
+      drafter's note: OWNER DECISION. The IBM 1442 is deliberately absent: it is the held-out exhibit for SN01, so the corpus has no card-reader resource and this key points at the wing that merely mentions it in prose. Routing to the wing and abstaining are both defensible, and the right answer changes the day snapshot B publishes the exhibit. Y keeps the wing; N moves the row to off-topic.
+  2 :: how far along is the forth kernel :: repo:sw-embed/sw-cor24-forth
+      drafter's note: Key corrected 2026-09-25: it expected the April self-hosting post, but the corpus holds seventeen Forth resources including this repository -- the kernel itself -- and four later rabbit-hole posts that supersede that April one. A status question about a kernel wants the kernel. The post remains a defensible second answer, which would make this an ambiguous-set row instead.
+  9 :: how much of the pascal toolchain is working :: blog:2026-04-27-embedded-pascal-pcode-yagni-bump-to-reclaim
+      a sibling outranks the key: blog:2026-04-05-saw-saga-archiving-mlpl-plsw-cor24-compilers
+ 11 :: is the index you are building usable yet :: blog:2026-09-20-saw-atlas-typed-decisions
+      a sibling outranks the key: blog:2026-09-12-software-wrighter-research-campus
+ 12 :: what is still planned rather than built :: (open)
+      drafter's note: genuinely open: the answer is a list
+ 13 :: progress on the risc-v emulator :: repo:sw-embed/risc-v-rs
+      a sibling outranks the key: blog:2026-03-22-cor24-rs-assembly-emulator
+ 16 :: explain in-context learning to me :: blog:2026-02-22-icl-revisited-from-mystery-to-engineering
+      a sibling outranks the key: blog:2026-02-08-five-ml-concepts-5
+ 17 :: why does grokking happen at all :: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+      a sibling outranks the key: blog:2026-03-04-five-ml-concepts-29
+ 18 :: what does a mixture of experts actually route :: blog:2026-09-13-saw-building-a-tiny-mixture-of-experts
+      a sibling outranks the key: blog:2026-02-14-five-ml-concepts-11
+ 20 :: what is catastrophic forgetting :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+      a sibling outranks the key: blog:2026-02-12-sleepy-coder-when-fine-tuning-fails
+ 21 :: why would anyone write a kernel in forth :: blog:2026-04-20-embedded-forth-self-hosting-spectrum
+      a sibling outranks the key: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name
+ 24 :: why is apl written with those symbols :: campus:apl
+      a sibling outranks the key: blog:2026-04-26-saw-tuplet-smalltalk-forth-from-forth
+ 26 :: explain what an engram cache does :: blog:2026-02-02-deepseek-papers-part2-engram
+      a sibling outranks the key: blog:2026-02-27-how-ai-learns-part4-memory-based
+ 27 :: why do you keep every number regenerable :: (open)
+      drafter's note: a question about method, not a resource
+ 28 :: what does sharpening the saw mean in your titles :: (open)
+      drafter's note: about the series convention
+ 39 :: take me to the checklist tool :: repo:softwarewrighter/sw-checklist
+      a sibling outranks the key: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents
+ 40 :: where is the array language itself :: repo:sw-ml-study/sw-mlpl
+      a sibling outranks the key: blog:2026-09-06-saw-mlpl-libraries-extensions-graphics-networking
+ 41 :: what should i read first about small models :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+      a sibling outranks the key: blog:2026-04-24-large-language-monkeys-scaling-inference
+ 42 :: suggest something to watch if i have five minutes :: (open)
+      drafter's note: open: any short video is defensible
+ 44 :: recommend a post about compilers :: (open)
+      drafter's note: open: several are right
+ 45 :: what is worth seeing if i only visit one exhibit :: (open)
+      drafter's note: open
+ 47 :: what should i look at after the campus map :: (open)
+      drafter's note: open: any building
+ 48 :: suggest a repository to read if i like interpreters :: (open)
+      drafter's note: open
+ 50 :: anything good for a rust programmer curious about ml :: repo:sw-ml-study/sw-mlpl
+      a sibling outranks the key: blog:2026-02-14-cat-finder-local-ml-rust
+ 52 :: what next after the forth rabbit holes :: (open)
+      drafter's note: open: the series continues
+ 53 :: how does forth compare with apl on your chip :: (open)
+      drafter's note: two resources; A0 cannot express this intent at all
+ 58 :: which of the small models runs best on a laptop :: blog:2026-02-05-small-models-part6-efficient-frontier
+      a sibling outranks the key: blog:2026-04-24-large-language-monkeys-scaling-inference
+ 65 :: tell me the story of your first program :: blog:2026-01-29-tbt-apl-horse-race
+      a sibling outranks the key: blog:2026-02-12-tbt-vector-graphics-games
+ 69 :: tell me about working at ibm :: blog:2026-04-30-tbt-mass-compile-pl-edit-aq-system
+      a sibling outranks the key: blog:2026-01-29-tbt-apl-horse-race
+ 71 :: again :: (open)
+      drafter's note: the mockup's rule: repeat the last story
+ 74 :: the background to your throwback thursday posts :: (open)
+      drafter's note: about the series
+
+======================================================================
+# exact-name: 7 need a look, 9 the drafter owns
+======================================================================
+  3 :: RCA COSMAC 1802 :: campus:rca-1802
+      drafter's note: bare name, no sentence
+  4 :: show me sw-checklist :: repo:softwarewrighter/sw-checklist
+      a sibling outranks the key: blog:2026-04-27-sw-checklist-ratchet-ai-coding-agents
+  9 :: midi-cli-rs :: blog:2026-02-20-midi-cli-rs-music-for-ai-agents
+      drafter's note: the tool is named in two posts; the first is expected; a sibling outranks the key: blog:2026-02-28-music-pipe-rs-unix-composition
+ 11 :: Grokking :: blog:2026-04-23-mlf-05-grokking-delayed-generalization
+      a sibling outranks the key: blog:2026-03-04-five-ml-concepts-29
+ 13 :: Five ML Concepts #11 :: blog:2026-02-14-five-ml-concepts-11
+      drafter's note: the post; the video is a defensible second answer
+ 14 :: neural collapse :: blog:2026-03-09-mlf-01-neural-collapse
+      a sibling outranks the key: blog:2026-03-04-five-ml-concepts-29
+ 15 :: pjmai-rs :: blog:2026-03-05-tbt-pjmai-rs-project-manager
+      a sibling outranks the key: blog:2026-03-08-saw-pjmai-rs-rig-langchain
+
+======================================================================
+# follow-up: 4 need a look, 6 the drafter owns
+======================================================================
+  4 :: how ai learns part one | what comes next :: blog:2026-02-25-how-ai-learns-part2-forgetting-vs-rot
+      drafter's note: series successor, from the declared chain; a sibling outranks the key: blog:2026-02-24-how-ai-learns-part1-time-scales
+  5 :: the small models series | which one should i read first :: blog:2026-01-31-small-models-part1-tiny-recursive-model
+      a sibling outranks the key: blog:2026-04-24-large-language-monkeys-scaling-inference
+  6 :: that memory layer for assistants | is it finished :: blog:2026-03-17-ai-tools-xskill-memory-layer-multimodal-agents
+      drafter's note: status of a named subject
+  8 :: the forth work | what did you do after dropping the hash :: blog:2026-04-24-rabbit-hole-forth-life-after-hashing
+      a sibling outranks the key: blog:2026-04-23-rabbit-hole-deep-dive-forth-find-cost-of-a-name

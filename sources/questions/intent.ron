@@ -9,8 +9,8 @@ QuestionSet(
     rows: [
 
         // --- Status ---
-        (text: "is the card reader exhibit finished yet", expect: ["campus:ibm-1130"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "how far along is the forth kernel", expect: ["blog:2026-04-20-embedded-forth-self-hosting-spectrum"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "is the card reader exhibit finished yet", expect: ["campus:ibm-1130"], intent: Status, origin: Teacher, status: Unconfirmed, note: "OWNER DECISION. The IBM 1442 is deliberately absent: it is the held-out exhibit for SN01, so the corpus has no card-reader resource and this key points at the wing that merely mentions it in prose. Routing to the wing and abstaining are both defensible, and the right answer changes the day snapshot B publishes the exhibit. Y keeps the wing; N moves the row to off-topic."),
+        (text: "how far along is the forth kernel", expect: ["repo:sw-embed/sw-cor24-forth"], intent: Status, origin: Teacher, status: Unconfirmed, note: "Key corrected 2026-09-25: it expected the April self-hosting post, but the corpus holds seventeen Forth resources including this repository -- the kernel itself -- and four later rabbit-hole posts that supersede that April one. A status question about a kernel wants the kernel. The post remains a defensible second answer, which would make this an ambiguous-set row instead."),
         (text: "did you ever finish the sudoku app", expect: ["blog:2026-09-09-personal-software-sudoku-learn-practice"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
         (text: "what works today on the campus", expect: ["campus:campus"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),
         (text: "is the apl interpreter usable or still a toy", expect: ["campus:apl"], intent: Status, origin: Teacher, status: Unconfirmed, note: ""),

@@ -72,6 +72,11 @@ const FORM_HEADER: &str = "\
 #
 # Columns are separated by ` :: `, not `|`, because a follow-up row contains a
 # `|` inside the question itself.
+#
+# SHORT ON TIME? sources/questions/NEEDS-REVIEW.txt lists the rows that
+# actually need a judgement -- the ones where the corpus offers a sibling the
+# key might have preferred, or where the drafter left a doubt. The rest had one
+# plausible answer and the drafter owns them.
 ";
 
 fn main() -> ExitCode {
