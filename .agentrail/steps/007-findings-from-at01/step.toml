@@ -1,8 +1,9 @@
 number = 7
 slug = "findings-from-at01"
-status = "in-progress"
+status = "completed"
 description = "demo-decision-model ran sw-atlas's own problem on sw-atlas's own data (their ..."
 role = "meta"
 context_files = []
 created_at = "2026-09-24T17:36:16"
-commits = []
+completed_at = "2026-09-24T17:39:24"
+commits = ["98a6821247f2e3cc5e7d94613adfcb112c185fb9"]
