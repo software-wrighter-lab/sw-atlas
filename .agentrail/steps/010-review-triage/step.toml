@@ -1,0 +1,9 @@
+number = 10
+slug = "review-triage"
+status = "completed"
+description = "The owner asked a fair question: why does confirming a row like 'is the card ..."
+role = "production"
+context_files = []
+created_at = "2026-09-25T09:48:34"
+completed_at = "2026-09-25T09:51:10"
+commits = ["8b3439ecd47b30bc5a7d11e92a96fd8646581fd5"]
