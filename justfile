@@ -55,12 +55,10 @@ report *args:
 report-check *args:
     just report --check {{args}}
 
-# Score every runtime class on the held-out questions (saga atlas-baseline).
+# Needs build/corpus/corpus.ron, so run `just ingest` first.
+# Score every arm on the confirmed question sets, with baselines and intervals.
 eval *args:
-    @echo "just eval {{args}}: not implemented yet." >&2
-    @echo "Lands in saga atlas-baseline, which builds the harness before" >&2
-    @echo "there is anything to evaluate. See docs/sagas.md." >&2
-    @exit 1
+    cargo run --quiet --release -p atlas-eval-cli -- {{args}}
 
 # Write the publishable snapshot with per-file hashes (saga atlas-runtime).
 snapshot:

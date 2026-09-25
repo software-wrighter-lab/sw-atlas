@@ -1,0 +1,8 @@
+number = 9
+slug = "eval-harness"
+status = "in-progress"
+description = "Read docs/hybrid-docent.md section 6 and section 2a-bis first. Write 'just ev..."
+role = "validation"
+context_files = []
+created_at = "2026-09-24T19:31:30"
+commits = []

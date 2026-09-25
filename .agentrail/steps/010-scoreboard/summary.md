@@ -1,0 +1,1 @@
+BLOCKED: Begun in error again: the cursor advances past steps 003 and 004, which an early reorder stranded behind a completed step, so 'begin' lands on the scoreboard. No scoreboard work was done; the eval harness is being inserted at the cursor. Reopen this once the harness has numbers.

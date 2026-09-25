@@ -1,0 +1,23 @@
+[package]
+name = "atlas-eval-cli"
+description = "The sw-atlas evaluation command: every arm on the frozen sets, with baselines and paired intervals"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "atlas-eval"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-corpus.workspace = true
+atlas-eval.workspace = true
+atlas-match.workspace = true
+atlas-questions.workspace = true
+clap = { workspace = true }
+ron = { workspace = true }

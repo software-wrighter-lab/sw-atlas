@@ -1,0 +1,23 @@
+[package]
+name = "atlas-eval"
+description = "The sw-atlas evaluation harness: every arm on the frozen question sets, with baselines and paired intervals"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "atlas_eval"
+path = "src/lib.rs"
+
+[dev-dependencies]
+ron = { workspace = true }
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-corpus.workspace = true
+atlas-questions.workspace = true
+ron = { workspace = true }

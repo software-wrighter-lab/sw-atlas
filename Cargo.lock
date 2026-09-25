@@ -118,6 +118,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "atlas-eval"
+version = "0.1.0"
+dependencies = [
+ "atlas-corpus",
+ "atlas-questions",
+ "ron",
+]
+
+[[package]]
+name = "atlas-eval-cli"
+version = "0.1.0"
+dependencies = [
+ "atlas-corpus",
+ "atlas-eval",
+ "atlas-match",
+ "atlas-questions",
+ "clap",
+ "ron",
+]
+
+[[package]]
 name = "atlas-graph"
 version = "0.1.0"
 dependencies = [
