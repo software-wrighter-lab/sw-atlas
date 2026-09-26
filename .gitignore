@@ -26,3 +26,6 @@
 
 # Scratch
 /tmp/
+
+# Local drafts (hub repo drafts, scratch). Never committed here.
+/work/
