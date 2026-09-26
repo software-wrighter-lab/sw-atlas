@@ -88,6 +88,26 @@ What it needs before it starts, and from whom:
   the abandoned copy and the corpus points visitors at dead work. A committed
   `sources/repo-canonical.ron` declares which copy is real. Found while
   drafting the public index repository.
+
+  **Scope grew, 2026-09-26, after resolving every fork's parent.** The step
+  prompt names five same-name pairs; there are ten, and the other five were
+  renamed on the way out, which is why a name comparison missed them: `p24c` →
+  `sw-cor24-pascal`, `pv24a` → `sw-cor24-pcode`, `web-dv24r` →
+  `web-sw-cor24-pcode`, `markdown-checker` → `sw-markdown-checker`, `proact` →
+  `sw-init`. The general rule the ingester needs is bigger than a list of
+  pairs, and is the owner's answer to "what should fork mean": **a fork of my
+  own work is my work; a fork of somebody else's is not.** Classify by who owns
+  the parent repository, not by GitHub's fork flag, which records which button
+  was pressed. Of 42 public forks, 14 are the owner's own work: ten duplicate
+  pairs, one that diverged into a different program
+  (`sw-embed/sw-cor24-x-assembler`, from `cor24-rs`), and three continuing work
+  from `wrightmikea`, an earlier personal account. The parent is one API field
+  per fork and belongs in the cache; `cache/README.md`'s keep/exclude rules
+  need rewriting around it.
+
+  Two pairs have the copy left behind still being pushed -- `sw-install` and
+  `proact`/`sw-init` -- so canonicality there is an **owner decision**, not a
+  date comparison.
 - **`refresh-repo-cache` (step 013, queued 2026-09-26).** The cache is from
   2026-09-19: one repository went private, five are new. A cache refresh is a
   corpus change and carries counts through the README, the tests and the
@@ -120,6 +140,11 @@ What it needs before it starts, and from whom:
   [`demo-decision-model-requests.md`](demo-decision-model-requests.md).
 
 ## Waiting on the owner
+
+- **Which copy is canonical for `sw-install` and `proact`/`sw-init`.** Both
+  were forked into an organisation and then the original kept being pushed, so
+  the public evidence contradicts the pattern the other eight pairs follow.
+  Step 012 needs the answer; everything else about that step is decided.
 
 - **An intent-balanced question supplement.** 72% of the 386 confirmed
   questions are `FindResource`, because they were drafted to test whether the
