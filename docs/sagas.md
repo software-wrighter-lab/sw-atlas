@@ -93,8 +93,14 @@ What it needs before it starts, and from whom:
   corpus change and carries counts through the README, the tests and the
   generated reports.
 - **`hub-recipe` (step 014, queued 2026-09-26).** `just hub`, rendering
-  `softwarewrighter/start-here` from the corpus instead of the throwaway script
-  that drafted it. The corpus is the right source because it cannot express the
+  `softwarewrighter/softwarewrighter` from the corpus instead of the throwaway
+  script that drafted it. **Correction, 2026-09-26, after the step was
+  queued:** the repository was `softwarewrighter/start-here` when the prompt
+  was written and has since been renamed, so it is now the profile-README
+  repository and the recipe must render *two* templates from one corpus -- a
+  23-line window for `README.md`, which GitHub renders on the profile page in
+  full with no fold, and the long front page as `docs/index.md`. The old name
+  301-redirects. The corpus is the right source because it cannot express the
   two defects the draft shipped: a link to a repository that does not exist, and
   private repository names read off the author's disk.
 - **`judge-loop` (step 015, queued 2026-09-25).** A local Ollama model asks
