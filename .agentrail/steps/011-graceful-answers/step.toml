@@ -1,8 +1,9 @@
 number = 11
 slug = "graceful-answers"
-status = "in-progress"
+status = "completed"
 description = "Owner direction, 2026-09-25: stop asking him to adjudicate rows whose answer ..."
 role = "production"
 context_files = []
 created_at = "2026-09-25T09:52:02"
-commits = []
+completed_at = "2026-09-26T12:29:54"
+commits = ["e4708944d916ee38faeaed24dd8bf179b13531c4"]
