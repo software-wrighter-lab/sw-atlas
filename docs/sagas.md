@@ -76,6 +76,20 @@ What it needs before it starts, and from whom:
 - **Not needed yet.** PR05 from `demo-decision-model` (Saga 3 step 3), and
   the text for the 32 videos without scripts.
 
+## In flight in Saga 2
+
+- **`graceful-answers` (step 011, done 2026-09-25).** The answer policy over
+  MB02: five outcomes, fitted thresholds, `just ask`. The fit is a negative
+  result -- no score/margin combination answers with a single resource above
+  0.54 precision -- so the docent offers the closest three and says so.
+  [`hybrid-docent.md`](hybrid-docent.md) section 9 has the distribution.
+- **`judge-loop` (step 012, queued 2026-09-25).** A local Ollama model asks
+  the docent questions, judges the replies for helpfulness and accuracy, and
+  records actionable defects for the owner to confirm. Owner's request. Its
+  verdicts are `Teacher` provenance and may never enter the scoreboard: a
+  judge's opinion is a model's impression, which the measurement discipline
+  excludes by name. What it produces is a queue of candidate bugs.
+
 ## Delivered by another repository
 
 - **PR05 and the pinnable tag are both done** (2026-09-22 and 2026-09-24).
