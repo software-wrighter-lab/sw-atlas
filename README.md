@@ -85,10 +85,29 @@ the blog, the campus, the repository cache and the video scripts into one
 validated, canonical corpus with no model in it, and two gates stand behind
 it -- zero resources that nothing can reach, zero URLs that 404.
 
-Nothing that answers a visitor is built yet. There is no matcher over this
-corpus (Saga 2), no model (Saga 3) and no browser runtime (Saga 9), so
-nothing here can be demonstrated to a visitor today, and every quality
-number below is inherited from `moe-microscope` rather than measured here.
+**Something answers a visitor now, and it is not a model.** `just ask "where
+is the IBM 1130 wing"` runs the deterministic matcher over the whole corpus
+and an answer policy over its evidence, and prints what a visitor would see
+plus the evidence it acted on. There is still no model (Saga 3) and no
+browser runtime (Saga 9).
+
+The policy has five outcomes -- one resource, the closest few, not yet,
+nothing here, or please rephrase -- and its thresholds are fitted rather
+than chosen, with the fit recorded in
+[`sources/answer-policy.ron`](sources/answer-policy.ron). The finding that
+shaped it is negative: at no combination of score and margin does answering
+with a *single* resource exceed 0.54 precision, so the docent offers the
+closest three and says that is what it is doing. Over the 386 confirmed
+questions it commits to an offer on 0.969 of them and the offer holds the
+expected destination 0.431 of the time
+([`docs/hybrid-docent.md`](docs/hybrid-docent.md) section 9).
+
+The matcher itself is measured: on 308 confirmed paraphrases across 642
+destinations, MB02t scores @1 0.256, @3 0.435, @5 0.494, @20 0.669, MRR
+0.364, p50 0.64 ms. The 0.669 at twenty is a ceiling, not a score -- nothing
+that reranks these candidates can beat it, and 102 of 308 right answers are
+never proposed at all. Intent scores 0.172 against a 0.721 majority
+baseline, which is the clearest thing a trained head could win.
 The scoreboard with its empty columns is
 [`docs/reference/results.md`](docs/reference/results.md).
 

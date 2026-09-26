@@ -55,6 +55,12 @@ pub struct Hit {
     /// The query words that fired, in query order, for the "why this?" panel
     /// and for a reranker that wants to know what the lexical evidence was.
     pub signals: Vec<String>,
+    /// The heaviest single word weight that fired, which says what *kind* of
+    /// evidence this is: 4 a concept, 3 an alias, 2 a title, 1.5 a summary, 1
+    /// the body, and 0.8 of any of those for a partial word. A hit built only
+    /// from body partials is a coincidence far more often than a hit on a
+    /// concept, and the policy needs to tell those apart.
+    pub best: f32,
 }
 
 /// What the matcher answers: an intent from the rules, and ranked candidates.
@@ -95,20 +101,21 @@ impl Matcher {
     /// Ties break by identifier so two machines rank the same way, which
     /// matters because a paraphrase often scores several resources equally.
     pub fn answer(&self, query: &str, k: usize) -> Answer {
-        let mut scores: BTreeMap<u32, (f32, Vec<String>)> = BTreeMap::new();
+        let mut scores: BTreeMap<u32, (f32, Vec<String>, f32)> = BTreeMap::new();
         for word in signals::tokens(query) {
             for (resource, weight) in self.signals.weigh(&word) {
-                let entry = scores.entry(resource).or_insert((0.0, Vec::new()));
+                let entry = scores.entry(resource).or_insert((0.0, Vec::new(), 0.0));
                 entry.0 += weight;
                 entry.1.push(word.clone());
+                entry.2 = entry.2.max(weight);
             }
         }
         for at in bonus::all_named(&self.aliases, query) {
-            scores.entry(at).or_insert((0.0, Vec::new()));
+            scores.entry(at).or_insert((0.0, Vec::new(), 0.0));
         }
         let mut hits: Vec<Hit> = scores
             .into_iter()
-            .map(|(at, (score, words))| self.finish(at, query, score, words))
+            .map(|(at, (score, words, best))| self.finish(at, query, score, (words, best)))
             .filter(|hit| hit.score > 0.0)
             .collect();
         hits.sort_by(|a, b| b.score.total_cmp(&a.score).then(a.id.cmp(&b.id)));
@@ -121,9 +128,11 @@ impl Matcher {
 
     /// One candidate's final score: its lexical sum, the bonuses it earns for
     /// having matched at all, and the verbatim-alias bonus.
-    fn finish(&self, at: u32, query: &str, score: f32, mut signals: Vec<String>) -> Hit {
+    fn finish(&self, at: u32, query: &str, score: f32, words: (Vec<String>, f32)) -> Hit {
+        let (mut signals, best) = words;
         let resource = at as usize;
         let mut total = score + self.bonus.get(resource).copied().unwrap_or_default();
+        let mut strongest = best;
         let aliases = self
             .aliases
             .get(resource)
@@ -131,12 +140,14 @@ impl Matcher {
             .unwrap_or_default();
         if let Some(alias) = bonus::named(aliases, query) {
             total += 4.0;
+            strongest = strongest.max(4.0);
             signals.push(format!("\"{alias}\""));
         }
         Hit {
             id: self.signals.ids.get(resource).cloned().unwrap_or_default(),
             score: total,
             signals,
+            best: strongest,
         }
     }
 }

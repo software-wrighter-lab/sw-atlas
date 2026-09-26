@@ -1,5 +1,7 @@
 [workspace]
 members = [
+    "crates/atlas-answer",
+    "crates/atlas-ask",
     "crates/atlas-blog",
     "crates/atlas-campus",
     "crates/atlas-core",
@@ -7,6 +9,7 @@ members = [
     "crates/atlas-corpus",
     "crates/atlas-decide",
     "crates/atlas-eval",
+    "crates/atlas-evidence",
     "crates/atlas-eval-cli",
     "crates/atlas-graph",
     "crates/atlas-ingest",
@@ -31,6 +34,8 @@ unsafe_code = "deny"
 missing_docs = "warn"
 
 [workspace.dependencies]
+atlas-answer = { path = "crates/atlas-answer" }
+atlas-ask = { path = "crates/atlas-ask" }
 atlas-blog = { path = "crates/atlas-blog" }
 atlas-campus = { path = "crates/atlas-campus" }
 atlas-core = { path = "crates/atlas-core" }
@@ -38,6 +43,7 @@ atlas-coverage = { path = "crates/atlas-coverage" }
 atlas-corpus = { path = "crates/atlas-corpus" }
 atlas-decide = { path = "crates/atlas-decide" }
 atlas-eval = { path = "crates/atlas-eval" }
+atlas-evidence = { path = "crates/atlas-evidence" }
 atlas-eval-cli = { path = "crates/atlas-eval-cli" }
 atlas-graph = { path = "crates/atlas-graph" }
 atlas-links = { path = "crates/atlas-links" }

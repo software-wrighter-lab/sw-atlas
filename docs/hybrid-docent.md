@@ -411,3 +411,56 @@ reachable in principle. If top-5 recall is itself near 0.7, the matcher
 is not even *proposing* the right answers. Then the hybrid needs a second
 candidate source (A1 embedding retrieval) before a reranker can help, and
 that is the finding. It costs one afternoon on MB01t's existing fixtures.
+
+## 9. AP01: what the docent says when it does not know
+
+Measured 2026-09-25 against corpus `e313e5e6`, MB02t, `just ask --measure`.
+This is the product half of the argument in section 2: A0 plus ordinary code
+is a usable docent before any model exists, provided it is honest about
+what it cannot do.
+
+The policy has five outcomes and the thresholds are fitted, not chosen. The
+fit is in [`sources/answer-policy.ron`](../sources/answer-policy.ron) with
+its measurement beside each number, and the headline finding is negative:
+**at no combination of score and margin does answering with a single
+resource exceed 0.54 precision.** Only a margin of 8 or more reaches 0.86,
+and it fires on 7 of 397 rows. So there is no confident single answer at
+ordinary thresholds, and the default is to offer the closest three.
+
+| Outcome | Fires | Share | Offer holds the expected answer |
+|---|---:|---:|---:|
+| SEVERAL | 371 | 0.961 | 0.431 |
+| NOTHING HERE | 10 | 0.026 | 0.000 |
+| ONE | 3 | 0.008 | 0.667 |
+| REPHRASE | 2 | 0.005 | 0.000 |
+| NOT YET | 0 | 0.000 | — |
+
+Read the share column and the precision column together. A policy that
+answered NOTHING HERE to everything would be perfectly precise and useless;
+this one commits to an offer on 0.969 of the confirmed questions and is right
+0.431 of the time, which is recall@3 (0.435) as it should be. NOT YET never
+fires on the frozen sets because those sets ask about things that exist --
+it fires on the withheld-exhibit questions that prompted the step, which is
+why the outcome is tested directly rather than measured here.
+
+Two defects found by typing at it, both instructive:
+
+- **`I have 1 things close to that`.** Fixed with a singular frame. Generated
+  prose has no grammar unless someone writes the grammar.
+- **`zzzq flibbertigibbet` scored 4.0 against a post about BERT**, because
+  MB01's verbatim-alias bonus is a *substring* test and "fli**bbert**igibbet"
+  contains "bert". The matcher keeps the bug: MB02 is comparable to MB01 only
+  while it makes MB01's mistakes, and every number in section 8 depends on
+  that. The policy declines to show it instead -- a hit whose only evidence is
+  an alias that is not a whole word in the query is discarded, and a query
+  whose *every* hit is that kind of coincidence is REPHRASE, not NOTHING HERE.
+  How to score is a different question from what to say.
+
+Keeping the mistake out of sight without changing the yardstick needed a
+fifth concern, so it got the sibling crate the house rule asks for:
+`atlas-evidence` decides which of the matcher's hits count for anything, and
+`atlas-answer` decides what to say about the ones that do.
+
+The second one is the division of labour working as designed. The matcher is
+a frozen yardstick; the policy is where judgement lives; the model, when it
+exists, replaces the judgement and not the yardstick.

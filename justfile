@@ -55,6 +55,10 @@ report *args:
 report-check *args:
     just report --check {{args}}
 
+# Ask the docent a question; --measure reports the outcome distribution.
+ask *args:
+    cargo run --quiet --release -p atlas-ask -- {{args}}
+
 # Needs build/corpus/corpus.ron, so run `just ingest` first.
 # Score every arm on the confirmed question sets, with baselines and intervals.
 eval *args:

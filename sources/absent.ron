@@ -1,0 +1,21 @@
+// Subjects a visitor will ask about that the corpus knowingly does not hold.
+//
+// Not a list of things nobody wrote about -- the matcher handles those by
+// finding nothing. This is for subjects that exist in the world of the project
+// and are deliberately absent from the index, where "nothing here matches"
+// would be misleading and "not yet" is the truth.
+//
+// Each key is matched against the visitor's words, case-insensitively, as whole
+// words. The reply is a frame: the text here is quoted verbatim.
+Absent(
+    subjects: {
+        // The 1442 card read punch is withheld on purpose: it is the held-out
+        // exhibit for the new-resource experiment (plan.md Saga 7, SN01), and
+        // the campus will publish it as a dated event. Its wing mentions it in
+        // prose, which is exactly why a visitor asks and why the honest answer
+        // is "not yet" rather than a route to the wing.
+        "1442": "The IBM 1442 card read punch is not an exhibit yet. The 1130 wing mentions it among the machine's peripherals, and it is the next thing due to open there.",
+        "card read punch": "The IBM 1442 card read punch is not an exhibit yet. The 1130 wing mentions it among the machine's peripherals, and it is the next thing due to open there.",
+        "card reader": "The card reader -- the IBM 1442 -- is not an exhibit yet. The 1130 wing mentions it among the machine's peripherals, and it is the next thing due to open there.",
+    },
+)

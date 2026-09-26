@@ -1,0 +1,29 @@
+// When the docent answers, offers a choice, or admits something.
+//
+// Every number here was fitted on 2026-09-25 to the 397 confirmed questions
+// that name a destination, against corpus e313e5e6, and the measurement is
+// beside it. Changing one is a corpus-visible act: rerun `just eval` and
+// `just ask --measure` and put the new numbers here.
+//
+// The headline finding, and the reason there is no confident-single-answer
+// outcome at ordinary thresholds: at NO combination of score and margin does
+// answering with one resource exceed 0.54 precision, and the evidence-strength
+// field does not separate an off-topic question from a real one. A single
+// answer would be wrong about half the time. Offering the closest three is
+// right 0.435 of the time and never pretends otherwise, so that is the default.
+Policy(
+    // A margin this large is the only decisive evidence there is: precision
+    // 0.86 over 7 of 397 rows. Rare, and worth keeping because when it fires
+    // it is usually a visitor naming a thing outright.
+    one_margin: 8.0,
+    // How many to offer otherwise. recall@3 is 0.435 and recall@5 0.494 on the
+    // paraphrases: three is where the list stays readable.
+    several: 3,
+    // Evidence this weak is a prose coincidence, not a subject match: the
+    // strongest field that fired was a summary or a body, and the total is low.
+    weak_best: 1.5,
+    weak_top: 4.0,
+    // Below this the hit is noise; a query whose every hit is under it gets
+    // "nothing here" rather than a list of near-misses.
+    floor: 2.0,
+)

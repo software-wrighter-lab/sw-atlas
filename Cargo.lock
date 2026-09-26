@@ -59,6 +59,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "atlas-answer"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "atlas-evidence",
+ "atlas-match",
+ "atlas-questions",
+ "ron",
+ "serde",
+]
+
+[[package]]
+name = "atlas-ask"
+version = "0.1.0"
+dependencies = [
+ "atlas-answer",
+ "atlas-corpus",
+ "atlas-match",
+ "atlas-questions",
+ "clap",
+ "ron",
+]
+
+[[package]]
 name = "atlas-blog"
 version = "0.1.0"
 dependencies = [
@@ -134,8 +159,17 @@ dependencies = [
  "atlas-eval",
  "atlas-match",
  "atlas-questions",
+ "atlas-signals",
  "clap",
  "ron",
+]
+
+[[package]]
+name = "atlas-evidence"
+version = "0.1.0"
+dependencies = [
+ "atlas-match",
+ "atlas-questions",
 ]
 
 [[package]]

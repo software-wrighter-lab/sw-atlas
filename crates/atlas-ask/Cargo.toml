@@ -1,6 +1,6 @@
 [package]
-name = "atlas-eval-cli"
-description = "The sw-atlas evaluation command: every arm on the frozen sets, with baselines and paired intervals"
+name = "atlas-ask"
+description = "Ask the sw-atlas docent a question from the command line"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -8,17 +8,16 @@ license.workspace = true
 repository.workspace = true
 
 [[bin]]
-name = "atlas-eval"
+name = "atlas-ask"
 path = "src/main.rs"
 
 [lints]
 workspace = true
 
 [dependencies]
+atlas-answer.workspace = true
 atlas-corpus.workspace = true
-atlas-eval.workspace = true
 atlas-match.workspace = true
-atlas-signals.workspace = true
 atlas-questions.workspace = true
 clap = { workspace = true }
 ron = { workspace = true }

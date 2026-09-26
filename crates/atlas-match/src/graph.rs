@@ -31,6 +31,7 @@ pub fn spread(corpus: &Corpus, hits: &[Hit], factor: f32) -> Vec<Hit> {
                     id: other,
                     score: inherited,
                     signals: vec![format!("via {}", hit.id)],
+                    best: 0.0,
                 }),
             }
         }

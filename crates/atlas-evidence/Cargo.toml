@@ -1,0 +1,15 @@
+[package]
+name = "atlas-evidence"
+description = "Which of the matcher's hits count as evidence for an answer, and how to say what fired"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+atlas-match.workspace = true
+atlas-questions.workspace = true
