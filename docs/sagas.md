@@ -83,7 +83,21 @@ What it needs before it starts, and from whom:
   result -- no score/margin combination answers with a single resource above
   0.54 precision -- so the docent offers the closest three and says so.
   [`hybrid-docent.md`](hybrid-docent.md) section 9 has the distribution.
-- **`judge-loop` (step 012, queued 2026-09-25).** A local Ollama model asks
+- **`fork-canonicality` (step 012, queued 2026-09-26).** Several repositories
+  exist twice, and GitHub flags the live copy as a fork, so the ingester keeps
+  the abandoned copy and the corpus points visitors at dead work. A committed
+  `sources/repo-canonical.ron` declares which copy is real. Found while
+  drafting the public index repository.
+- **`refresh-repo-cache` (step 013, queued 2026-09-26).** The cache is from
+  2026-09-19: one repository went private, five are new. A cache refresh is a
+  corpus change and carries counts through the README, the tests and the
+  generated reports.
+- **`hub-recipe` (step 014, queued 2026-09-26).** `just hub`, rendering
+  `softwarewrighter/start-here` from the corpus instead of the throwaway script
+  that drafted it. The corpus is the right source because it cannot express the
+  two defects the draft shipped: a link to a repository that does not exist, and
+  private repository names read off the author's disk.
+- **`judge-loop` (step 015, queued 2026-09-25).** A local Ollama model asks
   the docent questions, judges the replies for helpfulness and accuracy, and
   records actionable defects for the owner to confirm. Owner's request. Its
   verdicts are `Teacher` provenance and may never enter the scoreboard: a

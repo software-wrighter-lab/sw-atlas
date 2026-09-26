@@ -1,0 +1,11 @@
+Read docs/plan.md, then cache/README.md.
+
+Refresh `cache/github-repos.json`. It was fetched 2026-09-19 and is stale in ways that changed what the hub published: `MesaOS` is no longer public, and five public repositories are missing. This is the repository's only network step (`scripts/fetch-repos`, authenticated `gh`), and per cache/README.md a changed cache is a corpus change that belongs in its own commit stating the new counts.
+
+Measured live on 2026-09-26 across the 15 accounts, for comparison after the refresh: 247 public non-forks, 42 public forks, 289 public repositories. New since the snapshot: `softwarewrighter/microgpt-mlpl`, `softwarewrighter/wordcloud`, `softwarewrighter/start-here`, `sw-ml-study/m-poc`, `sw-vibe-coding/sw-apl-workspaces`. Gone from public: `softwarewrighter/MesaOS`. If the refresh disagrees with these numbers, the refresh is right and this prompt is stale -- say so in the summary.
+
+Then propagate, because a cache refresh touches everything downstream: the count pinned in `crates/atlas-repos/tests/repos.rs`, the cache/README.md table and fetch date, the README status table, `docs/reference/coverage.md` and `docs/reference/concept-collisions.md` by regeneration, and `cache/url-status.json` for the new URLs (`just links`). The zero-orphan gate must still pass: new repositories reach the graph through the organisation-as-concept rule, but verify rather than assume, and if one is genuinely unreachable decide between a concept, a relation and an exclusion with a reason.
+
+`softwarewrighter/start-here` needs a judgement of its own. It is the public index over everything else, so as a resource it is legitimate, but its text names every other artifact; ingesting its body would attach half the concept vocabulary to it and make it a false top hit for everything. Decide what to do -- most likely ingest it as a resource with its description and no body -- and put a test behind the decision so the next refresh cannot undo it quietly.
+
+Exit: the cache refreshed in its own commit naming the new counts and what moved, every downstream number consistent, the zero-orphan and URL gates green, `just check` green, and `just ingest` byte-stable across two runs.
