@@ -51,7 +51,7 @@ QuestionSet(
         (text: "where do the language experiments live", expect: ["campus:language-experiments"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
         (text: "get me to the processors exhibit", expect: ["campus:processors"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
         (text: "show me the wiki engine demo", expect: ["demo:sw-vibe-coding.github.io/wiki-rs"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
-        (text: "take me to the checklist tool", expect: ["repo:softwarewrighter/sw-checklist"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
+        (text: "take me to the checklist tool", expect: ["repo:sw-vibe-coding/sw-checklist"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: "destination moved by fork-canonicality, 2026-09-29; the question is unchanged"),
         (text: "where is the array language itself", expect: ["repo:sw-ml-study/sw-mlpl"], intent: Navigate, origin: Teacher, status: Unconfirmed, note: ""),
 
         // --- Recommend ---

@@ -17,6 +17,7 @@ members = [
     "crates/atlas-match",
     "crates/atlas-questions",
     "crates/atlas-signals",
+    "crates/atlas-supersede",
     "crates/atlas-repos",
     "crates/atlas-video",
 ]
@@ -50,6 +51,7 @@ atlas-links = { path = "crates/atlas-links" }
 atlas-match = { path = "crates/atlas-match" }
 atlas-questions = { path = "crates/atlas-questions" }
 atlas-signals = { path = "crates/atlas-signals" }
+atlas-supersede = { path = "crates/atlas-supersede" }
 atlas-repos = { path = "crates/atlas-repos" }
 atlas-video = { path = "crates/atlas-video" }
 clap = { version = "4", features = ["derive"] }

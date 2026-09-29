@@ -105,6 +105,10 @@ pub struct Repos {
     /// The committed list of repositories that are not artifacts.
     #[arg(long, default_value = "sources/repo-exclusions.ron")]
     pub exclusions: PathBuf,
+    /// The committed declarations of which copy is real, where a repository
+    /// exists twice because work moved by forking.
+    #[arg(long, default_value = "sources/repo-canonical.ron")]
+    pub canonical: PathBuf,
 }
 
 /// Where `videos` reads from.
@@ -133,6 +137,10 @@ pub struct Concepts {
     /// The committed corrections.
     #[arg(long, default_value = "sources/concept-overrides.ron")]
     pub overrides: PathBuf,
+    /// The committed declarations of which copy is real, applied to the
+    /// merged corpus so one piece of work is one resource.
+    #[arg(long, default_value = "sources/repo-canonical.ron")]
+    pub canonical: PathBuf,
     /// Where to write the collision report.
     #[arg(long, default_value = "docs/reference/concept-collisions.md")]
     pub report: PathBuf,

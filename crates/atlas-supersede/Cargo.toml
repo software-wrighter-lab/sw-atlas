@@ -1,6 +1,6 @@
 [package]
-name = "atlas-repos"
-description = "Read the committed GitHub repository metadata cache into an sw-atlas corpus"
+name = "atlas-supersede"
+description = "Which copy of a repository is the real one, and the corpus pass that makes it the only one"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -13,7 +13,5 @@ workspace = true
 [dependencies]
 atlas-core.workspace = true
 atlas-corpus.workspace = true
-atlas-supersede.workspace = true
 ron = { workspace = true }
 serde = { workspace = true }
-serde_json = { workspace = true }

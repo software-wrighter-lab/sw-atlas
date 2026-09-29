@@ -29,6 +29,7 @@ atlas-core.workspace = true
 atlas-corpus.workspace = true
 atlas-graph.workspace = true
 atlas-repos.workspace = true
+atlas-supersede.workspace = true
 atlas-video.workspace = true
 clap = { workspace = true }
 ron = { workspace = true }

@@ -8,6 +8,7 @@
 use atlas_core::{Provenance, RelationKind, ResourceId, ResourceKind};
 use atlas_corpus::{Corpus, validate};
 use atlas_repos::exclusions::Exclusions;
+use atlas_supersede::Canonical;
 use std::collections::BTreeSet;
 use std::path::PathBuf;
 
@@ -15,7 +16,29 @@ fn ingest(relative: &str, declared: &[&str]) -> Corpus {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(relative);
     let declared: BTreeSet<ResourceId> = declared.iter().map(|id| ResourceId::new(*id)).collect();
     let none = Exclusions::default();
-    atlas_repos::ingest(&path, &declared, &none).expect("the cache ingests")
+    atlas_repos::ingest(&path, &declared, (&none, &fixture_pairs())).expect("the cache ingests")
+}
+
+/// The fixture's one declared pair.
+fn fixture_pairs() -> Canonical {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/canonical.ron");
+    Canonical::load(&path).expect("the fixture pairs parse")
+}
+
+/// The committed declarations, as `just ingest-repos` applies them.
+fn real() -> Canonical {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../sources/repo-canonical.ron");
+    Canonical::load(&path).expect("the committed declarations parse")
+}
+
+/// Every `owner/name` in the committed cache.
+fn cached_names() -> Vec<String> {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../cache/github-repos.json");
+    let text = std::fs::read_to_string(path).unwrap_or_default();
+    let rows: Vec<serde_json::Value> = serde_json::from_str(&text).unwrap_or_default();
+    rows.iter()
+        .filter_map(|r| r["full_name"].as_str().map(str::to_string))
+        .collect()
 }
 
 /// The committed list, as `just ingest-repos` applies it.
@@ -37,7 +60,7 @@ fn undeclared_forks_are_excluded_and_nothing_else_is() {
         .filter(|r| r.kind == ResourceKind::Repo)
         .map(|r| r.id.as_str())
         .collect();
-    assert_eq!(repos.len(), 3);
+    assert_eq!(repos.len(), 4);
     assert!(!repos.contains(&"repo:sw-embed/bmp280"), "the fork");
     assert!(validate(&corpus).is_empty(), "{:?}", validate(&corpus));
 }
@@ -93,7 +116,8 @@ fn a_repository_github_knows_little_about_is_still_reachable() {
 #[test]
 fn an_excluded_repository_is_not_in_the_corpus() {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../cache/github-repos.json");
-    let corpus = atlas_repos::ingest(&path, &BTreeSet::new(), &committed()).expect("ingests");
+    let corpus =
+        atlas_repos::ingest(&path, &BTreeSet::new(), (&committed(), &real())).expect("ingests");
     let ids: Vec<&str> = corpus.resources.iter().map(|r| r.id.as_str()).collect();
     assert!(
         !ids.contains(&"repo:softwarewrighter/images"),
@@ -156,4 +180,104 @@ fn the_nine_forks_the_blog_names_are_all_in_the_committed_cache() {
         .iter()
         .filter(|r| r.kind == ResourceKind::Repo);
     assert_eq!(repos.count(), 251, "242 non-forks and the nine");
+}
+
+#[test]
+fn the_live_copy_is_kept_even_though_github_calls_it_a_fork() {
+    let corpus = fixture();
+    let ids: Vec<&str> = corpus.resources.iter().map(|r| r.id.as_str()).collect();
+    assert!(
+        ids.contains(&"repo:sw-vibe-coding/sw-install"),
+        "declared canonical, and nothing links to it: the old rule dropped it"
+    );
+    assert!(
+        !ids.contains(&"repo:softwarewrighter/sw-install"),
+        "the superseded copy is not a second resource for the same work"
+    );
+}
+
+#[test]
+fn the_superseded_name_still_reaches_the_live_work() {
+    let corpus = fixture();
+    let kept = corpus
+        .resources
+        .iter()
+        .find(|r| r.id.as_str() == "repo:sw-vibe-coding/sw-install")
+        .expect("kept");
+    assert!(
+        kept.aliases.iter().any(|a| a == "sw-install"),
+        "a visitor asking for the old name lands here: {:?}",
+        kept.aliases
+    );
+}
+
+#[test]
+fn a_declaration_naming_a_repository_that_does_not_exist_is_a_failing_build() {
+    let names = cached_names();
+    if names.is_empty() {
+        println!("skipped: no committed cache");
+        return;
+    }
+    let pairs = real();
+    for pair in &pairs.pairs {
+        assert!(
+            names.contains(&pair.canonical),
+            "canonical {} is not in the cache -- typo, or it needs a cache refresh",
+            pair.canonical
+        );
+        assert!(
+            names.contains(&pair.superseded),
+            "superseded {} is not in the cache",
+            pair.superseded
+        );
+        assert!(!pair.why.is_empty(), "{} has no reason", pair.canonical);
+    }
+}
+
+#[test]
+fn a_pair_never_declares_a_repository_both_real_and_superseded() {
+    let pairs = real();
+    for pair in &pairs.pairs {
+        assert_ne!(pair.canonical, pair.superseded);
+        assert!(
+            !pairs.drops(&pair.canonical),
+            "{} is declared canonical and superseded at once",
+            pair.canonical
+        );
+    }
+    assert_eq!(pairs.pairs.len(), 10, "the ten pairs found on 2026-09-26");
+}
+
+#[test]
+fn the_pairs_the_owner_chose_against_the_push_dates_are_marked() {
+    let pairs = real();
+    let pending: Vec<&str> = pairs
+        .pairs
+        .iter()
+        .filter(|p| p.pending_sync)
+        .map(|p| p.canonical.as_str())
+        .collect();
+    assert_eq!(
+        pending,
+        ["sw-vibe-coding/sw-install", "sw-vibe-coding/sw-init"],
+        "the two where the canonical copy is behind and the owner said so anyway"
+    );
+}
+
+#[test]
+fn every_superseded_repository_is_out_of_the_committed_corpus() {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../cache/github-repos.json");
+    if !path.exists() {
+        return;
+    }
+    let corpus =
+        atlas_repos::ingest(&path, &BTreeSet::new(), (&committed(), &real())).expect("ingests");
+    let ids: Vec<&str> = corpus.resources.iter().map(|r| r.id.as_str()).collect();
+    let pairs = real();
+    for pair in &pairs.pairs {
+        let gone = format!("repo:{}", pair.superseded);
+        assert!(!ids.contains(&gone.as_str()), "{gone} is still ingested");
+        let kept = format!("repo:{}", pair.canonical);
+        assert!(ids.contains(&kept.as_str()), "{kept} is missing");
+    }
 }

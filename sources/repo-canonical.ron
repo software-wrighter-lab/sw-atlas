@@ -1,0 +1,93 @@
+// Which copy of a repository is the real one.
+//
+// Work moves between accounts by forking, so both copies survive and GitHub
+// marks the NEWER one as the fork. Its fork flag records which button was
+// pressed, not who wrote the code, so the flag alone sends visitors to
+// abandoned repositories: `atlas-ingest` keeps a fork only when a post links
+// to it, which for these pairs keeps the copy nobody pushes to.
+//
+// Owner rule, 2026-09-26: a fork of my own work is my work; a fork of
+// somebody else's is not. This file records the ten pairs that rule applies
+// to. The canonical copy is ingested even when GitHub calls it a fork; the
+// superseded copy is left out and its name becomes an alias on the canonical
+// one, so a visitor who asks for the old name still lands on the live work.
+//
+// `pending_sync` marks a pair where the owner has chosen a canonical copy
+// that is currently BEHIND the one it supersedes. It is not a mistake and not
+// a guess: the owner intends to bring it up to date, and the flag exists so
+// the disagreement is visible in the corpus rather than silently resolved by
+// a push date. Every other pair has the canonical copy in front.
+//
+// Names are checked against `cache/github-repos.json` by a test: a typo here
+// is a failing build, not a silent no-op.
+Canonical(
+    pairs: [
+        // Tools that graduated into an organisation. The organisation copy is
+        // where the work continues, and it is the one installed on the path.
+        (
+            canonical: "sw-vibe-coding/sw-checklist",
+            superseded: "softwarewrighter/sw-checklist",
+            why: "Graduated to sw-vibe-coding; pushed there four months after the original stopped.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-vibe-coding/sw-install",
+            superseded: "softwarewrighter/sw-install",
+            why: "Owner decision, 2026-09-29: sw-vibe-coding is to be the version installed on the path, and sw-install installs itself. The original is ahead today and will be merged forward, then deprecated.",
+            pending_sync: true,
+        ),
+        (
+            canonical: "sw-vibe-coding/sw-markdown-checker",
+            superseded: "softwarewrighter/markdown-checker",
+            why: "Graduated and renamed; the sw- prefixed copy is the maintained one.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-vibe-coding/sw-init",
+            superseded: "softwarewrighter/proact",
+            why: "Owner decision, 2026-09-29: same as sw-install. proact is ahead today and will be merged forward, then deprecated; the original may later move to a boneyard organisation.",
+            pending_sync: true,
+        ),
+        (
+            canonical: "sw-cli-tools/sw-cli",
+            superseded: "softwarewrighter/sw-cli",
+            why: "Graduated to sw-cli-tools, where the tools that depend on it live.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-cli-tools/rank-wav-rs",
+            superseded: "sw-music-tools/rank-wav-rs",
+            why: "Never lived in softwarewrighter: a cross-organisation duplicate. The command-line tool belongs with the other command-line tools.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-game-dev/game-mcp-poc",
+            superseded: "softwarewrighter/game-mcp-poc",
+            why: "Graduated to sw-game-dev.",
+            pending_sync: false,
+        ),
+
+        // COR24 work that settled into sw-embed under a descriptive name. The
+        // rename is why a comparison of repository names found only half the
+        // pairs: nothing but the fork's parent connects p24c to
+        // sw-cor24-pascal.
+        (
+            canonical: "sw-embed/sw-cor24-pascal",
+            superseded: "softwarewrighter/p24c",
+            why: "Settled into sw-embed under a name that says what it is; pushed there two months later.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-embed/sw-cor24-pcode",
+            superseded: "softwarewrighter/pv24a",
+            why: "Settled into sw-embed under a descriptive name.",
+            pending_sync: false,
+        ),
+        (
+            canonical: "sw-embed/web-sw-cor24-pcode",
+            superseded: "softwarewrighter/web-dv24r",
+            why: "Settled into sw-embed under a descriptive name.",
+            pending_sync: false,
+        ),
+    ],
+)

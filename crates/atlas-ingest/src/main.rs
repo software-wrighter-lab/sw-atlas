@@ -50,7 +50,8 @@ fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error
             let blog = assemble::blog(&args.blog.join("_posts"))?;
             let named = [blog, atlas_campus::ingest(&args.campus)?];
             let skip = atlas_repos::exclusions::Exclusions::load(&args.exclusions)?;
-            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named), &skip)?
+            let real = atlas_supersede::Canonical::load(&args.canonical)?;
+            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named), (&skip, &real))?
         }
         cli::Source::Videos(args) => {
             let posts = assemble::blog(&args.blog.join("_posts"))?;
@@ -72,7 +73,9 @@ fn concepts(args: &cli::Concepts) -> Result<atlas_corpus::Corpus, Box<dyn std::e
         read.push(ron::from_str(&std::fs::read_to_string(path)?)?);
     }
     let ov = atlas_graph::overrides::Overrides::load(&args.overrides)?;
-    let (corpus, text, unknown) = atlas_graph::build(&read, &ov);
+    let (mut corpus, text, unknown) = atlas_graph::build(&read, &ov);
+    let declared = atlas_supersede::Canonical::load(&args.canonical)?;
+    atlas_supersede::supersede(&mut corpus, &declared);
     if let Some(first) = unknown.first() {
         let count = unknown.len();
         return Err(format!("{count} override keys name no concept, first: {first}").into());

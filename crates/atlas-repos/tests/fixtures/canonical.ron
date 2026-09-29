@@ -1,0 +1,11 @@
+// The fixture pair: the live copy is the one GitHub calls a fork.
+Canonical(
+    pairs: [
+        (
+            canonical: "sw-vibe-coding/sw-install",
+            superseded: "softwarewrighter/sw-install",
+            why: "Graduated to the organisation; the fork is where the work continues.",
+            pending_sync: true,
+        ),
+    ],
+)

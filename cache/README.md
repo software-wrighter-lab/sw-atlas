@@ -31,10 +31,27 @@ belongs in its own commit that states the new counts and updates the
 count pinned in `crates/atlas-repos/tests/repos.rs`.
 
 **What is kept.** The cache keeps every fork, so it remains a complete
-record of what GitHub reported. The ingester keeps a fork only when the
-owner has written about it -- when a blog post or campus place links to
-it (owner decision, 2026-09-22). The other 32 forks are someone else's
-work sitting in an owner's account, and stay out.
+record of what GitHub reported. The ingester keeps a fork when the owner
+has written about it -- when a blog post or campus place links to it
+(owner decision, 2026-09-22) -- or when `sources/repo-canonical.ron`
+declares it the real copy of work that exists twice. Any other fork is
+someone else's work sitting in an owner's account, and stays out.
+
+**Why a declaration is needed at all.** GitHub's `fork` field records
+which button was pressed, not who wrote the code. Work moved into an
+organisation by forking is marked as somebody else's forever, while the
+copy left behind keeps the flag off -- so a rule that reads the flag
+alone keeps the abandoned copy and drops the live one. Before the
+declarations, seven pieces of work were in the corpus only as the copy
+nobody pushes to, and three were in twice. Owner rule, 2026-09-26: **a
+fork of my own work is my work; a fork of somebody else's is not.** The
+cache does not yet record each fork's parent, which is the field that
+would let the ingester apply that rule without a list; adding it is part
+of the next cache refresh.
+
+**Counts after the declarations.** 246 repositories from the cache, down
+from 249: ten superseded copies out, seven canonical copies in, and three
+that were already there under both names now counted once.
 
 Two repositories are excluded for a different reason: they are public but
 are not artifacts a visitor could be sent to. They are named with their

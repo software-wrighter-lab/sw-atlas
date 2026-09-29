@@ -13,12 +13,20 @@
 //! decision, 2026-09-22.) Nothing marks an included fork as one: the flag
 //! only decides inclusion, and the cache does not record the upstream a
 //! visitor-facing "fork of X" would need.
+//!
+//! That flag is not the same question as who wrote the code, and taking it
+//! for the answer sent visitors to abandoned repositories: work moved into an
+//! organisation by forking is marked as somebody else's forever, while the
+//! copy left behind keeps the fork flag off. `sources/repo-canonical.ron`
+//! names the pairs where that happened and says which copy is real; the
+//! declarations and the corpus pass that applies them live in `atlas-supersede`.
 
 pub mod exclusions;
 pub mod record;
 
 use atlas_core::{Concept, ResourceId, ResourceKind};
 use atlas_corpus::{Corpus, content_hash};
+use atlas_supersede::Canonical;
 use exclusions::Exclusions;
 use std::collections::BTreeSet;
 use std::path::Path;
@@ -49,8 +57,9 @@ impl std::error::Error for Error {}
 /// Read the cache into a corpus of repositories and the demos they name.
 ///
 /// `declared` is every repository the owner has written about, from
-/// [`declared`]; it decides which forks are kept. `skip` is the committed
-/// list of repositories that are not artifacts at all.
+/// [`declared`]; it decides which forks are kept. `rules` is the committed
+/// pair: repositories that are not artifacts at all, and the declarations of
+/// which copy is real where a repository exists twice.
 ///
 /// # Errors
 ///
@@ -59,8 +68,9 @@ impl std::error::Error for Error {}
 pub fn ingest(
     cache: &Path,
     declared: &BTreeSet<ResourceId>,
-    skip: &Exclusions,
+    rules: (&Exclusions, &Canonical),
 ) -> Result<Corpus, Error> {
+    let (_, canonical) = rules;
     let text = std::fs::read_to_string(cache).map_err(Error::Io)?;
     let read = |e: serde_json::Error| Error::Cache {
         cause: e.to_string(),
@@ -71,9 +81,8 @@ pub fn ingest(
         let hash = content_hash(value.to_string().as_bytes());
         let record: record::Record = serde_json::from_value(value).map_err(read)?;
         let resource = record.resource(hash);
-        let unwanted = record.fork && !declared.contains(&resource.id);
-        if !unwanted && !skip.excludes(&record.full_name) {
-            keep(&mut corpus, &record, resource);
+        if exclusions::wanted(&record, &resource.id, declared, rules) {
+            keep(&mut corpus, &record, resource, canonical);
         }
     }
     corpus.concepts.sort_by(|a, b| a.id.cmp(&b.id));
@@ -81,8 +90,19 @@ pub fn ingest(
     Ok(corpus)
 }
 
-/// Add one repository, its concepts, and the demo its homepage names.
-fn keep(corpus: &mut Corpus, record: &record::Record, resource: atlas_core::Resource) {
+/// Add one repository, its concepts, the demo its homepage names, and the
+/// names of any copy it supersedes, so the old name still reaches it.
+fn keep(
+    corpus: &mut Corpus,
+    record: &record::Record,
+    mut resource: atlas_core::Resource,
+    canonical: &Canonical,
+) {
+    resource
+        .aliases
+        .extend(canonical.aliases(&record.full_name));
+    resource.aliases.sort();
+    resource.aliases.dedup();
     corpus.resources.extend(record.demo().map(|(demo, _)| demo));
     corpus.relations.extend(record.demo().map(|(_, edge)| edge));
     let concepts = record.concepts();

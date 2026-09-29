@@ -192,6 +192,7 @@ dependencies = [
  "atlas-corpus",
  "atlas-graph",
  "atlas-repos",
+ "atlas-supersede",
  "atlas-video",
  "clap",
  "ron",
@@ -234,6 +235,7 @@ version = "0.1.0"
 dependencies = [
  "atlas-core",
  "atlas-corpus",
+ "atlas-supersede",
  "ron",
  "serde",
  "serde_json",
@@ -245,6 +247,16 @@ version = "0.1.0"
 dependencies = [
  "atlas-core",
  "atlas-corpus",
+]
+
+[[package]]
+name = "atlas-supersede"
+version = "0.1.0"
+dependencies = [
+ "atlas-core",
+ "atlas-corpus",
+ "ron",
+ "serde",
 ]
 
 [[package]]

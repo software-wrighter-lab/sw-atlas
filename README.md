@@ -123,9 +123,9 @@ every rebuild):
 
 | | Blog | Campus | Repos | Videos |
 |---|---:|---:|---:|---:|
-| Posts | 126 | — | — | — |
+| Posts | 129 | — | — | — |
 | Places | — | 9 | — | — |
-| Repositories | 78 named | 4 named | 249 described | — |
+| Repositories | 78 named | 4 named | 246 described | — |
 | Videos | 84 named | — | — | 84 described, 52 with script |
 | Demos named | 6 | 4 | 4 | — |
 | Papers cited | 157 | — | — | — |
@@ -160,7 +160,7 @@ run):
 
 | | Indexed | Tagged | Related | Unreachable |
 |---|---:|---:|---:|---:|
-| All artifacts | 642 | 410 | 469 | **0** |
+| All artifacts | 648 | 410 | 477 | **0** |
 
 Every one of the 641 distinct URLs has been checked: 634 resolve, **none is
 gone**, six are academic hosts that refuse a robot and one did not answer.
@@ -235,9 +235,9 @@ the step that lands it, so this list stays honest:
 
 | Recipe | Does | Lands in |
 |---|---|---|
-| `just ingest-blog` | **done** — 126 posts from the blog's front matter | Saga 1, ingest-blog |
+| `just ingest-blog` | **done** — 129 posts from the blog's front matter | Saga 1, ingest-blog |
 | `just ingest-campus` | **done** — 9 places from the campus catalog | Saga 1, ingest-campus |
-| `just ingest-repos` | **done** — 249 public repositories: non-forks, and forks a post names | Saga 1, ingest-metadata and declared-forks |
+| `just ingest-repos` | **done** — 246 public repositories: non-forks, forks a post names, and the copy declared real where work exists twice | Saga 1 and Saga 2, fork-canonicality |
 | `just ingest-videos` | **done** — 84 videos, 52 with scripts from `shorts` | Saga 1, ingest-metadata |
 | `just concepts` | **done** — 689 concepts over the four corpora, with a collision report | Saga 1, concept-graph |
 | `just report` | **done** — coverage, gated on unreachable resources and dead links | Saga 1, coverage-report |

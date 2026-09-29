@@ -11,7 +11,7 @@ QuestionSet(
         (text: "where is the IBM 1130 wing", expect: ["campus:ibm-1130"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
         (text: "take me to the APL exhibit", expect: ["campus:apl"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
         (text: "RCA COSMAC 1802", expect: ["campus:rca-1802"], intent: Navigate, origin: Teacher, status: Confirmed, note: "bare name, no sentence"),
-        (text: "show me sw-checklist", expect: ["repo:softwarewrighter/sw-checklist"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
+        (text: "show me sw-checklist", expect: ["repo:sw-vibe-coding/sw-checklist"], intent: Navigate, origin: Teacher, status: Confirmed, note: "destination moved by fork-canonicality, 2026-09-29; the question is unchanged"),
         (text: "moe-microscope", expect: ["repo:sw-ml-study/moe-microscope"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
         (text: "where is sw-cor24-apl", expect: ["repo:sw-embed/sw-cor24-apl"], intent: Navigate, origin: Teacher, status: Confirmed, note: ""),
         (text: "the Tiny Recursive Model post", expect: ["blog:2026-01-31-small-models-part1-tiny-recursive-model"], intent: FindResource, origin: Teacher, status: Confirmed, note: ""),
