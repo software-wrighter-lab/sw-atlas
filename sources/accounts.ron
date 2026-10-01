@@ -1,0 +1,32 @@
+// The GitHub accounts whose work is the owner's own.
+//
+// Needed because GitHub's `fork` field records which button was pressed, not
+// who wrote the code. A fork whose parent lives in one of these accounts is
+// the owner's work moved between accounts; a fork of anybody else's parent is
+// somebody else's code kept for reference, and stays out of the corpus.
+// Owner rule, 2026-09-26: a fork of my own work is my work.
+//
+// `wrightmikea` is an earlier personal account holding 45 repositories of the
+// owner's own and several hundred forks. It is not actively managed and is
+// not indexed here -- but three repositories in the accounts below continue
+// work from it, so it belongs in this list even though it is not fetched.
+Accounts(
+    owned: [
+        "softwarewrighter",
+        "hardwarewrighter",
+        "software-wrighter-lab",
+        "sw-audio-viz",
+        "sw-cli-tools",
+        "sw-comp-history",
+        "sw-emacs",
+        "sw-embed",
+        "sw-fun",
+        "sw-game-dev",
+        "sw-langtools",
+        "sw-ml-study",
+        "sw-music-tools",
+        "sw-vibe-coding",
+        "sw-video-tools",
+        "wrightmikea",
+    ],
+)

@@ -29,5 +29,25 @@ fields='.[] | {
 
 jq -s 'unique_by(.full_name) | sort_by(.full_name)' "$tmp" > "$out"
 
+# Second pass: each fork's parent, which the list endpoints do not return.
+#
+# GitHub's `fork` field records which button was pressed, not who wrote the
+# code, so it cannot tell the owner's work moved between accounts from
+# somebody else's code kept for reference. Who owns the parent can, and it is
+# one request per fork -- about forty, on a script that is run deliberately.
+parents="$(mktemp)"
+trap 'rm -f "$tmp" "$parents"' EXIT
+: > "$parents"
+for name in $(jq -r '.[] | select(.fork) | .full_name' "$out"); do
+  up="$(gh api "repos/$name" -q '.parent.full_name // empty' 2>/dev/null || true)"
+  [ -n "$up" ] && printf '{"%s":"%s"}\n' "$name" "$up" >> "$parents"
+done
+
+jq -s 'add // {}' "$parents" > "$parents.json"
+jq --slurpfile p "$parents.json" \
+  'map(if $p[0][.full_name] then . + {parent: $p[0][.full_name]} else . end)' \
+  "$out" > "$tmp" && mv "$tmp" "$out"
+rm -f "$parents.json"
+
 printf 'wrote %s\n  repositories %s\n  fetched      %s\n' \
   "$out" "$(jq 'length' "$out")" "$(date -u +%Y-%m-%dT%H:%M:%SZ)"

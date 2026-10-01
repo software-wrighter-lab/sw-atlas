@@ -720,6 +720,11 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://blog.softwarewrighter.com": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://blog.softwarewrighter.com/2026/01/29/tbt-apl-horse-race/": {
       "status": "Ok",
       "code": 200,
@@ -1350,6 +1355,26 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://blog.softwarewrighter.com/2026/09/24/tbt-aplsv-birds-tttml/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://blog.softwarewrighter.com/2026/09/25/made-visible-rosetta-m/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://blog.softwarewrighter.com/2026/09/27/saw-second-host-word-cloud-benches/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://blog.softwarewrighter.com/2026/10/01/tbt-timelines-of-tools/": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://dl.acm.org/doi/10.1145/1553374.1553380": {
       "status": "Blocked",
       "code": 403,
@@ -1444,6 +1469,16 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/X_eTaL": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://github.com/softwarewrighter/X_eTaL-demos": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/softwarewrighter/ai-stack": {
       "status": "Ok",
@@ -1560,6 +1595,11 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://github.com/softwarewrighter/emacs-ai-study-group": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://github.com/softwarewrighter/engram-poc": {
       "status": "Ok",
       "code": 200,
@@ -1639,6 +1679,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/microgpt-mlpl": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/softwarewrighter/microgpt-rs": {
       "status": "Ok",
@@ -1789,6 +1834,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/softwarewrighter/softwarewrighter": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/softwarewrighter/speed-kings": {
       "status": "Ok",
@@ -1950,6 +2000,11 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://github.com/softwarewrighter/wordcloud": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://github.com/softwarewrighter/xmas-rs": {
       "status": "Ok",
       "code": 200,
@@ -1999,6 +2054,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/sw-cli-tools/sw-cli": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/sw-cli-tools/sw-cli-gen": {
       "status": "Ok",
@@ -2190,6 +2250,11 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://github.com/sw-embed/sw-cor24-pcode": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://github.com/sw-embed/sw-cor24-plsw": {
       "status": "Ok",
       "code": 200,
@@ -2234,6 +2299,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/sw-cor24-x-assembler": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/sw-embed/sw-cor24-x-pc-aotc": {
       "status": "Ok",
@@ -2304,6 +2374,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/sw-embed/web-sw-cor24-pcode": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/sw-embed/web-sw-cor24-plsw": {
       "status": "Ok",
@@ -2500,6 +2575,11 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://github.com/sw-ml-study/m-poc": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://github.com/sw-ml-study/ml-viz": {
       "status": "Ok",
       "code": 200,
@@ -2519,6 +2599,11 @@
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/sw-ml-study/reasoning-from-scratch": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/sw-ml-study/sw-mlpl": {
       "status": "Ok",
@@ -2580,10 +2665,35 @@
       "code": 200,
       "checked": "2026-09-22"
     },
+    "https://github.com/sw-vibe-coding/sw-apl-workspaces": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://github.com/sw-vibe-coding/sw-checklist": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
     "https://github.com/sw-vibe-coding/sw-fth-wasm": {
       "status": "Ok",
       "code": 200,
       "checked": "2026-09-22"
+    },
+    "https://github.com/sw-vibe-coding/sw-init": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://github.com/sw-vibe-coding/sw-install": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
+    },
+    "https://github.com/sw-vibe-coding/sw-markdown-checker": {
+      "status": "Ok",
+      "code": 200,
+      "checked": "2026-10-01"
     },
     "https://github.com/sw-vibe-coding/swvs": {
       "status": "Ok",

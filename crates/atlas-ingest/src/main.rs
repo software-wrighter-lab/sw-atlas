@@ -3,6 +3,9 @@
 mod cli;
 
 use atlas_ingest::assemble;
+use atlas_repos::accounts::Accounts;
+use atlas_repos::exclusions::Exclusions;
+use atlas_supersede::Canonical;
 
 use clap::Parser;
 use std::path::Path;
@@ -49,9 +52,12 @@ fn read(source: &cli::Source) -> Result<atlas_corpus::Corpus, Box<dyn std::error
         cli::Source::Repos(args) => {
             let blog = assemble::blog(&args.blog.join("_posts"))?;
             let named = [blog, atlas_campus::ingest(&args.campus)?];
-            let skip = atlas_repos::exclusions::Exclusions::load(&args.exclusions)?;
-            let real = atlas_supersede::Canonical::load(&args.canonical)?;
-            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named), (&skip, &real))?
+            let rules = (
+                &Exclusions::load(&args.exclusions)?,
+                &Canonical::load(&args.canonical)?,
+                &Accounts::load(&args.accounts)?,
+            );
+            atlas_repos::ingest(&args.cache, &atlas_repos::declared(&named), rules)?
         }
         cli::Source::Videos(args) => {
             let posts = assemble::blog(&args.blog.join("_posts"))?;
@@ -74,7 +80,7 @@ fn concepts(args: &cli::Concepts) -> Result<atlas_corpus::Corpus, Box<dyn std::e
     }
     let ov = atlas_graph::overrides::Overrides::load(&args.overrides)?;
     let (mut corpus, text, unknown) = atlas_graph::build(&read, &ov);
-    let declared = atlas_supersede::Canonical::load(&args.canonical)?;
+    let declared = Canonical::load(&args.canonical)?;
     atlas_supersede::supersede(&mut corpus, &declared);
     if let Some(first) = unknown.first() {
         let count = unknown.len();

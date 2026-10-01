@@ -109,6 +109,10 @@ pub struct Repos {
     /// exists twice because work moved by forking.
     #[arg(long, default_value = "sources/repo-canonical.ron")]
     pub canonical: PathBuf,
+    /// The committed list of accounts whose work is the owner's own, which
+    /// decides whether a fork is a move or somebody else's code.
+    #[arg(long, default_value = "sources/accounts.ron")]
+    pub accounts: PathBuf,
 }
 
 /// Where `videos` reads from.

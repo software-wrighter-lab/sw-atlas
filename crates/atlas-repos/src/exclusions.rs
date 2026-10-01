@@ -12,6 +12,7 @@
 //! a reason -- a real project with a description belongs in the corpus even
 //! if nobody has written about it yet.
 
+use crate::accounts::Accounts;
 use crate::record::Record;
 use atlas_core::ResourceId;
 use atlas_supersede::Canonical;
@@ -47,17 +48,29 @@ impl Exclusions {
 
 /// Whether this repository belongs in the corpus.
 ///
-/// A fork is kept when a post links to it, or when a declaration calls it the
-/// real copy of work that exists twice. Anything superseded, or listed as not
-/// an artifact at all, is out.
+/// A fork is kept when a post links to it, when a declaration calls it the
+/// real copy of work that exists twice, or when its parent lives in one of
+/// the owner's own accounts -- the general form of the rule, which the
+/// declarations only have to settle where both copies survive.
+///
+/// Out: anything superseded, anything listed as not an artifact, and every
+/// `.github` repository. The last is a category rather than a list: an
+/// organisation profile repository holds the text that renders on the
+/// organisation page, which is infrastructure for the index itself and not a
+/// place a visitor can be sent to. There is one per organisation and there
+/// will be one per organisation created later.
 pub fn wanted(
     record: &Record,
     id: &ResourceId,
     declared: &BTreeSet<ResourceId>,
-    rules: (&Exclusions, &Canonical),
+    rules: (&Exclusions, &Canonical, &Accounts),
 ) -> bool {
-    let (skip, canonical) = rules;
-    let known = declared.contains(id) || canonical.keeps(&record.full_name);
-    let out = skip.excludes(&record.full_name) || canonical.drops(&record.full_name);
+    let (skip, canonical, accounts) = rules;
+    let known = declared.contains(id)
+        || canonical.keeps(&record.full_name)
+        || accounts.owns(record.parent.as_ref());
+    let out = skip.excludes(&record.full_name)
+        || canonical.drops(&record.full_name)
+        || record.full_name.ends_with("/.github");
     (known || !record.fork) && !out
 }

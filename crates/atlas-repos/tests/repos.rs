@@ -7,22 +7,42 @@
 
 use atlas_core::{Provenance, RelationKind, ResourceId, ResourceKind};
 use atlas_corpus::{Corpus, validate};
+use atlas_repos::accounts::Accounts;
 use atlas_repos::exclusions::Exclusions;
 use atlas_supersede::Canonical;
 use std::collections::BTreeSet;
 use std::path::PathBuf;
 
+/// What the committed cache yields as shipped. Refreshing the cache updates
+/// this number in the same commit, with the new count in the message.
+const PINNED: usize = 252;
+
 fn ingest(relative: &str, declared: &[&str]) -> Corpus {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(relative);
     let declared: BTreeSet<ResourceId> = declared.iter().map(|id| ResourceId::new(*id)).collect();
     let none = Exclusions::default();
-    atlas_repos::ingest(&path, &declared, (&none, &fixture_pairs())).expect("the cache ingests")
+    atlas_repos::ingest(&path, &declared, (&none, &fixture_pairs(), &accounts()))
+        .expect("the cache ingests")
 }
 
 /// The fixture's one declared pair.
 fn fixture_pairs() -> Canonical {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/canonical.ron");
     Canonical::load(&path).expect("the fixture pairs parse")
+}
+
+/// The cache read exactly as `just ingest-repos` reads it: committed
+/// exclusions, committed canonical declarations, committed accounts.
+fn as_shipped(declared: &[&str]) -> Corpus {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../cache/github-repos.json");
+    let declared: BTreeSet<ResourceId> = declared.iter().map(|id| ResourceId::new(*id)).collect();
+    atlas_repos::ingest(&path, &declared, (&committed(), &real(), &accounts())).expect("ingests")
+}
+
+/// The committed accounts, as `just ingest-repos` applies them.
+fn accounts() -> Accounts {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../sources/accounts.ron");
+    Accounts::load(&path).expect("the committed accounts parse")
 }
 
 /// The committed declarations, as `just ingest-repos` applies them.
@@ -116,8 +136,12 @@ fn a_repository_github_knows_little_about_is_still_reachable() {
 #[test]
 fn an_excluded_repository_is_not_in_the_corpus() {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../cache/github-repos.json");
-    let corpus =
-        atlas_repos::ingest(&path, &BTreeSet::new(), (&committed(), &real())).expect("ingests");
+    let corpus = atlas_repos::ingest(
+        &path,
+        &BTreeSet::new(),
+        (&committed(), &real(), &accounts()),
+    )
+    .expect("ingests");
     let ids: Vec<&str> = corpus.resources.iter().map(|r| r.id.as_str()).collect();
     assert!(
         !ids.contains(&"repo:softwarewrighter/images"),
@@ -135,15 +159,16 @@ fn an_excluded_repository_is_not_in_the_corpus() {
 }
 
 #[test]
-fn the_committed_cache_holds_242_public_non_fork_repositories() {
+fn the_committed_cache_holds_the_pinned_number_of_repositories() {
     // Pinned on purpose: refreshing the cache is a corpus change, and its
-    // commit updates this number with the new count.
-    let corpus = ingest("../../cache/github-repos.json", &[]);
+    // commit updates this number with the new count. Read as shipped, so the
+    // number is the one a visitor's corpus actually holds.
+    let corpus = as_shipped(&[]);
     let repos = corpus
         .resources
         .iter()
         .filter(|r| r.kind == ResourceKind::Repo);
-    assert_eq!(repos.count(), 242);
+    assert_eq!(repos.count(), PINNED);
     assert!(validate(&corpus).is_empty());
 }
 
@@ -162,7 +187,7 @@ fn a_fork_the_owner_wrote_about_is_kept() {
 }
 
 #[test]
-fn the_nine_forks_the_blog_names_are_all_in_the_committed_cache() {
+fn the_forks_the_blog_names_are_all_in_the_committed_cache() {
     let named = [
         "repo:softwarewrighter/bdh",
         "repo:softwarewrighter/MesaOS",
@@ -174,12 +199,16 @@ fn the_nine_forks_the_blog_names_are_all_in_the_committed_cache() {
         "repo:sw-ml-study/Repeated-Sampling",
         "repo:sw-music-tools/rank-wav-rs",
     ];
-    let corpus = ingest("../../cache/github-repos.json", &named);
+    let corpus = as_shipped(&named);
     let repos = corpus
         .resources
         .iter()
-        .filter(|r| r.kind == ResourceKind::Repo);
-    assert_eq!(repos.count(), 251, "242 non-forks and the nine");
+        .filter(|r| r.kind == ResourceKind::Repo)
+        .count();
+    assert!(
+        repos >= PINNED,
+        "naming a fork can only add: {repos} against {PINNED}"
+    );
 }
 
 #[test]
@@ -249,7 +278,7 @@ fn a_pair_never_declares_a_repository_both_real_and_superseded() {
 }
 
 #[test]
-fn the_pairs_the_owner_chose_against_the_push_dates_are_marked() {
+fn no_declared_copy_is_waiting_to_be_caught_up() {
     let pairs = real();
     let pending: Vec<&str> = pairs
         .pairs
@@ -257,11 +286,23 @@ fn the_pairs_the_owner_chose_against_the_push_dates_are_marked() {
         .filter(|p| p.pending_sync)
         .map(|p| p.canonical.as_str())
         .collect();
-    assert_eq!(
-        pending,
-        ["sw-vibe-coding/sw-install", "sw-vibe-coding/sw-init"],
-        "the two where the canonical copy is behind and the owner said so anyway"
+    assert!(
+        pending.is_empty(),
+        "sw-install and sw-init were brought level on 2026-09-30; a pair that \
+         carries this flag again is a copy a visitor would be sent to while \
+         the work happens elsewhere: {pending:?}"
     );
+}
+
+#[test]
+fn a_copy_waiting_to_be_caught_up_can_still_be_declared() {
+    // The flag is not dead code just because no pair carries it today.
+    let text = r#"Canonical(pairs: [
+        (canonical: "org/thing", superseded: "owner/thing", why: "moving", pending_sync: true),
+    ])"#;
+    let pairs: Canonical = ron::from_str(text).expect("parses");
+    assert!(pairs.pairs[0].pending_sync);
+    assert!(pairs.keeps("org/thing") && pairs.drops("owner/thing"));
 }
 
 #[test]
@@ -270,8 +311,12 @@ fn every_superseded_repository_is_out_of_the_committed_corpus() {
     if !path.exists() {
         return;
     }
-    let corpus =
-        atlas_repos::ingest(&path, &BTreeSet::new(), (&committed(), &real())).expect("ingests");
+    let corpus = atlas_repos::ingest(
+        &path,
+        &BTreeSet::new(),
+        (&committed(), &real(), &accounts()),
+    )
+    .expect("ingests");
     let ids: Vec<&str> = corpus.resources.iter().map(|r| r.id.as_str()).collect();
     let pairs = real();
     for pair in &pairs.pairs {

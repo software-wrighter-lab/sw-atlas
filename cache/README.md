@@ -13,15 +13,16 @@ the fields `atlas-ingest repos` reads: `full_name`, `description`,
 
 | | Count |
 |---|---:|
-| Repositories in the cache | 283 |
-| ... not forks, all kept | 242 |
-| ... forks | 41 |
-| ... forks a blog post links to, kept | 9 |
+| Repositories in the cache | 307 |
+| ... not forks | 264 |
+| ... forks | 43 |
+| ... of those, forks of the owner's own work | 14 |
 | ... excluded as not artifacts | 2 |
-| In the corpus | 249 |
+| ... excluded as organisation profiles (`.github`) | 14 |
+| In the corpus | 252 |
 | Organisations and users represented | 15 |
 
-Fetched 2026-09-19 (the file's timestamp; the script prints the time but
+Fetched 2026-10-01 (the file's timestamp; the script prints the time but
 does not store it). Counts from `jq` over the committed file.
 
 **Refreshing.** `scripts/fetch-repos` is the only step in this repository
@@ -49,9 +50,14 @@ cache does not yet record each fork's parent, which is the field that
 would let the ingester apply that rule without a list; adding it is part
 of the next cache refresh.
 
-**Counts after the declarations.** 246 repositories from the cache, down
-from 249: ten superseded copies out, seven canonical copies in, and three
-that were already there under both names now counted once.
+**Counts after the declarations.** 252 repositories from the cache. The
+ten superseded copies are out; the ten canonical copies are in whatever
+GitHub's fork flag says; the fourteen `.github` organisation profile
+repositories are out as infrastructure rather than artifacts; and four more
+forks are in because `sources/accounts.ron` says their parent is the owner's
+own -- three continuing work from the earlier `wrightmikea` account, and one
+(`sw-embed/sw-cor24-x-assembler`) that began as a fork of `cor24-rs` and
+became a different program.
 
 Two repositories are excluded for a different reason: they are public but
 are not artifacts a visitor could be sent to. They are named with their

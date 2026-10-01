@@ -13,10 +13,15 @@
 // one, so a visitor who asks for the old name still lands on the live work.
 //
 // `pending_sync` marks a pair where the owner has chosen a canonical copy
-// that is currently BEHIND the one it supersedes. It is not a mistake and not
-// a guess: the owner intends to bring it up to date, and the flag exists so
-// the disagreement is visible in the corpus rather than silently resolved by
-// a push date. Every other pair has the canonical copy in front.
+// that is BEHIND the one it supersedes. It is not a mistake and not a guess:
+// the flag exists so the disagreement is visible rather than silently
+// resolved by a push date. Both pairs that carried it -- sw-install and
+// sw-init -- were brought level on 2026-09-30 by syncing the fork from its
+// parent, and both originals now carry a deprecation notice pointing here.
+//
+// A push date is no longer evidence for those two, and in fact now points
+// the wrong way: writing the deprecation notice pushed the deprecated copy,
+// so it is the more recently touched of the pair. The notice is the evidence.
 //
 // Names are checked against `cache/github-repos.json` by a test: a typo here
 // is a failing build, not a silent no-op.
@@ -33,8 +38,8 @@ Canonical(
         (
             canonical: "sw-vibe-coding/sw-install",
             superseded: "softwarewrighter/sw-install",
-            why: "Owner decision, 2026-09-29: sw-vibe-coding is to be the version installed on the path, and sw-install installs itself. The original is ahead today and will be merged forward, then deprecated.",
-            pending_sync: true,
+            why: "Owner decision, 2026-09-29: sw-vibe-coding is the version installed on the path, and sw-install installs itself. Brought level on 2026-09-30 (the original was three commits ahead) and the original now carries a deprecation notice.",
+            pending_sync: false,
         ),
         (
             canonical: "sw-vibe-coding/sw-markdown-checker",
@@ -45,8 +50,8 @@ Canonical(
         (
             canonical: "sw-vibe-coding/sw-init",
             superseded: "softwarewrighter/proact",
-            why: "Owner decision, 2026-09-29: same as sw-install. proact is ahead today and will be merged forward, then deprecated; the original may later move to a boneyard organisation.",
-            pending_sync: true,
+            why: "Owner decision, 2026-09-29: same as sw-install. Brought level on 2026-09-30 (proact was eight commits ahead) and the original now carries a deprecation notice. The code still calls itself proact internally; the repository name changed first.",
+            pending_sync: false,
         ),
         (
             canonical: "sw-cli-tools/sw-cli",

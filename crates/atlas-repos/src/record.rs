@@ -30,6 +30,11 @@ pub struct Record {
     pub pushed_at: Option<String>,
     /// Whether GitHub records this as a fork of another repository.
     pub fork: bool,
+    /// `owner/name` of the repository this was forked from, where GitHub
+    /// records one. The field `fork` says a fork button was pressed; this
+    /// says whose work it was, which is the question that decides inclusion.
+    #[serde(default)]
+    pub parent: Option<String>,
 }
 
 impl Record {

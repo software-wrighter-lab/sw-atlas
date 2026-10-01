@@ -21,9 +21,11 @@
 //! names the pairs where that happened and says which copy is real; the
 //! declarations and the corpus pass that applies them live in `atlas-supersede`.
 
+pub mod accounts;
 pub mod exclusions;
 pub mod record;
 
+use accounts::Accounts;
 use atlas_core::{Concept, ResourceId, ResourceKind};
 use atlas_corpus::{Corpus, content_hash};
 use atlas_supersede::Canonical;
@@ -57,9 +59,10 @@ impl std::error::Error for Error {}
 /// Read the cache into a corpus of repositories and the demos they name.
 ///
 /// `declared` is every repository the owner has written about, from
-/// [`declared`]; it decides which forks are kept. `rules` is the committed
-/// pair: repositories that are not artifacts at all, and the declarations of
-/// which copy is real where a repository exists twice.
+/// [`declared`]; it decides which forks are kept. `rules` is what the
+/// repository committed: the list of things that are not artifacts, the
+/// declarations of which copy is real where a repository exists twice, and
+/// the accounts whose work counts as the owner's own.
 ///
 /// # Errors
 ///
@@ -68,9 +71,9 @@ impl std::error::Error for Error {}
 pub fn ingest(
     cache: &Path,
     declared: &BTreeSet<ResourceId>,
-    rules: (&Exclusions, &Canonical),
+    rules: (&Exclusions, &Canonical, &Accounts),
 ) -> Result<Corpus, Error> {
-    let (_, canonical) = rules;
+    let (_, canonical, _) = rules;
     let text = std::fs::read_to_string(cache).map_err(Error::Io)?;
     let read = |e: serde_json::Error| Error::Cache {
         cause: e.to_string(),
